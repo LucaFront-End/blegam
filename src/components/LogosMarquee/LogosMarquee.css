@@ -1,0 +1,112 @@
+.client-matrix-section {
+  padding: 100px 0;
+  background: var(--bg-primary);
+  border-top: 1px solid var(--border-subtle);
+  border-bottom: 1px solid var(--border-subtle);
+  overflow: hidden;
+}
+
+.client-bento-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 24px;
+  max-width: 1000px;
+  margin: 0 auto;
+}
+
+.client-card-wrapper {
+  position: relative;
+  height: 140px;
+  border-radius: var(--radius-lg);
+  background: var(--bg-elevated);
+  border: 1px solid var(--border-subtle);
+  box-shadow: 0 10px 30px rgba(0,0,0,0.02);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+  transition: transform 0.4s ease-out, box-shadow 0.4s ease, border-color 0.4s ease;
+  transform-style: preserve-3d;
+  will-change: transform;
+}
+
+.client-card-wrapper:hover {
+  border-color: var(--accent-primary);
+  box-shadow: 0 20px 40px rgba(18, 212, 201, 0.1);
+  transition: transform 0s, box-shadow 0.4s ease, border-color 0.4s ease; /* Snappy tracking */
+  z-index: 10;
+}
+
+.client-glare {
+  position: absolute;
+  width: 150px;
+  height: 150px;
+  background: radial-gradient(circle, var(--accent-primary) 0%, transparent 70%);
+  border-radius: 50%;
+  pointer-events: none;
+  opacity: 0;
+  transform: translate(-50%, -50%);
+  transition: opacity 0.3s ease;
+  mix-blend-mode: overlay;
+  z-index: 1;
+}
+
+.client-card-inner {
+  position: relative;
+  z-index: 2;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 16px;
+  pointer-events: none;
+  transform: translateZ(20px);
+}
+
+.client-logo-container {
+  height: 54px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-bottom: 4px;
+}
+
+.client-logo-img {
+  max-height: 100%;
+  max-width: 140px;
+  object-fit: contain;
+  filter: grayscale(100%) opacity(0.5);
+  transition: all 0.5s ease;
+  border-radius: 8px; /* some favicons are squares, this softens them */
+}
+
+.client-card-wrapper:hover .client-logo-img {
+  filter: grayscale(0%) opacity(1);
+  transform: scale(1.05);
+}
+
+.client-name {
+  font-family: var(--font-heading);
+  font-size: 1.05rem;
+  font-weight: 600;
+  color: var(--text-secondary);
+  text-align: center;
+  letter-spacing: 0.02em;
+  transition: color 0.4s ease;
+}
+
+.client-card-wrapper:hover .client-name {
+  color: var(--accent-primary);
+}
+
+/* Responsive */
+@media (max-width: 900px) {
+  .client-bento-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+@media (max-width: 500px) {
+  .client-bento-grid {
+    grid-template-columns: 1fr;
+  }
+}

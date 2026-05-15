@@ -1,0 +1,140 @@
+.stats-strip {
+  padding: 80px 0;
+  background: var(--bg-primary); /* Match other sections */
+  border-top: 1px solid var(--border-subtle);
+  border-bottom: 1px solid var(--border-subtle);
+  position: relative;
+  z-index: 2;
+  overflow: hidden;
+}
+
+/* Subtle background accent */
+.stats-strip::before {
+  content: '';
+  position: absolute;
+  top: 0; left: 50%;
+  transform: translateX(-50%);
+  width: 100%; height: 1px;
+  background: linear-gradient(90deg, transparent, rgba(18, 212, 201, 0.3), transparent);
+}
+
+.stats-strip-inner {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  gap: 32px;
+  flex-wrap: wrap;
+}
+
+.stat-item {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  min-width: 180px;
+  flex: 1;
+}
+
+.stat-value {
+  display: flex;
+  align-items: flex-end;
+  font-family: var(--font-mono);
+  font-size: 4rem;
+  line-height: 1;
+}
+
+/* ─── ODOMETER STYLES ─── */
+.odometer {
+  display: flex;
+  background: #e2e8f0; /* Darker grey base to contrast with white digits */
+  padding: 6px;
+  border-radius: 8px;
+  box-shadow: 
+    inset 0 4px 10px rgba(0,0,0,0.08), 
+    inset 0 1px 3px rgba(0,0,0,0.1),
+    0 1px 0 rgba(255,255,255,1);
+  border: 1px solid #cbd5e1;
+}
+
+.odo-digit {
+  height: 1em; /* Matches font size */
+  overflow: hidden;
+  position: relative;
+  width: 0.65em; /* Fixed width for monospace feel */
+  text-align: center;
+  background: #ffffff; /* White background for each number wheel */
+  margin: 0 2px;
+  border-radius: 4px;
+  box-shadow: inset 0 2px 4px rgba(0,0,0,0.02);
+}
+
+.odo-digit-track {
+  display: flex;
+  flex-direction: column;
+  transition-property: transform;
+  transition-timing-function: cubic-bezier(0.16, 1, 0.3, 1); /* Custom smooth stop */
+}
+
+.odo-num {
+  height: 1em; /* Forces each number to take exactly 1em of height */
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--text-primary); /* Dark text for light theme */
+  font-weight: 800;
+  letter-spacing: -0.05em;
+}
+
+/* Glossy highlight over the numbers to make it look like a physical wheel */
+.odo-glass-overlay {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(
+    180deg, 
+    rgba(0,0,0,0.08) 0%, 
+    transparent 20%, 
+    transparent 80%, 
+    rgba(0,0,0,0.08) 100%
+  );
+  pointer-events: none;
+  border-radius: 4px;
+}
+
+/* ─── SUFFIX & LABEL ─── */
+.stat-suffix {
+  font-size: 2.5rem;
+  font-weight: 800;
+  color: var(--accent-primary);
+  margin-left: 8px;
+  opacity: 0;
+  transform: translateX(-15px);
+  transition: all 0.6s cubic-bezier(0.34, 1.56, 0.64, 1);
+}
+
+.stat-suffix.visible {
+  opacity: 1;
+  transform: translateX(0);
+}
+
+.stat-label {
+  font-family: var(--font-mono);
+  font-size: 0.75rem;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.12em;
+  color: var(--text-tertiary);
+  border-left: 2px solid var(--accent-primary);
+  padding-left: 12px;
+}
+
+/* Responsive */
+@media (max-width: 900px) {
+  .stat-value { font-size: 3rem; }
+  .stat-suffix { font-size: 2rem; }
+  .stat-item { min-width: 140px; }
+}
+
+@media (max-width: 600px) {
+  .stats-strip-inner { flex-direction: column; gap: 40px; }
+  .stat-item { width: 100%; align-items: center; text-align: center; }
+  .stat-label { border-left: none; padding-left: 0; border-top: 2px solid var(--accent-primary); padding-top: 12px; }
+}

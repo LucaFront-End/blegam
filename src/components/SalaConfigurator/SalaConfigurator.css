@@ -1,0 +1,348 @@
+.config-morph-wrapper {
+  display: grid;
+  grid-template-columns: 350px 1fr;
+  gap: 40px;
+  background: radial-gradient(circle at center, #0f172a 0%, #020617 100%);
+  border: 1px solid rgba(255, 255, 255, 0.05);
+  border-radius: var(--radius-lg);
+  padding: 40px;
+  overflow: hidden;
+  box-shadow: 0 40px 100px -20px rgba(0,0,0,0.8);
+}
+
+/* Sidebar */
+.config-morph-sidebar {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  z-index: 2;
+}
+
+.cm-title {
+  font-size: 1.5rem;
+  color: var(--text-primary);
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin: 0;
+}
+.cm-icon { color: var(--accent-primary); }
+.cm-desc { color: var(--text-secondary); font-size: 0.95rem; line-height: 1.6; margin: 0; }
+
+.config-morph-options {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  margin-top: 20px;
+}
+
+.morph-btn {
+  background: rgba(255, 255, 255, 0.02);
+  border: 1px solid rgba(255, 255, 255, 0.05);
+  border-radius: var(--radius-md);
+  padding: 16px;
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  cursor: pointer;
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  text-align: left;
+}
+.morph-btn:hover {
+  background: rgba(255, 255, 255, 0.05);
+  transform: translateX(5px);
+}
+.morph-btn.active {
+  background: rgba(255, 255, 255, 0.05);
+  border-color: var(--cat-color);
+  box-shadow: inset 0 0 20px rgba(255, 255, 255, 0.02);
+}
+
+.morph-btn-indicator {
+  width: 16px; height: 16px;
+  border-radius: 4px;
+  border: 2px solid rgba(255, 255, 255, 0.2);
+  transition: all 0.3s;
+}
+.morph-btn.active .morph-btn-indicator {
+  background: var(--cat-color);
+  border-color: var(--cat-color);
+  box-shadow: 0 0 10px var(--cat-color);
+}
+
+.morph-btn-content {
+  display: flex; flex-direction: column; gap: 6px;
+}
+.cat-title { font-weight: 600; color: var(--text-primary); font-size: 1.05rem; }
+.cat-hardware-desc { font-size: 0.8rem; color: var(--text-secondary); line-height: 1.4; display: block; }
+.cat-status { font-family: var(--font-mono); font-size: 0.7rem; color: var(--text-tertiary); font-weight: bold; margin-top: 4px; }
+.morph-btn.active .cat-status { color: var(--cat-color); }
+
+.config-morph-status {
+  margin-top: auto;
+  padding: 20px;
+  background: rgba(239, 68, 68, 0.05);
+  border: 1px dashed rgba(239, 68, 68, 0.3);
+  border-radius: var(--radius-md);
+  display: flex; align-items: center; gap: 12px;
+  transition: all 0.5s;
+}
+.config-morph-status.success {
+  background: rgba(18, 212, 201, 0.05);
+  border-color: rgba(18, 212, 201, 0.3);
+}
+.status-dot {
+  width: 10px; height: 10px; border-radius: 50%;
+  background: #ef4444; box-shadow: 0 0 10px #ef4444;
+  animation: blink 1s infinite;
+}
+.config-morph-status.success .status-dot {
+  background: #12d4c9; box-shadow: 0 0 10px #12d4c9;
+}
+.status-text {
+  font-family: var(--font-mono); font-size: 0.8rem; letter-spacing: 1px;
+  color: #ef4444;
+}
+.config-morph-status.success .status-text { color: #12d4c9; }
+
+
+/* ─── 3D SCENE ─── */
+.config-morph-scene {
+  position: relative;
+  min-height: 550px;
+  perspective: 2000px;
+  display: flex; align-items: center; justify-content: center;
+}
+
+.scene-3d-container {
+  width: 100%;
+  height: 100%;
+  transform-style: preserve-3d;
+}
+
+.room-3d {
+  width: 480px; height: 480px;
+  position: absolute;
+  top: 50%; left: 50%;
+  transform-origin: center center;
+  transform: translate(-50%, -50%) rotateX(60deg) rotateZ(-45deg);
+  transform-style: preserve-3d;
+  transition: transform 1s cubic-bezier(0.2, 0.8, 0.2, 1);
+}
+
+/* Floor */
+.r-floor {
+  position: absolute; inset: 0;
+  background: rgba(15, 23, 42, 0.8);
+  border: 1px solid rgba(18, 212, 201, 0.3);
+  transform-style: preserve-3d;
+  transition: all 1s;
+}
+.grid-lines {
+  position: absolute; inset: 0;
+  background-image: 
+    linear-gradient(rgba(18,212,201,0.1) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(18,212,201,0.1) 1px, transparent 1px);
+  background-size: 40px 40px;
+}
+
+/* Walls */
+.r-wall-back {
+  position: absolute;
+  top: 0; left: 0;
+  width: 480px; height: 120px;
+  background: rgba(18, 212, 201, 0.05);
+  border: 1px solid rgba(18, 212, 201, 0.2);
+  transform-origin: top left;
+  transform: rotateX(-90deg);
+}
+.r-wall-right {
+  position: absolute;
+  top: 0; right: 0;
+  width: 120px; height: 480px;
+  background: rgba(18, 212, 201, 0.03);
+  border: 1px solid rgba(18, 212, 201, 0.15);
+  transform-origin: top right;
+  transform: rotateY(-90deg);
+}
+
+/* Desks & Elements */
+.r-desk, .r-rack {
+  position: absolute;
+  transform-style: preserve-3d;
+  transition: all 0.5s;
+}
+
+/* Base Wireframe (Blueprint mode) */
+.wire-box {
+  position: absolute; inset: 0;
+  border: 1px solid rgba(18, 212, 201, 0.4);
+  background: rgba(18, 212, 201, 0.05);
+  transform: translateZ(10px);
+  transition: all 0.5s;
+  display: flex; align-items: center; justify-content: center;
+}
+.wire-box.rack-base { transform: translateZ(40px); }
+
+/* Desk Labels */
+.desk-label {
+  font-family: var(--font-mono);
+  font-size: 0.65rem;
+  color: rgba(18, 212, 201, 0.8);
+  /* Flat on the floor but facing the right way, or perfectly billboarded */
+  transform: translateZ(5px) rotateZ(45deg) rotateX(-60deg);
+  pointer-events: none;
+  font-weight: bold;
+}
+
+/* Positions (Adjusted for 480x480) */
+.r-juez { top: 30px; left: 160px; width: 140px; height: 50px; }
+.r-partes-left { top: 180px; left: 40px; width: 80px; height: 50px; }
+.r-partes-right { top: 180px; left: 340px; width: 80px; height: 50px; }
+.r-center-table { top: 180px; left: 180px; width: 100px; height: 50px; }
+.r-rack { top: 30px; left: 360px; width: 80px; height: 50px; }
+.r-operator { top: 380px; left: 160px; width: 140px; height: 50px; }
+
+/* Modules (Hidden until ON) */
+.r-module {
+  position: absolute; inset: 0;
+  transform-style: preserve-3d;
+  opacity: 0;
+  pointer-events: none;
+  transition: all 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+  transform: translateZ(50px) scale(0.8);
+}
+.r-module.on {
+  opacity: 1;
+  transform: translateZ(10px) scale(1);
+}
+
+/* Hardware Tags (Holographic labels) */
+.hw-tag {
+  position: absolute;
+  top: 0; left: 0;
+  font-family: var(--font-mono);
+  font-size: 0.65rem;
+  font-weight: bold;
+  color: #fff;
+  background: rgba(15, 23, 42, 0.85);
+  border: 1px solid rgba(18, 212, 201, 0.6);
+  padding: 4px 8px;
+  border-radius: 4px;
+  white-space: nowrap;
+  backdrop-filter: blur(4px);
+  box-shadow: 0 5px 15px rgba(0,0,0,0.5);
+  pointer-events: none;
+  opacity: 1;
+  transition: opacity 0.3s;
+}
+
+/* Specific Tag Offsets (Translated in screen space AFTER billboard rotation) */
+.tag-juez-screen { transform: translateZ(40px) rotateZ(45deg) rotateX(-60deg) translate(-60px, -40px); }
+.tag-juez-mic { transform: translateZ(40px) rotateZ(45deg) rotateX(-60deg) translate(-10px, -60px); }
+.tag-defensa { transform: translateZ(20px) rotateZ(45deg) rotateX(-60deg) translate(-70px, 10px); }
+.tag-fiscalia { transform: translateZ(20px) rotateZ(45deg) rotateX(-60deg) translate(50px, -20px); }
+.tag-evidencia { transform: translateZ(40px) rotateZ(45deg) rotateX(-60deg) translate(10px, 30px); }
+.tag-rack { transform: translateZ(100px) rotateZ(45deg) rotateX(-60deg) translate(50px, -50px); }
+.tag-op { transform: translateZ(40px) rotateZ(45deg) rotateX(-60deg) translate(30px, 40px); }
+.tag-cam-l { transform: translateZ(100px) rotateZ(45deg) rotateX(-60deg) translate(-70px, -70px); }
+.tag-cam-r { transform: translateZ(100px) rotateZ(45deg) rotateX(-60deg) translate(50px, -70px); }
+
+/* Fade out labels when room is complete to avoid cluttering the hologram */
+.room-real .hw-tag {
+  opacity: 0 !important;
+}
+
+/* Audio: Glowing Mics */
+.m-mic {
+  position: absolute; width: 4px; height: 18px;
+  background: #00ff88;
+  box-shadow: 0 0 10px #00ff88;
+  top: 15px; left: 15px;
+  transform: translateZ(20px) rotateX(-90deg);
+}
+.m-mic.right-mic { left: auto; right: 15px; }
+
+/* Screens: Glowing panels */
+.m-screen {
+  position: absolute; width: 40px; height: 2px;
+  background: #ff6b35;
+  box-shadow: 0 -10px 15px rgba(255, 107, 53, 0.5);
+  top: 15px; left: 15px;
+  transform: translateZ(20px) rotateX(-90deg);
+}
+.m-screen.big-screen { 
+  width: 70px; height: 4px; 
+  left: 15px; top: 25px; 
+  transform: translateZ(20px) rotateX(-90deg) translateY(-25px); 
+}
+.m-screen.op-screen { top: 15px; left: 15px; }
+.m-screen.op-screen.s2 { left: 70px; }
+
+/* Servers: Glass towers */
+.m-server {
+  position: absolute; width: 60px; height: 100px;
+  background: rgba(243, 244, 246, 0.8);
+  border: 1px solid #fff;
+  box-shadow: 0 0 20px rgba(255,255,255,0.2);
+  top: 0; left: 10px;
+  transform: translateZ(40px) rotateX(-90deg);
+  transform-origin: bottom center;
+}
+.m-server.s2 { left: 15px; top: 10px; }
+.m-server.s3 { left: 20px; top: 20px; }
+
+/* Video: Floating PTZ Cameras with Lasers */
+.r-video { transform: translateZ(120px) !important; }
+.m-cam {
+  position: absolute; width: 18px; height: 18px; border-radius: 50%;
+  background: #12d4c9; box-shadow: 0 0 15px #12d4c9;
+}
+.cam-left { top: -10px; left: -10px; }
+.cam-right { top: -10px; right: -10px; }
+.laser-beam {
+  position: absolute; width: 2px; height: 180px;
+  background: linear-gradient(to bottom, rgba(18,212,201,0.8), transparent);
+  top: 18px; left: 8px;
+  transform-origin: top;
+  transform: rotateZ(-45deg) rotateX(-45deg);
+}
+
+/* ─── Reality Morph (isComplete) ─── */
+.room-real .wire-box {
+  background: rgba(255, 255, 255, 0.05);
+  border-color: rgba(255, 255, 255, 0.1);
+  backdrop-filter: blur(5px);
+  box-shadow: 0 10px 20px rgba(0,0,0,0.5);
+}
+.room-real .desk-label { opacity: 0; }
+.room-real .r-floor {
+  background: radial-gradient(circle at center, rgba(18, 212, 201, 0.1) 0%, rgba(15, 23, 42, 0.95) 100%);
+  border-color: var(--accent-primary);
+  box-shadow: 0 0 80px rgba(18, 212, 201, 0.15);
+}
+.room-real .grid-lines { opacity: 0.1; }
+
+.r-completion-hologram {
+  position: absolute;
+  top: 50%; left: 50%;
+  transform: translate(-50%, -50%) translateZ(80px) rotateZ(45deg) rotateX(-60deg) translateY(-80px);
+  font-family: var(--font-mono);
+  font-size: 1.8rem;
+  color: #12d4c9;
+  text-shadow: 0 0 20px #12d4c9;
+  opacity: 0;
+  pointer-events: none;
+  transition: all 1s 0.5s;
+  white-space: nowrap;
+}
+.room-real .r-completion-hologram { 
+  opacity: 1; 
+  transform: translate(-50%, -50%) translateZ(140px) rotateZ(45deg) rotateX(-60deg) translateY(-80px); 
+}
+
+@media (max-width: 900px) {
+  .config-morph-wrapper { grid-template-columns: 1fr; padding: 20px; }
+  .config-morph-scene { min-height: 400px; }
+  .room-3d { transform: translate(-50%, -50%) scale(0.6) rotateX(60deg) rotateZ(-45deg); }
+}

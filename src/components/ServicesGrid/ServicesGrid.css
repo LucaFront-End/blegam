@@ -1,0 +1,239 @@
+.services-scroll-section {
+  position: relative;
+  background: var(--bg-void); /* Pure white background */
+  padding-bottom: 20vh; /* space after scroll */
+}
+
+/* Base Layout */
+.scroll-layout {
+  display: flex;
+  align-items: flex-start;
+  gap: 60px;
+  position: relative;
+}
+
+/* ─── LEFT PANEL (STICKY) ─── */
+.scroll-sticky-panel {
+  position: sticky;
+  top: var(--nav-height, 80px);
+  width: 40%;
+  height: calc(100vh - var(--nav-height, 80px));
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+.sticky-content {
+  padding: 40px 0;
+}
+
+.sticky-visual-wrapper {
+  margin-top: 40px;
+  position: relative;
+  width: 100%;
+  max-width: 400px;
+  aspect-ratio: 1 / 1;
+}
+
+/* ─── RIGHT PANEL (CARDS) ─── */
+.scroll-cards-panel {
+  width: 60%;
+  display: flex;
+  flex-direction: column;
+  padding-top: 20vh;
+  padding-bottom: 30vh;
+}
+
+.service-scroll-card {
+  min-height: 50vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  padding: 40px 0;
+  opacity: 0.3;
+  transform: scale(0.95);
+  transition: all 0.6s cubic-bezier(0.16, 1, 0.3, 1);
+  filter: blur(2px);
+}
+
+.service-scroll-card.is-active {
+  opacity: 1;
+  transform: scale(1);
+  filter: blur(0);
+}
+
+.card-glass {
+  background: #ffffff;
+  border: 1px solid var(--border-subtle);
+  border-radius: var(--radius-lg);
+  padding: 48px;
+  box-shadow: 0 10px 40px rgba(0,0,0,0.03);
+  transition: box-shadow 0.3s ease;
+}
+
+.service-scroll-card.is-active .card-glass {
+  box-shadow: 0 20px 60px rgba(0,0,0,0.06);
+  border-color: #cbd5e1;
+}
+
+.service-icon-large {
+  font-size: 3rem;
+  margin-bottom: 24px;
+}
+
+.service-scroll-card .service-title {
+  font-size: 1.8rem;
+  margin-bottom: 16px;
+  color: var(--text-primary);
+}
+
+.service-scroll-card .service-desc {
+  font-size: 1rem;
+  color: var(--text-secondary);
+  line-height: 1.7;
+  margin-bottom: 32px;
+}
+
+.service-features {
+  list-style: none;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.service-features li {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  font-size: 0.9rem;
+  color: var(--text-secondary);
+}
+
+/* ─── DYNAMIC VISUAL ICONS ─── */
+.dv-icon-container {
+  width: 100%;
+  height: 100%;
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.dv-glow {
+  position: absolute;
+  top: 50%; left: 50%;
+  transform: translate(-50%, -50%);
+  width: 70%; height: 70%;
+  border-radius: 50%;
+  filter: blur(50px);
+  opacity: 0.2;
+  transition: background-color 0.6s ease;
+  z-index: 1;
+}
+
+.dv-icon-wrapper {
+  position: relative;
+  width: 200px;
+  height: 200px;
+  z-index: 2;
+}
+
+.dv-icon-slide {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  opacity: 0;
+  transform: scale(0.8) translateY(20px);
+  transition: all 0.6s cubic-bezier(0.34, 1.56, 0.64, 1);
+}
+
+.dv-icon-slide.is-active {
+  opacity: 1;
+  transform: scale(1) translateY(0);
+}
+
+.dv-icon-box {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 32px;
+  border: 1px solid transparent;
+  box-shadow: 0 10px 30px rgba(0,0,0,0.03);
+  backdrop-filter: blur(8px);
+  transition: all 0.6s ease;
+}
+
+/* Tech Label */
+.dv-tech-label {
+  position: absolute;
+  bottom: -20px;
+  left: 50%;
+  transform: translateX(-50%);
+  font-family: var(--font-mono);
+  font-size: 0.75rem;
+  letter-spacing: 0.1em;
+  color: var(--text-tertiary);
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  background: var(--bg-glass-light);
+  padding: 8px 20px;
+  border-radius: 100px;
+  border: 1px solid var(--border-subtle);
+  z-index: 3;
+}
+
+.dv-dot {
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  transition: background-color 0.5s ease;
+}
+
+.dv-container.state-justicia-digital .dv-dot { background-color: #12D4C9; box-shadow: 0 0 5px #12D4C9; }
+.dv-container.state-seguridad-integral .dv-dot { background-color: #10b981; box-shadow: 0 0 5px #10b981; }
+.dv-container.state-ingenieria-software .dv-dot { background-color: #f59e0b; box-shadow: 0 0 5px #f59e0b; }
+.dv-container.state-broadcast .dv-dot { background-color: #8b5cf6; box-shadow: 0 0 5px #8b5cf6; }
+
+.dv-cursor {
+  animation: blink 1s step-end infinite;
+}
+
+@keyframes blink {
+  0%, 100% { opacity: 1; }
+  50% { opacity: 0; }
+}
+
+/* Responsive */
+@media (max-width: 1024px) {
+  .scroll-layout {
+    flex-direction: column;
+    gap: 0;
+  }
+
+  .scroll-sticky-panel {
+    position: relative;
+    top: 0;
+    width: 100%;
+    height: auto;
+    padding-bottom: 40px;
+  }
+
+  .scroll-cards-panel {
+    width: 100%;
+    padding-top: 0;
+    padding-bottom: 0;
+  }
+
+  .service-scroll-card {
+    min-height: auto;
+    opacity: 1;
+    transform: scale(1);
+    filter: blur(0);
+    margin-bottom: 32px;
+  }
+}

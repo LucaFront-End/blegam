@@ -1,0 +1,707 @@
+.page-salas { padding-top: var(--nav-height); }
+
+/* ─── HERO ─── */
+.waveform-hero {
+  position: relative;
+  min-height: 90vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+  padding: 80px 0;
+  background: var(--bg-void);
+}
+
+.salas-hero-content-center {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  max-width: 800px;
+  margin: 0 auto;
+}
+
+.salas-hero-title-center {
+  font-size: clamp(3rem, 6vw, 5.5rem);
+  font-weight: 900; 
+  line-height: 1.05;
+  margin-bottom: 24px; 
+  letter-spacing: -0.03em;
+  color: var(--text-primary);
+}
+
+.salas-hero-sub-center {
+  font-size: 1.25rem; 
+  color: var(--text-secondary);
+  max-width: 660px; 
+  line-height: 1.8; 
+  margin-bottom: 48px;
+}
+
+/* ─── Split Layout ─── */
+.salas-split {
+  display: grid; grid-template-columns: 1fr 1fr;
+  gap: 60px; align-items: center;
+}
+.split-text { position: relative; z-index: 1; }
+
+/* ─── What Section (Blueprint) ─── */
+.salas-what { padding: var(--section-padding); overflow: hidden; }
+
+.blueprint-list {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.blueprint-list-item {
+  padding: 16px 20px;
+  border-radius: var(--radius-md);
+  background: var(--bg-primary);
+  border: 1px solid var(--border-light);
+  cursor: pointer;
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.blueprint-list-item:hover, .blueprint-list-item.active {
+  background: var(--bg-elevated);
+  border-color: var(--accent-primary);
+  box-shadow: var(--shadow-glow);
+  transform: translateX(10px);
+}
+
+.bp-item-header {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  margin-bottom: 6px;
+}
+
+.bp-item-indicator {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background: var(--border-light);
+  transition: all 0.3s;
+}
+
+.blueprint-list-item.active .bp-item-indicator {
+  background: var(--accent-primary);
+  box-shadow: 0 0 10px var(--accent-primary);
+}
+
+.bp-item-header h4 {
+  font-size: 1.1rem;
+  font-weight: 700;
+  color: var(--text-primary);
+  margin: 0;
+}
+
+.blueprint-list-item.active h4 {
+  color: var(--accent-primary);
+}
+
+.bp-item-desc {
+  font-size: 0.95rem;
+  color: var(--text-secondary);
+  margin: 0;
+  padding-left: 20px;
+}
+
+/* ─── 3D Blueprint Visual (Exploded Layers) ─── */
+.blueprint-3d-container {
+  width: 100%;
+  height: 550px;
+  position: relative;
+  perspective: 1500px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: radial-gradient(circle at center, #1a202c 0%, #0f172a 100%);
+  border-radius: var(--radius-xl);
+  box-shadow: inset 0 0 0 1px rgba(255, 255, 255, 0.1), 0 20px 40px rgba(0,0,0,0.1);
+  overflow: hidden;
+}
+
+.bp-exploded-wrapper {
+  position: relative;
+  width: 280px;
+  height: 280px;
+  transform-style: preserve-3d;
+  /* Reduced rotateX for a more top-down, legible angle */
+  transform: rotateX(50deg) rotateZ(-40deg) translateZ(-100px);
+  transition: transform 0.8s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+}
+
+.blueprint-3d-container:hover .bp-exploded-wrapper {
+  transform: rotateX(45deg) rotateZ(-35deg) translateZ(-80px);
+}
+
+/* Individual Layers */
+.bp-layer {
+  position: absolute;
+  inset: 0;
+  transform-style: preserve-3d;
+  transition: all 0.6s cubic-bezier(0.4, 0, 0.2, 1);
+  opacity: 0.7;
+}
+
+.bp-layer-surface {
+  position: absolute;
+  inset: 0;
+  background: rgba(18, 212, 201, 0.05);
+  border: 1px solid rgba(18, 212, 201, 0.3);
+  backdrop-filter: blur(2px);
+  box-shadow: inset 0 0 20px rgba(18, 212, 201, 0.1);
+  transition: all 0.4s;
+  overflow: hidden;
+}
+
+/* Layer Base Translations (Stacking them up further apart for top-down view) */
+.bp-layer-redes { transform: translateZ(0px); }
+.bp-layer-storage { transform: translateZ(100px); }
+.bp-layer-av { transform: translateZ(200px); }
+.bp-layer-software { transform: translateZ(300px); }
+
+/* Layer Labels */
+.bp-layer-label {
+  position: absolute;
+  top: 10px; left: 10px;
+  font-family: var(--font-mono);
+  font-size: 0.6rem;
+  color: rgba(18, 212, 201, 0.6);
+  font-weight: bold;
+  letter-spacing: 2px;
+  transform: rotateZ(0deg); /* Text is flat on the surface */
+}
+
+/* Active State Styles */
+.blueprint-3d-container.has-active .bp-layer {
+  opacity: 0.1; /* Dim inactive layers */
+}
+
+.bp-layer.active {
+  opacity: 1 !important;
+}
+
+.bp-layer.active .bp-layer-surface {
+  background: rgba(18, 212, 201, 0.15);
+  border: 2px solid var(--accent-primary);
+  box-shadow: 0 0 40px rgba(18, 212, 201, 0.4), inset 0 0 30px rgba(18, 212, 201, 0.3);
+}
+
+.bp-layer.active .bp-layer-label {
+  color: #fff;
+  text-shadow: 0 0 10px var(--accent-primary);
+}
+
+/* ─── Layer 1: Redes (Cables & Switches) ─── */
+.bp-grid-pattern {
+  position: absolute;
+  inset: 0;
+  background-image: 
+    linear-gradient(rgba(18, 212, 201, 0.15) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(18, 212, 201, 0.15) 1px, transparent 1px);
+  background-size: 20px 20px;
+  opacity: 0.5;
+}
+.bp-layer-redes.active .bp-grid-pattern {
+  opacity: 1;
+  animation: pulse-glow 2s infinite;
+}
+
+.bp-realistic-svg {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  pointer-events: none;
+}
+
+.bp-anim-dash {
+  stroke-dasharray: 5, 5;
+  animation: dash-move 20s linear infinite;
+}
+.bp-anim-dash-fast {
+  stroke-dasharray: 4, 4;
+  animation: dash-move 5s linear infinite;
+}
+@keyframes dash-move {
+  to { stroke-dashoffset: -100; }
+}
+
+.bp-blink { animation: blinker 2s step-start infinite; }
+.bp-blink-fast { animation: blinker 0.5s step-start infinite; }
+@keyframes blinker {
+  50% { opacity: 0; }
+}
+
+/* ─── Layer 2: Storage (Racks) ─── */
+.server-rack {
+  position: absolute;
+  width: 40px;
+  height: 80px;
+  background: rgba(15, 23, 42, 0.8);
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  box-shadow: -2px 2px 0 rgba(255,255,255,0.05), -4px 4px 0 rgba(255,255,255,0.05);
+  display: flex;
+  flex-direction: column;
+  padding: 4px;
+  gap: 2px;
+}
+.main-rack {
+  top: 100px; left: 120px;
+}
+
+.rack-unit {
+  flex: 1;
+  background: rgba(255, 255, 255, 0.1);
+  border-radius: 1px;
+}
+
+.bp-layer-storage.active .server-rack {
+  background: rgba(15, 23, 42, 0.95);
+  border-color: var(--accent-primary);
+  box-shadow: -2px 2px 0 rgba(18, 212, 201, 0.4), -4px 4px 0 rgba(18, 212, 201, 0.2), 0 0 30px rgba(18, 212, 201, 0.3);
+}
+
+.bp-layer-storage.active .active-unit {
+  background: var(--accent-primary);
+  box-shadow: 0 0 10px var(--accent-primary);
+  animation: pulse-glow 1s infinite alternate;
+}
+
+
+/* ─── Layer 3: Audio & Video (Mics & Cameras) ─── */
+/* SVG paths are doing the heavy lifting here */
+
+/* If Video is active */
+.bp-layer-av.video .bp-camera-group path {
+  fill: #fff;
+  filter: drop-shadow(0 0 5px #fff);
+}
+.bp-layer-av.video .bp-camera-group circle:last-child {
+  fill: #ff3366; /* Rec light */
+  animation: blinker 1s step-start infinite;
+}
+
+/* If Audio is active */
+.bp-layer-av.audio .bp-mic-group circle {
+  fill: #fff;
+  filter: drop-shadow(0 0 8px #fff);
+}
+.bp-layer-av.audio .bp-mic-group line {
+  stroke: var(--accent-primary);
+}
+
+
+/* ─── Layer 4: Software MASOD (Dashboard) ─── */
+.bp-ui-dashboard {
+  position: absolute;
+  inset: 40px;
+  background: rgba(15, 23, 42, 0.8);
+  border-radius: 6px;
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  display: flex; flex-direction: column;
+  overflow: hidden;
+  box-shadow: 0 10px 30px rgba(0,0,0,0.5);
+}
+.bp-ui-header {
+  height: 12px; background: rgba(255, 255, 255, 0.05);
+  border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+  display: flex; gap: 4px; padding: 3px 6px; align-items: center;
+}
+.bp-ui-header::before { content:''; width: 4px; height: 4px; border-radius: 50%; background: #ff5f56; }
+.bp-ui-header::after { content:''; width: 4px; height: 4px; border-radius: 50%; background: #ffbd2e; }
+
+.bp-ui-body {
+  display: flex; flex: 1;
+}
+.bp-ui-sidebar {
+  width: 30px; border-right: 1px solid rgba(255, 255, 255, 0.05);
+  background: rgba(255, 255, 255, 0.02);
+}
+.bp-ui-content {
+  flex: 1; padding: 10px; display: grid; grid-template-columns: 1fr 1fr; gap: 8px;
+}
+.bp-ui-card {
+  background: rgba(255, 255, 255, 0.05); border-radius: 2px;
+}
+.bp-ui-graph {
+  grid-column: span 2; background: rgba(255, 255, 255, 0.02); border-radius: 2px;
+  display: flex; align-items: flex-end;
+}
+.bp-ui-graph svg { width: 100%; height: 100%; }
+
+.bp-layer-software.active .bp-ui-dashboard {
+  background: rgba(15, 23, 42, 0.95);
+  border-color: var(--accent-primary);
+  box-shadow: 0 0 40px rgba(18, 212, 201, 0.3);
+}
+.bp-layer-software.active .bp-ui-header { background: rgba(18, 212, 201, 0.1); border-color: rgba(18, 212, 201, 0.2); }
+.bp-layer-software.active .bp-ui-card { background: rgba(18, 212, 201, 0.08); }
+
+/* ─── Core Beam (Connects all layers) ─── */
+.bp-core-beam {
+  position: absolute;
+  top: 50%; left: 50%;
+  width: 2px;
+  height: 300px; /* height of the new expanded stack */
+  background: rgba(18, 212, 201, 0.3);
+  transform-origin: top left;
+  transform: rotateX(90deg) translateZ(0px); /* Stand vertically */
+}
+.blueprint-3d-container.has-active .bp-core-beam {
+  background: var(--accent-primary);
+  box-shadow: 0 0 20px var(--accent-primary);
+}
+
+/* ─── Problem ─── */
+.salas-problem { padding: var(--section-padding); background: var(--bg-secondary); }
+
+.problem-split {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 60px;
+  margin-top: 48px;
+  align-items: center;
+}
+
+/* Glitch Terminal */
+.glitch-terminal-wrapper {
+  background: radial-gradient(circle at top left, #1a202c 0%, #0f172a 100%);
+  border-radius: var(--radius-lg);
+  padding: 1px;
+  box-shadow: 0 30px 60px -20px rgba(0,0,0,0.5);
+  position: relative;
+  overflow: hidden;
+}
+
+.glitch-terminal {
+  background: #0b1120;
+  border-radius: calc(var(--radius-lg) - 1px);
+  position: relative;
+  overflow: hidden;
+}
+
+.terminal-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 12px 20px;
+  background: rgba(255, 255, 255, 0.03);
+  border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+}
+
+.term-dots { display: flex; gap: 6px; }
+.dot { width: 10px; height: 10px; border-radius: 50%; }
+.dot-red { background: #ff5f56; }
+.dot-yellow { background: #ffbd2e; }
+.dot-green { background: #27c93f; }
+
+.term-title {
+  font-family: var(--font-mono);
+  font-size: 0.7rem;
+  color: #ef4444;
+  letter-spacing: 2px;
+  animation: blinker 2s infinite;
+}
+
+.terminal-body {
+  padding: 30px 20px;
+  min-height: 250px;
+  font-family: var(--font-mono);
+  font-size: 0.85rem;
+  line-height: 1.8;
+  position: relative;
+}
+
+.term-time { color: #64748b; margin-right: 12px; }
+.term-tag { font-weight: bold; margin-right: 8px; }
+.term-line.error { color: #ef4444; }
+.term-line.error .term-tag { color: #f87171; }
+.term-line.warning { color: #f59e0b; }
+.term-line.warning .term-tag { color: #fbbf24; }
+
+.term-line {
+  opacity: 0;
+  animation: type-in 0.1s forwards;
+}
+
+.term-line:nth-child(1) { animation-delay: 0.2s; }
+.term-line:nth-child(2) { animation-delay: 0.8s; }
+.term-line:nth-child(3) { animation-delay: 1.4s; }
+.term-line:nth-child(4) { animation-delay: 2.0s; }
+
+@keyframes type-in {
+  from { opacity: 0; transform: translateX(-10px); }
+  to { opacity: 1; transform: translateX(0); }
+}
+
+/* Glitch Effect */
+.glitched {
+  animation: txt-glitch 3s infinite;
+}
+@keyframes txt-glitch {
+  0%, 95% { text-shadow: none; transform: translateX(0); }
+  96% { text-shadow: 2px 0 0 #ff0000, -2px 0 0 #00ffff; transform: translateX(-2px); }
+  98% { text-shadow: -2px 0 0 #ff0000, 2px 0 0 #00ffff; transform: translateX(2px); }
+  100% { text-shadow: none; transform: translateX(0); }
+}
+
+/* Scanner Line */
+.terminal-scanner {
+  position: absolute;
+  top: 0; left: 0; width: 100%; height: 4px;
+  background: var(--accent-primary);
+  box-shadow: 0 0 20px 4px var(--accent-primary);
+  opacity: 0;
+}
+.glitch-terminal-wrapper:hover .terminal-scanner {
+  animation: scan-down 2s forwards;
+}
+@keyframes scan-down {
+  0% { top: 0; opacity: 1; }
+  100% { top: 100%; opacity: 0; }
+}
+
+/* Clean State */
+.terminal-clean-state {
+  position: absolute;
+  top: 30px; left: 20px;
+  opacity: 0;
+  color: var(--accent-primary);
+}
+.term-tag.clean { color: #12d4c9; }
+
+.glitch-terminal-wrapper:hover .term-line {
+  opacity: 0 !important;
+  transition: opacity 0.1s 1s; /* fade out as scanner passes */
+}
+.glitch-terminal-wrapper:hover .terminal-clean-state {
+  opacity: 1;
+  transition: opacity 0.1s 1.2s;
+}
+
+/* Right Content: Descriptive Cards */
+.problem-content {
+  display: flex; flex-direction: column; gap: 24px;
+}
+.problem-detail-card {
+  display: flex; gap: 20px;
+  padding: 24px;
+  background: rgba(255, 255, 255, 0.4);
+  border: 1px solid var(--border-accent);
+  border-radius: var(--radius-lg);
+  backdrop-filter: blur(10px);
+}
+.prob-icon-wrapper {
+  font-size: 2rem;
+  background: rgba(239, 68, 68, 0.1);
+  width: 60px; height: 60px;
+  display: flex; align-items: center; justify-content: center;
+  border-radius: 50%;
+  flex-shrink: 0;
+}
+.prob-text h3 {
+  font-size: 1.1rem; margin-bottom: 8px; color: var(--text-primary);
+}
+.prob-text p {
+  font-size: 0.9rem; color: var(--text-secondary); line-height: 1.6; margin: 0;
+}
+
+/* ─── Solution ─── */
+.salas-solution { padding: var(--section-padding); overflow: hidden; }
+
+.solution-header-center {
+  text-align: center;
+  max-width: 800px;
+  margin: 0 auto 60px auto;
+}
+
+.pipeline-container {
+  position: relative;
+  width: 100%;
+  max-width: 1000px;
+  margin: 0 auto;
+  height: 350px;
+}
+
+.pipeline-svg {
+  position: absolute;
+  top: 0; left: 0; width: 100%; height: 100%;
+  z-index: 1;
+}
+
+.data-packet {
+  stroke-dasharray: 20 800; /* small dash, big gap */
+  stroke-dashoffset: 0;
+  animation: data-flow 4s linear infinite;
+}
+
+@keyframes data-flow {
+  to { stroke-dashoffset: -820; }
+}
+
+.pipeline-stations {
+  position: absolute;
+  top: 0; left: 0; width: 100%; height: 100%;
+  z-index: 2;
+  pointer-events: none;
+}
+
+.station {
+  position: absolute;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  transform: translate(-50%, -50%);
+}
+
+.station-1 { top: 50%; left: 5%; }
+.station-2 { top: 16.66%; left: 50%; }
+.station-3 { top: 83.33%; left: 95%; }
+
+.station-node {
+  width: 56px; height: 56px;
+  background: var(--bg-primary);
+  border: 2px solid var(--border-accent);
+  border-radius: 50%;
+  display: flex; align-items: center; justify-content: center;
+  box-shadow: 0 0 20px rgba(18, 212, 201, 0.2);
+  margin-bottom: 16px;
+  position: relative;
+  z-index: 3;
+}
+.station-node.active {
+  background: var(--accent-primary);
+  border-color: #fff;
+  box-shadow: 0 0 30px var(--accent-primary);
+}
+.node-icon { font-size: 1.5rem; }
+
+.station-card {
+  background: rgba(255, 255, 255, 0.6);
+  border: 1px solid rgba(255, 255, 255, 0.4);
+  padding: 16px 20px;
+  border-radius: var(--radius-md);
+  text-align: center;
+  width: 260px;
+  backdrop-filter: blur(8px);
+  pointer-events: auto;
+  transition: all 0.3s;
+}
+.station-card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 10px 30px rgba(18, 212, 201, 0.1);
+  border-color: var(--accent-primary);
+}
+
+.station-card h3 {
+  font-size: 1rem; color: var(--text-primary); margin-bottom: 8px;
+}
+.station-card p {
+  font-size: 0.8rem; color: var(--text-secondary); line-height: 1.5; margin: 0;
+}
+
+.active-card {
+  background: var(--bg-primary);
+  border-color: var(--accent-primary);
+  box-shadow: 0 10px 40px rgba(18, 212, 201, 0.15);
+}
+
+/* ─── Configurator Section ─── */
+.salas-configurator { padding: var(--section-padding); background: var(--bg-secondary); }
+
+/* ─── MASOD ─── */
+.salas-masod { padding: var(--section-padding); }
+.masod-features {
+  list-style: none; display: flex; flex-direction: column; gap: 10px;
+  margin-top: 24px;
+}
+.masod-features li {
+  display: flex; align-items: center; gap: 12px;
+  font-size: 0.9rem; color: var(--text-secondary);
+}
+.masod-terminal { max-width: 420px; margin: 0 auto; }
+
+/* ─── Process ─── */
+.salas-process { padding: var(--section-padding); background: var(--bg-secondary); }
+.process-timeline {
+  display: grid; grid-template-columns: repeat(3, 1fr);
+  gap: 24px; margin-top: 48px;
+}
+.process-step {
+  display: flex; gap: 20px; padding: 28px;
+  background: var(--bg-elevated);
+  border: 1px solid var(--border-subtle);
+  border-radius: var(--radius-md);
+  transition: all var(--duration-normal) var(--ease-spring);
+}
+.process-step:hover { border-color: var(--border-accent); transform: translateY(-4px); }
+.step-number {
+  font-family: var(--font-mono); font-size: 2rem;
+  font-weight: 800; color: var(--accent-primary);
+  opacity: 0.3; line-height: 1; flex-shrink: 0;
+}
+.step-content h3 { font-size: 1rem; font-weight: 700; margin-bottom: 6px; }
+.step-content p { font-size: 0.82rem; color: var(--text-tertiary); line-height: 1.6; }
+
+/* ─── Types ─── */
+.salas-types { padding: var(--section-padding); }
+.types-grid {
+  display: grid; grid-template-columns: repeat(auto-fit, minmax(160px, 1fr));
+  gap: 16px; margin-top: 40px; position: relative; z-index: 1;
+}
+.type-card {
+  padding: 24px; text-align: center;
+  display: flex; flex-direction: column; align-items: center; gap: 12px;
+}
+.type-icon { font-size: 2rem; }
+.type-name {
+  font-family: var(--font-mono); font-size: 0.78rem;
+  color: var(--text-secondary); letter-spacing: 0.02em;
+}
+
+/* ─── Benefits ─── */
+.salas-benefits { padding: var(--section-padding); background: var(--bg-secondary); }
+.benefits-grid {
+  display: grid; grid-template-columns: repeat(4, 1fr);
+  gap: 16px; margin-top: 40px;
+}
+.benefit-item {
+  display: flex; align-items: center; gap: 12px;
+  padding: 16px 20px;
+  background: var(--bg-elevated);
+  border: 1px solid var(--border-subtle);
+  border-radius: var(--radius-sm);
+  font-size: 0.85rem; color: var(--text-secondary);
+  transition: all var(--duration-fast);
+}
+.benefit-item:hover { border-color: var(--border-accent); color: var(--text-primary); }
+.benefit-icon { font-size: 1.2rem; flex-shrink: 0; }
+
+/* ─── CTA ─── */
+.salas-cta {
+  position: relative; padding: 120px 0; overflow: hidden;
+}
+.salas-cta-glow {
+  position: absolute; top: 50%; left: 50%;
+  transform: translate(-50%, -50%);
+  width: 800px; height: 400px;
+  background: radial-gradient(ellipse, rgba(18,212,201,0.08), transparent 70%);
+  pointer-events: none;
+}
+
+/* ─── Responsive ─── */
+@media (max-width: 900px) {
+  .salas-split { grid-template-columns: 1fr; gap: 40px; }
+  .problem-grid { grid-template-columns: 1fr 1fr; }
+  .process-timeline { grid-template-columns: 1fr; }
+  .benefits-grid { grid-template-columns: 1fr 1fr; }
+}
+@media (max-width: 600px) {
+  .problem-grid { grid-template-columns: 1fr; }
+  .benefits-grid { grid-template-columns: 1fr; }
+  .salas-hero-title { font-size: 2.2rem; }
+}

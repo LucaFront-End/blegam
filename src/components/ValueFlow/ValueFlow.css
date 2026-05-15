@@ -1,0 +1,198 @@
+.value-flow-section {
+  padding: 120px 0;
+  background: var(--bg-primary); /* Keeps it pure white/light mode */
+  position: relative;
+  overflow: hidden;
+  border-top: 1px solid var(--border-subtle);
+}
+
+.value-flow-header {
+  text-align: center;
+  margin-bottom: 80px;
+}
+
+.flow-circuit-container {
+  position: relative;
+  max-width: 1100px;
+  margin: 0 auto;
+  padding: 40px 0;
+}
+
+/* Technical Circuit Grid Background */
+.flow-circuit-grid {
+  position: absolute;
+  inset: -40px;
+  background-image: radial-gradient(var(--border-subtle) 1px, transparent 1px);
+  background-size: 24px 24px;
+  opacity: 0.6;
+  z-index: 0;
+  pointer-events: none;
+  mask-image: radial-gradient(ellipse at center, black 40%, transparent 70%);
+  -webkit-mask-image: radial-gradient(ellipse at center, black 40%, transparent 70%);
+}
+
+/* ─── DESKTOP HORIZONTAL TRACK ─── */
+.circuit-track {
+  position: absolute;
+  top: 80px; /* Align with node centers */
+  left: 10%;
+  right: 10%;
+  height: 2px;
+  background: var(--border-light);
+  z-index: 1;
+}
+
+.circuit-progress {
+  height: 100%;
+  width: var(--desktop-width, 0%);
+  background: var(--accent-primary);
+  box-shadow: 0 0 12px var(--accent-primary);
+  transition: width 0.2s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+/* ─── NODES ─── */
+.flow-nodes-wrapper {
+  display: flex;
+  justify-content: space-between;
+  position: relative;
+  z-index: 2;
+}
+
+.flow-node-item {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 300px;
+  opacity: 0.3;
+  transform: translateY(20px);
+  transition: all 0.8s cubic-bezier(0.34, 1.56, 0.64, 1);
+}
+
+.flow-node-item.is-active {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+.node-point {
+  width: 80px;
+  height: 80px;
+  border-radius: 50%;
+  background: #ffffff;
+  border: 2px solid var(--border-subtle);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-bottom: 40px;
+  position: relative;
+  transition: all 0.5s ease;
+  color: var(--text-tertiary);
+  box-shadow: 0 4px 10px rgba(0,0,0,0.02);
+}
+
+.flow-node-item.is-active .node-point {
+  border-color: var(--accent-primary);
+  color: var(--accent-primary);
+  box-shadow: 0 0 24px rgba(18, 212, 201, 0.25);
+}
+
+.node-pulse {
+  position: absolute;
+  inset: -2px;
+  border-radius: 50%;
+  border: 2px solid var(--accent-primary);
+  opacity: 0;
+}
+
+.flow-node-item.is-active .node-pulse {
+  animation: pulse-out 2s infinite cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+@keyframes pulse-out {
+  0% { transform: scale(1); opacity: 0.8; }
+  100% { transform: scale(1.6); opacity: 0; }
+}
+
+/* ─── CONTENT CARDS ─── */
+.node-content {
+  text-align: center;
+  padding: 32px 24px;
+  background: #ffffff;
+  border: 1px solid var(--border-subtle);
+  border-radius: var(--radius-lg);
+  box-shadow: 0 10px 40px rgba(0,0,0,0.03);
+  position: relative;
+  transition: all 0.5s ease;
+}
+
+.flow-node-item.is-active .node-content {
+  border-color: #cbd5e1;
+  box-shadow: 0 20px 50px rgba(0,0,0,0.06);
+}
+
+.node-content h3 {
+  font-family: var(--font-mono);
+  font-size: 1.15rem;
+  color: var(--text-primary);
+  margin-bottom: 12px;
+}
+
+.node-content p {
+  font-size: 0.95rem;
+  color: var(--text-secondary);
+  line-height: 1.7;
+}
+
+/* Vertical line connecting node point to card */
+.node-content::before {
+  content: '';
+  position: absolute;
+  top: -40px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 2px;
+  height: 40px;
+  background: var(--border-subtle);
+  transition: background 0.5s ease;
+}
+
+.flow-node-item.is-active .node-content::before {
+  background: var(--accent-primary);
+}
+
+/* Responsive (Switch to Vertical Flow) */
+@media (max-width: 900px) {
+  .flow-circuit-container {
+    padding: 20px 0;
+  }
+  
+  .flow-nodes-wrapper {
+    flex-direction: column;
+    gap: 80px;
+    align-items: center;
+  }
+  
+  .circuit-track {
+    top: 40px; /* Align with first node */
+    bottom: 40px; /* Align with last node */
+    left: 50%;
+    right: auto;
+    width: 2px;
+    height: auto;
+    transform: translateX(-50%);
+  }
+  
+  .circuit-progress {
+    width: 100%;
+    height: var(--mobile-height, 0%);
+    transition: height 0.2s cubic-bezier(0.16, 1, 0.3, 1);
+  }
+  
+  .node-point {
+    margin-bottom: 24px;
+    background: var(--bg-primary); /* Overlap track properly */
+  }
+
+  .node-content::before {
+    display: none; /* Hide connecting line on mobile since track goes through centers */
+  }
+}

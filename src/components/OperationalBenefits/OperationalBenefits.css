@@ -1,0 +1,199 @@
+.ob-section {
+  padding: 100px 0;
+  background: #020617; /* Very dark slate, matching the cinematic style */
+  position: relative;
+  overflow: hidden;
+}
+
+/* Background grid glow */
+.ob-section::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background-image: 
+    linear-gradient(rgba(18, 212, 201, 0.05) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(18, 212, 201, 0.05) 1px, transparent 1px);
+  background-size: 40px 40px;
+  background-position: center center;
+  mask-image: radial-gradient(circle at 50% 50%, black, transparent 70%);
+  -webkit-mask-image: radial-gradient(circle at 50% 50%, black, transparent 70%);
+  pointer-events: none;
+}
+
+.ob-header {
+  text-align: center;
+  margin-bottom: 60px;
+  position: relative;
+  z-index: 2;
+}
+
+.ob-section .section-label {
+  color: var(--accent-primary);
+  border-color: rgba(18, 212, 201, 0.3);
+}
+
+.ob-section .section-title {
+  color: #ffffff;
+}
+
+.ob-subtitle {
+  color: var(--text-secondary);
+  font-size: 1.2rem;
+  max-width: 600px;
+  margin: 15px auto 0;
+}
+
+.ob-bento-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 20px;
+  position: relative;
+  z-index: 2;
+}
+
+.ob-card {
+  background: rgba(15, 23, 42, 0.6);
+  border: 1px solid rgba(255, 255, 255, 0.05);
+  border-radius: var(--radius-lg);
+  padding: 35px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  position: relative;
+  overflow: hidden;
+  backdrop-filter: blur(10px);
+  transition: transform 0.4s cubic-bezier(0.4, 0, 0.2, 1),
+              opacity 0.4s cubic-bezier(0.4, 0, 0.2, 1),
+              border-color 0.3s ease,
+              box-shadow 0.3s ease;
+  opacity: 0;
+  transform: translateY(30px);
+}
+
+.ob-card.visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/* Delays */
+.ob-delay-0 { transition-delay: 0.05s; }
+.ob-delay-1 { transition-delay: 0.15s; }
+.ob-delay-2 { transition-delay: 0.25s; }
+.ob-delay-3 { transition-delay: 0.35s; }
+.ob-delay-4 { transition-delay: 0.45s; }
+.ob-delay-5 { transition-delay: 0.55s; }
+
+.ob-card:hover {
+  transform: translateY(-5px);
+  border-color: rgba(18, 212, 201, 0.3);
+  box-shadow: 0 10px 40px -10px rgba(18, 212, 201, 0.15);
+  background: rgba(15, 23, 42, 0.8);
+}
+
+/* Glow effect */
+.ob-card-glow {
+  position: absolute;
+  top: -50px;
+  right: -50px;
+  width: 200px;
+  height: 200px;
+  background: radial-gradient(circle, rgba(18,212,201,0.15) 0%, transparent 70%);
+  opacity: 0;
+  transition: opacity 0.4s ease;
+  pointer-events: none;
+}
+
+.ob-card:hover .ob-card-glow {
+  opacity: 1;
+}
+
+.ob-card-top {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  margin-bottom: 50px;
+}
+
+.ob-icon-wrapper {
+  width: 55px;
+  height: 55px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: rgba(255, 255, 255, 0.03);
+  border-radius: 14px;
+  color: var(--accent-primary);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  transition: all 0.3s ease;
+}
+.ob-icon-wrapper svg {
+  width: 28px;
+  height: 28px;
+}
+
+.ob-card:hover .ob-icon-wrapper {
+  background: rgba(18, 212, 201, 0.1);
+  border-color: rgba(18, 212, 201, 0.4);
+  color: #fff;
+  transform: scale(1.05);
+}
+
+.ob-highlight-badge {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+}
+
+.ob-highlight-value {
+  font-family: var(--font-mono);
+  font-size: 2.5rem;
+  font-weight: 700;
+  color: #fff;
+  line-height: 1;
+  text-shadow: 0 0 10px rgba(255,255,255,0.1);
+}
+
+.ob-highlight-label {
+  font-family: var(--font-mono);
+  font-size: 0.7rem;
+  color: var(--accent-primary);
+  letter-spacing: 1.5px;
+  margin-top: 6px;
+}
+
+.ob-card-bottom h3 {
+  font-size: 1.5rem;
+  color: #fff;
+  margin-bottom: 12px;
+  font-weight: 600;
+}
+
+.ob-card-bottom p {
+  color: var(--text-secondary);
+  font-size: 1rem;
+  line-height: 1.6;
+}
+
+/* Bento sizing adjustments to make it asymmetric */
+.ob-bento-grid .ob-card:nth-child(1) { grid-column: span 2; }
+.ob-bento-grid .ob-card:nth-child(6) { grid-column: span 2; }
+
+@media (max-width: 1024px) {
+  .ob-bento-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+  .ob-bento-grid .ob-card:nth-child(1),
+  .ob-bento-grid .ob-card:nth-child(6) {
+    grid-column: span 2;
+  }
+}
+
+@media (max-width: 768px) {
+  .ob-bento-grid {
+    grid-template-columns: 1fr;
+  }
+  .ob-bento-grid .ob-card:nth-child(1),
+  .ob-bento-grid .ob-card:nth-child(6) {
+    grid-column: span 1;
+  }
+}

@@ -1,0 +1,335 @@
+.isometric-assembler {
+  width: 100%;
+  height: 100%;
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  perspective: 1000px;
+}
+
+/* Tooltip Styles */
+.iso-tooltip {
+  position: absolute;
+  transform: translate(-50%, -120%);
+  background: var(--bg-glass);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  border: 1px solid var(--border-light);
+  border-radius: var(--radius-md);
+  padding: 16px 20px;
+  width: 240px;
+  box-shadow: 0 10px 30px rgba(0,0,0,0.08), 0 0 20px rgba(18, 212, 201, 0.1);
+  pointer-events: none;
+  opacity: 0;
+  transition: all 0.4s cubic-bezier(0.34, 1.56, 0.64, 1);
+  z-index: 10;
+}
+
+.iso-tooltip.visible {
+  opacity: 1;
+  transform: translate(-50%, -100%);
+}
+
+.tt-header {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  margin-bottom: 8px;
+}
+
+.tt-dot {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background: var(--tt-color);
+  box-shadow: 0 0 8px var(--tt-color);
+}
+
+.tt-header h4 {
+  font-family: var(--font-heading);
+  font-size: 0.9rem;
+  font-weight: 700;
+  color: var(--text-primary);
+  margin: 0;
+}
+
+.iso-tooltip p {
+  font-size: 0.75rem;
+  color: var(--text-secondary);
+  line-height: 1.5;
+  margin: 0;
+}
+
+/* SVG Container */
+.iso-svg {
+  width: 100%;
+  max-width: 800px; /* Increased from 600px */
+  height: auto;
+  overflow: visible;
+  transform: scale(1.1); /* Enlarge */
+  transform-origin: center right;
+}
+
+/* Base Grid */
+.iso-grid-base {
+  fill: #ffffff;
+  stroke: var(--border-light);
+  stroke-width: 1;
+}
+
+.iso-grid-lines {
+  fill: none;
+  stroke: #12D4C9;
+  stroke-width: 1;
+  stroke-dasharray: 20, 20;
+  opacity: 0.15; /* Increased contrast */
+}
+
+/* Shadows */
+.iso-shadow {
+  fill: rgba(0, 0, 0, 0.05);
+}
+
+/* Node Surfaces with deeper contrast for light mode */
+.iso-surface {
+  fill: #f9fafb;
+  stroke: #cbd5e1;
+  stroke-width: 1.5;
+  stroke-linejoin: round;
+  transition: all 0.3s ease;
+}
+
+.iso-surface-top {
+  fill: #ffffff;
+  stroke: #cbd5e1;
+  stroke-width: 1.5;
+  stroke-linejoin: round;
+  transition: all 0.3s ease;
+}
+
+.iso-face-left {
+  fill: #e2e8f0; /* Darker grey to stand out */
+  stroke: #cbd5e1;
+  stroke-width: 1.5;
+  stroke-linejoin: round;
+  transition: all 0.3s ease;
+}
+
+.iso-face-right {
+  fill: #f1f5f9;
+  stroke: #cbd5e1;
+  stroke-width: 1.5;
+  stroke-linejoin: round;
+  transition: all 0.3s ease;
+}
+
+/* Wires and Connectors */
+.iso-wire {
+  fill: none;
+  stroke: #94a3b8;
+  stroke-width: 2.5;
+  stroke-linejoin: round;
+  stroke-linecap: round;
+}
+
+/* Rack Details */
+.iso-blade {
+  stroke: #94a3b8;
+  stroke-width: 2;
+  stroke-linecap: round;
+}
+
+.iso-blade.active {
+  stroke: #10b981; /* Green accent */
+  filter: drop-shadow(0 0 4px rgba(16, 185, 129, 0.5));
+}
+
+.iso-blade.active-pulse {
+  stroke: #10b981;
+  animation: iso-pulse-green 2s infinite alternate;
+}
+
+.iso-port {
+  fill: #94a3b8;
+}
+
+.iso-port.active {
+  fill: #12D4C9;
+  filter: drop-shadow(0 0 4px #12D4C9);
+}
+
+/* Camera Details */
+.iso-lens {
+  fill: #1e293b;
+  stroke: #12D4C9;
+  stroke-width: 2;
+  transition: all 0.3s ease;
+}
+
+.iso-lens-core {
+  fill: rgba(255,255,255,0.8);
+  filter: drop-shadow(0 0 4px #12D4C9);
+}
+
+/* Screen Details */
+.iso-screen-bg {
+  fill: rgba(18, 212, 201, 0.1);
+}
+
+.iso-screen-chart {
+  stroke: #f59e0b; /* Orange accent */
+  stroke-width: 2;
+  stroke-linejoin: round;
+}
+
+.iso-screen-dot {
+  fill: #f59e0b;
+  filter: drop-shadow(0 0 4px #f59e0b);
+}
+
+/* Cloud / Rings */
+.cloud-glow {
+  fill: #ffffff;
+}
+
+.iso-ring {
+  fill: none;
+  stroke: #8b5cf6; /* Purple accent */
+  stroke-width: 2;
+  stroke-dasharray: 8, 8;
+  opacity: 0.5;
+  transform-origin: 400px 55px;
+  animation: iso-spin 12s linear infinite;
+}
+
+.iso-ring.delay-1 { animation-duration: 18s; animation-direction: reverse; }
+.iso-ring.delay-2 { animation-duration: 24s; }
+
+/* Packets */
+.iso-packet {
+  fill: #12D4C9;
+  filter: drop-shadow(0 0 8px #12D4C9);
+}
+
+.packet-1 { animation: packet-move-1 3s infinite linear; }
+.packet-2 { animation: packet-move-2 3s infinite linear 1s; }
+.packet-3 { animation: packet-move-3 3s infinite linear 0.5s; }
+
+/* Particles */
+.iso-particle {
+  fill: #12D4C9;
+  opacity: 0.6;
+  animation: float-particle 4s infinite ease-in-out alternate;
+}
+.p-1 { animation-delay: 0s; }
+.p-2 { animation-delay: 1s; }
+.p-3 { animation-delay: 2s; }
+.p-4 { animation-delay: 3s; }
+
+/* ─── HOVER EFFECTS ─── */
+.iso-node {
+  cursor: pointer;
+  outline: none;
+}
+
+/* Hover scales the node up slightly */
+.iso-node.is-hovered .iso-surface,
+.iso-node.is-hovered .iso-surface-top,
+.iso-node.is-hovered .iso-face-left,
+.iso-node.is-hovered .iso-face-right {
+  stroke: #12D4C9;
+  stroke-width: 2;
+  filter: drop-shadow(0 0 10px rgba(18, 212, 201, 0.2));
+}
+
+.iso-node.is-hovered .cloud-glow {
+  fill: #e0e7ff;
+}
+
+.iso-node.is-hovered .iso-lens {
+  stroke: #f59e0b;
+}
+
+/* ─── ANIMATIONS ─── */
+.isometric-assembler .iso-node {
+  opacity: 0;
+  transform: translateY(-40px);
+  transition: opacity 1s var(--ease-spring), transform 1s var(--ease-spring);
+}
+
+.isometric-assembler .iso-wire {
+  stroke-dasharray: 200;
+  stroke-dashoffset: 200;
+  transition: stroke-dashoffset 1.5s ease-out;
+}
+
+.isometric-assembler .iso-grid-floor,
+.isometric-assembler .iso-floor-glow {
+  opacity: 0;
+  transform: translateY(20px);
+  transition: opacity 1.5s ease-out, transform 1.5s ease-out;
+}
+
+.isometric-assembler.animate .iso-grid-floor,
+.isometric-assembler.animate .iso-floor-glow {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+.isometric-assembler.animate .iso-rack { transition-delay: 0.3s; opacity: 1; transform: translateY(0); }
+.isometric-assembler.animate .iso-camera { transition-delay: 0.6s; opacity: 1; transform: translateY(0); }
+.isometric-assembler.animate .iso-screen { transition-delay: 0.9s; opacity: 1; transform: translateY(0); }
+.isometric-assembler.animate .iso-cloud { transition-delay: 1.2s; opacity: 1; transform: translateY(0); }
+
+.isometric-assembler.animate .iso-wire {
+  stroke-dashoffset: 0;
+  transition-delay: 1.5s;
+}
+
+@keyframes iso-pulse-green {
+  0% { stroke: #94a3b8; filter: none; }
+  100% { stroke: #10b981; filter: drop-shadow(0 0 6px rgba(16, 185, 129, 0.6)); }
+}
+
+@keyframes iso-spin {
+  0% { transform: rotate(0deg); }
+  100% { transform: rotate(360deg); }
+}
+
+@keyframes float-particle {
+  0% { transform: translateY(0); }
+  100% { transform: translateY(-30px); opacity: 0; }
+}
+
+/* Packet paths */
+@keyframes packet-move-1 {
+  0% { transform: translate(0, 0); opacity: 0; }
+  10% { opacity: 1; }
+  45% { transform: translate(0, 40px); }
+  90% { transform: translate(70px, 75px); opacity: 1; }
+  100% { transform: translate(70px, 75px); opacity: 0; }
+}
+
+@keyframes packet-move-2 {
+  0% { transform: translate(0, 0); opacity: 0; }
+  10% { opacity: 1; }
+  45% { transform: translate(70px, -35px); }
+  90% { transform: translate(70px, -75px); opacity: 1; }
+  100% { transform: translate(70px, -75px); opacity: 0; }
+}
+
+@keyframes packet-move-3 {
+  0% { transform: translate(0, 0); opacity: 0; }
+  10% { opacity: 1; }
+  90% { transform: translate(0, -50px); opacity: 1; }
+  100% { transform: translate(0, -50px); opacity: 0; }
+}
+
+/* Mobile Adjustments */
+@media (max-width: 900px) {
+  .iso-svg {
+    transform: scale(1);
+    transform-origin: center center;
+  }
+}
