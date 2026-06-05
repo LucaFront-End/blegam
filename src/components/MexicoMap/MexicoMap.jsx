@@ -32,15 +32,20 @@ const projectGeo = {
   'Tren Suburbano — Seguridad': { coords: [19.5253, -99.1578], region: 'Edomex' },
   'Poder Judicial Puebla': { coords: [19.0414, -98.2063], region: 'Puebla' },
   'Secretaría de Seguridad CDMX': { coords: [19.4128, -99.1750], region: 'CDMX' },
+  'Instalación 3 Salas — Puebla': { coords: [19.0550, -98.2200], region: 'Puebla' },
+  'Mantenimiento Pachuca 2024': { coords: [20.1011, -98.7591], region: 'Hidalgo' },
+  'Mantenimiento Puebla 2024': { coords: [19.0300, -98.1900], region: 'Puebla' },
+  'Mantenimiento Puebla 2026': { coords: [19.0650, -98.2300], region: 'Puebla' },
 };
 
 const regionList = ['Todos', ...new Set(Object.values(projectGeo).map(p => p.region))];
 
 const regionCoords = {
-  'Todos': [20.5, -99.5, 6],
+  'Todos': [20.0, -99.2, 6],
   'CDMX': [19.42, -99.16, 12],
   'Edomex': [19.52, -99.16, 11],
-  'Puebla': [19.04, -98.21, 12],
+  'Puebla': [19.04, -98.21, 11],
+  'Hidalgo': [20.10, -98.76, 12],
 };
 
 function MapController({ activeRegion, selectedProject }) {
