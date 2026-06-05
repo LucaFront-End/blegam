@@ -1,4 +1,5 @@
 import { Link } from 'react-router-dom';
+import { Helmet } from 'react-helmet-async';
 import { brand } from '../data/content';
 import { useScrollReveal } from '../hooks/useScrollReveal';
 import ParticleHero from '../components/ParticleHero/ParticleHero';
@@ -12,6 +13,10 @@ export default function Servicios() {
 
   return (
     <main className="page-servicios">
+      <Helmet>
+        <title>Servicios de Implementación de IT e Integración Tecnológica | Blegam Corp</title>
+        <meta name="description" content="Descubre los servicios de Blegam Corp: instalación de Salas de Juicios Orales, infraestructura tecnológica, videoconferencia, redes, audio profesional y soluciones IT para empresas." />
+      </Helmet>
       {/* ─── 1. PARTICLE HERO ─── */}
       <ParticleHero
         badge="Soluciones End-to-End"

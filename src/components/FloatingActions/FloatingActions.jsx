@@ -5,6 +5,7 @@ import './FloatingActions.css';
 export default function FloatingActions() {
   const [feedbackOpen, setFeedbackOpen] = useState(false);
   const [submitted, setSubmitted] = useState(false);
+  const [sending, setSending] = useState(false);
   const [form, setForm] = useState({
     name: '',
     email: '',
@@ -17,16 +18,45 @@ export default function FloatingActions() {
     setForm({ ...form, [e.target.name]: e.target.value });
   };
 
-  const handleSubmit = (e) => {
+  const typeLabels = {
+    sugerencia: 'Sugerencia',
+    experiencia: 'Experiencia',
+    queja: 'Queja',
+    otro: 'Otro',
+  };
+
+  const handleSubmit = async (e) => {
     e.preventDefault();
-    // In production, wire this to a backend/email service
-    console.log('Feedback submitted:', form);
-    setSubmitted(true);
-    setTimeout(() => {
-      setSubmitted(false);
-      setFeedbackOpen(false);
-      setForm({ name: '', email: '', type: 'sugerencia', project: '', message: '' });
-    }, 3000);
+    setSending(true);
+
+    const body = new FormData();
+    body.append('Nombre', form.name);
+    body.append('Correo', form.email);
+    body.append('Tipo', typeLabels[form.type] || form.type);
+    body.append('Proyecto', form.project || 'No especificado');
+    body.append('Mensaje', form.message);
+    // FormSubmit config — clean, no template formatting, Spanish
+    body.append('_subject', `Buzón de comentarios: ${typeLabels[form.type] || form.type}`);
+    body.append('_captcha', 'false');
+    body.append('_template', 'table');
+    body.append('_autoresponse', 'Gracias por tu comentario. En Blegam Corp valoramos tu opinión y nos pondremos en contacto contigo si es necesario.');
+
+    try {
+      await fetch('https://formsubmit.co/ajax/info@blegam.com.mx', {
+        method: 'POST',
+        body,
+      });
+      setSubmitted(true);
+      setTimeout(() => {
+        setSubmitted(false);
+        setFeedbackOpen(false);
+        setForm({ name: '', email: '', type: 'sugerencia', project: '', message: '' });
+      }, 3000);
+    } catch {
+      alert('Hubo un error al enviar. Por favor intenta de nuevo.');
+    } finally {
+      setSending(false);
+    }
   };
 
   return (
@@ -155,8 +185,8 @@ export default function FloatingActions() {
                     />
                   </div>
 
-                  <button type="submit" className="fb-submit">
-                    Enviar Comentario
+                  <button type="submit" className="fb-submit" disabled={sending}>
+                    {sending ? 'Enviando...' : 'Enviar Comentario'}
                   </button>
                 </form>
               </>

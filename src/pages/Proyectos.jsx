@@ -1,4 +1,5 @@
 import { Link } from 'react-router-dom';
+import { Helmet } from 'react-helmet-async';
 import { brand } from '../data/content';
 import { useScrollReveal, useCountUp } from '../hooks/useScrollReveal';
 import MexicoMap from '../components/MexicoMap/MexicoMap';
@@ -11,6 +12,10 @@ export default function Proyectos() {
 
   return (
     <main className="page-proyectos">
+      <Helmet>
+        <title>Proyectos de IT y Salas de Juicios Orales Implementados | Blegam Corp</title>
+        <meta name="description" content="Conoce los proyectos desarrollados por Blegam Corp en integración tecnológica, implementación de IT empresarial e instalación de Salas de Juicios Orales para diversos sectores." />
+      </Helmet>
       {/* ─── 1. COMPACT HERO ─── */}
       <section className="proy-hero-compact">
         <div className="proy-hero-bg-grad" />

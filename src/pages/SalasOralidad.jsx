@@ -1,5 +1,6 @@
 import { Link } from 'react-router-dom';
 import { useState } from 'react';
+import { Helmet } from 'react-helmet-async';
 import { useScrollReveal } from '../hooks/useScrollReveal';
 import { brand, audienceProcess, salaTypes, benefits } from '../data/content';
 import SalaConfigurator from '../components/SalaConfigurator/SalaConfigurator';
@@ -34,6 +35,10 @@ export default function SalasOralidad() {
 
   return (
     <main className="page-salas">
+      <Helmet>
+        <title>Instalación de Salas de Juicios Orales con Tecnología Especializada | Blegam Corp</title>
+        <meta name="description" content="Diseñamos e implementamos Salas de Juicios Orales con sistemas de audio, videograbación, videoconferencia, monitoreo y tecnología especializada para instituciones gubernamentales y judiciales." />
+      </Helmet>
       {/* ─── 1. HERO ─── */}
       <section className="salas-hero waveform-hero" ref={heroRef}>
         <VoiceWaveform />

@@ -1,4 +1,5 @@
 import { Link } from 'react-router-dom';
+import { Helmet } from 'react-helmet-async';
 import { brand, valueProps } from '../data/content';
 import { useScrollReveal } from '../hooks/useScrollReveal';
 import StatsStrip from '../components/StatsStrip/StatsStrip';
@@ -15,6 +16,10 @@ export default function Home() {
 
   return (
     <main className="page-home">
+      <Helmet>
+        <title>Instalación de Salas de Juicios Orales e Implementación de IT a Empresas | Blegam Corp</title>
+        <meta name="description" content="Blegam Corp es especialista en instalación de Salas de Juicios Orales e implementación de IT a empresas. Integramos audio, video, redes, videoconferencia e infraestructura tecnológica para instituciones y corporativos." />
+      </Helmet>
       {/* ─── HERO ─── */}
       <section className="hero">
         <div className="hero-bg">

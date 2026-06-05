@@ -1,4 +1,5 @@
 import { useState } from 'react';
+import { Helmet } from 'react-helmet-async';
 import { brand } from '../data/content';
 import { useScrollReveal } from '../hooks/useScrollReveal';
 import './Contact.css';
@@ -6,13 +7,48 @@ import './Contact.css';
 export default function Contact() {
   const [form, setForm] = useState({ name:'', email:'', company:'', phone:'', service:'', message:'' });
   const [submitted, setSubmitted] = useState(false);
+  const [sending, setSending] = useState(false);
   const heroRef = useScrollReveal();
 
   const handleChange = (e) => setForm({ ...form, [e.target.name]: e.target.value });
-  const handleSubmit = (e) => { e.preventDefault(); setSubmitted(true); };
+
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+    setSending(true);
+
+    const body = new FormData();
+    body.append('Nombre', form.name);
+    body.append('Email', form.email);
+    body.append('Empresa', form.company);
+    body.append('Teléfono', form.phone);
+    body.append('Servicio de interés', form.service);
+    body.append('Mensaje', form.message);
+    // FormSubmit config — clean email, no template, Spanish subject
+    body.append('_subject', 'Nueva solicitud de cotización desde blegam.com');
+    body.append('_captcha', 'false');
+    body.append('_template', 'table');
+    body.append('_autoresponse', 'Gracias por contactar a Blegam Corp. Hemos recibido tu solicitud y un ejecutivo te contactará en las próximas 24 horas.');
+
+    try {
+      await fetch('https://formsubmit.co/ajax/info@blegam.com.mx', {
+        method: 'POST',
+        body,
+      });
+      setSubmitted(true);
+    } catch {
+      alert('Hubo un error al enviar. Por favor intenta de nuevo.');
+    } finally {
+      setSending(false);
+    }
+  };
 
   return (
     <main className="page-contact">
+      <Helmet>
+        <title>Contacto Blegam Corp | Cotiza tu Proyecto de IT o Sala de Juicios Orales</title>
+        <meta name="description" content="Solicita una cotización con Blegam Corp para instalación de Salas de Juicios Orales, infraestructura tecnológica e implementación de IT para empresas, corporativos e instituciones." />
+      </Helmet>
+
       <section className="contact-hero" ref={heroRef}>
         <div className="contact-hero-bg" />
         <div className="container reveal">
@@ -58,17 +94,19 @@ export default function Contact() {
                     <label>Servicio de interés</label>
                     <select name="service" value={form.service} onChange={handleChange}>
                       <option value="">Seleccionar servicio...</option>
-                      <option value="justicia">Justicia Digital / Salas de Oralidad</option>
-                      <option value="seguridad">Seguridad Integral</option>
-                      <option value="ingenieria">Ingeniería y Software</option>
-                      <option value="broadcast">Broadcast</option>
+                      <option value="Justicia Digital / Salas de Oralidad">Justicia Digital / Salas de Oralidad</option>
+                      <option value="Seguridad Integral">Seguridad Integral</option>
+                      <option value="Ingeniería y Software">Ingeniería y Software</option>
+                      <option value="Broadcast">Broadcast</option>
                     </select>
                   </div>
                   <div className="form-group">
                     <label>Mensaje</label>
                     <textarea name="message" rows="5" value={form.message} onChange={handleChange} placeholder="Cuéntanos sobre tu proyecto..." />
                   </div>
-                  <button type="submit" className="btn btn-primary form-submit">Cotizar Ahora →</button>
+                  <button type="submit" className="btn btn-primary form-submit" disabled={sending}>
+                    {sending ? 'Enviando...' : 'Cotizar Ahora →'}
+                  </button>
                 </form>
               )}
             </div>

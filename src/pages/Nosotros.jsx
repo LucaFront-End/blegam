@@ -1,4 +1,5 @@
 import { Link } from 'react-router-dom';
+import { Helmet } from 'react-helmet-async';
 import { brand, certifications } from '../data/content';
 import { useScrollReveal } from '../hooks/useScrollReveal';
 import { useCountUp } from '../hooks/useScrollReveal';
@@ -17,6 +18,10 @@ export default function Nosotros() {
 
   return (
     <main className="page-nosotros">
+      <Helmet>
+        <title>Blegam Corp | Expertos en Salas de Juicios Orales y Soluciones IT Empresariales</title>
+        <meta name="description" content="Conoce a Blegam Corp, empresa especializada en instalación de Salas de Juicios Orales, integración tecnológica e implementación de IT para empresas, gobierno e instituciones en México." />
+      </Helmet>
       {/* ─── 1. HERO STATEMENT ─── */}
       <section className="nosotros-hero" ref={heroRef}>
         <div className="nosotros-hero-bg">
