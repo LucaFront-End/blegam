@@ -26,16 +26,16 @@ const createIcon = (isActive) => new L.DivIcon({
 
 // Map projects to approximate coordinates
 const projectGeo = {
-  'Poder Judicial CDMX': { coords: [19.4326, -99.1332], region: 'CDMX' },
-  'Televisa — Análisis Deportivo': { coords: [19.3937, -99.1885], region: 'CDMX' },
-  'Juguetón 2023': { coords: [19.4363, -99.1406], region: 'CDMX' },
-  'Tren Suburbano — Seguridad': { coords: [19.5253, -99.1578], region: 'Edomex' },
-  'Poder Judicial Puebla': { coords: [19.0414, -98.2063], region: 'Puebla' },
-  'Secretaría de Seguridad CDMX': { coords: [19.4128, -99.1750], region: 'CDMX' },
-  'Instalación 3 Salas — Puebla': { coords: [19.0550, -98.2200], region: 'Puebla' },
-  'Mantenimiento Pachuca 2024': { coords: [20.1011, -98.7591], region: 'Hidalgo' },
-  'Mantenimiento Puebla 2024': { coords: [19.0300, -98.1900], region: 'Puebla' },
-  'Mantenimiento Puebla 2026': { coords: [19.0650, -98.2300], region: 'Puebla' },
+  'Salas de Oralidad — CDMX': { coords: [19.4326, -99.1332], region: 'CDMX' },
+  'Televisa — Estudio Deportivo': { coords: [19.3937, -99.1885], region: 'CDMX' },
+  'Juguetón — Producción AV': { coords: [19.4363, -99.1406], region: 'CDMX' },
+  'Tren Suburbano — CCTV': { coords: [19.5253, -99.1578], region: 'Edomex' },
+  'Salas de Oralidad — Puebla': { coords: [19.0414, -98.2063], region: 'Puebla' },
+  'SSC CDMX — Videovigilancia': { coords: [19.4128, -99.1750], region: 'CDMX' },
+  'Nuevas Salas — Atlixco, Puebla': { coords: [18.9069, -98.4328], region: 'Puebla' },
+  'Mantenimiento — Pachuca, Hidalgo': { coords: [20.1011, -98.7591], region: 'Hidalgo' },
+  'Mantenimiento — Puebla Centro': { coords: [19.0300, -98.1900], region: 'Puebla' },
+  'Mantenimiento — San Andrés Cholula': { coords: [19.0550, -98.2970], region: 'Puebla' },
 };
 
 const regionList = ['Todos', ...new Set(Object.values(projectGeo).map(p => p.region))];
