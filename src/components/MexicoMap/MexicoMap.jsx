@@ -3,7 +3,7 @@ import { MapContainer, TileLayer, Marker, Popup, useMap } from 'react-leaflet';
 import L from 'leaflet';
 import 'leaflet/dist/leaflet.css';
 import { projectsDetailed, mexicoPresence } from '../../data/content';
-import { MapPin, X, Calendar, ChevronRight } from 'lucide-react';
+import { MapPin, X, Calendar, ChevronRight, ChevronLeft } from 'lucide-react';
 import './MexicoMap.css';
 
 // Fix Leaflet default icon
@@ -67,6 +67,7 @@ function MapController({ activeRegion, selectedProject }) {
 export default function MexicoMap() {
   const [activeRegion, setActiveRegion] = useState('Todos');
   const [selectedProject, setSelectedProject] = useState(null);
+  const [carouselIdx, setCarouselIdx] = useState(0);
 
   const filtered = useMemo(() => {
     if (activeRegion === 'Todos') return projectsDetailed;
@@ -79,6 +80,13 @@ export default function MexicoMap() {
   const activeProject = selectedProject
     ? projectsDetailed.find(p => p.title === selectedProject)
     : null;
+
+  const projectImages = activeProject?.images || (activeProject ? [activeProject.image] : []);
+
+  // Reset carousel when project changes
+  useEffect(() => {
+    setCarouselIdx(0);
+  }, [selectedProject]);
 
   return (
     <section className="map-hero-section">
@@ -185,10 +193,38 @@ export default function MexicoMap() {
             </button>
 
             <div className="mh-detail-image">
-              <img src={activeProject.image} alt={activeProject.title} />
+              <img src={projectImages[carouselIdx]} alt={`${activeProject.title} ${carouselIdx + 1}`} />
               <div className="mh-detail-image-overlay">
                 <span className="mh-detail-cat">{activeProject.category}</span>
               </div>
+
+              {/* Carousel Controls */}
+              {projectImages.length > 1 && (
+                <>
+                  <button
+                    className="mh-carousel-btn mh-carousel-prev"
+                    onClick={(e) => { e.stopPropagation(); setCarouselIdx((carouselIdx - 1 + projectImages.length) % projectImages.length); }}
+                  >
+                    <ChevronLeft size={16} />
+                  </button>
+                  <button
+                    className="mh-carousel-btn mh-carousel-next"
+                    onClick={(e) => { e.stopPropagation(); setCarouselIdx((carouselIdx + 1) % projectImages.length); }}
+                  >
+                    <ChevronRight size={16} />
+                  </button>
+                  <div className="mh-carousel-dots">
+                    {projectImages.map((_, i) => (
+                      <button
+                        key={i}
+                        className={`mh-carousel-dot ${i === carouselIdx ? 'active' : ''}`}
+                        onClick={(e) => { e.stopPropagation(); setCarouselIdx(i); }}
+                      />
+                    ))}
+                  </div>
+                  <span className="mh-carousel-counter">{carouselIdx + 1}/{projectImages.length}</span>
+                </>
+              )}
             </div>
 
             <div className="mh-detail-body">
