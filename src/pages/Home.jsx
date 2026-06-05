@@ -69,6 +69,15 @@ export default function Home() {
       <ValueFlow />
 
       {/* ─── PROJECTS MAP ─── */}
+      <div className="home-map-intro container" style={{ textAlign: 'center', paddingTop: '120px', paddingBottom: '24px' }}>
+        <span className="section-label">Cobertura Nacional</span>
+        <h2 className="section-title">
+          Proyectos en <span className="accent">Todo México</span>
+        </h2>
+        <p style={{ color: 'var(--text-secondary)', maxWidth: '560px', margin: '0 auto', lineHeight: 1.7, fontSize: '1rem' }}>
+          Más de 200 proyectos ejecutados en múltiples estados. Seleccioná un pin en el mapa para explorar los detalles.
+        </p>
+      </div>
       <MexicoMap />
 
       {/* ─── LOGOS ─── */}
