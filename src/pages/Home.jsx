@@ -4,7 +4,7 @@ import { useScrollReveal } from '../hooks/useScrollReveal';
 import StatsStrip from '../components/StatsStrip/StatsStrip';
 import ServicesGrid from '../components/ServicesGrid/ServicesGrid';
 import ValueFlow from '../components/ValueFlow/ValueFlow';
-import CaseStudies from '../components/CaseStudies/CaseStudies';
+import ProjectMapPreview from '../components/ProjectMapPreview/ProjectMapPreview';
 import LogosMarquee from '../components/LogosMarquee/LogosMarquee';
 import IsometricHero from '../components/IsometricHero/IsometricHero';
 import './Home.css';
@@ -68,8 +68,8 @@ export default function Home() {
       {/* ─── VALUE PROPS (ValueFlow) ─── */}
       <ValueFlow />
 
-      {/* ─── CASE STUDIES ─── */}
-      <CaseStudies />
+      {/* ─── PROJECTS MAP ─── */}
+      <ProjectMapPreview />
 
       {/* ─── LOGOS ─── */}
       <LogosMarquee />
