@@ -22,8 +22,10 @@ export const brand = {
 export const nav = {
   links: [
     { label: 'Inicio', path: '/' },
+    { label: 'Nosotros', path: '/nosotros' },
     { label: 'Servicios', path: '/servicios' },
     { label: 'Salas de Oralidad', path: '/salas-de-oralidad', highlight: true },
+    { label: 'Proyectos', path: '/proyectos' },
     { label: 'Contacto', path: '/contacto' },
   ],
 };
@@ -319,4 +321,171 @@ export const benefits = [
     highlightLabel: 'UPTIME GARANTIZADO',
     iconType: 'uptime'
   }
+];
+
+// ─── PAGE: Nosotros ───
+
+export const timeline = [
+  { year: 2010, title: 'Fundación', description: 'BLEGAM CORP nace en la Ciudad de México como empresa integradora de tecnología.' },
+  { year: 2012, title: 'Primera Sala Oral', description: 'Implementación de la primera sala de juicios orales digitales en el Estado de México.' },
+  { year: 2014, title: 'Software MASOD®', description: 'Desarrollo y lanzamiento de MASOD®, nuestro sistema propietario de gestión de audiencias.' },
+  { year: 2016, title: 'Expansión Nacional', description: 'Presencia en 4 estados con más de 50 salas implementadas para el Poder Judicial.' },
+  { year: 2018, title: 'División Broadcast', description: 'Integración de soluciones audiovisuales para televisoras y eventos de gran escala.' },
+  { year: 2020, title: 'Transformación Digital', description: 'Implementación de videoconferencia judicial y audiencias remotas durante la pandemia.' },
+  { year: 2022, title: '150+ Salas', description: 'Hito de 150 salas implementadas. Certificación ISO 9001 y alianzas con fabricantes globales.' },
+  { year: 2024, title: '200+ Salas', description: 'Más de 200 salas activas en 6 estados. Expansión a ciberseguridad y Smart Cities.' },
+];
+
+export const coreValues = [
+  { title: 'Precisión Técnica', description: 'Cada instalación es ejecutada con estándares de ingeniería de grado militar.', icon: 'crosshair' },
+  { title: 'Innovación Constante', description: 'Investigamos y adoptamos tecnología de vanguardia antes que el mercado.', icon: 'cpu' },
+  { title: 'Compromiso Institucional', description: 'Entendemos la responsabilidad de servir a la justicia y la seguridad pública.', icon: 'shield' },
+  { title: 'Integridad Operativa', description: 'Transparencia total en cada proceso, desde cotización hasta entrega final.', icon: 'lock' },
+  { title: 'Soporte Continuo', description: 'No desaparecemos después de la instalación. Monitoreo y mantenimiento 24/7.', icon: 'headphones' },
+  { title: 'Escalabilidad', description: 'Arquitecturas que crecen con tu institución, desde 1 hasta 300+ salas.', icon: 'layers' },
+];
+
+export const teamCapabilities = [
+  { area: 'Ingeniería Audiovisual', specialists: 12, projects: 200, status: 'ACTIVE', color: '#12D4C9' },
+  { area: 'Desarrollo de Software', specialists: 8, projects: 15, status: 'ACTIVE', color: '#10b981' },
+  { area: 'Ciberseguridad', specialists: 5, projects: 30, status: 'ACTIVE', color: '#f59e0b' },
+  { area: 'Redes & Cableado', specialists: 10, projects: 180, status: 'ACTIVE', color: '#8b5cf6' },
+  { area: 'Soporte & NOC', specialists: 6, projects: 50, status: 'STANDBY', color: '#ef4444' },
+];
+
+export const certifications = [
+  { name: 'ISO 9001:2015', type: 'Calidad' },
+  { name: 'Empresa 100% Mexicana', type: 'Origen' },
+  { name: 'Padrón de Proveedores Confiables', type: 'Gobierno' },
+  { name: 'Certificación Bosch', type: 'Partner' },
+  { name: 'Partner Panasonic', type: 'Partner' },
+  { name: 'Integrador Autorizado Shure', type: 'Partner' },
+];
+
+// ─── PAGE: Servicios ───
+
+export const methodology = [
+  { phase: 1, title: 'Diagnóstico', description: 'Levantamiento arquitectónico, análisis de necesidades y evaluación de infraestructura existente.', icon: 'search' },
+  { phase: 2, title: 'Diseño', description: 'Ingeniería de detalle, planos ejecutivos y selección de equipamiento óptimo.', icon: 'pencil' },
+  { phase: 3, title: 'Implementación', description: 'Instalación física, cableado estructurado, montaje de equipos y configuración.', icon: 'wrench' },
+  { phase: 4, title: 'Testing', description: 'Pruebas integrales de audio, video, red y software. Certificación de rendimiento.', icon: 'check' },
+  { phase: 5, title: 'Soporte', description: 'Capacitación al usuario, mantenimiento preventivo y monitoreo remoto permanente.', icon: 'headphones' },
+];
+
+export const techStack = [
+  { name: 'Bosch', category: 'Audio', description: 'Sistemas de conferencia y PA profesional', logo: '/logos/bosch.png', color: '#EA0016' },
+  { name: 'Shure', category: 'Audio', description: 'Microfonía inalámbrica y de cuello de ganso', logo: '/logos/shure.png', color: '#1B365D' },
+  { name: 'Panasonic', category: 'Video', description: 'Cámaras PTZ y sistemas de proyección', logo: '/logos/panasonic.png', color: '#0068B5' },
+  { name: 'Sony', category: 'Video', description: 'Cámaras broadcast y monitores profesionales', logo: '/logos/sony.png', color: '#000000' },
+  { name: 'Cisco', category: 'Redes', description: 'Switches y routers de misión crítica', logo: '/logos/cisco.png', color: '#049FD9' },
+  { name: 'Hikvision', category: 'Seguridad', description: 'CCTV, NVRs y analítica de video', logo: '/logos/hikvision.png', color: '#ED1C24' },
+  { name: 'Crestron', category: 'Control', description: 'Automatización y control de salas', logo: '/logos/crestron.png', color: '#000000' },
+  { name: 'Extron', category: 'AV', description: 'Distribución y procesamiento de señal', logo: '/logos/extron.png', color: '#005BAA' },
+  { name: 'MASOD®', category: 'Software', description: 'Plataforma propia de gestión judicial', logo: '/logos/masod.png', color: '#12D4C9' },
+  { name: 'SICEM', category: 'Software', description: 'Sistema de monitoreo y control', logo: '/logos/sicem.png', color: '#10b981' },
+  { name: 'Synology', category: 'Storage', description: 'NAS y soluciones de almacenamiento', logo: '/logos/synology.png', color: '#000000' },
+  { name: 'APC', category: 'Energía', description: 'UPS y protección eléctrica', logo: '/logos/apc.png', color: '#FF0000' },
+];
+
+export const servicesDetailed = [
+  {
+    id: 'justicia-digital',
+    title: 'Justicia Digital',
+    subtitle: 'Ecosistemas para la justicia del siglo XXI',
+    description: 'Diseñamos, implementamos y mantenemos salas de audiencia oral completamente digitales. Desde el cableado estructurado hasta el software de gestión MASOD®, cada elemento está pensado para garantizar la integridad del proceso judicial.',
+    capabilities: ['Salas de Juicios Orales', 'Cámaras Gesell', 'Nodos de Videoconferencia', 'Software MASOD®', 'Servidores de Grabación', 'Sistemas de Firma Digital'],
+    metrics: { projects: '200+', uptime: '99.9%', states: '6' },
+  },
+  {
+    id: 'seguridad-integral',
+    title: 'Seguridad Integral',
+    subtitle: 'Protección inteligente para entornos críticos',
+    description: 'Implementamos soluciones de seguridad física y lógica que van desde CCTV con analítica inteligente hasta redes cifradas de comunicación. Nuestros sistemas protegen instalaciones gubernamentales, industriales y comerciales.',
+    capabilities: ['CCTV Analítico', 'Control de Acceso', 'Detección de Intrusos', 'Comunicaciones Cifradas', 'Monitoreo 24/7', 'Ciberseguridad Perimetral'],
+    metrics: { cameras: '5000+', sites: '50+', response: '<2min' },
+  },
+  {
+    id: 'ingenieria-software',
+    title: 'Ingeniería & Software',
+    subtitle: 'Soluciones a la medida de tu operación',
+    description: 'Desarrollamos software especializado y diseñamos infraestructura de red para digitalizar y automatizar procesos críticos. Desde el cableado hasta la aplicación final.',
+    capabilities: ['Software a Medida', 'Cableado Estructurado', 'Data Centers', 'Automatización', 'Sistema SICEM', 'APIs e Integraciones'],
+    metrics: { apps: '15+', uptime: '99.5%', users: '10K+' },
+  },
+  {
+    id: 'broadcast',
+    title: 'Broadcast & Producción',
+    subtitle: 'Tecnología profesional para medios',
+    description: 'Equipamos estudios de televisión, unidades móviles y eventos con tecnología de producción audiovisual de última generación. Trabajamos con las principales televisoras de México.',
+    capabilities: ['Unidades Móviles', 'Estudios de TV', 'Audio Profesional', 'Graficación en Vivo', 'Transmisión Satelital', 'Sets Virtuales'],
+    metrics: { events: '100+', channels: '5', live: '24/7' },
+  },
+];
+
+// ─── PAGE: Proyectos ───
+
+export const projectsDetailed = [
+  {
+    title: 'Poder Judicial CDMX',
+    category: 'Justicia Digital',
+    description: 'Implementación de 45 salas de juicios orales con sistema MASOD® integrado, incluyendo cámaras PTZ 4K, microfonía Shure y servidores de grabación redundante.',
+    image: 'https://static.wixstatic.com/media/45119e_46cf0e643d904898841f764a999053a0~mv2.jpeg/v1/fill/w_565,h_380,al_c,q_80,enc_avif,quality_auto/45119e_46cf0e643d904898841f764a999053a0~mv2.jpeg',
+    specs: ['45 Salas', '180+ Cámaras PTZ', 'MASOD® Centralizado', 'Redundancia Total'],
+    year: 2022,
+  },
+  {
+    title: 'Televisa — Análisis Deportivo',
+    category: 'Broadcast',
+    description: 'Instalación de equipos de última generación para los analistas deportivos de uno de los canales más importantes de televisión mexicana.',
+    image: 'https://static.wixstatic.com/media/45119e_f9bf515511d34a71abe789e9bd72bd8a~mv2.jpg/v1/fill/w_565,h_380,al_c,q_80,usm_0.66_1.00_0.01,enc_avif,quality_auto/45119e_f9bf515511d34a71abe789e9bd72bd8a~mv2.jpg',
+    specs: ['Audio Profesional Shure', 'Graficación en Vivo', '4K HDR', 'Transmisión Satelital'],
+    year: 2023,
+  },
+  {
+    title: 'Juguetón 2023',
+    category: 'Broadcast',
+    description: 'Suministro de equipos de producción audiovisual de alta calidad para el evento infantil más grande de México.',
+    image: 'https://static.wixstatic.com/media/45119e_7ec832f7af534fd3ba6852ff32bf3501~mv2.jpg/v1/fill/w_565,h_380,al_c,q_80,usm_0.66_1.00_0.01,enc_avif,quality_auto/45119e_7ec832f7af534fd3ba6852ff32bf3501~mv2.jpg',
+    specs: ['Multicámara', 'Audio PA', 'Streaming en Vivo', 'Iluminación LED'],
+    year: 2023,
+  },
+  {
+    title: 'Tren Suburbano — Seguridad',
+    category: 'Seguridad',
+    description: 'Implementación de un robusto sistema de seguridad de datos e instalación de equipos de audio de última tecnología.',
+    image: 'https://static.wixstatic.com/media/45119e_6147714d162c4b8da1015528134fd680~mv2.webp/v1/fill/w_565,h_380,al_c,q_80,usm_0.66_1.00_0.01,enc_avif,quality_auto/45119e_6147714d162c4b8da1015528134fd680~mv2.webp',
+    specs: ['200+ Cámaras', 'NVR Redundante', 'Analítica AI', 'Monitoreo 24/7'],
+    year: 2022,
+  },
+  {
+    title: 'Poder Judicial Puebla',
+    category: 'Justicia Digital',
+    description: 'Modernización completa de 30 salas de audiencia oral con tecnología de videoconferencia para audiencias remotas.',
+    image: 'https://static.wixstatic.com/media/45119e_46cf0e643d904898841f764a999053a0~mv2.jpeg/v1/fill/w_565,h_380,al_c,q_80,enc_avif,quality_auto/45119e_46cf0e643d904898841f764a999053a0~mv2.jpeg',
+    specs: ['30 Salas', 'Videoconferencia', 'MASOD®', 'Cámaras Gesell'],
+    year: 2021,
+  },
+  {
+    title: 'Secretaría de Seguridad CDMX',
+    category: 'Seguridad',
+    description: 'Sistema integral de videovigilancia con analítica inteligente para edificios gubernamentales de alta seguridad.',
+    image: 'https://static.wixstatic.com/media/45119e_46cf0e643d904898841f764a999053a0~mv2.jpeg/v1/fill/w_565,h_380,al_c,q_80,enc_avif,quality_auto/45119e_46cf0e643d904898841f764a999053a0~mv2.jpeg',
+    specs: ['500+ Cámaras', 'Analítica Facial', 'Centro de Monitoreo', 'Cifrado End-to-End'],
+    year: 2023,
+  },
+];
+
+export const testimonials = [
+  { name: 'Lic. Roberto Méndez', role: 'Director de TI, Poder Judicial CDMX', quote: 'BLEGAM transformó completamente nuestra infraestructura judicial. La integración de MASOD® nos permitió reducir los tiempos de consulta de audiencias en un 90%.', rating: 5 },
+  { name: 'Ing. Patricia Solís', role: 'Coordinadora de Proyectos, Televisa', quote: 'El profesionalismo y la calidad técnica del equipo de BLEGAM es excepcional. Cumplieron con todos los requerimientos de broadcast en tiempo récord.', rating: 5 },
+  { name: 'Mtro. Carlos Fuentes', role: 'Magistrado, Tribunal Superior Puebla', quote: 'La implementación fue impecable. Las salas operan 24/7 sin interrupciones y el soporte de BLEGAM es inmediato ante cualquier eventualidad.', rating: 5 },
+];
+
+export const mexicoPresence = [
+  { state: 'CDMX', projects: 85, coords: { x: 48, y: 62 } },
+  { state: 'Estado de México', projects: 40, coords: { x: 46, y: 60 } },
+  { state: 'Puebla', projects: 30, coords: { x: 52, y: 63 } },
+  { state: 'Querétaro', projects: 15, coords: { x: 46, y: 55 } },
+  { state: 'Jalisco', projects: 20, coords: { x: 35, y: 56 } },
+  { state: 'Nuevo León', projects: 10, coords: { x: 50, y: 42 } },
 ];

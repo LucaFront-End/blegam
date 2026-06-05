@@ -1,0 +1,62 @@
+.page-servicios { }
+
+/* ═══════════════════════════════════
+   BLOB CTA
+   ═══════════════════════════════════ */
+.servicios-cta {
+  position: relative;
+  padding: 140px 0;
+  overflow: hidden;
+  background: var(--bg-primary);
+}
+
+.blob-bg {
+  position: absolute;
+  inset: 0;
+  z-index: 0;
+  overflow: hidden;
+}
+
+.blob {
+  position: absolute;
+  border-radius: 50%;
+  filter: blur(80px);
+  opacity: 0.15;
+}
+
+.blob.b1 {
+  width: 400px;
+  height: 400px;
+  background: var(--accent-primary);
+  top: 20%;
+  left: 20%;
+  animation: blob-morph 8s ease-in-out infinite;
+}
+
+.blob.b2 {
+  width: 300px;
+  height: 300px;
+  background: var(--accent-purple);
+  bottom: 10%;
+  right: 20%;
+  animation: blob-morph 10s ease-in-out infinite reverse;
+}
+
+@keyframes blob-morph {
+  0%, 100% { transform: translate(0, 0) scale(1); border-radius: 50%; }
+  25% { transform: translate(30px, -20px) scale(1.1); border-radius: 40% 60% 60% 40%; }
+  50% { transform: translate(-20px, 20px) scale(0.95); border-radius: 60% 40% 40% 60%; }
+  75% { transform: translate(10px, 10px) scale(1.05); border-radius: 45% 55% 55% 45%; }
+}
+
+.cta-badge {
+  font-family: var(--font-mono);
+  font-size: 0.8rem;
+  font-weight: 600;
+  color: var(--accent-primary);
+  background: rgba(18,212,201,0.1);
+  padding: 6px 16px;
+  border-radius: 100px;
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
+}

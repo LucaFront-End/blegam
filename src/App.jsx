@@ -4,8 +4,12 @@ import { initGlobalReveal } from './hooks/useScrollReveal';
 import Navbar from './components/Navbar/Navbar';
 import Footer from './components/Footer/Footer';
 import Home from './pages/Home';
+import Nosotros from './pages/Nosotros';
+import Servicios from './pages/Servicios';
+import Proyectos from './pages/Proyectos';
 import Contact from './pages/Contact';
 import SalasOralidad from './pages/SalasOralidad';
+import FloatingActions from './components/FloatingActions/FloatingActions';
 import './styles/index.css';
 
 function ScrollToTop() {
@@ -30,10 +34,15 @@ export default function App() {
       <Navbar />
       <Routes>
         <Route path="/" element={<Home />} />
-        <Route path="/contacto" element={<Contact />} />
+        <Route path="/nosotros" element={<Nosotros />} />
+        <Route path="/servicios" element={<Servicios />} />
         <Route path="/salas-de-oralidad" element={<SalasOralidad />} />
+        <Route path="/proyectos" element={<Proyectos />} />
+        <Route path="/contacto" element={<Contact />} />
       </Routes>
+      <FloatingActions />
       <Footer />
     </BrowserRouter>
   );
 }
+

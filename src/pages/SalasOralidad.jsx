@@ -59,6 +59,116 @@ export default function SalasOralidad() {
         </div>
       </section>
 
+      {/* ─── DEADLINE BANNER — Abril 2027 (Light Theme Overhaul) ─── */}
+      <section className="dl-banner">
+        {/* Decorative elements */}
+        <div className="dl-corner dl-corner-tl" />
+        <div className="dl-corner dl-corner-br" />
+
+        <div className="container reveal">
+          {/* Top: Alert strip */}
+          <div className="dl-alert-strip">
+            <span className="dl-alert-pulse" />
+            <span className="dl-alert-text">MANDATO NACIONAL · REFORMA AL CÓDIGO NACIONAL DE PROCEDIMIENTOS CIVILES Y FAMILIARES</span>
+          </div>
+
+          {/* Hero headline */}
+          <div className="dl-hero">
+            <h2 className="dl-headline">
+              Los 32 estados deben contar con <br />
+              <span className="dl-headline-accent">salas de oralidad</span> antes de
+            </h2>
+            <div className="dl-date-badge">
+              <span className="dl-date-month">Abril</span>
+              <span className="dl-date-year">2027</span>
+            </div>
+          </div>
+
+          {/* Progress bar: time remaining */}
+          {(() => {
+            const start = new Date(2023, 0, 1);
+            const deadline = new Date(2027, 3, 1);
+            const now = new Date();
+            const totalSpan = deadline - start;
+            const elapsed = now - start;
+            const pct = Math.min(100, Math.max(0, (elapsed / totalSpan) * 100));
+            const diffMs = deadline - now;
+            const totalDays = Math.max(0, Math.floor(diffMs / (1000 * 60 * 60 * 24)));
+            const months = Math.floor(totalDays / 30);
+            const days = totalDays % 30;
+            return (
+              <div className="dl-progress-wrapper">
+                <div className="dl-progress-bar">
+                  <div className="dl-progress-fill" style={{ width: `${pct}%` }}>
+                    <div className="dl-progress-glow" />
+                  </div>
+                  <div className="dl-progress-marker" style={{ left: `${pct}%` }}>
+                    <span className="dl-marker-label">HOY</span>
+                    <div className="dl-marker-dot" />
+                  </div>
+                </div>
+                <div className="dl-progress-labels">
+                  <span>2023 — Decreto publicado</span>
+                  <span className="dl-time-remaining">
+                    <strong>{months}</strong> meses y <strong>{days}</strong> días restantes
+                  </span>
+                  <span>Abril 2027 — Fecha límite</span>
+                </div>
+              </div>
+            );
+          })()}
+
+          {/* Info paragraph */}
+          <p className="dl-description">
+            La fecha límite establecida a nivel nacional para la entrada en vigor del nuevo modelo de <strong>justicia oral en materias civil y familiar</strong> es abril de 2027. Para esta fecha, los gobiernos y poderes judiciales de los 32 estados deberán contar con la infraestructura y salas adaptadas.
+          </p>
+
+          {/* Two solution cards */}
+          <div className="dl-solutions-grid">
+            <div className="dl-sol-card">
+              <div className="dl-sol-number">01</div>
+              <div className="dl-sol-icon-wrap">
+                <svg width="32" height="32" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="1.5" d="M19 21V5a2 2 0 00-2-2H7a2 2 0 00-2 2v16m14 0h2m-2 0h-5m-9 0H3m2 0h5M9 7h1m-1 4h1m4-4h1m-1 4h1m-5 10v-5a1 1 0 011-1h2a1 1 0 011 1v5m-4 0h4" /></svg>
+              </div>
+              <h3 className="dl-sol-title">Salas Nuevas</h3>
+              <p className="dl-sol-desc">Diseño, ingeniería e instalación <strong>llave en mano</strong> de salas de audiencia oral con tecnología de punta en audio, video, redes y almacenamiento.</p>
+              <ul className="dl-sol-tags">
+                <li>Audio DSP</li>
+                <li>Video 4K</li>
+                <li>Redes</li>
+                <li>Storage</li>
+              </ul>
+            </div>
+
+            <div className="dl-sol-card dl-sol-card-accent">
+              <div className="dl-sol-number">02</div>
+              <div className="dl-sol-icon-wrap dl-sol-icon-accent">
+                <svg width="32" height="32" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="1.5" d="M4 4v5h.582m15.356 2A8.001 8.001 0 004.582 9m0 0H9m11 11v-5h-.581m0 0a8.003 8.003 0 01-15.357-2m15.357 2H15" /></svg>
+              </div>
+              <h3 className="dl-sol-title">Adaptación Multimateria</h3>
+              <p className="dl-sol-desc">Adaptamos con nuestro software <strong>MASOD®</strong> tus salas existentes y las convertimos en <strong>Multimateria</strong> — habilitadas para penal, civil y familiar.</p>
+              <ul className="dl-sol-tags">
+                <li>MASOD®</li>
+                <li>Multimateria</li>
+                <li>Sin obra civil</li>
+                <li>Rápido</li>
+              </ul>
+            </div>
+          </div>
+
+          {/* Bottom CTA strip */}
+          <div className="dl-cta-strip">
+            <div className="dl-cta-text">
+              <strong>¿Tu estado ya tiene la infraestructura lista?</strong>
+              <span>Agenda un diagnóstico gratuito y te ayudamos a cumplir con la normativa a tiempo.</span>
+            </div>
+            <Link to="/contacto" className="btn btn-primary dl-cta-btn">
+              Solicitar Diagnóstico →
+            </Link>
+          </div>
+        </div>
+      </section>
+
       {/* ─── 2. ¿Qué es? (Holograma Arquitectónico) ─── */}
       <section className="salas-what grid-bg" ref={whatRef}>
         <div className="container">

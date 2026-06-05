@@ -1,0 +1,230 @@
+.methodology-section {
+  padding: 0;
+  background: var(--bg-primary);
+}
+
+/* ─── Sticky + Scroll Layout ─── */
+.meth-layout {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 60px;
+  align-items: start;
+}
+
+/* ─── Sticky Panel ─── */
+.meth-sticky-panel {
+  position: sticky;
+  top: calc(var(--nav-height) + 40px);
+  padding: 100px 0;
+}
+
+.meth-sticky-inner {
+  max-width: 460px;
+}
+
+/* ─── Visual Progress (vertical in sticky) ─── */
+.meth-visual-progress {
+  display: flex;
+  gap: 20px;
+  margin-top: 40px;
+  position: relative;
+}
+
+.meth-progress-track {
+  width: 3px;
+  background: var(--border-subtle);
+  border-radius: 2px;
+  position: relative;
+  flex-shrink: 0;
+}
+
+.meth-progress-fill {
+  width: 100%;
+  background: linear-gradient(to bottom, var(--accent-primary), var(--accent-secondary));
+  border-radius: 2px;
+  transition: height 0.6s var(--ease-spring);
+  box-shadow: 0 0 8px rgba(18, 212, 201, 0.3);
+}
+
+.meth-progress-nodes {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  flex: 1;
+}
+
+.meth-progress-node {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  position: relative;
+  padding: 6px 0;
+}
+
+.mpn-dot {
+  width: 32px;
+  height: 32px;
+  border-radius: 50%;
+  background: var(--bg-card);
+  border: 2px solid var(--border-subtle);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--text-tertiary);
+  transition: all 0.4s var(--ease-spring);
+  flex-shrink: 0;
+  z-index: 1;
+}
+
+.meth-progress-node.active .mpn-dot {
+  border-color: var(--accent-primary);
+  color: var(--accent-primary);
+  background: var(--accent-glow);
+}
+
+.meth-progress-node.current .mpn-dot {
+  box-shadow: 0 0 12px rgba(18, 212, 201, 0.35);
+}
+
+.mpn-label {
+  font-family: var(--font-heading);
+  font-size: 0.85rem;
+  font-weight: 600;
+  color: var(--text-tertiary);
+  transition: color 0.3s;
+}
+
+.meth-progress-node.active .mpn-label {
+  color: var(--text-primary);
+}
+
+.meth-progress-node.current .mpn-label {
+  color: var(--accent-primary);
+}
+
+.mpn-ring {
+  position: absolute;
+  left: 0;
+  width: 32px;
+  height: 32px;
+  border-radius: 50%;
+  border: 2px solid rgba(18, 212, 201, 0.3);
+  animation: mpn-pulse 2s ease-in-out infinite;
+  pointer-events: none;
+}
+
+@keyframes mpn-pulse {
+  0%, 100% { transform: scale(1); opacity: 1; }
+  50% { transform: scale(1.6); opacity: 0; }
+}
+
+/* ─── Scrollable Cards ─── */
+.meth-scroll-panel {
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+  padding: 120px 0;
+}
+
+.meth-card {
+  background: var(--bg-card);
+  border: 1px solid var(--border-subtle);
+  border-radius: var(--radius-lg);
+  transition: all 0.5s var(--ease-spring);
+  overflow: hidden;
+}
+
+.meth-card.current {
+  border-color: var(--border-accent);
+  box-shadow: var(--shadow-elevated);
+  transform: scale(1.02);
+}
+
+.meth-card-inner {
+  padding: 36px 32px;
+}
+
+.meth-card-header {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  margin-bottom: 16px;
+}
+
+.meth-card-icon {
+  width: 48px;
+  height: 48px;
+  border-radius: var(--radius-sm);
+  background: var(--accent-glow);
+  border: 1px solid var(--border-accent);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--accent-primary);
+  transition: all 0.3s;
+}
+
+.meth-card.current .meth-card-icon {
+  background: var(--accent-primary);
+  color: white;
+}
+
+.meth-card-phase {
+  font-family: var(--font-mono);
+  font-size: 0.7rem;
+  font-weight: 600;
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+  color: var(--accent-primary);
+}
+
+.meth-card h3 {
+  font-size: 1.3rem;
+  font-weight: 800;
+  color: var(--text-primary);
+  margin-bottom: 12px;
+}
+
+.meth-card p {
+  font-size: 0.95rem;
+  color: var(--text-secondary);
+  line-height: 1.8;
+  margin-bottom: 20px;
+}
+
+/* Mini progress bar inside card */
+.meth-card-bar {
+  height: 3px;
+  background: var(--border-subtle);
+  border-radius: 2px;
+  overflow: hidden;
+}
+
+.meth-card-bar-fill {
+  height: 100%;
+  background: var(--accent-primary);
+  border-radius: 2px;
+  transition: width 0.8s var(--ease-spring);
+}
+
+/* ─── Responsive ─── */
+@media (max-width: 900px) {
+  .meth-layout {
+    grid-template-columns: 1fr;
+    gap: 24px;
+  }
+
+  .meth-sticky-panel {
+    position: relative;
+    top: auto;
+    padding: 60px 0 0;
+  }
+
+  .meth-visual-progress {
+    display: none;
+  }
+
+  .meth-scroll-panel {
+    padding: 0 0 60px;
+  }
+}

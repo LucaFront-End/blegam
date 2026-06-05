@@ -1,0 +1,200 @@
+.techstack-section {
+  padding: var(--section-padding);
+  background: var(--bg-void);
+}
+
+/* ─── Filters ─── */
+.ts-filters {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  margin: 40px 0;
+}
+
+.ts-filter-btn {
+  font-family: var(--font-mono);
+  font-size: 0.75rem;
+  font-weight: 600;
+  letter-spacing: 0.05em;
+  padding: 8px 20px;
+  border-radius: 100px;
+  border: 1px solid var(--border-subtle);
+  background: var(--bg-card);
+  color: var(--text-secondary);
+  transition: all 0.3s var(--ease-spring);
+  cursor: pointer;
+}
+
+.ts-filter-btn:hover {
+  border-color: var(--border-accent);
+  color: var(--accent-primary);
+}
+
+.ts-filter-btn.active {
+  background: var(--accent-primary);
+  color: #fff;
+  border-color: var(--accent-primary);
+}
+
+/* ─── Grid ─── */
+.ts-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+  gap: 20px;
+}
+
+/* ─── Card ─── */
+.ts-card {
+  position: relative;
+  background: var(--bg-card);
+  border: 1px solid var(--border-subtle);
+  border-radius: var(--radius-lg);
+  padding: 32px 24px 24px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  overflow: hidden;
+  transition: all 0.5s var(--ease-spring);
+  cursor: default;
+}
+
+.ts-card:hover {
+  border-color: var(--card-accent, var(--border-accent));
+  transform: translateY(-6px);
+  box-shadow: 0 16px 48px rgba(0, 0, 0, 0.06), 0 0 0 1px var(--card-accent, var(--border-accent));
+}
+
+/* ─── Top Accent Line ─── */
+.ts-card-accent-line {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 3px;
+  background: var(--card-accent, var(--accent-primary));
+  opacity: 0;
+  transition: opacity 0.4s;
+}
+
+.ts-card:hover .ts-card-accent-line {
+  opacity: 1;
+}
+
+/* ─── Logo Area ─── */
+.ts-logo-area {
+  width: 120px;
+  height: 72px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-bottom: 20px;
+  position: relative;
+  border-radius: var(--radius-sm);
+  overflow: hidden;
+}
+
+.ts-logo-img {
+  max-width: 110px;
+  max-height: 64px;
+  object-fit: contain;
+  filter: grayscale(100%) opacity(0.5);
+  transition: all 0.5s var(--ease-spring);
+}
+
+.ts-card:hover .ts-logo-img {
+  filter: grayscale(0%) opacity(1);
+  transform: scale(1.08);
+}
+
+/* ─── Info ─── */
+.ts-card-info {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 4px;
+  margin-bottom: 12px;
+}
+
+.ts-card-name {
+  font-family: var(--font-heading);
+  font-size: 1rem;
+  font-weight: 700;
+  color: var(--text-primary);
+  transition: color 0.3s;
+}
+
+.ts-card:hover .ts-card-name {
+  color: var(--card-accent, var(--text-primary));
+}
+
+.ts-card-category {
+  font-family: var(--font-mono);
+  font-size: 0.65rem;
+  font-weight: 600;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--text-tertiary);
+  background: var(--bg-glass-light);
+  padding: 3px 10px;
+  border-radius: 100px;
+}
+
+/* ─── Description (reveal on hover) ─── */
+.ts-card-desc {
+  max-height: 0;
+  overflow: hidden;
+  transition: max-height 0.5s var(--ease-spring), opacity 0.4s;
+  opacity: 0;
+}
+
+.ts-card:hover .ts-card-desc {
+  max-height: 80px;
+  opacity: 1;
+}
+
+.ts-card-desc p {
+  font-size: 0.78rem;
+  color: var(--text-secondary);
+  line-height: 1.5;
+  margin-top: 8px;
+  padding-top: 12px;
+  border-top: 1px solid var(--border-subtle);
+}
+
+/* ─── Corner Glow ─── */
+.ts-card-glow {
+  position: absolute;
+  top: -30px;
+  right: -30px;
+  width: 80px;
+  height: 80px;
+  border-radius: 50%;
+  background: radial-gradient(circle, var(--card-accent, rgba(18,212,201,0.1)) 0%, transparent 70%);
+  opacity: 0;
+  transition: opacity 0.5s;
+  pointer-events: none;
+  filter: blur(20px);
+}
+
+.ts-card:hover .ts-card-glow {
+  opacity: 0.3;
+}
+
+/* ─── Responsive ─── */
+@media (max-width: 768px) {
+  .ts-grid {
+    grid-template-columns: repeat(auto-fill, minmax(160px, 1fr));
+    gap: 12px;
+  }
+
+  .ts-card { padding: 24px 16px 16px; }
+  .ts-logo-area { width: 90px; height: 56px; margin-bottom: 16px; }
+  .ts-logo-img { max-width: 80px; max-height: 48px; }
+}
+
+@media (max-width: 480px) {
+  .ts-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}

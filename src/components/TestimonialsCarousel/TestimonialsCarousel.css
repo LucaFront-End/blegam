@@ -1,0 +1,132 @@
+.testimonials-section {
+  padding: var(--section-padding);
+  background: var(--bg-void);
+}
+
+.testi-carousel {
+  margin-top: 48px;
+  overflow: hidden;
+  position: relative;
+}
+
+.testi-track {
+  display: flex;
+  transition: transform 0.6s var(--ease-spring);
+}
+
+.testi-slide {
+  min-width: 100%;
+  padding: 0 40px;
+  box-sizing: border-box;
+}
+
+.testi-card {
+  max-width: 700px;
+  margin: 0 auto;
+  padding: 48px 40px;
+  text-align: center;
+  position: relative;
+}
+
+.testi-quote-mark {
+  font-family: var(--font-heading);
+  font-size: 5rem;
+  font-weight: 900;
+  color: var(--accent-primary);
+  opacity: 0.15;
+  line-height: 1;
+  position: absolute;
+  top: 8px;
+  left: 24px;
+}
+
+.testi-quote {
+  font-size: 1.1rem;
+  color: var(--text-secondary);
+  line-height: 1.8;
+  font-style: italic;
+  margin-bottom: 32px;
+  position: relative;
+  z-index: 1;
+}
+
+.testi-author {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 16px;
+  margin-bottom: 16px;
+}
+
+.testi-avatar {
+  width: 48px;
+  height: 48px;
+  border-radius: 50%;
+  background: var(--accent-glow);
+  border: 2px solid var(--border-accent);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-family: var(--font-heading);
+  font-size: 0.85rem;
+  font-weight: 700;
+  color: var(--accent-primary);
+}
+
+.testi-author strong {
+  display: block;
+  font-size: 0.95rem;
+  color: var(--text-primary);
+  text-align: left;
+}
+
+.testi-author span {
+  font-size: 0.78rem;
+  color: var(--text-tertiary);
+  text-align: left;
+  display: block;
+}
+
+.testi-stars {
+  display: flex;
+  justify-content: center;
+  gap: 4px;
+}
+
+.testi-star {
+  color: #f59e0b;
+  font-size: 1.1rem;
+}
+
+/* ─── Dots ─── */
+.testi-dots {
+  display: flex;
+  justify-content: center;
+  gap: 8px;
+  margin-top: 32px;
+}
+
+.testi-dot {
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+  border: 1.5px solid var(--border-light);
+  background: transparent;
+  transition: all 0.3s;
+  cursor: pointer;
+}
+
+.testi-dot.active {
+  background: var(--accent-primary);
+  border-color: var(--accent-primary);
+  transform: scale(1.2);
+}
+
+.testi-dot:hover {
+  border-color: var(--accent-primary);
+}
+
+@media (max-width: 768px) {
+  .testi-slide { padding: 0 16px; }
+  .testi-card { padding: 32px 24px; }
+}
