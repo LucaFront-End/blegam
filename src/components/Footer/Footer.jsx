@@ -1,8 +1,39 @@
+import { useState } from 'react';
 import { Link } from 'react-router-dom';
 import { brand, nav } from '../../data/content';
 import './Footer.css';
 
 export default function Footer() {
+  const [email, setEmail] = useState('');
+  const [submitted, setSubmitted] = useState(false);
+  const [sending, setSending] = useState(false);
+
+  const handleSubscribe = async (e) => {
+    e.preventDefault();
+    if (!email) return;
+    setSending(true);
+
+    const body = new FormData();
+    body.append('Email de suscripción', email);
+    body.append('_subject', 'Nueva suscripción a Newsletter de Blegam Corp');
+    body.append('_captcha', 'false');
+    body.append('_template', 'table');
+
+    try {
+      await fetch('https://formsubmit.co/ajax/info@blegam.com.mx', {
+        method: 'POST',
+        body,
+      });
+      setSubmitted(true);
+      setEmail('');
+      setTimeout(() => setSubmitted(false), 4000);
+    } catch (err) {
+      console.error(err);
+      alert('Ocurrió un error al procesar el registro. Intente nuevamente.');
+    } finally {
+      setSending(false);
+    }
+  };
   return (
     <footer className="footer">
       <div className="footer-glow" />
@@ -49,10 +80,26 @@ export default function Footer() {
           <div className="footer-col">
             <h4>Newsletter</h4>
             <p className="footer-newsletter-text">Suscríbete para recibir las últimas noticias tecnológicas.</p>
-            <form className="footer-newsletter" onSubmit={(e) => e.preventDefault()}>
-              <input type="email" placeholder="tu@email.com" className="footer-input" />
-              <button type="submit" className="btn btn-primary footer-subscribe">→</button>
-            </form>
+            {submitted ? (
+              <p className="footer-newsletter-success" style={{ color: 'var(--accent-primary)', fontSize: '0.9rem', marginTop: '12px' }}>
+                ¡Gracias por suscribirte!
+              </p>
+            ) : (
+              <form className="footer-newsletter" onSubmit={handleSubscribe}>
+                <input
+                  type="email"
+                  placeholder="tu@email.com"
+                  className="footer-input"
+                  value={email}
+                  onChange={(e) => setEmail(e.target.value)}
+                  required
+                  disabled={sending}
+                />
+                <button type="submit" className="btn btn-primary footer-subscribe" disabled={sending}>
+                  {sending ? '...' : '→'}
+                </button>
+              </form>
+            )}
           </div>
         </div>
 
