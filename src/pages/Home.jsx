@@ -8,18 +8,48 @@ import ValueFlow from '../components/ValueFlow/ValueFlow';
 import MexicoMap from '../components/MexicoMap/MexicoMap';
 import LogosMarquee from '../components/LogosMarquee/LogosMarquee';
 import IsometricHero from '../components/IsometricHero/IsometricHero';
+import { useLanding } from '../context/LandingContext';
 import './Home.css';
 
 export default function Home() {
   const vpRef = useScrollReveal();
   const ctaRef = useScrollReveal();
+  const landing = useLanding();
+
+  // Custom hero content based on dynamic landing context
+  let displayTitle = (
+    <>
+      Infraestructura <span className="accent-gradient">Crítica</span> para el Futuro Digital
+    </>
+  );
+  let displaySubtitle = "Tecnología aplicada a entornos de misión crítica. Soluciones integrales para justicia, seguridad y comunicaciones.";
+  let displayBadge = "Empresa 100% Mexicana · Fundada en 2010";
+
+  if (landing) {
+    displayBadge = `Cobertura: ${landing.ciudad}, ${landing.estado}`;
+    
+    // Split "Instalación de Salas de Juicios Orales en [Ciudad]" to wrap [Ciudad] in a gradient
+    const parts = (landing.titulo || '').split(' en ');
+    if (parts.length > 1) {
+      displayTitle = (
+        <>
+          {parts[0]} <span className="accent-gradient">en {parts.slice(1).join(' en ')}</span>
+        </>
+      );
+    } else {
+      displayTitle = landing.titulo;
+    }
+    displaySubtitle = landing.excerpt || displaySubtitle;
+  }
 
   return (
     <main className="page-home">
-      <Helmet>
-        <title>Instalación de Salas de Juicios Orales e Implementación de IT a Empresas | Blegam Corp</title>
-        <meta name="description" content="Blegam Corp es especialista en instalación de Salas de Juicios Orales e implementación de IT a empresas. Integramos audio, video, redes, videoconferencia e infraestructura tecnológica para instituciones y corporativos." />
-      </Helmet>
+      {!landing && (
+        <Helmet>
+          <title>Instalación de Salas de Juicios Orales e Implementación de IT a Empresas | Blegam Corp</title>
+          <meta name="description" content="Blegam Corp es especialista en instalación de Salas de Juicios Orales e implementación de IT a empresas. Integramos audio, video, redes, videoconferencia e infraestructura tecnológica para instituciones y corporativos." />
+        </Helmet>
+      )}
       {/* ─── HERO ─── */}
       <section className="hero">
         <div className="hero-bg">
@@ -33,16 +63,17 @@ export default function Home() {
           <div className="hero-text">
             <span className="hero-badge">
               <span className="hero-badge-dot" />
-              Empresa 100% Mexicana · Fundada en 2010
+              {displayBadge}
             </span>
             <h1 className="hero-title">
-              Infraestructura <span className="accent-gradient">Crítica</span> para el Futuro Digital
+              {displayTitle}
             </h1>
             <p className="hero-subtitle">
-              Tecnología aplicada a entornos de misión crítica. Soluciones integrales para justicia, seguridad y comunicaciones.
+              {displaySubtitle}
             </p>
             <div className="hero-actions">
-              <Link to="/contacto" className="btn btn-primary">
+
+              <Link to={landing ? `/contacto?ciudad=${encodeURIComponent(landing.ciudad)}&type=${landing.type}` : "/contacto"} className="btn btn-primary">
                 Solicitar Cotización
                 <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5">
                   <path d="M5 12h14M12 5l7 7-7 7" />
@@ -77,10 +108,12 @@ export default function Home() {
       <div className="home-map-intro container" style={{ textAlign: 'center', paddingTop: '120px', paddingBottom: '24px' }}>
         <span className="section-label">Cobertura Nacional</span>
         <h2 className="section-title">
-          Proyectos en <span className="accent">Todo México</span>
+          Proyectos en <span className="accent">{landing ? landing.ciudad : 'Todo México'}</span>
         </h2>
         <p style={{ color: 'var(--text-secondary)', maxWidth: '560px', margin: '0 auto', lineHeight: 1.7, fontSize: '1rem' }}>
-          Más de 200 proyectos ejecutados en múltiples estados. Seleccioná un pin en el mapa para explorar los detalles.
+          {landing
+            ? `Proyectos ejecutados a nivel nacional. Cotiza la instalación y mantenimiento de salas de oralidad e infraestructura IT en ${landing.ciudad}, ${landing.estado}.`
+            : "Más de 200 proyectos ejecutados en múltiples estados. Selecciona un pin en el mapa para explorar los detalles."}
         </p>
       </div>
       <MexicoMap />
@@ -99,19 +132,21 @@ export default function Home() {
                 <span className="cta-badge">Inicio Inmediato</span>
                 <h2 className="cta-title">
                   El Futuro de tu Infraestructura<br />
-                  <span className="accent-gradient">Comienza Aquí</span>
+                  <span className="accent-gradient">{landing ? `en ${landing.ciudad}` : 'Comienza Aquí'}</span>
                 </h2>
                 <p className="cta-desc">
-                  Tecnología de misión crítica, integración perfecta y soporte continuo. Únete a las instituciones de alto nivel que ya confían en Blegam.
+                  {landing
+                    ? `Tecnología de misión crítica, integración perfecta y soporte continuo en la zona de ${landing.ciudad}, ${landing.estado}.`
+                    : "Tecnología de misión crítica, integración perfecta y soporte continuo. Únete a las instituciones de alto nivel que ya confían en Blegam."}
                 </p>
                 <div className="cta-actions">
-                  <Link to="/contacto" className="btn btn-primary cta-btn">
+                  <Link to={landing ? `/contacto?ciudad=${encodeURIComponent(landing.ciudad)}&type=${landing.type}` : "/contacto"} className="btn btn-primary cta-btn">
                     Solicitar Diagnóstico
                     <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5">
                       <path d="M5 12h14M12 5l7 7-7 7" />
                     </svg>
                   </Link>
-                  <a href={brand.contact.whatsappLink} className="btn btn-outline" target="_blank" rel="noopener noreferrer">
+                  <a href={landing ? landing.whatsappUrl : brand.contact.whatsappLink} className="btn btn-outline" target="_blank" rel="noopener noreferrer">
                     Hablar con un Experto
                   </a>
                 </div>

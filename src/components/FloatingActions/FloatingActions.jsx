@@ -1,8 +1,10 @@
 import { useState } from 'react';
 import { brand } from '../../data/content';
+import { useLanding } from '../../context/LandingContext';
 import './FloatingActions.css';
 
 export default function FloatingActions() {
+  const landing = useLanding();
   const [feedbackOpen, setFeedbackOpen] = useState(false);
   const [submitted, setSubmitted] = useState(false);
   const [sending, setSending] = useState(false);
@@ -77,7 +79,7 @@ export default function FloatingActions() {
 
         {/* WhatsApp button */}
         <a
-          href={brand.contact.whatsappLink}
+          href={landing ? landing.whatsappUrl : brand.contact.whatsappLink}
           className="fab-btn fab-whatsapp"
           target="_blank"
           rel="noopener noreferrer"

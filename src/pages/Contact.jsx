@@ -1,14 +1,37 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { Helmet } from 'react-helmet-async';
+import { useSearchParams } from 'react-router-dom';
 import { brand } from '../data/content';
 import { useScrollReveal } from '../hooks/useScrollReveal';
+import { fetchAllLandings } from '../lib/landingService';
 import './Contact.css';
 
 export default function Contact() {
+  const [searchParams] = useSearchParams();
+  const queryCiudad = searchParams.get('ciudad');
+  const queryType = searchParams.get('type');
+  const [activeLanding, setActiveLanding] = useState(null);
+
   const [form, setForm] = useState({ name:'', email:'', company:'', phone:'', service:'', message:'' });
   const [submitted, setSubmitted] = useState(false);
   const [sending, setSending] = useState(false);
   const heroRef = useScrollReveal();
+
+  useEffect(() => {
+    if (queryCiudad) {
+      fetchAllLandings().then(list => {
+        const found = list.find(l => l.ciudad === queryCiudad && l.type === queryType);
+        if (found) {
+          setActiveLanding(found);
+          setForm(prev => ({
+            ...prev,
+            service: found.type === 'salas' ? 'Justicia Digital / Salas de Oralidad' : 'Ingeniería y Software',
+            message: `Hola, me interesa una cotización para la zona de ${found.ciudad}, ${found.estado}.`
+          }));
+        }
+      });
+    }
+  }, [queryCiudad, queryType]);
 
   const handleChange = (e) => setForm({ ...form, [e.target.name]: e.target.value });
 
@@ -45,16 +68,20 @@ export default function Contact() {
   return (
     <main className="page-contact">
       <Helmet>
-        <title>Contacto Blegam Corp | Cotiza tu Proyecto de IT o Sala de Juicios Orales</title>
-        <meta name="description" content="Solicita una cotización con Blegam Corp para instalación de Salas de Juicios Orales, infraestructura tecnológica e implementación de IT para empresas, corporativos e instituciones." />
+        <title>{activeLanding ? `${activeLanding.seoTitle} | Contacto` : 'Contacto Blegam Corp | Cotiza tu Proyecto de IT o Sala de Juicios Orales'}</title>
+        <meta name="description" content={activeLanding ? activeLanding.seoDescription : 'Solicita una cotización con Blegam Corp para instalación de Salas de Juicios Orales, infraestructura tecnológica e implementación de IT para empresas, corporativos e instituciones.'} />
       </Helmet>
 
       <section className="contact-hero" ref={heroRef}>
         <div className="contact-hero-bg" />
         <div className="container reveal">
           <span className="section-label">Contáctanos</span>
-          <h1 className="section-title">Háblanos de tu <span className="accent">Proyecto</span></h1>
-          <p className="section-description">Nuestro equipo de expertos está comprometido a comprender sus requisitos únicos.</p>
+          <h1 className="section-title">Háblanos de tu <span className="accent">Proyecto {activeLanding ? `en ${activeLanding.ciudad}` : ''}</span></h1>
+          <p className="section-description">
+            {activeLanding 
+              ? `Implementación a medida y soporte en la zona de ${activeLanding.ciudad}, ${activeLanding.estado}.` 
+              : "Nuestro equipo de expertos está comprometido a comprender sus requisitos únicos."}
+          </p>
         </div>
       </section>
 
@@ -119,7 +146,7 @@ export default function Contact() {
                     <span className="info-icon">📞</span>
                     <div><span className="info-label">Teléfono</span><span className="info-value">{brand.contact.phone}</span></div>
                   </a>
-                  <a href={brand.contact.whatsappLink} className="info-item" target="_blank" rel="noopener noreferrer">
+                  <a href={activeLanding ? activeLanding.whatsappUrl : brand.contact.whatsappLink} className="info-item" target="_blank" rel="noopener noreferrer">
                     <span className="info-icon">💬</span>
                     <div><span className="info-label">WhatsApp</span><span className="info-value">{brand.contact.whatsapp}</span></div>
                   </a>

@@ -9,10 +9,39 @@ import MasodHud from '../components/MasodHud/MasodHud';
 import HorizontalProcess from '../components/HorizontalProcess/HorizontalProcess';
 import TacticalRoomTabs from '../components/TacticalRoomTabs/TacticalRoomTabs';
 import OperationalBenefits from '../components/OperationalBenefits/OperationalBenefits';
+import { useLanding } from '../context/LandingContext';
 import './SalasOralidad.css';
 
 export default function SalasOralidad() {
   const [activeBlueprint, setActiveBlueprint] = useState(null);
+  const landing = useLanding();
+  
+  // Custom hero content based on dynamic landing context
+  let displayTitle = (
+    <>
+      Instalación de Salas de<br />
+      <span className="accent-gradient">Juicios Orales</span>
+    </>
+  );
+  let displaySubtitle = "Soluciones integrales llave en mano para la modernización de salas de audiencia oral digital. Audio, video, software y almacenamiento en un solo ecosistema.";
+  let displayBadge = "200+ Salas Implementadas en México";
+
+  if (landing) {
+    displayBadge = `Cobertura: ${landing.ciudad}, ${landing.estado}`;
+    
+    // Split "Instalación de Salas de Juicios Orales en [Ciudad]" to wrap [Ciudad] in a gradient
+    const parts = (landing.titulo || '').split(' en ');
+    if (parts.length > 1) {
+      displayTitle = (
+        <>
+          {parts[0]} <span className="accent-gradient">en {parts.slice(1).join(' en ')}</span>
+        </>
+      );
+    } else {
+      displayTitle = landing.titulo;
+    }
+    displaySubtitle = landing.excerpt || displaySubtitle;
+  }
   
   const blueprintNodes = [
     { id: 'video', label: 'Video PTZ', desc: 'Cámaras 4K con seguimiento en techo y esquinas.' },
@@ -35,10 +64,12 @@ export default function SalasOralidad() {
 
   return (
     <main className="page-salas">
-      <Helmet>
-        <title>Instalación de Salas de Juicios Orales con Tecnología Especializada | Blegam Corp</title>
-        <meta name="description" content="Diseñamos e implementamos Salas de Juicios Orales con sistemas de audio, videograbación, videoconferencia, monitoreo y tecnología especializada para instituciones gubernamentales y judiciales." />
-      </Helmet>
+      {!landing && (
+        <Helmet>
+          <title>Instalación de Salas de Juicios Orales con Tecnología Especializada | Blegam Corp</title>
+          <meta name="description" content="Diseñamos e implementamos Salas de Juicios Orales con sistemas de audio, videograbación, videoconferencia, monitoreo y tecnología especializada para instituciones gubernamentales y judiciales." />
+        </Helmet>
+      )}
       {/* ─── 1. HERO ─── */}
       <section className="salas-hero waveform-hero" ref={heroRef}>
         <VoiceWaveform />
@@ -47,17 +78,16 @@ export default function SalasOralidad() {
           <div className="salas-hero-content-center">
             <span className="hero-badge" style={{ margin: '0 auto 32px' }}>
               <span className="hero-badge-dot" />
-              200+ Salas Implementadas en México
+              {displayBadge}
             </span>
             <h1 className="salas-hero-title-center">
-              Instalación de Salas de<br />
-              <span className="accent-gradient">Juicios Orales</span>
+              {displayTitle}
             </h1>
             <p className="salas-hero-sub-center">
-              Soluciones integrales llave en mano para la modernización de salas de audiencia oral digital. Audio, video, software y almacenamiento en un solo ecosistema.
+              {displaySubtitle}
             </p>
             <div className="hero-actions" style={{ justifyContent: 'center' }}>
-              <Link to="/contacto" className="btn btn-primary">Solicitar Diagnóstico →</Link>
+              <Link to={landing ? `/contacto?ciudad=${encodeURIComponent(landing.ciudad)}&type=${landing.type}` : "/contacto"} className="btn btn-primary">Solicitar Diagnóstico →</Link>
               <a href="#configurador" className="btn btn-outline">Explorar Sala Interactiva</a>
             </div>
           </div>
@@ -514,11 +544,17 @@ export default function SalasOralidad() {
       <section className="salas-cta" ref={ctaRef}>
         <div className="salas-cta-glow" />
         <div className="container reveal" style={{ textAlign: 'center' }}>
-          <h2 className="cta-title">¿Listo para modernizar su <span className="accent">infraestructura judicial</span>?</h2>
-          <p className="cta-desc">Agende un diagnóstico gratuito con nuestros especialistas.</p>
+          <h2 className="cta-title">
+            ¿Listo para modernizar su <span className="accent">{landing ? `sala de oralidad en ${landing.ciudad}` : 'infraestructura judicial'}</span>?
+          </h2>
+          <p className="cta-desc">
+            {landing
+              ? `Agende un diagnóstico gratuito en ${landing.ciudad}, ${landing.estado} con nuestros especialistas.`
+              : 'Agende un diagnóstico gratuito con nuestros especialistas.'}
+          </p>
           <div className="cta-actions">
-            <Link to="/contacto" className="btn btn-primary">Agendar Diagnóstico</Link>
-            <a href={brand.contact.whatsappLink} className="btn btn-ghost" target="_blank" rel="noopener noreferrer">💬 WhatsApp Directo</a>
+            <Link to={landing ? `/contacto?ciudad=${encodeURIComponent(landing.ciudad)}&type=${landing.type}` : "/contacto"} className="btn btn-primary">Agendar Diagnóstico</Link>
+            <a href={landing ? landing.whatsappUrl : brand.contact.whatsappLink} className="btn btn-ghost" target="_blank" rel="noopener noreferrer">💬 WhatsApp Directo</a>
           </div>
         </div>
       </section>

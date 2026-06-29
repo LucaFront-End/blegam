@@ -20,20 +20,33 @@
   height: calc(100vh - var(--nav-height, 80px));
   display: flex;
   flex-direction: column;
-  justify-content: center;
+  justify-content: flex-start; /* Use flex-start with margin: auto on child to prevent top clipping on overflow */
 }
 
 .sticky-content {
   padding: 40px 0;
+  margin: auto 0; /* Automatically centers when content fits, falls back to top alignment when overflowing */
 }
 
 .sticky-visual-wrapper {
   margin-top: 40px;
   position: relative;
   width: 100%;
-  max-width: 400px;
+  max-width: 320px; /* Reduced from 400px to fit better on standard laptop screens */
   aspect-ratio: 1 / 1;
 }
+
+/* Adjustments for smaller screen heights */
+@media (max-height: 850px) {
+  .sticky-content {
+    padding: 20px 0;
+  }
+  .sticky-visual-wrapper {
+    margin-top: 24px;
+    max-width: 250px;
+  }
+}
+
 
 /* ─── RIGHT PANEL (CARDS) ─── */
 .scroll-cards-panel {

@@ -59,7 +59,9 @@ export default function Footer() {
         <div className="footer-bottom">
           <p>© {new Date().getFullYear()} {brand.fullName}. Todos los derechos reservados.</p>
           <div className="footer-bottom-links">
-            <Link to="/politica-de-privacidad">Aviso de Privacidad</Link>
+            <Link to="/zonas">Zonas de Servicio</Link>
+            <span>|</span>
+            <Link to="/aviso-de-privacidad">Aviso de Privacidad</Link>
             <span>|</span>
             <span>Sitio diseñado por Grupo DDMX</span>
           </div>
