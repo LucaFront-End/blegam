@@ -2,6 +2,15 @@ import { defineConfig } from 'vite'
 import react from '@vitejs/plugin-react'
 import fs from 'fs'
 import path from 'path'
+import { createClient, OAuthStrategy } from '@wix/sdk'
+import { items } from '@wix/data'
+
+const wixClient = createClient({
+  modules: { items },
+  auth: OAuthStrategy({
+    clientId: '04379a33-416c-45cb-8d77-71afbf63fa6f'
+  })
+})
 
 // Custom local middleware plugin to mock Vercel sitemaps in Vite local dev server
 const localSitemapsPlugin = () => ({
@@ -21,7 +30,11 @@ const localSitemapsPlugin = () => ({
     <lastmod>${today}</lastmod>
   </sitemap>
   <sitemap>
-    <loc>${SITE_URL}/sitemap-landings.xml</loc>
+    <loc>${SITE_URL}/sitemap-ciudades.xml</loc>
+    <lastmod>${today}</lastmod>
+  </sitemap>
+  <sitemap>
+    <loc>${SITE_URL}/sitemap-salas.xml</loc>
     <lastmod>${today}</lastmod>
   </sitemap>
 </sitemapindex>`;
@@ -58,23 +71,19 @@ ${urls}
         return;
       }
 
-      if (urlPath === '/sitemap-landings.xml') {
+      const serveWixSitemap = async (collectionId) => {
         try {
-          const filePath = path.join(process.cwd(), 'src', 'data', 'landings.json');
-          const fileContent = fs.readFileSync(filePath, 'utf8');
-          const landings = JSON.parse(fileContent);
-
-          const urls = (landings || []).map(l => {
-            if (!l.slug) return '';
-            const loc = `${SITE_URL}/ciudades/${l.slug}`;
-            return `
+          const results = await wixClient.items.query(collectionId).limit(1000).find();
+          const urls = (results.items || [])
+            .filter(item => item.slug)
+            .map(item => `
   <url>
-    <loc>${loc}</loc>
+    <loc>${SITE_URL}/ciudades/${item.slug}</loc>
     <lastmod>${today}</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>
-  </url>`;
-          }).filter(Boolean).join('');
+  </url>`)
+            .join('');
 
           const xml = `<?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
@@ -83,10 +92,19 @@ ${urls}
           res.setHeader('Content-Type', 'application/xml');
           res.end(xml);
         } catch (err) {
-          console.error('Error serving local sitemaps:', err);
+          console.error('Error serving local sitemaps from Wix:', err);
           res.statusCode = 500;
           res.end('Error loading landings sitemap');
         }
+      };
+
+      if (urlPath === '/sitemap-ciudades.xml' || urlPath === '/sitemap-landings.xml') {
+        serveWixSitemap('LandingPrincipalCiudades');
+        return;
+      }
+
+      if (urlPath === '/sitemap-salas.xml') {
+        serveWixSitemap('LandingDeSalasDeJuiciosOrales');
         return;
       }
 

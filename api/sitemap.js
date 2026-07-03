@@ -13,7 +13,11 @@ export default function handler(req, res) {
     <lastmod>${today}</lastmod>
   </sitemap>
   <sitemap>
-    <loc>${SITE_URL}/sitemap-landings.xml</loc>
+    <loc>${SITE_URL}/sitemap-ciudades.xml</loc>
+    <lastmod>${today}</lastmod>
+  </sitemap>
+  <sitemap>
+    <loc>${SITE_URL}/sitemap-salas.xml</loc>
     <lastmod>${today}</lastmod>
   </sitemap>
 </sitemapindex>`;

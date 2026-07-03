@@ -12,9 +12,10 @@ import OperationalBenefits from '../components/OperationalBenefits/OperationalBe
 import { useLanding } from '../context/LandingContext';
 import './SalasOralidad.css';
 
-export default function SalasOralidad() {
+export default function SalasOralidad({ landing: propLanding }) {
   const [activeBlueprint, setActiveBlueprint] = useState(null);
-  const landing = useLanding();
+  const contextLanding = useLanding();
+  const landing = propLanding || contextLanding;
   
   // Custom hero content based on dynamic landing context
   let displayTitle = (

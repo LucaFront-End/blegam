@@ -84,7 +84,7 @@ export default function LandingPage() {
       </Helmet>
       
       {/* Renders the appropriate layout which will dynamically consume the active landing context */}
-      {landing.type === 'salas' ? <SalasOralidad /> : <Home />}
+      {landing.type === 'salas' ? <SalasOralidad landing={landing} /> : <Home landing={landing} />}
     </>
   );
 }

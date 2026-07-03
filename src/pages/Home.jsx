@@ -11,10 +11,11 @@ import IsometricHero from '../components/IsometricHero/IsometricHero';
 import { useLanding } from '../context/LandingContext';
 import './Home.css';
 
-export default function Home() {
+export default function Home({ landing: propLanding }) {
   const vpRef = useScrollReveal();
   const ctaRef = useScrollReveal();
-  const landing = useLanding();
+  const contextLanding = useLanding();
+  const landing = propLanding || contextLanding;
 
   // Custom hero content based on dynamic landing context
   let displayTitle = (
