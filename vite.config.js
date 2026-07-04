@@ -100,12 +100,12 @@ ${urls}
       };
 
       if (urlPath === '/sitemap-ciudades.xml' || urlPath === '/sitemap-landings.xml') {
-        serveWixSitemap('LandingPrincipalCiudades');
+        serveWixSitemap('Landingprincipalciudades');
         return;
       }
 
       if (urlPath === '/sitemap-salas.xml') {
-        serveWixSitemap('LandingDeSalasDeJuiciosOrales');
+        serveWixSitemap('LandingdeSalasdeJuiciosOrales');
         return;
       }
 

@@ -15,7 +15,7 @@ const wixClient = createClient({
 
 export default async function handler(req, res) {
   try {
-    const results = await wixClient.items.query('LandingDeSalasDeJuiciosOrales').limit(1000).find();
+    const results = await wixClient.items.query('LandingdeSalasdeJuiciosOrales').limit(1000).find();
     const today = new Date().toISOString().split('T')[0];
 
     const urls = (results.items || [])

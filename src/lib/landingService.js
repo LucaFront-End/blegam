@@ -20,10 +20,10 @@ function mapWixItem(item, type) {
     type,
     frase: getField(item, 'frase', 'title', 'fraseDeCabecera'),
     slug: getField(item, 'slug'),
-    titulo: getField(item, 'tituloDePagina', 'titulo', 'title'),
-    excerpt: getField(item, 'excerptDePagina', 'excerptDepagina', 'excerpt', 'descripcion'),
+    titulo: getField(item, 'tituloDePgina', 'tituloDePagina', 'titulo', 'title'),
+    excerpt: getField(item, 'excerptDEpgina', 'excerptDePagina', 'excerptDepagina', 'excerpt', 'descripcion'),
     seoTitle: getField(item, 'tituloDeSeo', 'seoTitle', 'title'),
-    seoDescription: getField(item, 'metadescripcion', 'metaDescripcion', 'seoDescription', 'description'),
+    seoDescription: getField(item, 'metadescripcin', 'metadescripcion', 'metaDescripcion', 'seoDescription', 'description'),
     whatsappUrl: getField(item, 'whatsappUrl', 'whatsapp_url', 'whatsapp'),
     ciudad: getField(item, 'ciudad'),
     estado: getField(item, 'estado'),
@@ -40,9 +40,9 @@ export async function fetchLandingBySlug(slug) {
   if (!slug) return null;
   
   try {
-    // 1. Query "LandingPrincipalCiudades" collection
+    // 1. Query "Landingprincipalciudades" collection
     const homeResult = await wixClient.items
-      .query('LandingPrincipalCiudades')
+      .query('Landingprincipalciudades')
       .eq('slug', slug)
       .limit(1)
       .find();
@@ -51,9 +51,9 @@ export async function fetchLandingBySlug(slug) {
       return mapWixItem(homeResult.items[0], 'home');
     }
     
-    // 2. Query "LandingDeSalasDeJuiciosOrales" collection
+    // 2. Query "LandingdeSalasdeJuiciosOrales" collection
     const salasResult = await wixClient.items
-      .query('LandingDeSalasDeJuiciosOrales')
+      .query('LandingdeSalasdeJuiciosOrales')
       .eq('slug', slug)
       .limit(1)
       .find();
@@ -74,8 +74,8 @@ export async function fetchLandingBySlug(slug) {
 export async function fetchAllLandings() {
   try {
     // Fetch all items from both collections (Wix query defaults limit to 50, max is 1000)
-    const homeResult = await wixClient.items.query('LandingPrincipalCiudades').limit(1000).find();
-    const salasResult = await wixClient.items.query('LandingDeSalasDeJuiciosOrales').limit(1000).find();
+    const homeResult = await wixClient.items.query('Landingprincipalciudades').limit(1000).find();
+    const salasResult = await wixClient.items.query('LandingdeSalasdeJuiciosOrales').limit(1000).find();
     
     const homes = (homeResult.items || []).map(item => mapWixItem(item, 'home'));
     const salas = (salasResult.items || []).map(item => mapWixItem(item, 'salas'));
