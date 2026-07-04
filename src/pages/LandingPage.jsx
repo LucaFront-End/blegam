@@ -81,6 +81,8 @@ export default function LandingPage() {
       <Helmet>
         <title>{landing.seoTitle}</title>
         <meta name="description" content={landing.seoDescription} />
+        <meta property="og:title" content={landing.seoTitle} />
+        <meta property="og:description" content={landing.seoDescription} />
       </Helmet>
       
       {/* Renders the appropriate layout which will dynamically consume the active landing context */}
