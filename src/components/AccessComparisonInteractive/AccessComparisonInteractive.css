@@ -1,0 +1,352 @@
+/* ═══════════════════════════════════════════════════
+   BLEGAM — Access Comparison Interactive Component
+   ═══════════════════════════════════════════════════ */
+
+.comparison-interactive-container {
+  margin-top: 40px;
+}
+
+.comparison-header {
+  max-width: 760px;
+  margin: 0 auto 40px;
+}
+
+.comparison-title {
+  font-size: 2.25rem;
+  font-weight: 800;
+  color: var(--text-primary);
+  line-height: 1.25;
+  margin-bottom: 12px;
+}
+
+.comparison-subtitle {
+  font-size: 1.05rem;
+  color: var(--text-secondary);
+  line-height: 1.6;
+}
+
+/* Mode Selector */
+.comparison-mode-selector {
+  display: inline-flex;
+  gap: 8px;
+  background: var(--bg-primary);
+  border: 1px solid var(--border-light);
+  padding: 6px;
+  border-radius: 40px;
+  box-shadow: var(--shadow-card);
+}
+
+.mode-btn {
+  background: transparent;
+  border: none;
+  color: var(--text-secondary);
+  padding: 10px 20px;
+  border-radius: 30px;
+  font-size: 0.88rem;
+  font-weight: 700;
+  cursor: pointer;
+  transition: all 0.25s ease;
+}
+
+.mode-btn:hover {
+  color: var(--text-primary);
+}
+
+.mode-btn.active {
+  background: #ffffff;
+  color: var(--text-primary);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+}
+
+.mode-btn.active-blegam {
+  background: var(--accent-secondary);
+  color: #ffffff;
+  box-shadow: 0 4px 14px rgba(14, 165, 157, 0.35);
+}
+
+.mode-btn.active-warning {
+  background: #ef4444;
+  color: #ffffff;
+  box-shadow: 0 4px 14px rgba(239, 68, 68, 0.35);
+}
+
+/* Cards Grid */
+.comparison-cards-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 32px;
+  margin-bottom: 48px;
+  transition: all 0.4s var(--ease-smooth);
+}
+
+.comparison-cards-grid.mode-blegam,
+.comparison-cards-grid.mode-tradicional {
+  grid-template-columns: 1fr;
+  max-width: 800px;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.comp-card {
+  border-radius: var(--radius-xl);
+  padding: 36px;
+  display: flex;
+  flex-direction: column;
+  box-shadow: var(--shadow-elevated);
+  transition: all 0.35s var(--ease-smooth);
+}
+
+/* Traditional Card Style */
+.card-traditional {
+  background: #ffffff;
+  border: 1px solid rgba(239, 68, 68, 0.25);
+  box-shadow: 0 10px 30px rgba(239, 68, 68, 0.06);
+}
+
+.card-traditional:hover {
+  border-color: #ef4444;
+  transform: translateY(-4px);
+  box-shadow: 0 16px 40px rgba(239, 68, 68, 0.12);
+}
+
+/* BLEGAM Card Style */
+.card-blegam {
+  background: #ffffff;
+  border: 1.5px solid var(--border-accent);
+  box-shadow: 0 12px 40px rgba(18, 212, 201, 0.12);
+}
+
+.card-blegam:hover {
+  border-color: var(--accent-primary);
+  transform: translateY(-4px);
+  box-shadow: 0 20px 50px rgba(18, 212, 201, 0.25);
+}
+
+/* Badges */
+.comp-card-badge {
+  display: inline-flex;
+  align-items: center;
+  font-size: 0.75rem;
+  font-weight: 800;
+  letter-spacing: 0.5px;
+  padding: 6px 14px;
+  border-radius: 20px;
+  margin-bottom: 24px;
+  align-self: flex-start;
+}
+
+.badge-danger {
+  background: rgba(239, 68, 68, 0.1);
+  color: #dc2626;
+  border: 1px solid rgba(239, 68, 68, 0.25);
+}
+
+.badge-success {
+  background: rgba(18, 212, 201, 0.12);
+  color: var(--accent-secondary);
+  border: 1px solid var(--border-accent);
+}
+
+.comp-card-header {
+  display: flex;
+  gap: 20px;
+  align-items: center;
+  margin-bottom: 24px;
+}
+
+.comp-icon-box {
+  width: 60px;
+  height: 60px;
+  border-radius: var(--radius-md);
+  display: grid;
+  place-items: center;
+  flex-shrink: 0;
+}
+
+.box-danger {
+  background: rgba(239, 68, 68, 0.1);
+  color: #dc2626;
+}
+
+.box-accent {
+  background: var(--accent-glow);
+  color: var(--accent-secondary);
+}
+
+.comp-card-title {
+  font-size: 1.4rem;
+  font-weight: 800;
+  color: var(--text-primary);
+  line-height: 1.25;
+}
+
+.comp-card-sub {
+  font-size: 0.88rem;
+  color: var(--text-tertiary);
+  font-weight: 500;
+}
+
+/* Metrics Strip */
+.comp-metrics-strip {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 12px;
+  padding: 16px;
+  border-radius: var(--radius-md);
+  margin-bottom: 28px;
+  text-align: center;
+}
+
+.strip-danger {
+  background: rgba(239, 68, 68, 0.04);
+  border: 1px solid rgba(239, 68, 68, 0.15);
+}
+
+.strip-accent {
+  background: rgba(18, 212, 201, 0.05);
+  border: 1px solid var(--border-accent);
+}
+
+.comp-metric-item {
+  display: flex;
+  flex-direction: column;
+}
+
+.m-val {
+  font-size: 1.25rem;
+  font-weight: 900;
+  line-height: 1.2;
+}
+
+.m-lbl {
+  font-size: 0.7rem;
+  font-weight: 700;
+  color: var(--text-tertiary);
+  letter-spacing: 0.5px;
+}
+
+/* Points List */
+.comp-points-list {
+  list-style: none;
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+.point-item {
+  display: flex;
+  gap: 14px;
+  align-items: flex-start;
+  font-size: 0.92rem;
+}
+
+.icon-neg {
+  color: #dc2626;
+  flex-shrink: 0;
+  margin-top: 2px;
+}
+
+.icon-pos {
+  color: var(--accent-secondary);
+  flex-shrink: 0;
+  margin-top: 2px;
+}
+
+.point-item strong {
+  display: block;
+  font-size: 0.95rem;
+  color: var(--text-primary);
+  font-weight: 700;
+  margin-bottom: 2px;
+}
+
+.point-item p {
+  color: var(--text-secondary);
+  line-height: 1.5;
+}
+
+/* Gauges Wrapper */
+.comparison-gauges-wrapper {
+  background: var(--bg-card);
+  border: 1px solid var(--border-light);
+  border-radius: var(--radius-xl);
+  padding: 40px;
+  box-shadow: var(--shadow-card);
+}
+
+.gauges-title {
+  font-size: 1.35rem;
+  font-weight: 800;
+  color: var(--text-primary);
+}
+
+.gauge-bars-stack {
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+}
+
+.gauge-row {
+  display: grid;
+  grid-template-columns: 280px 1fr;
+  gap: 20px;
+  align-items: center;
+}
+
+.gauge-label-box {
+  display: flex;
+  align-items: center;
+  font-size: 0.95rem;
+  font-weight: 700;
+  color: var(--text-primary);
+}
+
+.gauge-bars-dual {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.bar-track {
+  height: 24px;
+  background: #f1f5f9;
+  border-radius: 12px;
+  overflow: hidden;
+  position: relative;
+}
+
+.bar-fill {
+  height: 100%;
+  border-radius: 12px;
+  display: flex;
+  align-items: center;
+  padding: 0 12px;
+  transition: width 0.8s var(--ease-spring);
+}
+
+.fill-bad {
+  background: linear-gradient(90deg, #f87171, #ef4444);
+}
+
+.fill-good {
+  background: linear-gradient(90deg, #0ea59d, #12D4C9);
+}
+
+.bar-val {
+  font-size: 0.75rem;
+  font-weight: 800;
+  color: #ffffff;
+  white-space: nowrap;
+}
+
+/* Responsive Queries */
+@media (max-width: 992px) {
+  .comparison-cards-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .gauge-row {
+    grid-template-columns: 1fr;
+    gap: 10px;
+  }
+}

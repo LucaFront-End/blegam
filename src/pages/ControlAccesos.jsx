@@ -37,6 +37,7 @@ import {
 import { useScrollReveal } from '../hooks/useScrollReveal';
 import { controlAccesosData, projectsDetailed as projects } from '../data/content';
 import AccessBuildingInteractive from '../components/AccessBuildingInteractive/AccessBuildingInteractive';
+import AccessComparisonInteractive from '../components/AccessComparisonInteractive/AccessComparisonInteractive';
 import ProjectGallery from '../components/ProjectGallery/ProjectGallery';
 import './ControlAccesos.css';
 
@@ -180,36 +181,10 @@ export default function ControlAccesos() {
         </div>
       </section>
 
-      {/* ─── 2. SEGURIDAD QUE COMIENZA DESDE EL ACCESO ─── */}
+      {/* ─── 2. SEGURIDAD QUE COMIENZA DESDE EL ACCESO (COMPARATIVA DENSIDAD & RENDIMIENTO) ─── */}
       <section className="accesos-intro-section" ref={introRef}>
         <div className="container reveal">
-          <div className="section-header text-center">
-            <span className="badge badge-accent mb-2">{controlAccesosData.intro.hook}</span>
-            <h2 className="section-title">
-              Seguridad que comienza <span className="accent-gradient">desde el acceso</span>
-            </h2>
-          </div>
-          
-          <div className="intro-card-box">
-            <div className="intro-main-text">
-              <p className="intro-paragraph">{controlAccesosData.intro.text}</p>
-              <p className="intro-subparagraph">{controlAccesosData.intro.subtext}</p>
-            </div>
-            <div className="intro-metrics-grid">
-              <div className="metric-box">
-                <span className="metric-num">100%</span>
-                <span className="metric-label">Integración Multi-Marca</span>
-              </div>
-              <div className="metric-box">
-                <span className="metric-num">24/7</span>
-                <span className="metric-label">Continuidad Operativa</span>
-              </div>
-              <div className="metric-box">
-                <span className="metric-num">+15</span>
-                <span className="metric-label">Años de Experiencia</span>
-              </div>
-            </div>
-          </div>
+          <AccessComparisonInteractive />
         </div>
       </section>
 
