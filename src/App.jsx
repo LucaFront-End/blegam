@@ -12,6 +12,7 @@ import SalasOralidad from './pages/SalasOralidad';
 import Privacy from './pages/Privacy';
 import Zones from './pages/Zones';
 import LandingPage from './pages/LandingPage';
+import ControlAccesos from './pages/ControlAccesos';
 import FloatingActions from './components/FloatingActions/FloatingActions';
 import { LandingProvider } from './context/LandingContext';
 import './styles/index.css';
@@ -41,6 +42,7 @@ export default function App() {
           <Route path="/" element={<Home />} />
           <Route path="/nosotros" element={<Nosotros />} />
           <Route path="/servicios" element={<Servicios />} />
+          <Route path="/control-de-accesos" element={<ControlAccesos />} />
           <Route path="/salas-de-oralidad" element={<SalasOralidad />} />
           <Route path="/proyectos" element={<Proyectos />} />
           <Route path="/contacto" element={<Contact />} />

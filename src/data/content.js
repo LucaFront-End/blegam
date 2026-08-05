@@ -24,7 +24,8 @@ export const nav = {
     { label: 'Inicio', path: '/' },
     { label: 'Nosotros', path: '/nosotros' },
     { label: 'Servicios', path: '/servicios' },
-    { label: 'Salas de Oralidad', path: '/salas-de-oralidad', highlight: true },
+    { label: 'Control de Accesos', path: '/control-de-accesos', highlight: true },
+    { label: 'Salas de Oralidad', path: '/salas-de-oralidad' },
     { label: 'Proyectos', path: '/proyectos' },
     { label: 'Contacto', path: '/contacto' },
   ],
@@ -531,3 +532,195 @@ export const mexicoPresence = [
   { state: 'Jalisco', projects: 20, coords: { x: 35, y: 56 } },
   { state: 'Nuevo León', projects: 10, coords: { x: 50, y: 42 } },
 ];
+
+export const controlAccesosData = {
+  hero: {
+    hook: "Control inteligente. Accesos seguros.",
+    title: "Sistemas de Control de Acceso para Empresas e Instituciones",
+    excerpt: "Protege tus instalaciones y administra quién puede ingresar, cuándo y a qué áreas con soluciones de control de acceso adaptadas a cada operación.",
+    badge: "Seguridad Física, Biométrica e Integración de Accesos",
+    ctaPrimary: "Solicitar una cotización",
+    ctaSecondary: "Probar Simulador Interactivo",
+  },
+  intro: {
+    hook: "Decide quién entra. Protege lo que importa.",
+    text: "En BLEGAM integramos sistemas de control de acceso para edificios, oficinas, bancos, instituciones gubernamentales y escuelas. Diseñamos cada solución de acuerdo con el nivel de seguridad, flujo de personas y características de cada instalación.",
+    subtext: "Desde accesos mediante tarjeta hasta sistemas biométricos, desarrollamos proyectos que combinan seguridad, tecnología y eficiencia operativa."
+  },
+  solutions: [
+    {
+      id: "torniquetes",
+      title: "Control de Acceso con Torniquetes",
+      desc: "Sistemas diseñados para administrar grandes flujos de personas y restringir físicamente el ingreso a áreas determinadas.",
+      idealFor: ["Corporativos", "Oficinas", "Gobierno", "Escuelas", "Bancos"],
+      icon: "ShieldCheck",
+      tag: "Flujo Masivo & Restricción Física"
+    },
+    {
+      id: "riel",
+      title: "Control de Acceso de Riel",
+      desc: "Soluciones de acceso físico para organizar y controlar el tránsito de personas dentro de instalaciones con puntos de entrada definidos.",
+      idealFor: ["Edificios", "Corporativos", "Instituciones", "Áreas restringidas"],
+      icon: "GitCommit",
+      tag: "Tránsito Guiado & Canalizado"
+    },
+    {
+      id: "tarjeta",
+      title: "Control de Acceso con Tarjeta",
+      desc: "Permite autorizar accesos mediante credenciales individuales y establecer diferentes permisos según usuario, área u horario.",
+      idealFor: ["Oficinas", "Edificios", "Escuelas", "Gobierno", "Bancos"],
+      icon: "CreditCard",
+      tag: "Credenciales RFID & Proximidad"
+    },
+    {
+      id: "biometrico",
+      title: "Control de Acceso Biométrico y Huella",
+      desc: "Utiliza características biométricas para validar la identidad del usuario y proporcionar un nivel adicional de seguridad.",
+      idealFor: ["Áreas restringidas", "Bancos", "Gobierno", "Corporativos", "Instalaciones críticas"],
+      icon: "Fingerprint",
+      tag: "Biometría Facial & Dactilar"
+    }
+  ],
+  environments: [
+    {
+      id: "edificios",
+      title: "Edificios",
+      desc: "Administra accesos de empleados, residentes, proveedores y visitantes desde puntos estratégicos.",
+      features: ["Control centralizado de visitantes", "Integración con torniquetes y barreras", "Registro y bitácora en tiempo real"],
+      icon: "Building2"
+    },
+    {
+      id: "oficinas",
+      title: "Oficinas y Corporativos",
+      desc: "Controla el ingreso de colaboradores y restringe áreas según perfiles, horarios o niveles de autorización.",
+      features: ["Permisos jerárquicos por rol", "Gestión de turnos y franjas horarias", "Desactivación inmediata de credenciales"],
+      icon: "Briefcase"
+    },
+    {
+      id: "bancos",
+      title: "Bancos e Inst. Financieras",
+      desc: "Fortalece el control de zonas sensibles mediante sistemas de identificación y accesos restringidos.",
+      features: ["Doble autenticación biométrica", "Bóvedas y áreas críticas", "Auditoría estricta de accesos"],
+      icon: "Landmark"
+    },
+    {
+      id: "gobierno",
+      title: "Gobierno",
+      desc: "Implementa diferentes niveles de autorización para empleados, funcionarios, proveedores y visitantes.",
+      features: ["Zonas de alta seguridad clasificadas", "Cumplimiento normativo estricto", "Trazabilidad completa de visitas"],
+      icon: "Building"
+    },
+    {
+      id: "escuelas",
+      title: "Escuelas e Inst. Educativas",
+      desc: "Gestiona accesos de personal, estudiantes y visitantes para fortalecer la seguridad de las instalaciones.",
+      features: ["Torniquetes de acceso escolar ágil", "Filtro de seguridad en ingresos", "Protección perimetral de la comunidad"],
+      icon: "GraduationCap"
+    }
+  ],
+  howItWorks: {
+    hook: "Identifica. Autoriza. Controla.",
+    steps: [
+      { step: "01", title: "Identificación", desc: "El usuario presenta su tarjeta RFID, huella dactilar o validación facial biométrica en la lectora." },
+      { step: "02", title: "Validación", desc: "El sistema verifica las credenciales, horarios y nivel de permisos autorizados en microsegundos." },
+      { step: "03", title: "Autorización", desc: "Se habilita el torniquete, riel o electroimán de puerta para conceder o rechazar el paso." },
+      { step: "04", title: "Registro", desc: "El evento queda grabado en la bitácora centralizada para facilitar seguimiento y auditoría." }
+    ]
+  },
+  benefits: {
+    hook: "Convierte cada acceso en un punto inteligente de seguridad.",
+    items: [
+      { title: "Control de entradas y salidas", desc: "Monitoreo detallado de quién ingresa y sale de cada área en todo momento.", icon: "ArrowLeftRight" },
+      { title: "Restricción de áreas", desc: "Acceso exclusivo únicamente a personal autorizado a zonas sensibles.", icon: "Lock" },
+      { title: "Identificación de usuarios", desc: "Validación precisa de la identidad por tarjeta o datos biométricos.", icon: "UserCheck" },
+      { title: "Administración de permisos", desc: "Asignación flexible de privilegios por usuario, grupo o departamento.", icon: "ShieldAlert" },
+      { title: "Diferentes niveles de acceso", desc: "Jerarquías de seguridad personalizadas para cada perfil operativo.", icon: "Sliders" },
+      { title: "Mayor trazabilidad", desc: "Historial y reportes detallados para auditorías e investigaciones.", icon: "FileText" },
+      { title: "Gestión de horarios", desc: "Configuración de franjas horarias permitidas para apertura de puertas.", icon: "Clock" },
+      { title: "Escalabilidad", desc: "Capacidad de expansión desde una puerta hasta campus de múltiples edificios.", icon: "Maximize" },
+      { title: "Integración con infraestructura", desc: "Conexión directa con CCTV/VMS, alarmas y redes de seguridad.", icon: "Cpu" }
+    ]
+  },
+  integration: {
+    hook: "Todo conectado. Todo bajo control.",
+    desc: "Los sistemas de control de acceso pueden formar parte de proyectos integrales de seguridad BLEGAM, combinando tecnologías de identificación, CCTV/VMS, redes, monitoreo e infraestructura tecnológica.",
+    subtext: "BLEGAM trabaja con diseño e implementación multi-marca y garantiza la continuidad operativa en sus soluciones de seguridad."
+  },
+  interactiveZones: [
+    {
+      id: "entrada",
+      name: "1. Entrada Principal",
+      tech: "Torniquetes de Flujo Continuo",
+      subtitle: "Acceso Masivo Controlado",
+      desc: "Administra el ingreso de empleados y visitantes filtrando intentos no autorizados mediante torniquetes ópticos o mecánicos.",
+      recommendedFor: "Corporativos, Universidades y Edificios de Gobierno",
+      icon: "ShieldCheck"
+    },
+    {
+      id: "recepcion",
+      name: "2. Recepción & Registro",
+      tech: "Lectoras de Tarjeta / Credencial RFID",
+      subtitle: "Credencialización Temporal y Permanente",
+      desc: "Impresión e identificación instantánea de pases de visita con restricción de horarios y áreas autorizadas.",
+      recommendedFor: "Oficinas, Edificios Corporativos y Bancos",
+      icon: "CreditCard"
+    },
+    {
+      id: "oficinas",
+      name: "3. Áreas de Oficinas",
+      tech: "Lectoras Biométricas de Huella Dactilar",
+      subtitle: "Acceso Departamental Automatizado",
+      desc: "Permite la entrada a colaboradores autorizados según su departamento sin necesidad de llaves físicas o tarjetas perdibles.",
+      recommendedFor: "Oficinas Privadas y Centros de Operación",
+      icon: "Fingerprint"
+    },
+    {
+      id: "restringida",
+      name: "4. Área Restringida & Bóveda",
+      tech: "Biométrico Facial + Doble Autenticación",
+      subtitle: "Máxima Seguridad Anti-Clonación",
+      desc: "Validación estricta sin contacto o multi-factor para sitios de alto riesgo, servidores o información confidencial.",
+      recommendedFor: "Bancos, Data Centers y Sedes Gubernamentales",
+      icon: "ScanFace"
+    },
+    {
+      id: "monitoreo",
+      name: "5. Centro de Monitoreo",
+      tech: "Plataforma Centralizada VMS & Control de Acceso",
+      subtitle: "Administración & Auditoría en Tiempo Real",
+      desc: "Panel central que consolida accesos, alertas en vivo, apertura remota y sincronización inmediata con cámaras CCTV.",
+      recommendedFor: "Equipos de Seguridad Patrimonial e TI",
+      icon: "Monitor"
+    }
+  ],
+  process: {
+    hook: "De la ingeniería a la operación.",
+    steps: [
+      { num: "01", title: "Análisis", desc: "Evaluación física, flujo de personas y mapa de riesgos del inmueble." },
+      { num: "02", title: "Diseño", desc: "Ingeniería de detalle, arquitectura de red y especificación de hardware." },
+      { num: "03", title: "Integración", desc: "Selección multi-marca e integración con sistemas existentes." },
+      { num: "04", title: "Instalación", desc: "Montaje físico, canalización y cableado estructurado de alta calidad." },
+      { num: "05", title: "Configuración", desc: "Parametrización de software, perfiles, reglas y niveles de acceso." },
+      { num: "06", title: "Puesta en Marcha", desc: "Pruebas integrales de funcionamiento, fail-safe y sincronización de red." },
+      { num: "07", title: "Capacitación", desc: "Entrenamiento operativo al personal de administración y seguridad." },
+      { num: "08", title: "Soporte", desc: "Soporte técnico continuo, pólizas de mantenimiento y asistencia inmediata." }
+    ]
+  },
+  whyBlegam: {
+    hook: "Tecnología respaldada por experiencia.",
+    desc: "Empresa integradora 100% mexicana con experiencia desde 2010 en proyectos tecnológicos y de misión crítica. BLEGAM combina ingeniería, infraestructura, software y soporte para desarrollar soluciones adaptadas a las necesidades de cada proyecto.",
+    highlights: [
+      { label: "+15 Años de Experiencia", icon: "Award" },
+      { label: "Integración Multimarca", icon: "Layers" },
+      { label: "Soluciones Llave en Mano", icon: "KeyRound" },
+      { label: "Ingeniería Especializada", icon: "Wrench" },
+      { label: "Soporte Técnico 24/7", icon: "Headphones" }
+    ]
+  },
+  ctaFinal: {
+    hook: "Controla tus accesos. Fortalece tu seguridad.",
+    desc: "Diseñamos e implementamos soluciones de control de acceso adaptadas a las necesidades de tu organización.",
+    ctaPrimary: "Solicitar diagnóstico",
+    ctaSecondary: "Cotizar proyecto"
+  }
+};
