@@ -51,7 +51,7 @@ export default function Servicios() {
             Nuestro equipo analizará tus requerimientos y te presentará la solución óptima en 48 horas.
           </p>
           <div className="cta-actions">
-            <Link to="/contacto" className="btn btn-primary">Solicitar Cotización →</Link>
+            <Link to="/contacto?origen=servicios" className="btn btn-primary">Solicitar Cotización →</Link>
             <a href={brand.contact.whatsappLink} className="btn btn-outline" target="_blank" rel="noopener noreferrer">
               💬 WhatsApp
             </a>

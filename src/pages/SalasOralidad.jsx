@@ -554,7 +554,7 @@ export default function SalasOralidad({ landing: propLanding }) {
               : 'Agende un diagnóstico gratuito con nuestros especialistas.'}
           </p>
           <div className="cta-actions">
-            <Link to={landing ? `/contacto?ciudad=${encodeURIComponent(landing.ciudad)}&type=${landing.type}` : "/contacto"} className="btn btn-primary">Agendar Diagnóstico</Link>
+            <Link to={landing ? `/contacto?ciudad=${encodeURIComponent(landing.ciudad)}&type=${landing.type}&origen=salas` : "/contacto?origen=salas"} className="btn btn-primary">Agendar Diagnóstico</Link>
             <a href={landing ? landing.whatsappUrl : brand.contact.whatsappLink} className="btn btn-ghost" target="_blank" rel="noopener noreferrer">💬 WhatsApp Directo</a>
           </div>
         </div>
