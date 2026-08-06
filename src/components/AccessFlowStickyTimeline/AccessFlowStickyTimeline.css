@@ -1,0 +1,273 @@
+/* ═══════════════════════════════════════════════════
+   BLEGAM — Sticky Scroll-Based Flow Timeline
+   ═══════════════════════════════════════════════════ */
+
+.flow-sticky-container {
+  margin-top: 20px;
+}
+
+.sticky-timeline-grid {
+  display: grid;
+  grid-template-columns: 360px 1fr;
+  gap: 40px;
+  margin-top: 48px;
+  align-items: start;
+}
+
+/* Left Sticky Sidebar Track */
+.sticky-track-sidebar {
+  position: sticky;
+  top: 100px;
+  align-self: start;
+  z-index: 10;
+  background: var(--bg-card);
+  border: 1px solid var(--border-light);
+  border-radius: var(--radius-xl);
+  padding: 32px 24px;
+  box-shadow: var(--shadow-card);
+}
+
+.sticky-track-inner {
+  position: relative;
+}
+
+.track-title {
+  display: block;
+  font-size: 0.72rem;
+  font-weight: 800;
+  color: var(--text-tertiary);
+  letter-spacing: 0.5px;
+  margin-bottom: 20px;
+}
+
+/* Glowing Vertical Line Background */
+.track-line-bg {
+  position: absolute;
+  top: 45px;
+  left: 20px;
+  bottom: 20px;
+  width: 2px;
+  background: var(--border-subtle);
+  border-radius: 2px;
+  z-index: 1;
+}
+
+.track-line-progress {
+  width: 100%;
+  background: linear-gradient(180deg, var(--accent-primary), var(--accent-secondary));
+  box-shadow: 0 0 10px var(--accent-primary);
+  border-radius: 2px;
+  transition: height 0.4s ease;
+}
+
+/* Track Steps List */
+.track-steps-list {
+  position: relative;
+  z-index: 2;
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+.track-step-btn {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  background: var(--bg-primary);
+  border: 1px solid var(--border-light);
+  padding: 14px 18px;
+  border-radius: var(--radius-lg);
+  cursor: pointer;
+  text-align: left;
+  transition: all 0.25s var(--ease-smooth);
+}
+
+.track-step-btn:hover {
+  border-color: var(--accent-primary);
+  transform: translateX(4px);
+}
+
+.track-step-btn.active {
+  background: #ffffff;
+  border-color: var(--accent-secondary);
+  box-shadow: 0 6px 20px rgba(14, 165, 157, 0.2);
+}
+
+.step-btn-badge {
+  width: 32px;
+  height: 32px;
+  border-radius: 50%;
+  background: var(--accent-glow);
+  color: var(--accent-secondary);
+  border: 1px solid var(--border-accent);
+  display: grid;
+  place-items: center;
+  flex-shrink: 0;
+  transition: all 0.25s ease;
+}
+
+.track-step-btn.active .step-btn-badge {
+  background: var(--accent-secondary);
+  color: #ffffff;
+  border-color: var(--accent-secondary);
+}
+
+.step-btn-num {
+  font-family: var(--font-mono);
+  font-size: 0.78rem;
+  font-weight: 800;
+}
+
+.step-btn-content {
+  flex-grow: 1;
+}
+
+.step-btn-title {
+  display: block;
+  font-size: 0.88rem;
+  font-weight: 800;
+  color: var(--text-primary);
+  line-height: 1.25;
+}
+
+.step-btn-sub {
+  display: block;
+  font-size: 0.72rem;
+  color: var(--accent-secondary);
+  font-weight: 600;
+  margin-top: 2px;
+}
+
+.step-btn-icon {
+  color: var(--text-tertiary);
+  transition: color 0.2s ease;
+}
+
+.track-step-btn.active .step-btn-icon {
+  color: var(--accent-secondary);
+}
+
+/* Right Scrollable Step Cards */
+.sticky-content-column {
+  display: flex;
+  flex-direction: column;
+  gap: 32px;
+}
+
+.step-scroll-card {
+  background: var(--bg-card);
+  border: 1px solid var(--border-light);
+  border-radius: var(--radius-xl);
+  padding: 36px;
+  box-shadow: var(--shadow-card);
+  transition: all 0.35s ease;
+}
+
+.step-scroll-card.is-active {
+  border-color: var(--border-accent);
+  box-shadow: var(--shadow-elevated), 0 0 30px rgba(18, 212, 201, 0.15);
+}
+
+.card-step-header {
+  display: flex;
+  align-items: center;
+  gap: 20px;
+  margin-bottom: 18px;
+}
+
+.step-icon-box {
+  width: 60px;
+  height: 60px;
+  border-radius: var(--radius-lg);
+  background: var(--accent-glow);
+  color: var(--accent-secondary);
+  display: grid;
+  place-items: center;
+  border: 1px solid var(--border-accent);
+  flex-shrink: 0;
+  transition: all 0.3s ease;
+}
+
+.step-scroll-card.is-active .step-icon-box {
+  background: var(--accent-secondary);
+  color: #ffffff;
+  border-color: var(--accent-secondary);
+  box-shadow: 0 4px 16px rgba(14, 165, 157, 0.3);
+}
+
+.card-step-title {
+  font-size: 1.55rem;
+  font-weight: 800;
+  color: var(--text-primary);
+  line-height: 1.25;
+}
+
+.card-step-sub {
+  font-size: 0.88rem;
+  color: var(--text-accent);
+  font-weight: 600;
+  display: block;
+}
+
+.card-step-desc {
+  font-size: 0.95rem;
+  color: var(--text-secondary);
+  line-height: 1.65;
+  margin-bottom: 24px;
+}
+
+/* Tech Highlights Inside Step Card */
+.step-highlights-box {
+  background: var(--bg-primary);
+  border: 1px solid var(--border-light);
+  border-radius: var(--radius-lg);
+  padding: 20px;
+  margin-bottom: 20px;
+}
+
+.hl-title-label {
+  display: block;
+  font-size: 0.7rem;
+  font-weight: 800;
+  color: var(--text-tertiary);
+  letter-spacing: 0.5px;
+  margin-bottom: 12px;
+}
+
+.hl-grid {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.hl-tech-item {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  font-size: 0.88rem;
+  font-weight: 600;
+  color: var(--text-primary);
+}
+
+.step-metric-bar {
+  display: inline-flex;
+  align-items: center;
+  background: rgba(18, 212, 201, 0.08);
+  border: 1px solid var(--border-accent);
+  padding: 8px 16px;
+  border-radius: 20px;
+  font-size: 0.82rem;
+  color: var(--text-primary);
+}
+
+/* Responsive Rules */
+@media (max-width: 992px) {
+  .sticky-timeline-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .sticky-track-sidebar {
+    position: relative;
+    top: 0;
+  }
+}

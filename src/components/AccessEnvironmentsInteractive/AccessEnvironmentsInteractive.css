@@ -1,0 +1,385 @@
+/* ═══════════════════════════════════════════════════
+   BLEGAM — 3-Photo Dedicated Industry Checkpoints
+   ═══════════════════════════════════════════════════ */
+
+.env-3photo-wrapper {
+  margin-top: 20px;
+}
+
+/* 1. HEROIC INDUSTRY CARDS SELECTOR GRID */
+.industry-cards-selector-grid {
+  display: grid;
+  grid-template-columns: repeat(5, 1fr);
+  gap: 16px;
+  margin-top: 36px;
+  margin-bottom: 36px;
+}
+
+.ind-hero-card {
+  position: relative;
+  background: var(--bg-card);
+  border: 1px solid var(--border-light);
+  border-radius: var(--radius-lg);
+  padding: 20px 16px;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 12px;
+  cursor: pointer;
+  text-align: left;
+  transition: all 0.25s var(--ease-smooth);
+  box-shadow: var(--shadow-card);
+  overflow: hidden;
+}
+
+.ind-hero-card:hover {
+  border-color: var(--accent-primary);
+  transform: translateY(-4px);
+  box-shadow: var(--shadow-elevated);
+}
+
+.ind-hero-card.active {
+  background: #ffffff;
+  border-color: var(--accent-secondary);
+  box-shadow: 0 8px 25px rgba(14, 165, 157, 0.25);
+}
+
+.ind-hero-icon-box {
+  width: 44px;
+  height: 44px;
+  border-radius: var(--radius-md);
+  background: var(--accent-glow);
+  color: var(--accent-secondary);
+  display: grid;
+  place-items: center;
+  border: 1px solid var(--border-accent);
+  transition: all 0.25s ease;
+}
+
+.ind-hero-card.active .ind-hero-icon-box {
+  background: var(--accent-secondary);
+  color: #ffffff;
+  border-color: var(--accent-secondary);
+}
+
+.ind-hero-content {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.ind-hero-tag {
+  font-size: 0.68rem;
+  font-weight: 800;
+  color: var(--accent-secondary);
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+}
+
+.ind-hero-title {
+  font-size: 0.92rem;
+  font-weight: 800;
+  color: var(--text-primary);
+  line-height: 1.25;
+}
+
+.ind-hero-active-bar {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  height: 4px;
+  background: transparent;
+  transition: background 0.25s ease;
+}
+
+.ind-hero-card.active .ind-hero-active-bar {
+  background: var(--accent-secondary);
+}
+
+/* 2. DEDICATED STAGE CONTAINER */
+.checkpoint-stage-card {
+  background: var(--bg-card);
+  border: 1px solid var(--border-light);
+  border-radius: var(--radius-xl);
+  padding: 36px;
+  box-shadow: var(--shadow-elevated);
+}
+
+/* Industry Banner */
+.stage-top-banner {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 24px;
+  padding-bottom: 24px;
+  border-bottom: 1px solid var(--border-subtle);
+  margin-bottom: 24px;
+}
+
+.banner-left {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+}
+
+.banner-icon-bg {
+  width: 52px;
+  height: 52px;
+  border-radius: var(--radius-md);
+  background: var(--accent-glow);
+  color: var(--accent-secondary);
+  display: grid;
+  place-items: center;
+  border: 1px solid var(--border-accent);
+  flex-shrink: 0;
+}
+
+.banner-title {
+  font-size: 1.6rem;
+  font-weight: 800;
+  color: var(--text-primary);
+  line-height: 1.2;
+}
+
+.banner-desc {
+  font-size: 0.92rem;
+  color: var(--text-secondary);
+  max-width: 520px;
+  line-height: 1.5;
+}
+
+/* 3 Checkpoint Step Buttons Nav */
+.checkpoints-step-nav {
+  margin-bottom: 24px;
+}
+
+.step-nav-label {
+  display: block;
+  font-size: 0.72rem;
+  font-weight: 800;
+  color: var(--text-tertiary);
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  margin-bottom: 12px;
+}
+
+.step-buttons-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 16px;
+}
+
+.step-nav-btn {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  background: var(--bg-primary);
+  border: 1px solid var(--border-light);
+  padding: 12px 16px;
+  border-radius: var(--radius-lg);
+  cursor: pointer;
+  text-align: left;
+  transition: all 0.25s ease;
+}
+
+.step-nav-btn:hover {
+  border-color: var(--accent-primary);
+  transform: translateY(-2px);
+}
+
+.step-nav-btn.active {
+  background: rgba(18, 212, 201, 0.08);
+  border-color: var(--accent-primary);
+  box-shadow: 0 4px 16px rgba(18, 212, 201, 0.2);
+}
+
+.step-num {
+  width: 28px;
+  height: 28px;
+  border-radius: 50%;
+  background: var(--accent-glow);
+  color: var(--accent-secondary);
+  font-family: var(--font-mono);
+  font-size: 0.85rem;
+  font-weight: 800;
+  display: grid;
+  place-items: center;
+  flex-shrink: 0;
+  border: 1px solid var(--border-accent);
+}
+
+.step-nav-btn.active .step-num {
+  background: var(--accent-secondary);
+  color: #ffffff;
+  border-color: var(--accent-secondary);
+}
+
+.step-btn-info {
+  display: flex;
+  flex-direction: column;
+  flex-grow: 1;
+}
+
+.step-title {
+  font-size: 0.88rem;
+  font-weight: 800;
+  color: var(--text-primary);
+  line-height: 1.25;
+}
+
+.step-tech {
+  font-size: 0.72rem;
+  color: var(--accent-secondary);
+  font-weight: 600;
+  margin-top: 2px;
+}
+
+.step-eye-icon {
+  color: var(--text-tertiary);
+  transition: color 0.2s ease;
+}
+
+.step-nav-btn.active .step-eye-icon {
+  color: var(--accent-primary);
+}
+
+/* 3-PHOTO VIEWER GRID */
+.checkpoint-viewer-grid {
+  display: grid;
+  grid-template-columns: 1.15fr 1fr;
+  gap: 32px;
+  align-items: stretch;
+}
+
+/* Dedicated Photo Frame */
+.cp-photo-frame {
+  position: relative;
+  border-radius: var(--radius-xl);
+  overflow: hidden;
+  box-shadow: var(--shadow-elevated), 0 8px 30px rgba(0, 0, 0, 0.12);
+  border: 1px solid var(--border-light);
+  background: var(--bg-primary);
+}
+
+.cp-photo-wrapper {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  min-height: 420px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+}
+
+.cp-img-display {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+  transition: transform 0.4s ease;
+}
+
+.cp-photo-frame:hover .cp-img-display {
+  transform: scale(1.03);
+}
+
+/* Dedicated Info Panel */
+.cp-info-panel {
+  background: var(--bg-primary);
+  border: 1px solid var(--border-light);
+  border-radius: var(--radius-xl);
+  padding: 32px;
+  display: flex;
+  flex-direction: column;
+}
+
+.panel-cp-title {
+  font-size: 1.35rem;
+  font-weight: 800;
+  color: var(--text-primary);
+  margin-top: 4px;
+  margin-bottom: 8px;
+}
+
+.panel-tech-box {
+  display: inline-flex;
+  align-items: center;
+  background: rgba(18, 212, 201, 0.08);
+  color: var(--accent-secondary);
+  border: 1px solid var(--border-accent);
+  padding: 6px 12px;
+  border-radius: 20px;
+  font-size: 0.8rem;
+  font-weight: 700;
+  margin-bottom: 16px;
+}
+
+.panel-cp-desc {
+  font-size: 0.92rem;
+  color: var(--text-secondary);
+  line-height: 1.6;
+  margin-bottom: 24px;
+}
+
+/* Highlights Box */
+.panel-highlights-box {
+  margin-bottom: 24px;
+}
+
+.hl-box-label {
+  display: block;
+  font-size: 0.7rem;
+  font-weight: 800;
+  color: var(--text-tertiary);
+  letter-spacing: 0.5px;
+  margin-bottom: 12px;
+}
+
+.hl-list {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.hl-item {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  font-size: 0.88rem;
+  font-weight: 600;
+  color: var(--text-primary);
+}
+
+/* Responsive Rules */
+@media (max-width: 1200px) {
+  .industry-cards-selector-grid {
+    grid-template-columns: repeat(3, 1fr);
+  }
+}
+
+@media (max-width: 992px) {
+  .industry-cards-selector-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  .step-buttons-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .checkpoint-viewer-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .stage-top-banner {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+}
+
+@media (max-width: 600px) {
+  .industry-cards-selector-grid {
+    grid-template-columns: 1fr;
+  }
+}

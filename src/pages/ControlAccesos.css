@@ -6,7 +6,7 @@
   background: var(--bg-primary);
   min-height: 100vh;
   padding-top: var(--nav-height);
-  overflow-x: hidden;
+  overflow-x: clip;
 }
 
 /* ─── 1. HERO SECTION ─── */
@@ -858,6 +858,20 @@
   justify-content: center;
   gap: 16px;
   flex-wrap: wrap;
+}
+
+.cta-banner-actions .btn-outline {
+  color: #ffffff !important;
+  border-color: rgba(255, 255, 255, 0.35) !important;
+  background: rgba(255, 255, 255, 0.08) !important;
+  transition: all 0.25s ease;
+}
+
+.cta-banner-actions .btn-outline:hover {
+  background: rgba(18, 212, 201, 0.2) !important;
+  border-color: var(--accent-primary) !important;
+  color: #ffffff !important;
+  box-shadow: 0 0 20px rgba(18, 212, 201, 0.3);
 }
 
 /* Responsive Rules */
