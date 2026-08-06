@@ -91,8 +91,8 @@ export default function BrochureModal() {
 
       // Trigger PDF download
       const link = document.createElement('a');
-      link.href = '/assets/brochure-salas-juicios-orales.pdf';
-      link.download = 'Brochure-Salas-Juicios-Orales-BLEGAM.pdf';
+      link.href = '/assets/brochure-blegam-2026.pdf';
+      link.download = 'Brochure-Blegam-2026.pdf';
       link.target = '_blank';
       document.body.appendChild(link);
       link.click();
