@@ -75,7 +75,9 @@ export default function BrochureModal() {
     body.append('Documento', 'Brochure Salas de Juicios Orales');
     body.append('_subject', `[Descarga Brochure - Salas de Oralidad] Lead de ${form.name} (${form.estado})`);
     body.append('_captcha', 'false');
-    body.append('_template', 'table');
+    body.append('_template', 'box');
+    body.append('_language', 'es');
+    body.append('_autoresponse', 'Gracias por solicitar el Brochure de Salas de Oralidad de Blegam Corp.');
 
     try {
       await fetch('https://formsubmit.co/ajax/info@blegam.com.mx', {

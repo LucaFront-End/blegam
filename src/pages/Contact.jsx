@@ -82,11 +82,12 @@ export default function Contact() {
     body.append('Origen / Referencia', origenRef);
     body.append('Mensaje', form.message);
     
-    // FormSubmit config
+    // FormSubmit config - Clean White Template & Spanish Language
     body.append('_subject', `Nueva solicitud de cotización [Origen: ${origenRef.toUpperCase()}] desde blegam.com`);
     body.append('_captcha', 'false');
-    body.append('_template', 'table');
-    body.append('_autoresponse', 'Gracias por contactar a Blegam Corp. Hemos recibido tu solicitud y un ejecutivo te contactará en las próximas 24 horas.');
+    body.append('_template', 'box');
+    body.append('_language', 'es');
+    body.append('_autoresponse', 'Gracias por contactar a Blegam Corp. Hemos recibido tu solicitud y un ejecutivo especializado te contactará a la brevedad.');
 
     try {
       await fetch('https://formsubmit.co/ajax/info@blegam.com.mx', {

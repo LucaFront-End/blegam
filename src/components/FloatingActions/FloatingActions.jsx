@@ -37,10 +37,11 @@ export default function FloatingActions() {
     body.append('Tipo', typeLabels[form.type] || form.type);
     body.append('Proyecto', form.project || 'No especificado');
     body.append('Mensaje', form.message);
-    // FormSubmit config — clean, no template formatting, Spanish
+    // FormSubmit config - Clean White Template & Spanish Language
     body.append('_subject', `Buzón de comentarios: ${typeLabels[form.type] || form.type}`);
     body.append('_captcha', 'false');
-    body.append('_template', 'table');
+    body.append('_template', 'box');
+    body.append('_language', 'es');
     body.append('_autoresponse', 'Gracias por tu comentario. En Blegam Corp valoramos tu opinión y nos pondremos en contacto contigo si es necesario.');
 
     try {

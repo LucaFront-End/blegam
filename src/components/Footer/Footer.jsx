@@ -17,7 +17,8 @@ export default function Footer() {
     body.append('Email de suscripción', email);
     body.append('_subject', 'Nueva suscripción a Newsletter de Blegam Corp');
     body.append('_captcha', 'false');
-    body.append('_template', 'table');
+    body.append('_template', 'box');
+    body.append('_language', 'es');
 
     try {
       await fetch('https://formsubmit.co/ajax/info@blegam.com.mx', {
