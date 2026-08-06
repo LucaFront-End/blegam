@@ -9,6 +9,7 @@ import MasodHud from '../components/MasodHud/MasodHud';
 import HorizontalProcess from '../components/HorizontalProcess/HorizontalProcess';
 import TacticalRoomTabs from '../components/TacticalRoomTabs/TacticalRoomTabs';
 import OperationalBenefits from '../components/OperationalBenefits/OperationalBenefits';
+import BrochureModal from '../components/BrochureModal/BrochureModal';
 import { useLanding } from '../context/LandingContext';
 import './SalasOralidad.css';
 
@@ -65,6 +66,7 @@ export default function SalasOralidad({ landing: propLanding }) {
 
   return (
     <main className="page-salas">
+      <BrochureModal />
       {!landing && (
         <Helmet>
           <title>Instalación de Salas de Juicios Orales con Tecnología Especializada | Blegam Corp</title>
