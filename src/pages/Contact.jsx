@@ -1,6 +1,17 @@
 import { useState, useEffect } from 'react';
 import { Helmet } from 'react-helmet-async';
 import { useSearchParams } from 'react-router-dom';
+import { 
+  Phone, 
+  MessageSquare, 
+  Mail, 
+  MapPin, 
+  ShieldCheck, 
+  Clock, 
+  Sparkles, 
+  Send,
+  CheckCircle2
+} from 'lucide-react';
 import { brand } from '../data/content';
 import { fetchAllLandings } from '../lib/landingService';
 import './Contact.css';
@@ -113,70 +124,78 @@ export default function Contact() {
       </Helmet>
 
       {/* Hero Header */}
-      <section className="contact-hero">
+      <section className="contact-hero text-center">
         <div className="contact-hero-bg" />
         <div className="container">
-          <span className="section-label">
+          <span className="badge badge-accent mb-2">
+            <Sparkles size={14} className="mr-1 inline-block" />
             {activeLanding 
               ? `Zona ${activeLanding.ciudad}` 
               : currentOrigen === 'salas'
               ? 'Justicia Digital & Salas de Oralidad'
               : currentOrigen === 'control-accesos' || currentOrigen === 'accesos'
               ? 'Control de Accesos & Seguridad'
-              : 'Contáctanos'}
+              : 'Atención Ejecutiva & Soporte Directo'}
           </span>
           <h1 className="section-title">
-            Háblanos de tu <span className="accent">Proyecto {activeLanding ? `en ${activeLanding.ciudad}` : currentOrigen ? `de ${currentOrigen.replace('-', ' ')}` : ''}</span>
+            Háblanos de tu <span className="accent-gradient">Proyecto {activeLanding ? `en ${activeLanding.ciudad}` : currentOrigen ? `de ${currentOrigen.replace('-', ' ')}` : ''}</span>
           </h1>
-          <p className="section-description">
+          <p className="section-subtitle text-center">
             {activeLanding 
               ? `Implementación a medida y soporte en la zona de ${activeLanding.ciudad}, ${activeLanding.estado}.` 
               : currentOrigen === 'salas'
               ? "Cotización e ingeniería especializada para Salas de Juicios Orales y recintos judiciales en todo México."
               : currentOrigen === 'control-accesos' || currentOrigen === 'accesos'
               ? "Diseño e implementación de sistemas de control de acceso, torniquetes, biometría y automatización."
-              : "Nuestro equipo de expertos está comprometido a comprender sus requisitos únicos."}
+              : "Nuestro equipo de consultores e ingenieros analizará tus requerimientos para presentarte una propuesta a medida."}
           </p>
         </div>
       </section>
 
-      {/* Form & Info Section */}
+      {/* Form & Info Side-by-Side Section */}
       <section className="contact-content">
         <div className="container">
           <div className="contact-grid">
-            {/* Form Wrap */}
-            <div className="contact-form-wrap glass-card">
+            {/* Left Column: Form Card */}
+            <div className="contact-form-wrap contact-card-box">
+              <div className="card-box-header">
+                <Send size={20} className="text-accent mr-2" />
+                <h3 className="card-box-title">Formulario de Cotización Directa</h3>
+              </div>
+
               {submitted ? (
                 <div className="contact-success">
                   <div className="success-icon">✓</div>
-                  <h3>¡Registro Exitoso!</h3>
-                  <p>Te contactará un ejecutivo especializado en menos de 24 hrs.</p>
+                  <h3>¡Solicitud Recibida con Éxito!</h3>
+                  <p>Un ejecutivo especializado analizará tus datos y te contactará en menos de 24 horas.</p>
                 </div>
               ) : (
                 <form onSubmit={handleSubmit} className="contact-form">
                   <div className="form-row">
                     <div className="form-group">
-                      <label>Nombre completo</label>
-                      <input name="name" type="text" value={form.name} onChange={handleChange} required placeholder="Tu nombre" />
+                      <label>NOMBRE COMPLETO *</label>
+                      <input name="name" type="text" value={form.name} onChange={handleChange} required placeholder="Ej: Ing. Carlos Mendoza" />
                     </div>
                     <div className="form-group">
-                      <label>Email</label>
-                      <input name="email" type="email" value={form.email} onChange={handleChange} required placeholder="tu@email.com" />
+                      <label>EMAIL CORPORATIVO *</label>
+                      <input name="email" type="email" value={form.email} onChange={handleChange} required placeholder="carlos@empresa.com" />
                     </div>
                   </div>
+
                   <div className="form-row">
                     <div className="form-group">
-                      <label>Empresa / Institución</label>
+                      <label>EMPRESA / INSTITUCIÓN</label>
                       <input name="company" type="text" value={form.company} onChange={handleChange} placeholder="Nombre de tu empresa u organismo" />
                     </div>
                     <div className="form-group">
-                      <label>Teléfono de Contacto</label>
+                      <label>TELÉFONO DE CONTACTO</label>
                       <input name="phone" type="tel" value={form.phone} onChange={handleChange} placeholder="+52 55 1234 5678" />
                     </div>
                   </div>
+
                   <div className="form-group">
-                    <label>Servicio de interés</label>
-                    <select name="service" value={form.service} onChange={handleChange}>
+                    <label>SERVICIO DE INTERÉS *</label>
+                    <select name="service" value={form.service} onChange={handleChange} required>
                       <option value="">Seleccionar servicio...</option>
                       <option value="Justicia Digital / Salas de Oralidad">Justicia Digital / Salas de Oralidad</option>
                       <option value="Seguridad Integral / Control de Accesos">Seguridad Integral / Control de Accesos</option>
@@ -184,38 +203,91 @@ export default function Contact() {
                       <option value="Broadcast">Broadcast</option>
                     </select>
                   </div>
+
                   <div className="form-group">
-                    <label>Mensaje / Detalles del Proyecto</label>
-                    <textarea name="message" rows="4" value={form.message} onChange={handleChange} placeholder="Cuéntanos sobre tu proyecto..." />
+                    <label>MENSAJE / DETALLES DEL PROYECTO</label>
+                    <textarea name="message" rows="4" value={form.message} onChange={handleChange} placeholder="Detalla el número de accesos, salas, ubicación u otras especificaciones clave..." />
                   </div>
-                  <button type="submit" className="btn btn-primary form-submit" disabled={sending}>
-                    {sending ? 'Enviando...' : 'Cotizar Ahora →'}
+
+                  <button type="submit" className="btn btn-primary form-submit-btn w-full justify-center py-3 text-base" disabled={sending}>
+                    {sending ? 'Enviando Solicitud...' : 'Enviar Solicitud de Cotización →'}
                   </button>
                 </form>
               )}
             </div>
 
-            {/* Direct Info Card */}
-            <div className="contact-info">
-              <div className="info-card glass-card">
-                <h3>Información Directa</h3>
+            {/* Right Column: Direct Info Card */}
+            <div className="contact-info contact-card-box info-panel-side">
+              <div>
+                <div className="card-box-header">
+                  <Phone size={20} className="text-accent mr-2" />
+                  <h3 className="card-box-title">Información Directa & Atención</h3>
+                </div>
+
+                <div className="live-status-pill mb-4 font-mono">
+                  <span className="pulse-dot mr-2" />
+                  EN LÍNEA — RESPUESTA EN &lt; 15 MINUTOS
+                </div>
+
                 <div className="info-items">
                   <a href={`tel:${brand.contact.phone.replace(/\s/g,'')}`} className="info-item">
-                    <span className="info-icon">📞</span>
-                    <div><span className="info-label">Teléfono</span><span className="info-value">{brand.contact.phone}</span></div>
+                    <div className="info-icon-box">
+                      <Phone size={20} />
+                    </div>
+                    <div>
+                      <span className="info-label font-mono">TELÉFONO CORPORATIVO</span>
+                      <span className="info-value font-mono">{brand.contact.phone}</span>
+                    </div>
                   </a>
-                  <a href={activeLanding ? activeLanding.whatsappUrl : brand.contact.whatsappLink} className="info-item" target="_blank" rel="noopener noreferrer">
-                    <span className="info-icon">💬</span>
-                    <div><span className="info-label">WhatsApp Directo</span><span className="info-value">{brand.contact.whatsapp}</span></div>
+
+                  <a href={activeLanding ? activeLanding.whatsappUrl : brand.contact.whatsappLink} className="info-item wa-item" target="_blank" rel="noopener noreferrer">
+                    <div className="info-icon-box wa-icon-bg">
+                      <MessageSquare size={20} />
+                    </div>
+                    <div>
+                      <span className="info-label font-mono">WHATSAPP DIRECTO</span>
+                      <span className="info-value font-mono text-emerald-400 font-bold">{brand.contact.whatsapp}</span>
+                    </div>
                   </a>
+
                   <a href={`mailto:${brand.contact.email}`} className="info-item">
-                    <span className="info-icon">✉️</span>
-                    <div><span className="info-label">Email Corporativo</span><span className="info-value">{brand.contact.email}</span></div>
+                    <div className="info-icon-box">
+                      <Mail size={20} />
+                    </div>
+                    <div>
+                      <span className="info-label font-mono">EMAIL CORPORATIVO</span>
+                      <span className="info-value font-mono">{brand.contact.email}</span>
+                    </div>
                   </a>
+
                   <a href={brand.contact.mapLink} className="info-item" target="_blank" rel="noopener noreferrer">
-                    <span className="info-icon">📍</span>
-                    <div><span className="info-label">Oficinas Principales</span><span className="info-value">{brand.contact.address}</span></div>
+                    <div className="info-icon-box">
+                      <MapPin size={20} />
+                    </div>
+                    <div>
+                      <span className="info-label font-mono">OFICINAS CENTRALES</span>
+                      <span className="info-value">{brand.contact.address}</span>
+                    </div>
                   </a>
+                </div>
+              </div>
+
+              {/* SLA Guarantees Box at bottom of right card */}
+              <div className="contact-sla-guarantees">
+                <span className="sla-box-title font-mono">COMPROMISOS BLEGAM:</span>
+                <div className="sla-items-list">
+                  <div className="sla-item">
+                    <CheckCircle2 size={15} className="text-accent mr-2 flex-shrink-0" />
+                    <span>Cotizaciones ejecutivas en Pesos Mexicanos (MXN).</span>
+                  </div>
+                  <div className="sla-item">
+                    <CheckCircle2 size={15} className="text-accent mr-2 flex-shrink-0" />
+                    <span>Levantamiento técnico sin costo en todo México.</span>
+                  </div>
+                  <div className="sla-item">
+                    <CheckCircle2 size={15} className="text-accent mr-2 flex-shrink-0" />
+                    <span>Pólizas de soporte y mantenimiento SLA 24/7.</span>
+                  </div>
                 </div>
               </div>
             </div>
