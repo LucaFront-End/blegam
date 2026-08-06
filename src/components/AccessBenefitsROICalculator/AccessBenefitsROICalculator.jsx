@@ -295,9 +295,9 @@ export default function AccessBenefitsROICalculator() {
 
             {/* Action CTA Row */}
             <div className="panel-cta-row">
-              <Link to="/contacto?type=control-accesos&roi=true" className="btn btn-primary w-full justify-center text-lg py-4">
+              <a href="https://wa.link/nf8gq3" target="_blank" rel="noopener noreferrer" className="btn btn-primary w-full justify-center text-lg py-4">
                 Solicitar Dictamen de ROI en MXN <ArrowRight size={20} className="ml-2" />
-              </Link>
+              </a>
             </div>
           </div>
         </div>

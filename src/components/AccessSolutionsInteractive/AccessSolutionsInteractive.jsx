@@ -271,9 +271,9 @@ export default function AccessSolutionsInteractive() {
 
               {/* Footer Link */}
               <div className="holo-card-footer">
-                <Link to={`/contacto?type=control-accesos&tech=${sol.id}`} className="holo-btn-action">
+                <a href="https://wa.link/nf8gq3" target="_blank" rel="noopener noreferrer" className="holo-btn-action">
                   Solicitar Especificación Técnica <ChevronRight size={16} />
-                </Link>
+                </a>
               </div>
             </div>
           );

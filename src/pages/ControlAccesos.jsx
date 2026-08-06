@@ -126,9 +126,9 @@ export default function ControlAccesos() {
                 {controlAccesosData.hero.excerpt}
               </p>
               <div className="hero-actions">
-                <Link to="/contacto?type=control-accesos" className="btn btn-primary btn-lg">
+                <a href="https://wa.link/nf8gq3" target="_blank" rel="noopener noreferrer" className="btn btn-primary btn-lg">
                   {controlAccesosData.hero.ctaPrimary} <ArrowRight size={18} className="ml-1" />
-                </Link>
+                </a>
                 <a href="#simulador" className="btn btn-outline btn-lg">
                   {controlAccesosData.hero.ctaSecondary}
                 </a>
@@ -234,9 +234,9 @@ export default function ControlAccesos() {
             </p>
 
             <div className="cta-banner-actions">
-              <Link to="/contacto?type=control-accesos" className="btn btn-primary btn-lg">
+              <a href="https://wa.link/nf8gq3" target="_blank" rel="noopener noreferrer" className="btn btn-primary btn-lg">
                 Solicitar Cotización y Levantamiento <ArrowRight size={20} className="ml-1" />
-              </Link>
+              </a>
               <a href="https://wa.link/nf8gq3" target="_blank" rel="noopener noreferrer" className="btn btn-outline btn-lg flex items-center justify-center">
                 <MessageCircle size={20} className="mr-2 text-emerald-400" />
                 Asesoría Inmediata por WhatsApp
