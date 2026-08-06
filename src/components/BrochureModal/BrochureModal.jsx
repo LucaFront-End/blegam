@@ -38,18 +38,25 @@ const ESTADOS_MEXICO = [
 ];
 
 export default function BrochureModal() {
-  const [isOpen, setIsOpen] = useState(true);
+  const [isOpen, setIsOpen] = useState(false);
   const [form, setForm] = useState({ name: '', phone: '', email: '', estado: '' });
   const [sending, setSending] = useState(false);
   const [downloaded, setDownloaded] = useState(false);
 
-  // Force modal open when component mounts
   useEffect(() => {
-    setIsOpen(true);
+    // Check if user has already closed/submitted the brochure modal in this session
+    const isClosed = sessionStorage.getItem('blegam_brochure_modal_dismissed');
+    if (!isClosed) {
+      const timer = setTimeout(() => {
+        setIsOpen(true);
+      }, 1200);
+      return () => clearTimeout(timer);
+    }
   }, []);
 
   const handleClose = () => {
     setIsOpen(false);
+    sessionStorage.setItem('blegam_brochure_modal_dismissed', 'true');
   };
 
   const handleChange = (e) => {
@@ -80,6 +87,7 @@ export default function BrochureModal() {
     } finally {
       setSending(false);
       setDownloaded(true);
+      sessionStorage.setItem('blegam_brochure_modal_dismissed', 'true');
 
       // Trigger PDF download
       const link = document.createElement('a');
@@ -108,9 +116,8 @@ export default function BrochureModal() {
           onClick={handleClose} 
           title="Cerrar ventana"
           aria-label="Cerrar"
-          type="button"
         >
-          <X size={22} />
+          <X size={20} />
         </button>
 
         {/* Modal Header */}
