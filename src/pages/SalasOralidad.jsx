@@ -521,7 +521,7 @@ export default function SalasOralidad({ landing: propLanding }) {
                 ))}
               </ul>
             </div>
-            <div className="split-visual" style={{ width: '100%', minWidth: '600px' }}>
+            <div className="split-visual masod-split-visual">
               <MasodHud />
             </div>
           </div>

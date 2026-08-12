@@ -191,9 +191,27 @@
 @media (max-width: 768px) {
   .ob-bento-grid {
     grid-template-columns: 1fr;
+    gap: 16px;
+    margin-top: 32px;
   }
   .ob-bento-grid .ob-card:nth-child(1),
   .ob-bento-grid .ob-card:nth-child(6) {
     grid-column: span 1;
+  }
+  .ob-card {
+    padding: 22px 18px;
+    opacity: 1;
+    transform: none;
+  }
+  .ob-highlight-num {
+    font-size: 2.2rem;
+  }
+  .ob-card-bottom h3 {
+    font-size: 1.25rem;
+    margin-bottom: 8px;
+  }
+  .ob-card-bottom p {
+    font-size: 0.9rem;
+    line-height: 1.5;
   }
 }

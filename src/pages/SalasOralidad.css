@@ -1105,8 +1105,117 @@
   .process-timeline { grid-template-columns: 1fr; }
   .benefits-grid { grid-template-columns: 1fr 1fr; }
 }
-@media (max-width: 600px) {
-  .problem-grid { grid-template-columns: 1fr; }
-  .benefits-grid { grid-template-columns: 1fr; }
-  .salas-hero-title { font-size: 2.2rem; }
+
+/* ═══════════════════════════════════════════════════
+   PERFECT MOBILE UX/UI OVERHAUL (SMARTPHONES & TABLETS)
+   ═══════════════════════════════════════════════════ */
+
+.page-salas {
+  overflow-x: hidden;
+}
+
+.masod-split-visual {
+  width: 100%;
+  max-width: 100%;
+  min-width: 0;
+  overflow: hidden;
+}
+
+@media (max-width: 768px) {
+  .page-salas {
+    padding-top: var(--nav-height);
+  }
+
+  .waveform-hero {
+    min-height: auto;
+    padding: 40px 16px 50px;
+  }
+
+  .salas-hero-title-center {
+    font-size: 2.1rem !important;
+    line-height: 1.15;
+    margin-bottom: 16px;
+  }
+
+  .salas-hero-sub-center {
+    font-size: 0.98rem;
+    line-height: 1.6;
+    margin-bottom: 28px;
+  }
+
+  .salas-split {
+    grid-template-columns: 1fr;
+    gap: 28px;
+  }
+
+  .split-text {
+    padding-right: 0 !important;
+  }
+
+  /* 3D Holographic Blueprint Visual on Mobile */
+  .blueprint-3d-container {
+    height: 320px !important;
+    perspective: 1000px;
+    border-radius: var(--radius-lg);
+  }
+
+  .bp-exploded-wrapper {
+    width: 220px;
+    height: 220px;
+    transform: rotateX(45deg) rotateZ(-30deg) scale(0.72) translateZ(-40deg) !important;
+  }
+
+  .blueprint-list-item {
+    padding: 12px 14px;
+  }
+
+  .bp-item-header h4 {
+    font-size: 0.98rem;
+  }
+
+  .bp-item-desc {
+    font-size: 0.85rem;
+    padding-left: 0;
+  }
+
+  /* Problems Section */
+  .problem-split {
+    grid-template-columns: 1fr;
+    gap: 28px;
+  }
+
+  .terminal-body {
+    padding: 16px 12px;
+    font-size: 0.78rem;
+    min-height: auto;
+  }
+
+  /* MASOD Section */
+  .masod-features {
+    margin-bottom: 24px !important;
+  }
+
+  /* CTA Section */
+  .salas-cta {
+    padding: 60px 16px;
+  }
+
+  .cta-title {
+    font-size: 1.85rem !important;
+  }
+
+  .cta-desc {
+    font-size: 0.95rem;
+  }
+
+  .cta-actions {
+    flex-direction: column;
+    width: 100%;
+    gap: 12px;
+  }
+
+  .cta-actions .btn {
+    width: 100%;
+    justify-content: center;
+  }
 }
