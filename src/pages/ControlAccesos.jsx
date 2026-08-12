@@ -37,7 +37,13 @@ import {
 } from 'lucide-react';
 import { useScrollReveal } from '../hooks/useScrollReveal';
 import { useLanding } from '../context/LandingContext';
-import { controlAccesosData, projectsDetailed as projects } from '../data/content';
+import { controlAccesosData } from '../data/content';
+import AccessComparisonInteractive from '../components/AccessComparisonInteractive/AccessComparisonInteractive';
+import AccessSolutionsInteractive from '../components/AccessSolutionsInteractive/AccessSolutionsInteractive';
+import AccessEnvironmentsInteractive from '../components/AccessEnvironmentsInteractive/AccessEnvironmentsInteractive';
+import AccessFlowStickyTimeline from '../components/AccessFlowStickyTimeline/AccessFlowStickyTimeline';
+import AccessBenefitsROICalculator from '../components/AccessBenefitsROICalculator/AccessBenefitsROICalculator';
+import './ControlAccesos.css';
 
 export default function ControlAccesos({ landing: propLanding }) {
   const contextLanding = useLanding();
@@ -53,18 +59,7 @@ export default function ControlAccesos({ landing: propLanding }) {
   const envRef = useScrollReveal();
   const howRef = useScrollReveal();
   const benefitsRef = useScrollReveal();
-  const integrationRef = useScrollReveal();
-  const interactiveRef = useScrollReveal();
-  const processRef = useScrollReveal();
-  const whyRef = useScrollReveal();
-  const casesRef = useScrollReveal();
   const ctaRef = useScrollReveal();
-
-  const filteredSolutions = activeSolution === 'all' 
-    ? controlAccesosData.solutions 
-    : controlAccesosData.solutions.filter(s => s.id === activeSolution);
-
-  const selectedEnv = controlAccesosData.environments.find(e => e.id === activeEnv) || controlAccesosData.environments[0];
 
   const primaryCtaUrl = landing && landing.whatsappUrl ? landing.whatsappUrl : 'https://wa.link/nf8gq3';
   const pageTitle = landing ? (landing.titulo || landing.frase) : 'Sistemas de Control de Acceso para Empresas e Instituciones';
@@ -207,10 +202,10 @@ export default function ControlAccesos({ landing: propLanding }) {
             </p>
 
             <div className="cta-banner-actions">
-              <a href="https://wa.link/nf8gq3" target="_blank" rel="noopener noreferrer" className="btn btn-primary btn-lg">
+              <a href={primaryCtaUrl} target="_blank" rel="noopener noreferrer" className="btn btn-primary btn-lg">
                 Solicitar Cotización y Levantamiento <ArrowRight size={20} className="ml-1" />
               </a>
-              <a href="https://wa.link/nf8gq3" target="_blank" rel="noopener noreferrer" className="btn btn-outline btn-lg flex items-center justify-center">
+              <a href={primaryCtaUrl} target="_blank" rel="noopener noreferrer" className="btn btn-outline btn-lg flex items-center justify-center">
                 <MessageCircle size={20} className="mr-2 text-emerald-400" />
                 Asesoría Inmediata por WhatsApp
               </a>
