@@ -24,7 +24,6 @@ const ENVIRONMENTS_3PHOTO_DATA = [
     desc: "Sistemas de alta seguridad con autenticación biométrica multinivel, trazabilidad inalterable de bóvedas y auditoría continua 24/7.",
     icon: Landmark,
     badge: "Misión Crítica & Bóvedas",
-    masterImage: "/assets/images/control-accesos/bank_vault.png",
     checkpoints: [
       {
         id: "bank_boveda",
@@ -35,7 +34,7 @@ const ENVIRONMENTS_3PHOTO_DATA = [
         tag: "Bóvedas & Custodia",
         image: "/assets/images/control-accesos/bank_vault.png",
         pinTop: 45,
-        pinLeft: 30,
+        pinLeft: 42,
         highlights: ["Apertura por doble autorización", "Registro con sello de tiempo inalterable", "Cierre electroimán de alta presión"]
       },
       {
@@ -46,8 +45,8 @@ const ENVIRONMENTS_3PHOTO_DATA = [
         desc: "Validación de identidad de cajeros y supervisores previa a autorizar transacciones o apertura de gavetas de valores.",
         tag: "Zona de Cajas",
         image: "/assets/images/control-accesos/bank_teller.png",
-        pinTop: 58,
-        pinLeft: 58,
+        pinTop: 40,
+        pinLeft: 55,
         highlights: ["Sensor óptico anti-huella de silicona", "Verificación previa a transacción", "Historial por operador de caja"]
       },
       {
@@ -58,8 +57,8 @@ const ENVIRONMENTS_3PHOTO_DATA = [
         desc: "Sincronización simultánea de videoclips HD con cada intento de acceso o evento de lectura de credencial.",
         tag: "Auditoría 24/7",
         image: "/assets/images/control-accesos/bank_cctv.png",
-        pinTop: 35,
-        pinLeft: 78,
+        pinTop: 38,
+        pinLeft: 50,
         highlights: ["Videowall de control en tiempo real", "Alertas instantáneas por intento fallido", "Resguardo de bitácora en la nube"]
       }
     ]
@@ -71,7 +70,6 @@ const ENVIRONMENTS_3PHOTO_DATA = [
     desc: "Canalización de colaboradores con torniquetes ópticos de cristal, credenciales móviles NFC y restricción por área y horario.",
     icon: Briefcase,
     badge: "Lobbies & Perfiles Jerárquicos",
-    masterImage: "/assets/images/control-accesos/corporate_office.png",
     checkpoints: [
       {
         id: "office_turnstile",
@@ -81,8 +79,8 @@ const ENVIRONMENTS_3PHOTO_DATA = [
         desc: "Desahogo continuo de hasta 60 colaboradores por minuto en horas pico previniendo pasos simultáneos sin autorización.",
         tag: "Flujo Masivo",
         image: "/assets/images/control-accesos/office_turnstile.png",
-        pinTop: 60,
-        pinLeft: 28,
+        pinTop: 50,
+        pinLeft: 45,
         highlights: ["Brazos/cristales retráctiles de velocidad", "Sensor infrarrojo anti-cola", "Integración con sistema de nómina"]
       },
       {
@@ -93,8 +91,8 @@ const ENVIRONMENTS_3PHOTO_DATA = [
         desc: "Restricción exclusiva a personal informático autorizado con monitoreo de tiempo de permanencia y puerta abierta.",
         tag: "Infraestructura TI",
         image: "/assets/images/control-accesos/office_server.png",
-        pinTop: 38,
-        pinLeft: 55,
+        pinTop: 35,
+        pinLeft: 50,
         highlights: ["Biometría facial liveness anti-foto", "Alerta automática por puerta abierta", "Bitácora exclusiva para auditoría de TI"]
       },
       {
@@ -105,8 +103,8 @@ const ENVIRONMENTS_3PHOTO_DATA = [
         desc: "Asignación instantánea de permisos temporales a empleados y consultores sin necesidad de tarjetas plásticas físicas.",
         tag: "NFC Smartphone",
         image: "/assets/images/control-accesos/office_nfc.png",
-        pinTop: 52,
-        pinLeft: 80,
+        pinTop: 48,
+        pinLeft: 52,
         highlights: ["Acceso con smartphone Apple/Android", "Baja de credenciales con 1 clic", "Enviado por WhatsApp o email"]
       }
     ]
@@ -118,7 +116,6 @@ const ENVIRONMENTS_3PHOTO_DATA = [
     desc: "Gestión integral de residentes, empleados y visitantes desde accesos peatonales, elevadores y barreras vehiculares.",
     icon: Building2,
     badge: "Acceso Peatonal & Elevadores",
-    masterImage: "/assets/images/control-accesos/building_entrance.png",
     checkpoints: [
       {
         id: "building_kiosk",
@@ -128,8 +125,8 @@ const ENVIRONMENTS_3PHOTO_DATA = [
         desc: "Autocomprobación de identidad y registro fotográfico con notificación automática al residente o anfitrión corporativo.",
         tag: "Autogestión QR",
         image: "/assets/images/control-accesos/building_kiosk.png",
-        pinTop: 52,
-        pinLeft: 25,
+        pinTop: 45,
+        pinLeft: 42,
         highlights: ["Impresión de distintivo de visita", "Validación de código QR dinámico", "Notificación instantánea por App"]
       },
       {
@@ -140,8 +137,8 @@ const ENVIRONMENTS_3PHOTO_DATA = [
         desc: "El elevador habilita exclusivamente la botonera del piso asignado a la tarjeta o credencial del usuario.",
         tag: "Pisos Restringidos",
         image: "/assets/images/control-accesos/building_elevator.png",
-        pinTop: 38,
-        pinLeft: 55,
+        pinTop: 40,
+        pinLeft: 58,
         highlights: ["Integración con botoneras de marcas líderes", "Permisos según perfil de residente/empleado", "Bloqueo nocturno de pisos ejecutivos"]
       },
       {
@@ -152,8 +149,8 @@ const ENVIRONMENTS_3PHOTO_DATA = [
         desc: "Apertura automatizada de barreras de estacionamiento para vehículos registrados con historial completo de entradas.",
         tag: "Tag Vehicular",
         image: "/assets/images/control-accesos/building_barrier.png",
-        pinTop: 65,
-        pinLeft: 80,
+        pinTop: 52,
+        pinLeft: 55,
         highlights: ["Antena RFID alcance 6 a 10 metros", "Apertura de pluma en 1.5 segundos", "Integración con sistema de cobro o pensiones"]
       }
     ]
@@ -165,7 +162,6 @@ const ENVIRONMENTS_3PHOTO_DATA = [
     desc: "Soluciones de máxima institucionalidad para la segregación de personal clasificado, funcionarios y atención a la ciudadanía.",
     icon: Building,
     badge: "Seguridad Nacional & CNPP",
-    masterImage: "/assets/images/control-accesos/government_facility.png",
     checkpoints: [
       {
         id: "gov_facial",
@@ -175,8 +171,8 @@ const ENVIRONMENTS_3PHOTO_DATA = [
         desc: "Verificación de identidad sin detener el paso de funcionarios y directores con alta precisión anti-suplantación.",
         tag: "Reconocimiento Facial",
         image: "/assets/images/control-accesos/gov_facial.png",
-        pinTop: 35,
-        pinLeft: 30,
+        pinTop: 32,
+        pinLeft: 50,
         highlights: ["Lectura sobre la marcha a 3 metros", "Detección liveness anti-fotos", "Sin contacto físico en accesos"]
       },
       {
@@ -187,9 +183,9 @@ const ENVIRONMENTS_3PHOTO_DATA = [
         desc: "Punto de control institucional que canaliza el flujo del público general previo a las áreas gubernamentales.",
         tag: "Filtro Institucional",
         image: "/assets/images/control-accesos/gov_filter.png",
-        pinTop: 58,
-        pinLeft: 55,
-        highlights: ["Chasis reinforced anti-vandalismo", "Integración con detector de metales", "Control de entrada/salida segregado"]
+        pinTop: 52,
+        pinLeft: 45,
+        highlights: ["Chasis reforzado anti-vandalismo", "Integración con detector de metales", "Control de entrada/salida segregado"]
       },
       {
         id: "gov_archive",
@@ -199,8 +195,8 @@ const ENVIRONMENTS_3PHOTO_DATA = [
         desc: "Control riguroso de ingreso a repositorios de documentos oficiales con sello de tiempo inalterable.",
         tag: "Archivos Clasificados",
         image: "/assets/images/control-accesos/gov_archive.png",
-        pinTop: 48,
-        pinLeft: 78,
+        pinTop: 45,
+        pinLeft: 58,
         highlights: ["Electroimán de 600 libras de retención", "Huella o rostro para cada apertura", "Historial de consulta de archivos"]
       }
     ]
@@ -212,7 +208,6 @@ const ENVIRONMENTS_3PHOTO_DATA = [
     desc: "Protección perimetral de campus escolares y universidades con torniquetes de desahogo masivo y notificación en tiempo real.",
     icon: GraduationCap,
     badge: "Seguridad Escolar & Campus",
-    masterImage: "/assets/images/control-accesos/school_entrance.png",
     checkpoints: [
       {
         id: "school_turnstile",
@@ -222,8 +217,8 @@ const ENVIRONMENTS_3PHOTO_DATA = [
         desc: "Ingreso masivo de miles de alumnos por hora con validación de credencial activa y prevención de sustitución.",
         tag: "Ingreso Alumnos",
         image: "/assets/images/control-accesos/school_turnstile.png",
-        pinTop: 62,
-        pinLeft: 28,
+        pinTop: 55,
+        pinLeft: 48,
         highlights: ["Validación de credencial activa", "Alerta automática de entrada a tutores", "Resistencia a uso continuo por alumnos"]
       },
       {
@@ -234,8 +229,8 @@ const ENVIRONMENTS_3PHOTO_DATA = [
         desc: "Validación obligatoria de padres y proveedores con impresión de distintivo temporal de visita.",
         tag: "Control de Tutores",
         image: "/assets/images/control-accesos/school_visitor.png",
-        pinTop: 42,
-        pinLeft: 55,
+        pinTop: 45,
+        pinLeft: 40,
         highlights: ["Verificación de tutor autorizado", "Impresión de gafete de visitante con foto", "Filtro obligatorio en recepción"]
       },
       {
@@ -246,8 +241,8 @@ const ENVIRONMENTS_3PHOTO_DATA = [
         desc: "Caída de brazos de torniquetes y apertura inmediata de puertas ante señal de alarma sísmica o incendio.",
         tag: "Fail-Safe Evacuación",
         image: "/assets/images/control-accesos/school_failsafe.png",
-        pinTop: 50,
-        pinLeft: 82,
+        pinTop: 48,
+        pinLeft: 52,
         highlights: ["Desbloqueo instantáneo sin energía", "Liberación por contacto de alarma", "Cumplimiento normativo de Protección Civil"]
       }
     ]
@@ -261,12 +256,12 @@ export default function AccessEnvironmentsInteractive() {
   const selectedEnv = ENVIRONMENTS_3PHOTO_DATA.find((e) => e.id === activeEnvId) || ENVIRONMENTS_3PHOTO_DATA[4];
   const ActiveIcon = selectedEnv.icon;
 
-  // Selected Checkpoint
+  // Selected Checkpoint (its photo changes dynamically on selection!)
   const currentCheckpoint = selectedEnv.checkpoints[activeCheckpointIndex] || selectedEnv.checkpoints[0];
 
   const handleSelectIndustry = (envId) => {
     setActiveEnvId(envId);
-    setActiveCheckpointIndex(0); // Reset to first checkpoint
+    setActiveCheckpointIndex(0); // Reset to first checkpoint photo
   };
 
   return (
@@ -281,7 +276,7 @@ export default function AccessEnvironmentsInteractive() {
           Una solución para <span className="accent-gradient">cada entorno</span>
         </h2>
         <p className="section-subtitle">
-          Selecciona una industria y explora sus <strong>3 puntos de control clave</strong> interactivos.
+          Selecciona una industria y explora sus <strong>3 puntos de control clave</strong> con imágenes reales y fichas técnicas.
         </p>
       </div>
 
@@ -320,7 +315,7 @@ export default function AccessEnvironmentsInteractive() {
           </div>
         </aside>
 
-        {/* RIGHT INTERACTIVE STAGE: Hotspot Master Map & Dynamic Spec Ficha Card */}
+        {/* RIGHT INTERACTIVE STAGE: Dynamic Photo Viewer + Spec Ficha Card */}
         <div className="env-stage-area">
           {/* Header of Active Environment */}
           <div className="stage-top-banner">
@@ -336,7 +331,7 @@ export default function AccessEnvironmentsInteractive() {
 
           {/* Hotspots Control Point Selector Bar */}
           <div className="hotspots-nav-bar">
-            <span className="hotspot-bar-title font-mono">HAZ CLIC EN CADA PUNTO DE CONTROL PARA INSPECCIONAR SU FICHA:</span>
+            <span className="hotspot-bar-title font-mono">SELECCIONA EL PUNTO DE CONTROL A INSPECCIONAR:</span>
             <div className="hotspot-pills">
               {selectedEnv.checkpoints.map((cp, idx) => {
                 const isSelected = activeCheckpointIndex === idx;
@@ -356,65 +351,46 @@ export default function AccessEnvironmentsInteractive() {
             </div>
           </div>
 
-          {/* ARCHITECTURAL INTERACTIVE GRID (Master Hotspot Map + Dynamic Ficha Card) */}
+          {/* ARCHITECTURAL DYNAMIC PHOTO STAGE & FICHA CARD */}
           <div className="env-architectural-grid">
             
-            {/* Left: Master Environment Map with Hotspot Pins ("edificio animado") */}
+            {/* Left: Dynamic Photo Stage for the Selected Control Point */}
             <div className="arch-visual-container">
               <div className="arch-image-wrapper">
-                {/* Master Panoramic Image for this Environment */}
+                {/* High-Resolution Real Photo of the Active Control Point */}
                 <img 
-                  src={selectedEnv.masterImage} 
-                  alt={selectedEnv.title} 
-                  className="arch-bg-image"
+                  key={currentCheckpoint.id}
+                  src={currentCheckpoint.image} 
+                  alt={currentCheckpoint.title} 
+                  className="arch-bg-image fade-in-img"
                 />
 
                 <div className="arch-image-overlay" />
 
-                {/* Pulsing Hotspot Pins (1, 2, 3) over the Master Map */}
-                {selectedEnv.checkpoints.map((cp, idx) => {
-                  const isSelected = activeCheckpointIndex === idx;
-
-                  return (
-                    <button
-                      key={cp.id}
-                      className={`hotspot-pin-btn ${isSelected ? 'active' : ''}`}
-                      style={{ top: `${cp.pinTop}%`, left: `${cp.pinLeft}%` }}
-                      onClick={() => setActiveCheckpointIndex(idx)}
-                      title={cp.title}
-                    >
-                      <span className="pin-pulse-wave" />
-                      <span className="pin-pulse-ring" />
-                      <span className="pin-number">{cp.number}</span>
-                      <span className="pin-tooltip font-mono">{cp.title}</span>
-                    </button>
-                  );
-                })}
+                {/* Hotspot Focus Marker over the active equipment in the photo */}
+                <div 
+                  className="hotspot-pin-btn active"
+                  style={{ top: `${currentCheckpoint.pinTop}%`, left: `${currentCheckpoint.pinLeft}%` }}
+                >
+                  <span className="pin-pulse-wave" />
+                  <span className="pin-pulse-ring" />
+                  <span className="pin-number">{currentCheckpoint.number}</span>
+                  <span className="pin-tooltip font-mono">{currentCheckpoint.title}</span>
+                </div>
 
                 <div className="arch-badge-tag font-mono">
                   <ShieldCheck size={14} className="text-accent mr-1 inline-block" />
-                  <span>Plano General: {selectedEnv.title}</span>
+                  <span>Punto {currentCheckpoint.number}: {currentCheckpoint.tag}</span>
                 </div>
               </div>
             </div>
 
-            {/* Right: Dynamic Ficha Card with Detail Photo Asset */}
+            {/* Right: Dynamic Ficha Card with Detailed Technical Specs */}
             <div className="ficha-spec-card">
-              {/* Detail Photo Thumbnail Header */}
-              <div className="ficha-photo-header">
-                <img 
-                  src={currentCheckpoint.image} 
-                  alt={currentCheckpoint.title}
-                  className="ficha-detail-img"
-                />
-                <span className="ficha-photo-badge font-mono">
-                  Punto {currentCheckpoint.number}: {currentCheckpoint.tag}
-                </span>
-              </div>
-
               <div className="ficha-body">
                 <div className="ficha-header">
-                  <h4 className="ficha-title">{currentCheckpoint.title}</h4>
+                  <span className="badge badge-accent mb-2">{currentCheckpoint.tag}</span>
+                  <h4 className="ficha-title">Punto {currentCheckpoint.number}: {currentCheckpoint.title}</h4>
                   
                   <div className="ficha-tech font-mono">
                     <Zap size={14} className="text-accent mr-1 inline-block" />
