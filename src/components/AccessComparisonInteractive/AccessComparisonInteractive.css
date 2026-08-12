@@ -376,3 +376,38 @@
     grid-template-columns: 1fr;
   }
 }
+
+@media (max-width: 768px) {
+  .comparison-title {
+    font-size: 1.6rem;
+    line-height: 1.25;
+  }
+
+  .comparison-subtitle {
+    font-size: 0.9rem;
+    line-height: 1.5;
+  }
+
+  .comp-card {
+    padding: 22px 16px;
+    border-radius: var(--radius-lg);
+  }
+
+  .comp-card-header {
+    gap: 12px;
+  }
+
+  .comp-icon-box {
+    width: 46px;
+    height: 46px;
+  }
+
+  .comp-card-title {
+    font-size: 1.2rem;
+  }
+
+  .metric-card {
+    padding: 18px 14px;
+    border-radius: var(--radius-lg);
+  }
+}

@@ -901,3 +901,74 @@
     font-size: 2rem;
   }
 }
+
+@media (max-width: 768px) {
+  .accesos-hero {
+    padding: 40px 0 40px;
+  }
+
+  .hero-h1-title {
+    font-size: 2.1rem;
+    line-height: 1.2;
+  }
+
+  .hero-excerpt {
+    font-size: 0.95rem;
+    line-height: 1.6;
+    margin-bottom: 24px;
+  }
+
+  .hero-actions {
+    flex-direction: column;
+    width: 100%;
+    gap: 12px;
+  }
+
+  .hero-actions .btn {
+    width: 100%;
+    justify-content: center;
+    text-align: center;
+    font-size: 1rem;
+    padding: 14px 20px;
+  }
+
+  .badge-simulator {
+    padding: 20px 16px;
+    border-radius: var(--radius-lg);
+  }
+
+  .badge-scanner-box {
+    height: 120px;
+  }
+
+  .cta-banner-box {
+    padding: 36px 20px;
+    border-radius: var(--radius-xl);
+  }
+
+  .cta-banner-title {
+    font-size: 1.8rem;
+    line-height: 1.25;
+    margin-bottom: 14px;
+  }
+
+  .cta-banner-desc {
+    font-size: 0.92rem;
+    line-height: 1.55;
+    margin-bottom: 24px;
+  }
+
+  .cta-banner-actions {
+    flex-direction: column;
+    width: 100%;
+    gap: 12px;
+  }
+
+  .cta-banner-actions .btn {
+    width: 100%;
+    justify-content: center;
+    text-align: center;
+    font-size: 0.95rem;
+    padding: 14px 20px;
+  }
+}

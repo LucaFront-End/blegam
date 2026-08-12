@@ -271,3 +271,20 @@
     top: 0;
   }
 }
+
+@media (max-width: 768px) {
+  .sticky-track-sidebar {
+    display: none;
+  }
+
+  .flow-step-card {
+    padding: 22px 18px;
+    border-radius: var(--radius-lg);
+  }
+
+  .step-header {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 8px;
+  }
+}
