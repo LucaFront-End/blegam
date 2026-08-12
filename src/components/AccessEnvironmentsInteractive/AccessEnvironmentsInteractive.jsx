@@ -11,7 +11,8 @@ import {
   Sparkles,
   ChevronRight,
   ShieldCheck,
-  MapPin
+  MapPin,
+  Eye
 } from 'lucide-react';
 import './AccessEnvironmentsInteractive.css';
 
@@ -23,6 +24,7 @@ const ENVIRONMENTS_3PHOTO_DATA = [
     desc: "Sistemas de alta seguridad con autenticación biométrica multinivel, trazabilidad inalterable de bóvedas y auditoría continua 24/7.",
     icon: Landmark,
     badge: "Misión Crítica & Bóvedas",
+    masterImage: "/assets/images/control-accesos/bank_vault.png",
     checkpoints: [
       {
         id: "bank_boveda",
@@ -32,7 +34,7 @@ const ENVIRONMENTS_3PHOTO_DATA = [
         desc: "Acceso con regla de doble custodia obligatoria, bitácora AES-256 inalterable y protocolo silencioso anti-coacción.",
         tag: "Bóvedas & Custodia",
         image: "/assets/images/control-accesos/bank_vault.png",
-        pinTop: 42,
+        pinTop: 45,
         pinLeft: 30,
         highlights: ["Apertura por doble autorización", "Registro con sello de tiempo inalterable", "Cierre electroimán de alta presión"]
       },
@@ -69,6 +71,7 @@ const ENVIRONMENTS_3PHOTO_DATA = [
     desc: "Canalización de colaboradores con torniquetes ópticos de cristal, credenciales móviles NFC y restricción por área y horario.",
     icon: Briefcase,
     badge: "Lobbies & Perfiles Jerárquicos",
+    masterImage: "/assets/images/control-accesos/corporate_office.png",
     checkpoints: [
       {
         id: "office_turnstile",
@@ -115,6 +118,7 @@ const ENVIRONMENTS_3PHOTO_DATA = [
     desc: "Gestión integral de residentes, empleados y visitantes desde accesos peatonales, elevadores y barreras vehiculares.",
     icon: Building2,
     badge: "Acceso Peatonal & Elevadores",
+    masterImage: "/assets/images/control-accesos/building_entrance.png",
     checkpoints: [
       {
         id: "building_kiosk",
@@ -161,6 +165,7 @@ const ENVIRONMENTS_3PHOTO_DATA = [
     desc: "Soluciones de máxima institucionalidad para la segregación de personal clasificado, funcionarios y atención a la ciudadanía.",
     icon: Building,
     badge: "Seguridad Nacional & CNPP",
+    masterImage: "/assets/images/control-accesos/government_facility.png",
     checkpoints: [
       {
         id: "gov_facial",
@@ -184,7 +189,7 @@ const ENVIRONMENTS_3PHOTO_DATA = [
         image: "/assets/images/control-accesos/gov_filter.png",
         pinTop: 58,
         pinLeft: 55,
-        highlights: ["Chasis reforzado anti-vandalismo", "Integración con detector de metales", "Control de entrada/salida segregado"]
+        highlights: ["Chasis reinforced anti-vandalismo", "Integración con detector de metales", "Control de entrada/salida segregado"]
       },
       {
         id: "gov_archive",
@@ -207,6 +212,7 @@ const ENVIRONMENTS_3PHOTO_DATA = [
     desc: "Protección perimetral de campus escolares y universidades con torniquetes de desahogo masivo y notificación en tiempo real.",
     icon: GraduationCap,
     badge: "Seguridad Escolar & Campus",
+    masterImage: "/assets/images/control-accesos/school_entrance.png",
     checkpoints: [
       {
         id: "school_turnstile",
@@ -249,7 +255,7 @@ const ENVIRONMENTS_3PHOTO_DATA = [
 ];
 
 export default function AccessEnvironmentsInteractive() {
-  const [activeEnvId, setActiveEnvId] = useState('escuelas'); // Defaults to Escuelas as per screenshot, or user can toggle
+  const [activeEnvId, setActiveEnvId] = useState('escuelas');
   const [activeCheckpointIndex, setActiveCheckpointIndex] = useState(0);
 
   const selectedEnv = ENVIRONMENTS_3PHOTO_DATA.find((e) => e.id === activeEnvId) || ENVIRONMENTS_3PHOTO_DATA[4];
@@ -279,10 +285,10 @@ export default function AccessEnvironmentsInteractive() {
         </p>
       </div>
 
-      {/* MAIN LAYOUT: Left Sidebar ("entornos") + Right Interactive Visual Stage */}
+      {/* MAIN LAYOUT: Sticky Left Sidebar ("entornos") + Right Interactive Visual Stage */}
       <div className="env-main-layout">
         
-        {/* LEFT SIDEBAR: "entornos" Menu */}
+        {/* STICKY LEFT SIDEBAR: "entornos" Menu */}
         <aside className="env-sidebar-menu">
           <div className="sidebar-header font-mono">
             <MapPin size={16} className="text-accent mr-1 inline-block" />
@@ -314,7 +320,7 @@ export default function AccessEnvironmentsInteractive() {
           </div>
         </aside>
 
-        {/* RIGHT INTERACTIVE STAGE: Hotspots & Dynamic Ficha Card */}
+        {/* RIGHT INTERACTIVE STAGE: Hotspot Master Map & Dynamic Spec Ficha Card */}
         <div className="env-stage-area">
           {/* Header of Active Environment */}
           <div className="stage-top-banner">
@@ -330,7 +336,7 @@ export default function AccessEnvironmentsInteractive() {
 
           {/* Hotspots Control Point Selector Bar */}
           <div className="hotspots-nav-bar">
-            <span className="hotspot-bar-title font-mono">PUNTOS DE CONTROL EN ESTE ENTORNO (HAZ CLIC EN CADA UNO):</span>
+            <span className="hotspot-bar-title font-mono">HAZ CLIC EN CADA PUNTO DE CONTROL PARA INSPECCIONAR SU FICHA:</span>
             <div className="hotspot-pills">
               {selectedEnv.checkpoints.map((cp, idx) => {
                 const isSelected = activeCheckpointIndex === idx;
@@ -343,27 +349,29 @@ export default function AccessEnvironmentsInteractive() {
                   >
                     <span className="pill-num">{cp.number}</span>
                     <span className="pill-title">{cp.title}</span>
+                    <Eye size={14} className="pill-eye-icon ml-auto opacity-60" />
                   </button>
                 );
               })}
             </div>
           </div>
 
-          {/* ARCHITECTURAL INTERACTIVE GRID (Hotspot Visual + Dynamic Ficha Card) */}
+          {/* ARCHITECTURAL INTERACTIVE GRID (Master Hotspot Map + Dynamic Ficha Card) */}
           <div className="env-architectural-grid">
             
-            {/* Left: Hotspot Visual Stage ("edificio animado con ondas parpadeantes") */}
+            {/* Left: Master Environment Map with Hotspot Pins ("edificio animado") */}
             <div className="arch-visual-container">
               <div className="arch-image-wrapper">
+                {/* Master Panoramic Image for this Environment */}
                 <img 
-                  src={currentCheckpoint.image} 
-                  alt={currentCheckpoint.title} 
+                  src={selectedEnv.masterImage} 
+                  alt={selectedEnv.title} 
                   className="arch-bg-image"
                 />
 
                 <div className="arch-image-overlay" />
 
-                {/* Hotspot Pins on the Image with Pulsing Waves ("parpadea ondas") */}
+                {/* Pulsing Hotspot Pins (1, 2, 3) over the Master Map */}
                 {selectedEnv.checkpoints.map((cp, idx) => {
                   const isSelected = activeCheckpointIndex === idx;
 
@@ -385,43 +393,56 @@ export default function AccessEnvironmentsInteractive() {
 
                 <div className="arch-badge-tag font-mono">
                   <ShieldCheck size={14} className="text-accent mr-1 inline-block" />
-                  <span>Punto {currentCheckpoint.number}: {currentCheckpoint.tag}</span>
+                  <span>Plano General: {selectedEnv.title}</span>
                 </div>
               </div>
             </div>
 
-            {/* Right: Dynamic Ficha Card ("ficha de información") */}
+            {/* Right: Dynamic Ficha Card with Detail Photo Asset */}
             <div className="ficha-spec-card">
-              <div className="ficha-header">
-                <span className="badge badge-accent mb-2">{currentCheckpoint.tag}</span>
-                <h4 className="ficha-title">Punto {currentCheckpoint.number}: {currentCheckpoint.title}</h4>
-                
-                <div className="ficha-tech font-mono">
-                  <Zap size={14} className="text-accent mr-1 inline-block" />
-                  <span>{currentCheckpoint.tech}</span>
-                </div>
+              {/* Detail Photo Thumbnail Header */}
+              <div className="ficha-photo-header">
+                <img 
+                  src={currentCheckpoint.image} 
+                  alt={currentCheckpoint.title}
+                  className="ficha-detail-img"
+                />
+                <span className="ficha-photo-badge font-mono">
+                  Punto {currentCheckpoint.number}: {currentCheckpoint.tag}
+                </span>
               </div>
 
-              <p className="ficha-desc">{currentCheckpoint.desc}</p>
-
-              <div className="ficha-highlights">
-                <span className="highlights-label font-mono">CARACTERÍSTICAS TÉCNICAS CLAVE:</span>
-                <div className="highlights-list">
-                  {currentCheckpoint.highlights.map((h, i) => (
-                    <div key={i} className="hl-row">
-                      <CheckCircle2 size={16} className="text-accent flex-shrink-0 mr-2 inline-block" />
-                      <span>{h}</span>
-                    </div>
-                  ))}
+              <div className="ficha-body">
+                <div className="ficha-header">
+                  <h4 className="ficha-title">{currentCheckpoint.title}</h4>
+                  
+                  <div className="ficha-tech font-mono">
+                    <Zap size={14} className="text-accent mr-1 inline-block" />
+                    <span>{currentCheckpoint.tech}</span>
+                  </div>
                 </div>
-              </div>
 
-              <Link 
-                to={`/contacto?origen=control-accesos&sector=${selectedEnv.id}&cp=${currentCheckpoint.id}`} 
-                className="btn btn-primary w-full justify-center mt-auto text-base py-3"
-              >
-                Cotizar {currentCheckpoint.title} →
-              </Link>
+                <p className="ficha-desc">{currentCheckpoint.desc}</p>
+
+                <div className="ficha-highlights">
+                  <span className="highlights-label font-mono">CARACTERÍSTICAS TÉCNICAS CLAVE:</span>
+                  <div className="highlights-list">
+                    {currentCheckpoint.highlights.map((h, i) => (
+                      <div key={i} className="hl-row">
+                        <CheckCircle2 size={15} className="text-accent flex-shrink-0 mr-2 inline-block" />
+                        <span>{h}</span>
+                      </div>
+                    ))}
+                  </div>
+                </div>
+
+                <Link 
+                  to={`/contacto?origen=control-accesos&sector=${selectedEnv.id}&cp=${currentCheckpoint.id}`} 
+                  className="btn btn-primary w-full justify-center mt-auto text-base py-3"
+                >
+                  Cotizar {currentCheckpoint.title} →
+                </Link>
+              </div>
             </div>
 
           </div>
