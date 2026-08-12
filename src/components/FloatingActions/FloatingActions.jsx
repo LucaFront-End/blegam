@@ -1,10 +1,12 @@
 import { useState } from 'react';
+import { useLocation } from 'react-router-dom';
 import { brand } from '../../data/content';
 import { useLanding } from '../../context/LandingContext';
 import './FloatingActions.css';
 
 export default function FloatingActions() {
   const landing = useLanding();
+  const location = useLocation();
   const [feedbackOpen, setFeedbackOpen] = useState(false);
   const [submitted, setSubmitted] = useState(false);
   const [sending, setSending] = useState(false);
@@ -62,6 +64,15 @@ export default function FloatingActions() {
     }
   };
 
+  // Determine WhatsApp URL based on current page location
+  let whatsappUrl = landing ? landing.whatsappUrl : brand.contact.whatsappLink;
+
+  if (location.pathname.includes('/control-de-accesos')) {
+    whatsappUrl = `https://api.whatsapp.com/send?phone=525541692770&text=${encodeURIComponent('Hola, quisiera más información de Control de acceso.')}`;
+  } else if (location.pathname.includes('/salas-de-oralidad')) {
+    whatsappUrl = `https://api.whatsapp.com/send?phone=525541692770&text=${encodeURIComponent('Hola, quisiera más información de Salas de Juicios Orales.')}`;
+  }
+
   return (
     <>
       {/* Floating buttons */}
@@ -80,7 +91,7 @@ export default function FloatingActions() {
 
         {/* WhatsApp button */}
         <a
-          href={landing ? landing.whatsappUrl : brand.contact.whatsappLink}
+          href={whatsappUrl}
           className="fab-btn fab-whatsapp"
           target="_blank"
           rel="noopener noreferrer"
@@ -98,101 +109,99 @@ export default function FloatingActions() {
         <div className="fb-overlay" onClick={() => setFeedbackOpen(false)}>
           <div className="fb-modal" onClick={(e) => e.stopPropagation()}>
             {/* Close */}
-            <button className="fb-close" onClick={() => setFeedbackOpen(false)} aria-label="Cerrar">
-              <svg width="20" height="20" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M6 18L18 6M6 6l12 12" />
-              </svg>
+            <button
+              className="fb-close"
+              onClick={() => setFeedbackOpen(false)}
+              aria-label="Cerrar"
+            >
+              &times;
             </button>
+
+            <div className="fb-header">
+              <div className="fb-icon">💬</div>
+              <h3>Buzón de Comentarios</h3>
+              <p>Tu opinión nos ayuda a mejorar. Envíanos tu sugerencia, experiencia o reporte.</p>
+            </div>
 
             {submitted ? (
               <div className="fb-success">
-                <div className="fb-success-icon">
-                  <svg width="48" height="48" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" />
-                  </svg>
-                </div>
-                <h3>¡Gracias por tu comentario!</h3>
-                <p>Tu opinión es muy importante para nosotros. Nos pondremos en contacto contigo si es necesario.</p>
+                <span className="fb-check">✓</span>
+                <h4>¡Gracias por tu comentario!</h4>
+                <p>Hemos recibido tu mensaje correctamente.</p>
               </div>
             ) : (
-              <>
-                <div className="fb-header">
-                  <div className="fb-header-icon">
-                    <svg width="24" height="24" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="1.5" d="M7 8h10M7 12h4m1 8l-4-4H5a2 2 0 01-2-2V6a2 2 0 012-2h14a2 2 0 012 2v8a2 2 0 01-2 2h-3l-4 4z" />
-                    </svg>
+              <form onSubmit={handleSubmit} className="fb-form">
+                <div className="fb-field">
+                  <label htmlFor="fb-type">Tipo de mensaje</label>
+                  <select
+                    id="fb-type"
+                    name="type"
+                    value={form.type}
+                    onChange={handleChange}
+                  >
+                    <option value="sugerencia">💡 Sugerencia de mejora</option>
+                    <option value="experiencia">⭐ Experiencia con nuestro servicio</option>
+                    <option value="queja">⚠️ Queja o reporte</option>
+                    <option value="otro">💬 Otro asunto</option>
+                  </select>
+                </div>
+
+                <div className="fb-row">
+                  <div className="fb-field">
+                    <label htmlFor="fb-name">Nombre completo *</label>
+                    <input
+                      id="fb-name"
+                      type="text"
+                      name="name"
+                      required
+                      placeholder="Tu nombre"
+                      value={form.name}
+                      onChange={handleChange}
+                    />
                   </div>
-                  <div>
-                    <h3 className="fb-title">Buzón de Comentarios</h3>
-                    <p className="fb-subtitle">Comparte tu experiencia, sugerencia o queja</p>
+                  <div className="fb-field">
+                    <label htmlFor="fb-email">Correo electrónico *</label>
+                    <input
+                      id="fb-email"
+                      type="email"
+                      name="email"
+                      required
+                      placeholder="tu@email.com"
+                      value={form.email}
+                      onChange={handleChange}
+                    />
                   </div>
                 </div>
 
-                <form onSubmit={handleSubmit} className="fb-form">
-                  <div className="fb-row">
-                    <div className="fb-field">
-                      <label>Nombre</label>
-                      <input
-                        type="text"
-                        name="name"
-                        value={form.name}
-                        onChange={handleChange}
-                        placeholder="Tu nombre"
-                        required
-                      />
-                    </div>
-                    <div className="fb-field">
-                      <label>Correo</label>
-                      <input
-                        type="email"
-                        name="email"
-                        value={form.email}
-                        onChange={handleChange}
-                        placeholder="correo@ejemplo.com"
-                        required
-                      />
-                    </div>
-                  </div>
+                <div className="fb-field">
+                  <label htmlFor="fb-project">Proyecto u Organización (opcional)</label>
+                  <input
+                    id="fb-project"
+                    type="text"
+                    name="project"
+                    placeholder="Ej. Poder Judicial Estado de X, Empresa Y"
+                    value={form.project}
+                    onChange={handleChange}
+                  />
+                </div>
 
-                  <div className="fb-row">
-                    <div className="fb-field">
-                      <label>Tipo</label>
-                      <select name="type" value={form.type} onChange={handleChange}>
-                        <option value="sugerencia">💡 Sugerencia</option>
-                        <option value="experiencia">⭐ Experiencia</option>
-                        <option value="queja">⚠️ Queja</option>
-                        <option value="otro">📋 Otro</option>
-                      </select>
-                    </div>
-                    <div className="fb-field">
-                      <label>Proyecto (opcional)</label>
-                      <input
-                        type="text"
-                        name="project"
-                        value={form.project}
-                        onChange={handleChange}
-                        placeholder="Nombre del proyecto"
-                      />
-                    </div>
-                  </div>
+                <div className="fb-field">
+                  <label htmlFor="fb-message">Mensaje *</label>
+                  <textarea
+                    id="fb-message"
+                    name="message"
+                    required
+                    rows="4"
+                    placeholder="Escribe aquí tu comentario, sugerencia o detalle de tu experiencia..."
+                    value={form.message}
+                    onChange={handleChange}
+                  />
+                </div>
 
-                  <div className="fb-field">
-                    <label>Mensaje</label>
-                    <textarea
-                      name="message"
-                      value={form.message}
-                      onChange={handleChange}
-                      placeholder="Cuéntanos tu experiencia, sugerencia o queja..."
-                      rows={5}
-                      required
-                    />
-                  </div>
-
-                  <button type="submit" className="fb-submit" disabled={sending}>
-                    {sending ? 'Enviando...' : 'Enviar Comentario'}
-                  </button>
-                </form>
-              </>
+                <button type="submit" className="fb-submit" disabled={sending}>
+                  {sending ? 'Enviando...' : 'Enviar Comentario'}
+                </button>
+              </form>
             )}
           </div>
         </div>
