@@ -1195,6 +1195,66 @@
     margin-bottom: 24px !important;
   }
 
+  /* Pipeline Mobile Fallback Stack */
+  .pipeline-container {
+    height: auto;
+  }
+
+  .pipeline-mobile-stack {
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+    width: 100%;
+  }
+
+  .pipeline-mobile-card {
+    display: flex;
+    align-items: flex-start;
+    gap: 16px;
+    background: var(--bg-card);
+    border: 1px solid var(--border-light);
+    border-radius: var(--radius-lg);
+    padding: 20px;
+    box-shadow: var(--shadow-card);
+  }
+
+  .pipeline-mobile-card.active-mobile-card {
+    border-color: var(--accent-primary);
+    background: rgba(18, 212, 201, 0.05);
+    box-shadow: 0 0 20px rgba(18, 212, 201, 0.15);
+  }
+
+  .p-mobile-icon-box {
+    width: 48px;
+    height: 48px;
+    border-radius: 50%;
+    background: var(--bg-primary);
+    border: 1px solid var(--border-light);
+    display: grid;
+    place-items: center;
+    font-size: 1.4rem;
+    flex-shrink: 0;
+  }
+
+  .p-mobile-icon-box.active-icon {
+    background: var(--accent-glow);
+    border-color: var(--accent-primary);
+  }
+
+  .p-mobile-info h3 {
+    font-size: 1.15rem;
+    font-weight: 700;
+    color: var(--text-primary);
+    margin-bottom: 6px;
+  }
+
+  .p-mobile-info p {
+    font-size: 0.9rem;
+    color: var(--text-secondary);
+    line-height: 1.5;
+    margin: 0;
+  }
+
   /* CTA Section */
   .salas-cta {
     padding: 60px 16px;

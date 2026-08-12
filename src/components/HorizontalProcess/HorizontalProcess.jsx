@@ -30,8 +30,8 @@ export default function HorizontalProcess() {
 
   return (
     <section className="hp-wrapper-light" ref={sectionRef}>
-      <div className="hp-sticky-light">
-        
+      {/* Desktop Sticky Horizontal View */}
+      <div className="hp-sticky-light hp-desktop-only">
         <div className="hp-header-light">
           <span className="section-label dark">Flujo Operativo</span>
           <h2 className="section-title dark">¿Cómo Funciona una <span className="accent-dark">Audiencia</span>?</h2>
@@ -53,7 +53,26 @@ export default function HorizontalProcess() {
              ))}
            </div>
         </div>
+      </div>
 
+      {/* Mobile Stacked Vertical View */}
+      <div className="hp-mobile-only container">
+        <div className="hp-header-mobile">
+          <span className="section-label dark">Flujo Operativo</span>
+          <h2 className="section-title dark">¿Cómo Funciona una <span className="accent-dark">Audiencia</span>?</h2>
+        </div>
+
+        <div className="hp-mobile-vertical-list">
+          {audienceProcess.map((step, i) => (
+            <div key={i} className="hp-card-mobile">
+              <div className="hp-mobile-card-header">
+                <span className="hp-mobile-card-num">{String(step.step).padStart(2, '0')}</span>
+                <h3 className="hp-mobile-card-title">{step.title}</h3>
+              </div>
+              <p className="hp-mobile-card-desc">{step.description}</p>
+            </div>
+          ))}
+        </div>
       </div>
     </section>
   );

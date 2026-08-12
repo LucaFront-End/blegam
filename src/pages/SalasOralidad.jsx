@@ -423,60 +423,89 @@ export default function SalasOralidad({ landing: propLanding }) {
           </div>
 
           <div className="pipeline-container">
-            {/* La Tubería (SVG) */}
-            <svg className="pipeline-svg" viewBox="0 0 1000 300" preserveAspectRatio="xMidYMid meet">
-              <defs>
-                <linearGradient id="pipeGrad" x1="0%" y1="0%" x2="100%" y2="0%">
-                  <stop offset="0%" stopColor="rgba(18,212,201,0.1)" />
-                  <stop offset="50%" stopColor="rgba(18,212,201,0.5)" />
-                  <stop offset="100%" stopColor="rgba(18,212,201,0.1)" />
-                </linearGradient>
-                <filter id="glow" x="-20%" y="-20%" width="140%" height="140%">
-                  <feGaussianBlur stdDeviation="8" result="blur" />
-                  <feComposite in="SourceGraphic" in2="blur" operator="over" />
-                </filter>
-              </defs>
+            {/* Desktop SVG Pipeline View */}
+            <div className="pipeline-desktop-view hp-desktop-only">
+              <svg className="pipeline-svg" viewBox="0 0 1000 300" preserveAspectRatio="xMidYMid meet">
+                <defs>
+                  <linearGradient id="pipeGrad" x1="0%" y1="0%" x2="100%" y2="0%">
+                    <stop offset="0%" stopColor="rgba(18,212,201,0.1)" />
+                    <stop offset="50%" stopColor="rgba(18,212,201,0.5)" />
+                    <stop offset="100%" stopColor="rgba(18,212,201,0.1)" />
+                  </linearGradient>
+                  <filter id="glow" x="-20%" y="-20%" width="140%" height="140%">
+                    <feGaussianBlur stdDeviation="8" result="blur" />
+                    <feComposite in="SourceGraphic" in2="blur" operator="over" />
+                  </filter>
+                </defs>
 
-              {/* Base Pipe */}
-              <path d="M 50 150 C 250 150, 250 50, 500 50 C 750 50, 750 250, 950 250" fill="none" stroke="rgba(255,255,255,0.05)" strokeWidth="12" strokeLinecap="round" />
-              
-              {/* Glowing Core */}
-              <path d="M 50 150 C 250 150, 250 50, 500 50 C 750 50, 750 250, 950 250" fill="none" stroke="url(#pipeGrad)" strokeWidth="4" strokeLinecap="round" filter="url(#glow)" />
-              
-              {/* Animated Data Packets */}
-              <path d="M 50 150 C 250 150, 250 50, 500 50 C 750 50, 750 250, 950 250" fill="none" stroke="#fff" strokeWidth="6" strokeLinecap="round" className="data-packet" filter="url(#glow)" />
-            </svg>
+                {/* Base Pipe */}
+                <path d="M 50 150 C 250 150, 250 50, 500 50 C 750 50, 750 250, 950 250" fill="none" stroke="rgba(255,255,255,0.05)" strokeWidth="12" strokeLinecap="round" />
+                
+                {/* Glowing Core */}
+                <path d="M 50 150 C 250 150, 250 50, 500 50 C 750 50, 750 250, 950 250" fill="none" stroke="url(#pipeGrad)" strokeWidth="4" strokeLinecap="round" filter="url(#glow)" />
+                
+                {/* Animated Data Packets */}
+                <path d="M 50 150 C 250 150, 250 50, 500 50 C 750 50, 750 250, 950 250" fill="none" stroke="#fff" strokeWidth="6" strokeLinecap="round" className="data-packet" filter="url(#glow)" />
+              </svg>
 
-            {/* Estaciones del Ecosistema */}
-            <div className="pipeline-stations">
-              {/* Estación 1 */}
-              <div className="station station-1">
-                <div className="station-node pulse">
-                  <div className="node-icon">🎙️</div>
+              {/* Estaciones del Ecosistema */}
+              <div className="pipeline-stations">
+                {/* Estación 1 */}
+                <div className="station station-1">
+                  <div className="station-node pulse">
+                    <div className="node-icon">🎙️</div>
+                  </div>
+                  <div className="station-card glass-card">
+                    <h3>1. Captura Exacta</h3>
+                    <p>Arreglos de micrófonos DSP y Cámaras PTZ 4K con seguimiento automático del orador.</p>
+                  </div>
                 </div>
-                <div className="station-card glass-card">
+
+                {/* Estación 2 */}
+                <div className="station station-2">
+                  <div className="station-node pulse-fast active">
+                    <div className="node-icon">🧠</div>
+                  </div>
+                  <div className="station-card glass-card active-card">
+                    <h3>2. Gestión MASOD®</h3>
+                    <p>El núcleo del ecosistema. Sincroniza audio, video, metadatos y actas en tiempo real.</p>
+                  </div>
+                </div>
+
+                {/* Estación 3 */}
+                <div className="station station-3">
+                  <div className="station-node pulse">
+                    <div className="node-icon">🔒</div>
+                  </div>
+                  <div className="station-card glass-card">
+                    <h3>3. Resguardo Seguro</h3>
+                    <p>Almacenamiento en NAS redundante con cifrado militar para garantizar la inmutabilidad.</p>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            {/* Mobile Stacked View */}
+            <div className="pipeline-mobile-stack hp-mobile-only">
+              <div className="pipeline-mobile-card">
+                <div className="p-mobile-icon-box">🎙️</div>
+                <div className="p-mobile-info">
                   <h3>1. Captura Exacta</h3>
                   <p>Arreglos de micrófonos DSP y Cámaras PTZ 4K con seguimiento automático del orador.</p>
                 </div>
               </div>
 
-              {/* Estación 2 */}
-              <div className="station station-2">
-                <div className="station-node pulse-fast active">
-                  <div className="node-icon">🧠</div>
-                </div>
-                <div className="station-card glass-card active-card">
+              <div className="pipeline-mobile-card active-mobile-card">
+                <div className="p-mobile-icon-box active-icon">🧠</div>
+                <div className="p-mobile-info">
                   <h3>2. Gestión MASOD®</h3>
                   <p>El núcleo del ecosistema. Sincroniza audio, video, metadatos y actas en tiempo real.</p>
                 </div>
               </div>
 
-              {/* Estación 3 */}
-              <div className="station station-3">
-                <div className="station-node pulse">
-                  <div className="node-icon">🔒</div>
-                </div>
-                <div className="station-card glass-card">
+              <div className="pipeline-mobile-card">
+                <div className="p-mobile-icon-box">🔒</div>
+                <div className="p-mobile-info">
                   <h3>3. Resguardo Seguro</h3>
                   <p>Almacenamiento en NAS redundante con cifrado militar para garantizar la inmutabilidad.</p>
                 </div>
