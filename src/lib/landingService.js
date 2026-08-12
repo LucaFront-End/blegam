@@ -5,13 +5,14 @@ function mapWixItem(item, type) {
   // Robust helper to check multiple possible field name variations from Wix database schema
   const getField = (obj, ...keys) => {
     for (const k of keys) {
-      if (obj[k] !== undefined && obj[k] !== null) return obj[k];
+      if (obj[k] !== undefined && obj[k] !== null && String(obj[k]).trim() !== '') return obj[k];
     }
-    // Also try case-insensitive matching
+    // Also try normalized case-insensitive matching
     const entries = Object.entries(obj);
     for (const k of keys) {
-      const match = entries.find(([key]) => key.toLowerCase().replace(/[^a-z0-9]/g, '') === k.toLowerCase().replace(/[^a-z0-9]/g, ''));
-      if (match) return match[1];
+      const targetKey = k.toLowerCase().replace(/[^a-z0-9]/g, '');
+      const match = entries.find(([key]) => key.toLowerCase().replace(/[^a-z0-9]/g, '') === targetKey);
+      if (match && match[1] !== undefined && match[1] !== null && String(match[1]).trim() !== '') return match[1];
     }
     return '';
   };
@@ -20,11 +21,11 @@ function mapWixItem(item, type) {
     type,
     frase: getField(item, 'frase', 'title', 'fraseDeCabecera'),
     slug: getField(item, 'slug'),
-    titulo: getField(item, 'tituloDePgina', 'tituloDePagina', 'titulo', 'title'),
+    titulo: getField(item, 'tituloDePgina', 'tituloDePagina', 'tituloDePagina1', 'titulo', 'title'),
     excerpt: getField(item, 'excerptDEpgina', 'excerptDePagina', 'excerptDepagina', 'excerpt', 'descripcion'),
-    seoTitle: getField(item, 'tituloDeSeo', 'seoTitle', 'title'),
+    seoTitle: getField(item, 'tituloDeSeo', 'seoTitle', 'tituloDeSeo1', 'title'),
     seoDescription: getField(item, 'metadescripcin', 'metadescripcion', 'metaDescripcion', 'seoDescription', 'description'),
-    whatsappUrl: getField(item, 'whatsappUrl', 'whatsapp_url', 'whatsapp'),
+    whatsappUrl: getField(item, 'whatsappUrl', 'whatsapp_url', 'whatsapp', 'linkWhatsapp', 'urlWhatsapp'),
     ciudad: getField(item, 'ciudad'),
     estado: getField(item, 'estado'),
     palabra: getField(item, 'palabra'),

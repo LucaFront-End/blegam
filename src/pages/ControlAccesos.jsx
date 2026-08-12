@@ -62,10 +62,10 @@ export default function ControlAccesos({ landing: propLanding }) {
   const ctaRef = useScrollReveal();
 
   const primaryCtaUrl = landing && landing.whatsappUrl ? landing.whatsappUrl : 'https://wa.link/nf8gq3';
-  const pageTitle = landing ? (landing.titulo || landing.frase) : 'Sistemas de Control de Acceso para Empresas e Instituciones';
-  const pageExcerpt = landing && landing.excerpt ? landing.excerpt : controlAccesosData.hero.excerpt;
-  const pageSeoTitle = landing && landing.seoTitle ? landing.seoTitle : 'Sistemas de Control de Acceso para Empresas e Instituciones | BLEGAM Corp';
-  const pageSeoDesc = landing && landing.seoDescription ? landing.seoDescription : 'Sistemas integrales de control de acceso: torniquetes, riel, tarjetas RFID y biométricos de huella y rostro. Soluciones para edificios, oficinas, bancos, gobierno y escuelas.';
+  const pageTitle = landing ? (landing.titulo || landing.frase || landing.seoTitle) : 'Sistemas de Control de Acceso para Empresas e Instituciones';
+  const pageExcerpt = landing ? (landing.excerpt || landing.seoDescription) : controlAccesosData.hero.excerpt;
+  const pageSeoTitle = landing ? (landing.seoTitle || landing.titulo || landing.frase) : 'Sistemas de Control de Acceso para Empresas e Instituciones | BLEGAM Corp';
+  const pageSeoDesc = landing ? (landing.seoDescription || landing.excerpt) : 'Sistemas integrales de control de acceso: torniquetes, riel, tarjetas RFID y biométricos de huella y rostro. Soluciones para edificios, oficinas, bancos, gobierno y escuelas.';
 
   return (
     <main className="page-control-accesos">
