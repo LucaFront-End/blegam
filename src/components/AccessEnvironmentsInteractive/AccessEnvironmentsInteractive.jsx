@@ -12,7 +12,8 @@ import {
   ChevronRight,
   ShieldCheck,
   MapPin,
-  Eye
+  Eye,
+  MessageSquare
 } from 'lucide-react';
 import './AccessEnvironmentsInteractive.css';
 
@@ -256,12 +257,11 @@ export default function AccessEnvironmentsInteractive() {
   const selectedEnv = ENVIRONMENTS_3PHOTO_DATA.find((e) => e.id === activeEnvId) || ENVIRONMENTS_3PHOTO_DATA[4];
   const ActiveIcon = selectedEnv.icon;
 
-  // Selected Checkpoint (its photo changes dynamically on selection!)
   const currentCheckpoint = selectedEnv.checkpoints[activeCheckpointIndex] || selectedEnv.checkpoints[0];
 
   const handleSelectIndustry = (envId) => {
     setActiveEnvId(envId);
-    setActiveCheckpointIndex(0); // Reset to first checkpoint photo
+    setActiveCheckpointIndex(0);
   };
 
   return (
@@ -280,9 +280,10 @@ export default function AccessEnvironmentsInteractive() {
         </p>
       </div>
 
-      {/* MAIN LAYOUT: Sticky Left Sidebar ("entornos") + Right Interactive Visual Stage */}
-      <div className="env-main-layout">
-        
+      {/* ═══════════════════════════════════════════════════
+         DESKTOP VIEW: 2-Column Interactive Stage (UNTOUCHED)
+         ═══════════════════════════════════════════════════ */}
+      <div className="env-main-layout hp-desktop-only">
         {/* STICKY LEFT SIDEBAR: "entornos" Menu */}
         <aside className="env-sidebar-menu">
           <div className="sidebar-header font-mono">
@@ -353,11 +354,9 @@ export default function AccessEnvironmentsInteractive() {
 
           {/* ARCHITECTURAL DYNAMIC PHOTO STAGE & FICHA CARD */}
           <div className="env-architectural-grid">
-            
             {/* Left: Dynamic Photo Stage for the Selected Control Point */}
             <div className="arch-visual-container">
               <div className="arch-image-wrapper">
-                {/* High-Resolution Real Photo of the Active Control Point */}
                 <img 
                   key={currentCheckpoint.id}
                   src={currentCheckpoint.image} 
@@ -367,7 +366,6 @@ export default function AccessEnvironmentsInteractive() {
 
                 <div className="arch-image-overlay" />
 
-                {/* Hotspot Focus Marker over the active equipment in the photo */}
                 <div 
                   className="hotspot-pin-btn active"
                   style={{ top: `${currentCheckpoint.pinTop}%`, left: `${currentCheckpoint.pinLeft}%` }}
@@ -420,10 +418,97 @@ export default function AccessEnvironmentsInteractive() {
                 </Link>
               </div>
             </div>
-
           </div>
         </div>
+      </div>
 
+      {/* ═══════════════════════════════════════════════════
+         MOBILE VIEW: Sleek Executive Hardware Stream (< 769px)
+         ═══════════════════════════════════════════════════ */}
+      <div className="env-mobile-stream hp-mobile-only">
+        {/* Industry Selector Tabs Bar */}
+        <div className="env-mobile-tabs-scroll">
+          {ENVIRONMENTS_3PHOTO_DATA.map((env) => {
+            const IconComponent = env.icon;
+            const isActive = env.id === activeEnvId;
+
+            return (
+              <button
+                key={env.id}
+                className={`env-mobile-tab-btn ${isActive ? 'active' : ''}`}
+                onClick={() => handleSelectIndustry(env.id)}
+              >
+                <IconComponent size={16} className="tab-icon" />
+                <span>{env.title.split(' ')[0]}</span>
+              </button>
+            );
+          })}
+        </div>
+
+        {/* Selected Industry Banner */}
+        <div className="env-mobile-banner">
+          <div className="flex items-center gap-3 mb-2">
+            <div className="env-mobile-icon-box">
+              <ActiveIcon size={22} />
+            </div>
+            <div>
+              <span className="badge badge-accent text-xs">{selectedEnv.badge}</span>
+              <h3 className="env-mobile-title">{selectedEnv.title}</h3>
+            </div>
+          </div>
+          <p className="env-mobile-desc">{selectedEnv.desc}</p>
+        </div>
+
+        {/* 3 Executive Hardware Cards Feed */}
+        <div className="env-mobile-cards-feed">
+          {selectedEnv.checkpoints.map((cp) => {
+            const waMessage = `Hola, quisiera más información de "${cp.title}" para el sector ${selectedEnv.title}.`;
+            const waUrl = `https://api.whatsapp.com/send?phone=525541692770&text=${encodeURIComponent(waMessage)}`;
+
+            return (
+              <div key={cp.id} className="env-mobile-card">
+                {/* Photo Banner Header */}
+                <div className="env-mobile-card-img-wrap">
+                  <img src={cp.image} alt={cp.title} className="env-mobile-card-img" />
+                  <span className="env-mobile-tag-badge font-mono">
+                    Punto {cp.number}: {cp.tag}
+                  </span>
+                </div>
+
+                {/* Card Content Body */}
+                <div className="env-mobile-card-body">
+                  <h4 className="env-mobile-card-title">{cp.title}</h4>
+                  
+                  <div className="env-mobile-tech-pill font-mono">
+                    <Zap size={13} className="text-accent mr-1 inline-block" />
+                    <span>{cp.tech}</span>
+                  </div>
+
+                  <p className="env-mobile-card-desc">{cp.desc}</p>
+
+                  <div className="env-mobile-highlights font-mono">
+                    {cp.highlights.map((h, hIdx) => (
+                      <span key={hIdx} className="env-mobile-hl-pill">
+                        <CheckCircle2 size={13} className="text-accent mr-1 inline-block" />
+                        {h}
+                      </span>
+                    ))}
+                  </div>
+
+                  <a 
+                    href={waUrl} 
+                    target="_blank" 
+                    rel="noopener noreferrer" 
+                    className="btn btn-primary w-full justify-center text-sm py-2.5 mt-3"
+                  >
+                    <MessageSquare size={15} className="mr-1.5 inline-block" />
+                    Cotizar por WhatsApp →
+                  </a>
+                </div>
+              </div>
+            );
+          })}
+        </div>
       </div>
     </div>
   );
