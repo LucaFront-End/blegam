@@ -220,8 +220,8 @@ export default function SalaConfigurator() {
         <div className="scm-mobile-cta-box">
           <h4>¿Necesitas Cotizar una Sala Oral?</h4>
           <p>Te enviamos la memoria de cálculo y catálogo de equipos en menos de 24 horas.</p>
-          <Link to="/contacto?origen=salas" className="btn btn-primary w-full justify-center py-3 text-base mt-3">
-            Solicitar Cotización de Integración →
+          <Link to="/contacto?origen=salas" className="btn btn-primary w-full justify-center py-3 text-base mt-3 scm-mobile-btn">
+            Solicitar Cotización →
           </Link>
         </div>
       </div>
