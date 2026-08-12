@@ -186,7 +186,7 @@ const ENVIRONMENTS_3PHOTO_DATA = [
         image: "/assets/images/control-accesos/gov_filter.png",
         pinTop: 52,
         pinLeft: 45,
-        highlights: ["Chasis reforzado anti-vandalismo", "Integración con detector de metales", "Control de entrada/salida segregado"]
+        highlights: ["Chasis reinforced anti-vandalismo", "Integración con detector de metales", "Control de entrada/salida segregado"]
       },
       {
         id: "gov_archive",
@@ -423,11 +423,11 @@ export default function AccessEnvironmentsInteractive() {
       </div>
 
       {/* ═══════════════════════════════════════════════════
-         MOBILE VIEW: Sleek Executive Hardware Stream (< 769px)
+         MOBILE VIEW: Clean 2-Column Grid Selector + Feed (< 769px)
          ═══════════════════════════════════════════════════ */}
       <div className="env-mobile-stream hp-mobile-only">
-        {/* Industry Selector Tabs Bar */}
-        <div className="env-mobile-tabs-scroll">
+        {/* Clean 2-Column Industry Selector Grid */}
+        <div className="env-mobile-grid-selector">
           {ENVIRONMENTS_3PHOTO_DATA.map((env) => {
             const IconComponent = env.icon;
             const isActive = env.id === activeEnvId;
@@ -435,11 +435,13 @@ export default function AccessEnvironmentsInteractive() {
             return (
               <button
                 key={env.id}
-                className={`env-mobile-tab-btn ${isActive ? 'active' : ''}`}
+                className={`env-mobile-grid-chip ${isActive ? 'active' : ''}`}
                 onClick={() => handleSelectIndustry(env.id)}
               >
-                <IconComponent size={16} className="tab-icon" />
-                <span>{env.title.split(' ')[0]}</span>
+                <div className="chip-icon-wrap">
+                  <IconComponent size={16} />
+                </div>
+                <span className="chip-label">{env.title.split(' ')[0]}</span>
               </button>
             );
           })}
