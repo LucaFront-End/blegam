@@ -1,16 +1,48 @@
 import { useState } from 'react';
 import { Link } from 'react-router-dom';
-import { CheckCircle2, Plus, Sparkles, ShieldCheck, Monitor, Mic, Video, Server } from 'lucide-react';
+import { Video, Mic, Monitor, Server, ShieldCheck, CheckCircle2 } from 'lucide-react';
 import { salaCategories } from '../../data/content';
 import './SalaConfigurator.css';
 
-// Hardware details map
+// Hardware details map for desktop interactive 3D scene
 const hardwareDetails = {
-  'video': { title: 'Video & Cámaras 4K', desc: 'Cámaras PTZ 4K con auto-tracking inteligente por voz.', icon: <Video size={20} /> },
-  'audio': { title: 'Audio & Microfonía DSP', desc: 'Micrófonos de condensador DSP y amplificación en sala.', icon: <Mic size={20} /> },
-  'pantallas': { title: 'Pantallas & Monitores', desc: 'Monitores para el Juez y pantalla de evidencias de 86".', icon: <Monitor size={20} /> },
-  'estaciones': { title: 'Servidores & MASOD® Core', desc: 'Rack de servidores NAS inmutables con software MASOD.', icon: <Server size={20} /> }
+  'video': { title: 'Video & Cámaras 4K', desc: 'Cámaras PTZ 4K con auto-tracking inteligente por voz.' },
+  'audio': { title: 'Audio & Microfonía DSP', desc: 'Micrófonos de condensador DSP y amplificación en sala.' },
+  'pantallas': { title: 'Pantallas & Monitores', desc: 'Monitores para el Juez y pantalla de evidencias de 86".' },
+  'estaciones': { title: 'Servidores & MASOD® Core', desc: 'Rack de servidores NAS inmutables con software MASOD.' }
 };
+
+// Static mobile hardware breakdown items
+const mobileHardwareShowcase = [
+  {
+    icon: <Video size={24} className="text-accent" />,
+    title: 'Video & Cámaras PTZ 4K',
+    subtitle: 'Seguimiento inteligente por voz',
+    description: 'Sistema de video 4K Ultra HD con seguimiento automático del orador, conmutación inteligente y cobertura multi-ángulo en estrados.',
+    tags: ['4K Ultra HD', 'Auto-Tracking', 'Multi-Cámara']
+  },
+  {
+    icon: <Mic size={24} className="text-accent" />,
+    title: 'Audio & Microfonía DSP',
+    subtitle: 'Claridad vocal sin distorsión',
+    description: 'Arreglos de micrófonos de condensador con procesador de señal digital (DSP), cancelación activa de eco y cifrado de audio.',
+    tags: ['DSP Avanzado', 'Filtro Anti-Eco', 'Audio Cifrado']
+  },
+  {
+    icon: <Monitor size={24} className="text-accent" />,
+    title: 'Pantallas & Visualización',
+    subtitle: 'Presentación clara de pruebas',
+    description: 'Pantalla central de evidencias de 86" con superficie antirreflejo y monitores táctiles e individuales en el estrado del juzgador.',
+    tags: ['Display 86"', 'Panel Táctil Juez', 'HDMI Judicial']
+  },
+  {
+    icon: <Server size={24} className="text-accent" />,
+    title: 'Servidores NAS & MASOD® Core',
+    subtitle: 'Resguardo inmutable de audiencias',
+    description: 'Rack de servidores redundantes con almacenamiento NAS, firma de hash criptográfico AES-256 e indexación automatizada.',
+    tags: ['Cifrado AES-256', 'Almacenamiento NAS', 'Kernel MASOD®']
+  }
+];
 
 export default function SalaConfigurator() {
   const [activeCategories, setActiveCategories] = useState(new Set());
@@ -23,12 +55,10 @@ export default function SalaConfigurator() {
   };
 
   const isComplete = activeCategories.size === salaCategories.length;
-  const activeCount = activeCategories.size;
-  const progressPercentage = (activeCount / salaCategories.length) * 100;
 
   return (
     <>
-      {/* DESKTOP VIEW: Original 3D Morph Scene */}
+      {/* DESKTOP VIEW: Original 3D Interactive Morph Scene (UNTOUCHED) */}
       <div className={`config-morph-wrapper hp-desktop-only ${isComplete ? 'is-complete' : ''}`}>
         {/* Sidebar Controls */}
         <div className="config-morph-sidebar">
@@ -158,97 +188,55 @@ export default function SalaConfigurator() {
         </div>
       </div>
 
-      {/* MOBILE VIEW: Top Fixed HUD + Tap-to-Build Hardware Grid */}
-      <div className="scm-mobile-builder hp-mobile-only">
-        {/* Top HUD Monitor */}
-        <div className={`scm-mobile-hud ${isComplete ? 'hud-complete' : ''}`}>
-          <div className="scm-hud-header">
-            <div className="scm-hud-badge">
-              <Sparkles size={14} className="mr-1 inline-block text-accent" />
-              SIMULADOR DE SALA ORAL
-            </div>
-            <span className={`scm-hud-status ${isComplete ? 'status-ready' : ''}`}>
-              {isComplete ? '✓ 100% OPERATIVA' : `${activeCount}/4 SISTEMAS`}
-            </span>
-          </div>
-
-          <h3 className="scm-hud-title">
-            {isComplete ? '¡Sala Oral Completa & Certificada!' : 'Selecciona Equipamiento para Integrar'}
+      {/* MOBILE VIEW: Non-Interactive Executive Hardware Breakdown */}
+      <div className="scm-mobile-showcase hp-mobile-only">
+        <div className="scm-mobile-intro text-center">
+          <span className="badge badge-accent mb-2">
+            <ShieldCheck size={13} className="mr-1 inline-block" />
+            Equipamiento de Misión Crítica
+          </span>
+          <h3 className="scm-mobile-showcase-title">
+            Arquitectura de <span className="accent-gradient">Sala Oral</span>
           </h3>
-
-          {/* Progress Bar */}
-          <div className="scm-progress-bar-bg">
-            <div 
-              className="scm-progress-bar-fill" 
-              style={{ width: `${progressPercentage}%` }}
-            />
-          </div>
-
-          {/* Active Module Indicators */}
-          <div className="scm-active-chips">
-            {salaCategories.map(cat => {
-              const isActive = activeCategories.has(cat.id);
-              const detail = hardwareDetails[cat.id] || { title: cat.label };
-              return (
-                <div key={cat.id} className={`scm-chip ${isActive ? 'chip-on' : 'chip-off'}`}>
-                  <span className="scm-chip-icon">{detail.icon}</span>
-                  <span className="scm-chip-name">{detail.title.split(' ')[0]}</span>
-                </div>
-              );
-            })}
-          </div>
+          <p className="scm-mobile-showcase-subtitle">
+            Integración de ingeniería con tecnología certificada para recintos judiciales en México.
+          </p>
         </div>
 
-        {/* Tap-to-Add Hardware List */}
-        <div className="scm-mobile-options-list">
-          {salaCategories.map(cat => {
-            const isActive = activeCategories.has(cat.id);
-            const detail = hardwareDetails[cat.id] || { title: cat.label, desc: 'Sistema judicial.' };
-            return (
-              <div 
-                key={cat.id} 
-                className={`scm-mobile-card ${isActive ? 'card-active' : ''}`}
-                onClick={() => toggleCategory(cat.id)}
-              >
-                <div className="scm-card-top">
-                  <div className="scm-card-title-wrap">
-                    <span className="scm-card-icon">{detail.icon}</span>
-                    <div>
-                      <h4 className="scm-card-title">{detail.title}</h4>
-                      <span className="scm-card-subtitle">{isActive ? '✓ Módulo Instalado' : 'Pendiente de agregar'}</span>
-                    </div>
-                  </div>
-                  <button className={`scm-toggle-btn ${isActive ? 'btn-active' : ''}`}>
-                    {isActive ? (
-                      <>
-                        <CheckCircle2 size={16} className="mr-1 inline-block" />
-                        INSTALADO
-                      </>
-                    ) : (
-                      <>
-                        <Plus size={16} className="mr-1 inline-block" />
-                        AÑADIR
-                      </>
-                    )}
-                  </button>
+        {/* 4 Clean Executive Hardware Cards */}
+        <div className="scm-mobile-showcase-list">
+          {mobileHardwareShowcase.map((item, idx) => (
+            <div key={idx} className="scm-mobile-showcase-card">
+              <div className="scm-card-header">
+                <div className="scm-icon-wrap">{item.icon}</div>
+                <div>
+                  <h4 className="scm-item-title">{item.title}</h4>
+                  <span className="scm-item-subtitle font-mono">{item.subtitle}</span>
                 </div>
-                <p className="scm-card-desc">{detail.desc}</p>
               </div>
-            );
-          })}
+
+              <p className="scm-item-desc">{item.description}</p>
+
+              <div className="scm-item-tags">
+                {item.tags.map((tag, tIdx) => (
+                  <span key={tIdx} className="scm-tag-pill font-mono">
+                    <CheckCircle2 size={12} className="text-accent mr-1 inline-block" />
+                    {tag}
+                  </span>
+                ))}
+              </div>
+            </div>
+          ))}
         </div>
 
-        {/* CTA when complete */}
-        {isComplete && (
-          <div className="scm-mobile-complete-cta">
-            <ShieldCheck size={20} className="text-accent mb-1 inline-block" />
-            <h4>Configuración Lista para Cotizar</h4>
-            <p>Has seleccionado la arquitectura completa de Misión Crítica para Sala Oral.</p>
-            <Link to="/contacto?origen=salas" className="btn btn-primary w-full justify-center text-base py-3 mt-2">
-              Solicitar Cotización de Esta Sala →
-            </Link>
-          </div>
-        )}
+        {/* Direct Action CTA */}
+        <div className="scm-mobile-cta-box">
+          <h4>¿Necesitas Cotizar una Sala Oral?</h4>
+          <p>Te enviamos la memoria de cálculo y catálogo de equipos en menos de 24 horas.</p>
+          <Link to="/contacto?origen=salas" className="btn btn-primary w-full justify-center py-3 text-base mt-2">
+            Solicitar Cotización de Integración →
+          </Link>
+        </div>
       </div>
     </>
   );
