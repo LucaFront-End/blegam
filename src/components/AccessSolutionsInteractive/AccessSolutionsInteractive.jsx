@@ -1,5 +1,4 @@
 import { useState, useRef } from 'react';
-import { Link } from 'react-router-dom';
 import { 
   ShieldCheck, 
   GitCommit, 
@@ -9,11 +8,10 @@ import {
   Zap, 
   Cpu, 
   Shield, 
-  Building2, 
-  Lock, 
   Activity, 
   Sparkles,
-  CheckCircle2
+  CheckCircle2,
+  MessageSquare
 } from 'lucide-react';
 import './AccessSolutionsInteractive.css';
 
@@ -26,6 +24,7 @@ const SOLUTIONS_SPEC_DATA = [
     tag: "Flujo Masivo & Restricción Física",
     icon: ShieldCheck,
     badgeColor: "cyan",
+    image: "/assets/images/control-accesos/office_turnstile.png",
     specs: {
       speed: "60 personas / min",
       securityLevel: "4.8 / 5.0",
@@ -43,6 +42,7 @@ const SOLUTIONS_SPEC_DATA = [
     tag: "Tránsito Guiado & Canalizado",
     icon: GitCommit,
     badgeColor: "purple",
+    image: "/assets/images/control-accesos/building_entrance.png",
     specs: {
       speed: "35 personas / min",
       securityLevel: "4.2 / 5.0",
@@ -60,6 +60,7 @@ const SOLUTIONS_SPEC_DATA = [
     tag: "Credenciales RFID & Proximidad",
     icon: CreditCard,
     badgeColor: "blue",
+    image: "/assets/images/control-accesos/office_nfc.png",
     specs: {
       speed: "30 personas / min",
       securityLevel: "4.5 / 5.0",
@@ -77,6 +78,7 @@ const SOLUTIONS_SPEC_DATA = [
     tag: "Biometría Facial & Dactilar Anti-Clon",
     icon: Fingerprint,
     badgeColor: "emerald",
+    image: "/assets/images/control-accesos/gov_facial.png",
     specs: {
       speed: "25 personas / min",
       securityLevel: "5.0 / 5.0 (Máximo)",
@@ -107,10 +109,10 @@ export default function AccessSolutionsInteractive() {
     const centerX = rect.width / 2;
     const centerY = rect.height / 2;
 
-    const rotateX = ((y - centerY) / centerY) * -8; // Tilt deg
-    const rotateY = ((x - centerX) / centerX) * 8;
+    const rotateX = ((y - centerY) / centerY) * -6; // Tilt deg
+    const rotateY = ((x - centerX) / centerX) * 6;
 
-    card.style.transform = `perspective(1000px) rotateX(${rotateX}deg) rotateY(${rotateY}deg) translateY(-6px)`;
+    card.style.transform = `perspective(1000px) rotateX(${rotateX}deg) rotateY(${rotateY}deg) translateY(-4px)`;
   };
 
   const handleMouseLeave = (id) => {
@@ -173,6 +175,10 @@ export default function AccessSolutionsInteractive() {
           const IconComponent = sol.icon;
           const isHovered = hoveredCard === sol.id;
           const activeInd = selectedIndustry[sol.id];
+          
+          // Generate WhatsApp Direct URL with customized pre-filled message
+          const waMessage = `Hola, quisiera más información de "${sol.title}".`;
+          const waUrl = `https://api.whatsapp.com/send?phone=525541692770&text=${encodeURIComponent(waMessage)}`;
 
           return (
             <div
@@ -183,97 +189,108 @@ export default function AccessSolutionsInteractive() {
               onMouseEnter={() => setHoveredCard(sol.id)}
               onMouseLeave={() => handleMouseLeave(sol.id)}
             >
-              {/* Scan Overlay Line Effect */}
-              <div className="holo-scan-line" />
-              <div className="holo-glow-radial" />
-
-              {/* Card Header */}
-              <div className="holo-card-top">
-                <div className="holo-icon-box">
-                  <IconComponent size={28} />
-                </div>
+              {/* Card Photo Banner Header */}
+              <div className="holo-card-image-wrapper">
+                <img src={sol.image} alt={sol.title} className="holo-card-img" />
+                <div className="holo-card-img-overlay" />
                 <span className="holo-tag-badge">{sol.tag}</span>
               </div>
 
-              {/* Title & Desc */}
-              <h3 className="holo-card-title">{sol.title}</h3>
-              <span className="holo-card-sub">{sol.subtitle}</span>
-              <p className="holo-card-desc">{sol.desc}</p>
-
-              {/* Interactive Specs Dashboard */}
-              <div className="holo-specs-box">
-                <div className="spec-item">
-                  <div className="spec-item-header">
-                    <Zap size={14} className="text-accent mr-1" />
-                    <span className="spec-lbl">CAPACIDAD / VELOCIDAD</span>
+              <div className="holo-card-body">
+                {/* Card Top Title Row */}
+                <div className="holo-card-top">
+                  <div className="holo-icon-box">
+                    <IconComponent size={24} />
                   </div>
-                  <span className="spec-val font-mono text-accent">{sol.specs.speed}</span>
+                  <div>
+                    <h3 className="holo-card-title">{sol.title}</h3>
+                    <span className="holo-card-sub">{sol.subtitle}</span>
+                  </div>
                 </div>
 
-                <div className="spec-item">
-                  <div className="spec-item-header">
-                    <Shield size={14} className="text-accent mr-1" />
-                    <span className="spec-lbl">NIVEL DE SEGURIDAD</span>
-                  </div>
-                  <span className="spec-val font-mono text-accent">{sol.specs.securityLevel}</span>
-                </div>
+                <p className="holo-card-desc">{sol.desc}</p>
 
-                <div className="spec-item">
-                  <div className="spec-item-header">
-                    <Activity size={14} className="text-accent mr-1" />
-                    <span className="spec-lbl">MODO DE EMERGENCIA</span>
-                  </div>
-                  <span className="spec-val">{sol.specs.failSafe}</span>
-                </div>
-
-                <div className="spec-item">
-                  <div className="spec-item-header">
-                    <Cpu size={14} className="text-accent mr-1" />
-                    <span className="spec-lbl">RESISTENCIA & CHASIS</span>
-                  </div>
-                  <span className="spec-val">{sol.specs.durability}</span>
-                </div>
-              </div>
-
-              {/* Key Features List */}
-              <div className="holo-highlights-list">
-                {sol.highlights.map((h, i) => (
-                  <div key={i} className="holo-hl-point">
-                    <div className="hl-check-pill">
-                      <CheckCircle2 size={14} />
+                {/* Interactive Specs Dashboard */}
+                <div className="holo-specs-box">
+                  <div className="spec-item">
+                    <div className="spec-item-header">
+                      <Zap size={13} className="text-accent mr-1" />
+                      <span className="spec-lbl">CAPACIDAD / VELOCIDAD</span>
                     </div>
-                    <span>{h}</span>
+                    <span className="spec-val font-mono text-accent">{sol.specs.speed}</span>
                   </div>
-                ))}
-              </div>
 
-              {/* Interactive Industry Selector */}
-              <div className="holo-industry-selector">
-                <span className="ind-selector-title">Despliegue Recomendado en:</span>
-                <div className="ind-chips-row">
-                  {sol.idealFor.map((ind, idx) => (
-                    <button
-                      key={idx}
-                      className={`ind-chip ${activeInd === ind ? 'active' : ''}`}
-                      onClick={() => toggleIndustry(sol.id, ind)}
-                    >
-                      {ind}
-                    </button>
+                  <div className="spec-item">
+                    <div className="spec-item-header">
+                      <Shield size={13} className="text-accent mr-1" />
+                      <span className="spec-lbl">NIVEL DE SEGURIDAD</span>
+                    </div>
+                    <span className="spec-val font-mono text-accent">{sol.specs.securityLevel}</span>
+                  </div>
+
+                  <div className="spec-item">
+                    <div className="spec-item-header">
+                      <Activity size={13} className="text-accent mr-1" />
+                      <span className="spec-lbl">MODO DE EMERGENCIA</span>
+                    </div>
+                    <span className="spec-val">{sol.specs.failSafe}</span>
+                  </div>
+
+                  <div className="spec-item">
+                    <div className="spec-item-header">
+                      <Cpu size={13} className="text-accent mr-1" />
+                      <span className="spec-lbl">RESISTENCIA & CHASIS</span>
+                    </div>
+                    <span className="spec-val">{sol.specs.durability}</span>
+                  </div>
+                </div>
+
+                {/* Key Features List */}
+                <div className="holo-highlights-list">
+                  {sol.highlights.map((h, i) => (
+                    <div key={i} className="holo-hl-point">
+                      <div className="hl-check-pill">
+                        <CheckCircle2 size={13} />
+                      </div>
+                      <span>{h}</span>
+                    </div>
                   ))}
                 </div>
-                {activeInd && (
-                  <div className="ind-active-preview">
-                    <Zap size={14} className="text-accent mr-1 inline-block" />
-                    <span>Configurado para <strong>{activeInd}</strong> con integración nativa BLEGAM OS.</span>
-                  </div>
-                )}
-              </div>
 
-              {/* Footer Link */}
-              <div className="holo-card-footer">
-                <a href="https://wa.link/nf8gq3" target="_blank" rel="noopener noreferrer" className="holo-btn-action">
-                  Solicitar Especificación Técnica <ChevronRight size={16} />
-                </a>
+                {/* Interactive Industry Selector */}
+                <div className="holo-industry-selector">
+                  <span className="ind-selector-title">Despliegue Recomendado en:</span>
+                  <div className="ind-chips-row">
+                    {sol.idealFor.map((ind, idx) => (
+                      <button
+                        key={idx}
+                        className={`ind-chip ${activeInd === ind ? 'active' : ''}`}
+                        onClick={() => toggleIndustry(sol.id, ind)}
+                      >
+                        {ind}
+                      </button>
+                    ))}
+                  </div>
+                  {activeInd && (
+                    <div className="ind-active-preview">
+                      <Zap size={14} className="text-accent mr-1 inline-block" />
+                      <span>Configurado para <strong>{activeInd}</strong> con integración nativa BLEGAM OS.</span>
+                    </div>
+                  )}
+                </div>
+
+                {/* WhatsApp Direct Action Link */}
+                <div className="holo-card-footer">
+                  <a 
+                    href={waUrl} 
+                    target="_blank" 
+                    rel="noopener noreferrer" 
+                    className="holo-btn-action"
+                  >
+                    <MessageSquare size={16} className="mr-1 inline-block text-accent" />
+                    Solicitar Especificación por WhatsApp <ChevronRight size={16} />
+                  </a>
+                </div>
               </div>
             </div>
           );
