@@ -384,15 +384,18 @@
   left: 50%;
   transform: translateX(-50%) translateY(0);
   white-space: nowrap;
-  background: rgba(15, 23, 42, 0.95);
-  border: 1px solid var(--border-accent);
-  padding: 6px 12px;
-  border-radius: 6px;
-  font-size: 0.72rem;
-  color: var(--text-primary);
+  background: #020617;
+  border: 1.5px solid #12d4c9;
+  padding: 8px 16px;
+  border-radius: 20px;
+  font-family: var(--font-mono);
+  font-size: 0.78rem;
+  font-weight: 800;
+  color: #ffffff !important;
   opacity: 1;
   pointer-events: none;
-  box-shadow: 0 4px 14px rgba(0, 0, 0, 0.4);
+  box-shadow: 0 8px 25px rgba(0, 0, 0, 0.7), 0 0 15px rgba(18, 212, 201, 0.4);
+  letter-spacing: 0.02em;
 }
 
 /* DYNAMIC FICHA CARD */
