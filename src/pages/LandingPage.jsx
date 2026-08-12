@@ -5,6 +5,7 @@ import { fetchLandingBySlug } from '../lib/landingService';
 import { useSetLanding } from '../context/LandingContext';
 import Home from './Home';
 import SalasOralidad from './SalasOralidad';
+import ControlAccesos from './ControlAccesos';
 
 export default function LandingPage() {
   const { slug } = useParams();
@@ -86,7 +87,13 @@ export default function LandingPage() {
       </Helmet>
       
       {/* Renders the appropriate layout which will dynamically consume the active landing context */}
-      {landing.type === 'salas' ? <SalasOralidad landing={landing} /> : <Home landing={landing} />}
+      {landing.type === 'salas' ? (
+        <SalasOralidad landing={landing} />
+      ) : landing.type === 'accesos' ? (
+        <ControlAccesos landing={landing} />
+      ) : (
+        <Home landing={landing} />
+      )}
     </>
   );
 }

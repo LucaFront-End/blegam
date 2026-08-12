@@ -4,6 +4,7 @@
     { "source": "/sitemap-static.xml", "destination": "/api/sitemap-static" },
     { "source": "/sitemap-ciudades.xml", "destination": "/api/sitemap-ciudades" },
     { "source": "/sitemap-salas.xml", "destination": "/api/sitemap-salas" },
+    { "source": "/sitemap-accesos.xml", "destination": "/api/sitemap-accesos" },
     { "source": "/sitemap-landings.xml", "destination": "/api/sitemap-ciudades" },
     { "source": "/(.*)", "destination": "/" }
   ]

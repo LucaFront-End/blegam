@@ -36,43 +36,13 @@ import {
   MessageCircle
 } from 'lucide-react';
 import { useScrollReveal } from '../hooks/useScrollReveal';
+import { useLanding } from '../context/LandingContext';
 import { controlAccesosData, projectsDetailed as projects } from '../data/content';
-import AccessBuildingInteractive from '../components/AccessBuildingInteractive/AccessBuildingInteractive';
-import AccessComparisonInteractive from '../components/AccessComparisonInteractive/AccessComparisonInteractive';
-import AccessSolutionsInteractive from '../components/AccessSolutionsInteractive/AccessSolutionsInteractive';
-import AccessEnvironmentsInteractive from '../components/AccessEnvironmentsInteractive/AccessEnvironmentsInteractive';
-import AccessFlowStickyTimeline from '../components/AccessFlowStickyTimeline/AccessFlowStickyTimeline';
-import AccessBenefitsROICalculator from '../components/AccessBenefitsROICalculator/AccessBenefitsROICalculator';
-import ProjectGallery from '../components/ProjectGallery/ProjectGallery';
-import './ControlAccesos.css';
 
-const ICON_MAP = {
-  ShieldCheck: ShieldCheck,
-  GitCommit: GitCommit,
-  CreditCard: CreditCard,
-  Fingerprint: Fingerprint,
-  Building2: Building2,
-  Briefcase: Briefcase,
-  Landmark: Landmark,
-  Building: Building,
-  GraduationCap: GraduationCap,
-  ArrowLeftRight: ArrowLeftRight,
-  Lock: Lock,
-  UserCheck: UserCheck,
-  ShieldAlert: ShieldAlert,
-  Sliders: Sliders,
-  FileText: FileText,
-  Clock: Clock,
-  Maximize: Maximize,
-  Cpu: Cpu,
-  Award: Award,
-  Layers: Layers,
-  KeyRound: KeyRound,
-  Wrench: Wrench,
-  Headphones: Headphones
-};
+export default function ControlAccesos({ landing: propLanding }) {
+  const contextLanding = useLanding();
+  const landing = propLanding || contextLanding;
 
-export default function ControlAccesos() {
   const [activeSolution, setActiveSolution] = useState('all');
   const [activeEnv, setActiveEnv] = useState('edificios');
 
@@ -96,16 +66,19 @@ export default function ControlAccesos() {
 
   const selectedEnv = controlAccesosData.environments.find(e => e.id === activeEnv) || controlAccesosData.environments[0];
 
+  const primaryCtaUrl = landing && landing.whatsappUrl ? landing.whatsappUrl : 'https://wa.link/nf8gq3';
+  const pageTitle = landing ? (landing.titulo || landing.frase) : 'Sistemas de Control de Acceso para Empresas e Instituciones';
+  const pageExcerpt = landing && landing.excerpt ? landing.excerpt : controlAccesosData.hero.excerpt;
+  const pageSeoTitle = landing && landing.seoTitle ? landing.seoTitle : 'Sistemas de Control de Acceso para Empresas e Instituciones | BLEGAM Corp';
+  const pageSeoDesc = landing && landing.seoDescription ? landing.seoDescription : 'Sistemas integrales de control de acceso: torniquetes, riel, tarjetas RFID y biométricos de huella y rostro. Soluciones para edificios, oficinas, bancos, gobierno y escuelas.';
+
   return (
     <main className="page-control-accesos">
       <Helmet>
-        <title>Sistemas de Control de Acceso para Empresas e Instituciones | BLEGAM Corp</title>
-        <meta 
-          name="description" 
-          content="Sistemas integrales de control de acceso: torniquetes, riel, tarjetas RFID y biométricos de huella y rostro. Soluciones para edificios, oficinas, bancos, gobierno y escuelas." 
-        />
-        <meta property="og:title" content="Control Inteligente. Accesos Seguros | BLEGAM Corp" />
-        <meta property="og:description" content="Diseñamos e implementamos sistemas de control de acceso adaptados a cada operación. Soluciones llave en mano e integración de seguridad." />
+        <title>{pageSeoTitle}</title>
+        <meta name="description" content={pageSeoDesc} />
+        <meta property="og:title" content={pageSeoTitle} />
+        <meta property="og:description" content={pageSeoDesc} />
       </Helmet>
 
       {/* ─── 1. HERO ─── */}
@@ -120,16 +93,16 @@ export default function ControlAccesos() {
               </span>
               <span className="hero-hook-tag">{controlAccesosData.hero.hook}</span>
               <h1 className="hero-h1-title">
-                Sistemas de <span className="accent-gradient">Control de Acceso</span> para Empresas e Instituciones
+                {pageTitle}
               </h1>
               <p className="hero-excerpt">
-                {controlAccesosData.hero.excerpt}
+                {pageExcerpt}
               </p>
               <div className="hero-actions">
-                <a href="https://wa.link/nf8gq3" target="_blank" rel="noopener noreferrer" className="btn btn-primary btn-lg">
+                <a href={primaryCtaUrl} target="_blank" rel="noopener noreferrer" className="btn btn-primary btn-lg">
                   {controlAccesosData.hero.ctaPrimary} <ArrowRight size={18} className="ml-1" />
                 </a>
-                <a href="#simulador" className="btn btn-outline btn-lg">
+                <a href="#soluciones" className="btn btn-outline btn-lg">
                   {controlAccesosData.hero.ctaSecondary}
                 </a>
               </div>

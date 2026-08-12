@@ -20,6 +20,10 @@ export default function handler(req, res) {
     <loc>${SITE_URL}/sitemap-salas.xml</loc>
     <lastmod>${today}</lastmod>
   </sitemap>
+  <sitemap>
+    <loc>${SITE_URL}/sitemap-accesos.xml</loc>
+    <lastmod>${today}</lastmod>
+  </sitemap>
 </sitemapindex>`;
 
   res.setHeader('Content-Type', 'application/xml');
