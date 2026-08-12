@@ -1,3 +1,7 @@
+/* ═══════════════════════════════════════════════════
+   BLEGAM — Sala Configurator 3D & Mobile Showcase
+   ═══════════════════════════════════════════════════ */
+
 .config-morph-wrapper {
   display: grid;
   grid-template-columns: 350px 1fr;
@@ -105,8 +109,7 @@
 }
 .config-morph-status.success .status-text { color: #12d4c9; }
 
-
-/* ─── 3D SCENE ─── */
+/* 3D Scene */
 .config-morph-scene {
   position: relative;
   min-height: 550px;
@@ -130,7 +133,6 @@
   transition: transform 1s cubic-bezier(0.2, 0.8, 0.2, 1);
 }
 
-/* Floor */
 .r-floor {
   position: absolute; inset: 0;
   background: rgba(15, 23, 42, 0.8);
@@ -146,157 +148,98 @@
   background-size: 40px 40px;
 }
 
-/* Walls */
 .r-wall-back {
-  position: absolute;
-  top: 0; left: 0;
-  width: 480px; height: 120px;
-  background: rgba(18, 212, 201, 0.05);
-  border: 1px solid rgba(18, 212, 201, 0.2);
-  transform-origin: top left;
+  position: absolute; top: 0; left: 0; width: 100%; height: 120px;
+  background: linear-gradient(to top, rgba(15, 23, 42, 0.9), rgba(15, 23, 42, 0.4));
+  border-bottom: 1px solid rgba(18, 212, 201, 0.2);
+  transform-origin: top;
   transform: rotateX(-90deg);
 }
+
 .r-wall-right {
-  position: absolute;
-  top: 0; right: 0;
-  width: 120px; height: 480px;
-  background: rgba(18, 212, 201, 0.03);
-  border: 1px solid rgba(18, 212, 201, 0.15);
-  transform-origin: top right;
-  transform: rotateY(-90deg);
+  position: absolute; top: 0; right: 0; width: 120px; height: 100%;
+  background: linear-gradient(to left, rgba(15, 23, 42, 0.9), rgba(15, 23, 42, 0.4));
+  border-left: 1px solid rgba(18, 212, 201, 0.2);
+  transform-origin: right;
+  transform: rotateY(90deg);
 }
 
-/* Desks & Elements */
-.r-desk, .r-rack {
-  position: absolute;
-  transform-style: preserve-3d;
-  transition: all 0.5s;
+.r-desk {
+  position: absolute; transform-style: preserve-3d;
 }
-
-/* Base Wireframe (Blueprint mode) */
 .wire-box {
-  position: absolute; inset: 0;
-  border: 1px solid rgba(18, 212, 201, 0.4);
+  border: 1px stroke rgba(18, 212, 201, 0.4);
   background: rgba(18, 212, 201, 0.05);
-  transform: translateZ(10px);
-  transition: all 0.5s;
+  box-shadow: inset 0 0 10px rgba(18, 212, 201, 0.1);
+  position: relative;
   display: flex; align-items: center; justify-content: center;
 }
-.wire-box.rack-base { transform: translateZ(40px); }
-
-/* Desk Labels */
 .desk-label {
-  font-family: var(--font-mono);
-  font-size: 0.65rem;
-  color: rgba(18, 212, 201, 0.8);
-  /* Flat on the floor but facing the right way, or perfectly billboarded */
-  transform: translateZ(5px) rotateZ(45deg) rotateX(-60deg);
-  pointer-events: none;
-  font-weight: bold;
+  font-family: var(--font-mono); font-size: 0.55rem; color: var(--accent-primary);
+  letter-spacing: 1px; opacity: 0.7; pointer-events: none;
 }
 
-/* Positions (Adjusted for 480x480) */
-.r-juez { top: 30px; left: 160px; width: 140px; height: 50px; }
-.r-partes-left { top: 180px; left: 40px; width: 80px; height: 50px; }
-.r-partes-right { top: 180px; left: 340px; width: 80px; height: 50px; }
-.r-center-table { top: 180px; left: 180px; width: 100px; height: 50px; }
-.r-rack { top: 30px; left: 360px; width: 80px; height: 50px; }
-.r-operator { top: 380px; left: 160px; width: 140px; height: 50px; }
+.r-juez { top: 40px; left: 160px; width: 160px; height: 50px; }
+.r-juez .desk-base { width: 160px; height: 50px; }
 
-/* Modules (Hidden until ON) */
+.r-defensa { top: 160px; left: 40px; width: 100px; height: 40px; }
+.r-defensa .desk-base { width: 100px; height: 40px; }
+
+.r-fiscalia { top: 160px; right: 40px; width: 100px; height: 40px; }
+.r-fiscalia .desk-base { width: 100px; height: 40px; }
+
 .r-module {
-  position: absolute; inset: 0;
-  transform-style: preserve-3d;
-  opacity: 0;
-  pointer-events: none;
-  transition: all 0.5s cubic-bezier(0.4, 0, 0.2, 1);
-  transform: translateZ(50px) scale(0.8);
+  position: absolute; transform-style: preserve-3d;
+  opacity: 0.15; transition: all 0.8s cubic-bezier(0.4, 0, 0.2, 1);
+  filter: grayscale(1);
 }
 .r-module.on {
-  opacity: 1;
-  transform: translateZ(10px) scale(1);
+  opacity: 1; filter: grayscale(0);
 }
 
-/* Hardware Tags (Holographic labels) */
 .hw-tag {
   position: absolute;
-  top: 0; left: 0;
-  font-family: var(--font-mono);
-  font-size: 0.65rem;
-  font-weight: bold;
-  color: #fff;
-  background: rgba(15, 23, 42, 0.85);
-  border: 1px solid rgba(18, 212, 201, 0.6);
-  padding: 4px 8px;
-  border-radius: 4px;
-  white-space: nowrap;
-  backdrop-filter: blur(4px);
-  box-shadow: 0 5px 15px rgba(0,0,0,0.5);
-  pointer-events: none;
-  opacity: 1;
-  transition: opacity 0.3s;
+  font-family: var(--font-mono); font-size: 0.6rem;
+  background: rgba(18, 212, 201, 0.2); border: 1px solid var(--accent-primary);
+  color: #fff; padding: 2px 6px; border-radius: 3px;
+  white-space: nowrap; pointer-events: none;
+  transform: rotateZ(45deg) rotateX(-60deg) translateY(-20px);
+  opacity: 0; transition: all 0.5s;
+}
+.r-module.on .hw-tag { opacity: 1; transform: rotateZ(45deg) rotateX(-60deg) translateY(-35px); }
+
+.r-pantallas .m-screen {
+  width: 40px; height: 25px; background: rgba(18, 212, 201, 0.4);
+  border: 1px solid #fff; position: absolute; top: -10px; left: 60px;
+  transform: rotateX(-30deg);
+}
+.r-audio .m-mic {
+  width: 4px; height: 12px; background: var(--accent-primary);
+  position: absolute; top: 15px; left: 20px;
+  box-shadow: 0 0 10px var(--accent-primary);
+}
+.r-audio .m-mic.right-mic { left: 130px; }
+
+.r-wall-screen { top: 0; left: 140px; }
+.wall-tv {
+  width: 200px; height: 90px; background: rgba(18, 212, 201, 0.2);
+  border: 2px solid var(--accent-primary);
+  transform-origin: top; transform: rotateX(-90deg) translateY(-40px);
+  box-shadow: 0 0 30px rgba(18, 212, 201, 0.3);
 }
 
-/* Specific Tag Offsets (Translated in screen space AFTER billboard rotation) */
-.tag-juez-screen { transform: translateZ(40px) rotateZ(45deg) rotateX(-60deg) translate(-60px, -40px); }
-.tag-juez-mic { transform: translateZ(40px) rotateZ(45deg) rotateX(-60deg) translate(-10px, -60px); }
-.tag-defensa { transform: translateZ(20px) rotateZ(45deg) rotateX(-60deg) translate(-70px, 10px); }
-.tag-fiscalia { transform: translateZ(20px) rotateZ(45deg) rotateX(-60deg) translate(50px, -20px); }
-.tag-evidencia { transform: translateZ(40px) rotateZ(45deg) rotateX(-60deg) translate(10px, 30px); }
-.tag-rack { transform: translateZ(100px) rotateZ(45deg) rotateX(-60deg) translate(50px, -50px); }
-.tag-op { transform: translateZ(40px) rotateZ(45deg) rotateX(-60deg) translate(30px, 40px); }
-.tag-cam-l { transform: translateZ(100px) rotateZ(45deg) rotateX(-60deg) translate(-70px, -70px); }
-.tag-cam-r { transform: translateZ(100px) rotateZ(45deg) rotateX(-60deg) translate(50px, -70px); }
-
-/* Fade out labels when room is complete to avoid cluttering the hologram */
-.room-real .hw-tag {
-  opacity: 0 !important;
+.r-estaciones { top: 60px; right: 0; }
+.rack-cabinet {
+  width: 40px; height: 80px; background: rgba(15, 23, 42, 0.9);
+  border: 1px solid var(--accent-primary);
+  transform-origin: right; transform: rotateY(90deg) translateZ(-20px);
 }
 
-/* Audio: Glowing Mics */
-.m-mic {
-  position: absolute; width: 4px; height: 18px;
-  background: #00ff88;
-  box-shadow: 0 0 10px #00ff88;
-  top: 15px; left: 15px;
-  transform: translateZ(20px) rotateX(-90deg);
-}
-.m-mic.right-mic { left: auto; right: 15px; }
-
-/* Screens: Glowing panels */
-.m-screen {
-  position: absolute; width: 40px; height: 2px;
-  background: #ff6b35;
-  box-shadow: 0 -10px 15px rgba(255, 107, 53, 0.5);
-  top: 15px; left: 15px;
-  transform: translateZ(20px) rotateX(-90deg);
-}
-.m-screen.big-screen { 
-  width: 70px; height: 4px; 
-  left: 15px; top: 25px; 
-  transform: translateZ(20px) rotateX(-90deg) translateY(-25px); 
-}
-.m-screen.op-screen { top: 15px; left: 15px; }
-.m-screen.op-screen.s2 { left: 70px; }
-
-/* Servers: Glass towers */
-.m-server {
-  position: absolute; width: 60px; height: 100px;
-  background: rgba(243, 244, 246, 0.8);
-  border: 1px solid #fff;
-  box-shadow: 0 0 20px rgba(255,255,255,0.2);
-  top: 0; left: 10px;
-  transform: translateZ(40px) rotateX(-90deg);
-  transform-origin: bottom center;
-}
-.m-server.s2 { left: 15px; top: 10px; }
-.m-server.s3 { left: 20px; top: 20px; }
-
-/* Video: Floating PTZ Cameras with Lasers */
-.r-video { transform: translateZ(120px) !important; }
-.m-cam {
-  position: absolute; width: 18px; height: 18px; border-radius: 50%;
-  background: #12d4c9; box-shadow: 0 0 15px #12d4c9;
+.r-video { inset: 0; pointer-events: none; }
+.cam-unit {
+  position: absolute; width: 16px; height: 16px;
+  background: var(--accent-primary); border-radius: 50%;
+  box-shadow: 0 0 15px var(--accent-primary);
 }
 .cam-left { top: -10px; left: -10px; }
 .cam-right { top: -10px; right: -10px; }
@@ -308,7 +251,6 @@
   transform: rotateZ(-45deg) rotateX(-45deg);
 }
 
-/* ─── Reality Morph (isComplete) ─── */
 .room-real .wire-box {
   background: rgba(255, 255, 255, 0.05);
   border-color: rgba(255, 255, 255, 0.1);
@@ -341,29 +283,16 @@
   transform: translate(-50%, -50%) translateZ(140px) rotateZ(45deg) rotateX(-60deg) translateY(-80px); 
 }
 
+/* ═══════════════════════════════════════════════════
+   STATIC EXECUTIVE MOBILE HARDWARE SHOWCASE (< 769px)
+   ═══════════════════════════════════════════════════ */
+
 .scm-mobile-showcase {
   display: flex;
   flex-direction: column;
-  gap: 20px;
+  gap: 16px;
   width: 100%;
-}
-
-.scm-mobile-intro {
-  margin-bottom: 8px;
-}
-
-.scm-mobile-showcase-title {
-  font-size: 1.6rem;
-  font-weight: 800;
-  color: var(--text-primary);
-  line-height: 1.2;
-  margin-bottom: 8px;
-}
-
-.scm-mobile-showcase-subtitle {
-  font-size: 0.9rem;
-  color: var(--text-secondary);
-  line-height: 1.5;
+  margin-top: 0;
 }
 
 .scm-mobile-showcase-list {
@@ -376,8 +305,8 @@
   background: var(--bg-card);
   border: 1px solid var(--border-light);
   border-radius: var(--radius-xl);
-  padding: 20px 18px;
-  box-shadow: var(--shadow-card);
+  padding: 24px 20px;
+  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.04);
 }
 
 .scm-card-header {
@@ -388,8 +317,8 @@
 }
 
 .scm-icon-wrap {
-  width: 44px;
-  height: 44px;
+  width: 46px;
+  height: 46px;
   border-radius: var(--radius-md);
   background: var(--accent-glow);
   border: 1px solid var(--border-accent);
@@ -399,23 +328,25 @@
 }
 
 .scm-item-title {
-  font-size: 1.1rem;
-  font-weight: 700;
+  font-size: 1.15rem;
+  font-weight: 800;
   color: var(--text-primary);
   line-height: 1.25;
 }
 
 .scm-item-subtitle {
-  font-size: 0.72rem;
+  font-size: 0.75rem;
+  font-weight: 700;
   color: var(--accent-primary);
-  letter-spacing: 0.5px;
+  display: block;
+  margin-top: 2px;
 }
 
 .scm-item-desc {
-  font-size: 0.88rem;
+  font-size: 0.9rem;
   color: var(--text-secondary);
-  line-height: 1.55;
-  margin-bottom: 14px;
+  line-height: 1.6;
+  margin-bottom: 16px;
 }
 
 .scm-item-tags {
@@ -425,34 +356,36 @@
 }
 
 .scm-tag-pill {
-  font-size: 0.68rem;
+  font-size: 0.72rem;
   font-weight: 700;
   color: var(--text-primary);
   background: var(--bg-primary);
   border: 1px solid var(--border-light);
-  padding: 4px 10px;
-  border-radius: 100px;
+  padding: 6px 12px;
+  border-radius: 8px;
+  display: inline-flex;
+  align-items: center;
 }
 
 .scm-mobile-cta-box {
   background: linear-gradient(135deg, #0f172a, #1e293b);
   border: 1px solid var(--border-accent);
   border-radius: var(--radius-xl);
-  padding: 24px 20px;
+  padding: 28px 20px;
   text-align: center;
-  margin-top: 10px;
-  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+  margin-top: 12px;
+  box-shadow: 0 10px 30px rgba(15, 23, 42, 0.25);
 }
 
 .scm-mobile-cta-box h4 {
-  font-size: 1.2rem;
+  font-size: 1.25rem;
   font-weight: 800;
   color: #ffffff;
-  margin-bottom: 6px;
+  margin-bottom: 8px;
 }
 
 .scm-mobile-cta-box p {
-  font-size: 0.88rem;
+  font-size: 0.9rem;
   color: #94a3b8;
-  line-height: 1.5;
+  line-height: 1.6;
 }

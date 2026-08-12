@@ -1,6 +1,6 @@
 import { useState } from 'react';
 import { Link } from 'react-router-dom';
-import { Video, Mic, Monitor, Server, ShieldCheck, CheckCircle2 } from 'lucide-react';
+import { Video, Mic, Monitor, Server, CheckCircle2 } from 'lucide-react';
 import { salaCategories } from '../../data/content';
 import './SalaConfigurator.css';
 
@@ -190,19 +190,6 @@ export default function SalaConfigurator() {
 
       {/* MOBILE VIEW: Non-Interactive Executive Hardware Breakdown */}
       <div className="scm-mobile-showcase hp-mobile-only">
-        <div className="scm-mobile-intro text-center">
-          <span className="badge badge-accent mb-2">
-            <ShieldCheck size={13} className="mr-1 inline-block" />
-            Equipamiento de Misión Crítica
-          </span>
-          <h3 className="scm-mobile-showcase-title">
-            Arquitectura de <span className="accent-gradient">Sala Oral</span>
-          </h3>
-          <p className="scm-mobile-showcase-subtitle">
-            Integración de ingeniería con tecnología certificada para recintos judiciales en México.
-          </p>
-        </div>
-
         {/* 4 Clean Executive Hardware Cards */}
         <div className="scm-mobile-showcase-list">
           {mobileHardwareShowcase.map((item, idx) => (
@@ -220,7 +207,7 @@ export default function SalaConfigurator() {
               <div className="scm-item-tags">
                 {item.tags.map((tag, tIdx) => (
                   <span key={tIdx} className="scm-tag-pill font-mono">
-                    <CheckCircle2 size={12} className="text-accent mr-1 inline-block" />
+                    <CheckCircle2 size={13} className="text-accent mr-1 inline-block" />
                     {tag}
                   </span>
                 ))}
@@ -233,7 +220,7 @@ export default function SalaConfigurator() {
         <div className="scm-mobile-cta-box">
           <h4>¿Necesitas Cotizar una Sala Oral?</h4>
           <p>Te enviamos la memoria de cálculo y catálogo de equipos en menos de 24 horas.</p>
-          <Link to="/contacto?origen=salas" className="btn btn-primary w-full justify-center py-3 text-base mt-2">
+          <Link to="/contacto?origen=salas" className="btn btn-primary w-full justify-center py-3 text-base mt-3">
             Solicitar Cotización de Integración →
           </Link>
         </div>
