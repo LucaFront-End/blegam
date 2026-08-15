@@ -1,5 +1,4 @@
 import { useState } from 'react';
-import { Link } from 'react-router-dom';
 import { 
   Building2, 
   Briefcase, 
@@ -12,9 +11,7 @@ import {
   ChevronRight, 
   ShieldCheck, 
   MapPin, 
-  Eye, 
   MessageSquare,
-  X,
   Activity,
   ArrowRight
 } from 'lucide-react';
@@ -33,15 +30,16 @@ const ENVIRONMENTS_DATA = [
       {
         id: "school_turnstile",
         number: 1,
-        title: "Torniquete Escolar de Alta Velocidad",
+        title: "Torniquetes de Alta Velocidad",
         tech: "Carnet RFID Estudiantil / Lectura QR",
         desc: "Ingreso masivo de miles de alumnos por hora con validación de credencial activa y prevención de sustitución de alumnos.",
         tag: "Ingreso Alumnos",
-        svgCoords: { x: 320, y: 310 },
+        svgCoords: { x: 300, y: 310 },
+        tagCoords: { x: 300, y: 260 },
         highlights: [
-          "Validación de credencial activa en < 0.2s",
-          "Alerta automática de entrada a tutores por App",
-          "Mecanismo de uso rudo continuo para alto flujo"
+          "Validación en < 0.2 seg",
+          "Alerta automática a tutores por App",
+          "Mecanismo de uso continuo de alto flujo"
         ]
       },
       {
@@ -51,25 +49,27 @@ const ENVIRONMENTS_DATA = [
         tech: "Escáner de Identificación & Pase Visual",
         desc: "Validación obligatoria de padres de familia y proveedores con impresión de distintivo temporal con fotografía y QR.",
         tag: "Control de Tutores",
-        svgCoords: { x: 620, y: 240 },
+        svgCoords: { x: 640, y: 240 },
+        tagCoords: { x: 640, y: 190 },
         highlights: [
-          "Verificación biométrica y validación de tutor autorizado",
-          "Impresión de gafete de visitante con código QR temporal",
-          "Filtro obligatorio en recepción previa al ingreso"
+          "Validación de tutor autorizado",
+          "Gafete de visita con QR temporal",
+          "Filtro obligatorio en recepción"
         ]
       },
       {
         id: "school_failsafe",
         number: 3,
-        title: "Evacuación Emergencia Fail-Safe",
+        title: "Evacuación Fail-Safe Emergencia",
         tech: "Liberación Automática por Protección Civil",
         desc: "Caída inmediata de brazos de torniquetes y apertura de puertas ante señal de alarma sísmica, conato de incendio o corte de luz.",
         tag: "Fail-Safe Evacuación",
         svgCoords: { x: 500, y: 130 },
+        tagCoords: { x: 500, y: 75 },
         highlights: [
-          "Desbloqueo instantáneo electromecánico sin energía",
-          "Liberación por contacto seco con panel de alarma sísmica",
-          "Cumplimiento normativo estricto de Protección Civil"
+          "Desbloqueo instantáneo sin energía",
+          "Liberación por contacto de alarma",
+          "Cumplimiento normativo Protección Civil"
         ]
       }
     ]
@@ -91,38 +91,41 @@ const ENVIRONMENTS_DATA = [
         desc: "Acceso con regla de doble custodia obligatoria, bitácora AES-256 inalterable y protocolo silencioso anti-coacción.",
         tag: "Bóvedas & Custodia",
         svgCoords: { x: 280, y: 180 },
+        tagCoords: { x: 280, y: 120 },
         highlights: [
-          "Apertura condicionada por doble autorización simultánea",
-          "Registro forense con sello de tiempo inalterable",
-          "Cierre electroimán de alta presión con sensor de estado"
+          "Apertura por doble autorización",
+          "Registro forense inalterable",
+          "Cierre electroimán de alta presión"
         ]
       },
       {
         id: "bank_cajas",
         number: 2,
-        title: "Control de Zona de Cajas & Esclusa",
-        tech: "Lector Dactilar Anti-Suplantación + Esclusa Unipersonal",
+        title: "Esclusa & Control de Cajas",
+        tech: "Lector Dactilar Anti-Suplantación + Esclusa",
         desc: "Validación de identidad de cajeros y supervisores previa a autorizar transacciones o apertura de gavetas de valores.",
         tag: "Zona de Cajas",
-        svgCoords: { x: 550, y: 280 },
+        svgCoords: { x: 560, y: 280 },
+        tagCoords: { x: 560, y: 225 },
         highlights: [
-          "Sensor óptico anti-huella de silicona o película",
-          "Verificación de presencia obligatoria en cada apertura",
-          "Historial detallado por operador y supervisor de caja"
+          "Sensor óptico anti-huella falsa",
+          "Verificación en cada apertura",
+          "Historial por operador de caja"
         ]
       },
       {
         id: "bank_monitoreo",
         number: 3,
-        title: "Centro de Monitoreo & CCTV Core",
-        tech: "Integración VMS IP + Logs de Acceso en Tiempo Real",
+        title: "Centro de Monitoreo & CCTV",
+        tech: "Integración VMS IP + Logs de Acceso en Vivo",
         desc: "Sincronización simultánea de videoclips HD con cada intento de acceso o evento de lectura de credencial.",
         tag: "Auditoría 24/7",
-        svgCoords: { x: 640, y: 140 },
+        svgCoords: { x: 650, y: 140 },
+        tagCoords: { x: 650, y: 85 },
         highlights: [
-          "Videowall de control y supervisión en tiempo real",
-          "Alertas instantáneas por intento fallido o puerta forzada",
-          "Resguardo inmutable de bitácora en la nube privada"
+          "Videowall en tiempo real",
+          "Alertas por intento fallido",
+          "Resguardo inmutable en la nube"
         ]
       }
     ]
@@ -139,43 +142,46 @@ const ENVIRONMENTS_DATA = [
       {
         id: "office_turnstile",
         number: 1,
-        title: "Torniquetes Ópticos de Cristal (Speed Gates)",
+        title: "Speed Gates Ópticos de Cristal",
         tech: "Sensores Anti-Tailgating + Lector RFID / Móvil",
         desc: "Desahogo continuo de colaboradores en horas pico previniendo pasos simultáneos sin autorización mediante cortina infrarroja.",
         tag: "Flujo Masivo",
         svgCoords: { x: 330, y: 300 },
+        tagCoords: { x: 330, y: 245 },
         highlights: [
-          "Cristales batientes de apertura veloz (< 0.3 seg)",
-          "Matriz de 16 sensores infrarrojos anti-cola (tailgating)",
-          "Integración bidireccional con sistema de nómina y RH"
+          "Apertura veloz (< 0.3 seg)",
+          "16 sensores anti-tailgating",
+          "Integración directa con Nómina/RH"
         ]
       },
       {
         id: "office_server",
         number: 2,
-        title: "Acceso a Sala de Servidores / Data Center",
-        tech: "Doble Autenticación Biométrica Facial 3D",
+        title: "Acceso Data Center / Servidores TI",
+        tech: "Doble Autenticación Facial 3D",
         desc: "Restricción exclusiva a personal informático autorizado con monitoreo de tiempo de permanencia y alerta por puerta abierta.",
         tag: "Infraestructura TI",
         svgCoords: { x: 280, y: 160 },
+        tagCoords: { x: 280, y: 105 },
         highlights: [
-          "Biometría facial liveness anti-foto y anti-video",
-          "Alarma automática por puerta abierta más de 30 segundos",
-          "Bitácora exclusiva para auditorías de seguridad informática"
+          "Facial 3D liveness anti-foto",
+          "Alerta por puerta abierta >30s",
+          "Bitácora exclusiva para TI"
         ]
       },
       {
         id: "office_nfc",
         number: 3,
-        title: "Recepción & Credenciales Móviles NFC",
-        tech: "Pases Virtuales Smartphone Apple Wallet / Google Pay",
+        title: "Recepción & Acceso Móvil NFC",
+        tech: "Pases Virtuales Apple Wallet / Google Pay",
         desc: "Asignación instantánea de permisos temporales a empleados y consultores sin necesidad de tarjetas plásticas físicas.",
         tag: "NFC Smartphone",
-        svgCoords: { x: 610, y: 230 },
+        svgCoords: { x: 620, y: 230 },
+        tagCoords: { x: 620, y: 175 },
         highlights: [
-          "Acceso sin contacto con smartphone o Apple Watch",
-          "Revocación de credenciales con 1 clic desde el portal",
-          "Envío automático por correo electrónico o WhatsApp"
+          "Acceso sin contacto con móvil",
+          "Baja de credencial con 1 clic",
+          "Envío por WhatsApp o Email"
         ]
       }
     ]
@@ -192,43 +198,46 @@ const ENVIRONMENTS_DATA = [
       {
         id: "building_kiosk",
         number: 1,
-        title: "Kiosco Interactivo de Visitantes",
+        title: "Kiosco Interactivo de Visitantes QR",
         tech: "Pases QR Dinámicos + Escaneo de Identificación",
         desc: "Autocomprobación de identidad y registro fotográfico con notificación automática al residente o anfitrión corporativo.",
         tag: "Autogestión QR",
         svgCoords: { x: 310, y: 290 },
+        tagCoords: { x: 310, y: 235 },
         highlights: [
-          "Impresión de distintivo de visita o ticket con QR",
-          "Validación de código QR dinámico de un solo uso",
-          "Notificación push instantánea a la app del inquilino"
+          "Ticket o distintivo con código QR",
+          "QR dinámico de un solo uso",
+          "Notificación push al residente"
         ]
       },
       {
         id: "building_elevator",
         number: 2,
-        title: "Control de Elevadores Inteligentes",
-        tech: "Lector RFID & Relevador por Piso",
+        title: "Control de Elevadores por Piso",
+        tech: "Lector RFID & Relevador Inteligente",
         desc: "El elevador habilita exclusivamente la botonera del piso asignado a la tarjeta o credencial del usuario.",
         tag: "Pisos Restringidos",
         svgCoords: { x: 560, y: 170 },
+        tagCoords: { x: 560, y: 115 },
         highlights: [
-          "Integración con botoneras Otis, Schindler, KONE y Thyssen",
-          "Permisos programables según perfil de residente/empleado",
-          "Bloqueo nocturno de pisos ejecutivos y penthouses"
+          "Compatible con Otis, Schindler, KONE",
+          "Permisos por perfil de residente",
+          "Bloqueo nocturno de pisos ejecutivos"
         ]
       },
       {
         id: "building_barrier",
         number: 3,
-        title: "Acceso Vehicular con Tag UHF",
-        tech: "Lectura a Distancia sin Bajar Ventanilla (Alcance 8m)",
+        title: "Barrera Vehicular con Tag UHF",
+        tech: "Lectura a Distancia sin Bajar Ventanilla (8m)",
         desc: "Apertura automatizada de barreras de estacionamiento para vehículos registrados con historial completo de entradas.",
         tag: "Tag Vehicular",
         svgCoords: { x: 600, y: 340 },
+        tagCoords: { x: 600, y: 285 },
         highlights: [
-          "Antena RFID de largo alcance (6 a 10 metros)",
-          "Apertura ultrarrápida de pluma en 1.5 segundos",
-          "Integración con sistemas de pensiones o cobro automático"
+          "Antena UHF alcance 6 a 10m",
+          "Apertura en 1.5 segundos",
+          "Integración con pensiones/cobro"
         ]
       }
     ]
@@ -245,43 +254,46 @@ const ENVIRONMENTS_DATA = [
       {
         id: "gov_facial",
         number: 1,
-        title: "Cámara Facial de Largo Alcance en Pasillo",
-        tech: "Reconocimiento a Distancia sobre la Marcha (3m)",
+        title: "Reconocimiento Facial en Pasillo",
+        tech: "Identificación a Distancia sobre la Marcha (3m)",
         desc: "Verificación de identidad sin detener el paso de funcionarios y directores con alta precisión anti-suplantación.",
         tag: "Reconocimiento Facial",
         svgCoords: { x: 310, y: 190 },
+        tagCoords: { x: 310, y: 135 },
         highlights: [
-          "Lectura fluida sobre la marcha a 3 metros de distancia",
-          "Detección liveness 3D con luz infrarroja anti-fotos",
-          "Acceso sin contacto físico para alta higiene y velocidad"
+          "Lectura al caminar a 3m",
+          "Sensor liveness infrarrojo 3D",
+          "Acceso sin contacto físico"
         ]
       },
       {
         id: "gov_filter",
         number: 2,
-        title: "Filtro Perimetral de Seguridad Institucional",
-        tech: "Torniquetes Electromecánicos + Detector de Metales",
+        title: "Filtro Perimetral Institucional",
+        tech: "Torniquetes Electromecánicos + Arco Detector",
         desc: "Punto de control institucional que canaliza el flujo del público general previo a ingresar a áreas gubernamentales.",
         tag: "Filtro Institucional",
         svgCoords: { x: 550, y: 300 },
+        tagCoords: { x: 550, y: 245 },
         highlights: [
-          "Chasis de acero inoxidable 304 reforzado anti-vandalismo",
-          "Integración con pórtico detector de metales y rayos X",
-          "Control de entrada y salida segregado con conteo de aforo"
+          "Acero inoxidable 304 anti-vandalismo",
+          "Integración con detector de metales",
+          "Conteo de aforo en tiempo real"
         ]
       },
       {
         id: "gov_archive",
         number: 3,
-        title: "Archivo Confidencial & Expedientes Clasificados",
-        tech: "Cerradura Electroimán 600lbs + Biometría Dual",
+        title: "Archivo Confidencial [600 lbs]",
+        tech: "Cerradura Electroimán + Biometría Dual",
         desc: "Control riguroso de ingreso a repositorios de documentos oficiales con sello de tiempo inalterable.",
         tag: "Archivos Clasificados",
         svgCoords: { x: 570, y: 130 },
+        tagCoords: { x: 570, y: 75 },
         highlights: [
-          "Electroimán de 600 libras de retención magnética",
-          "Validación obligatoria de huella o rostro para cada apertura",
-          "Historial inalterable de apertura para auditorías oficiales"
+          "Retención magnética 600 lbs",
+          "Huella o rostro obligatorio",
+          "Bitácora forense de aperturas"
         ]
       }
     ]
@@ -291,7 +303,6 @@ const ENVIRONMENTS_DATA = [
 export default function AccessEnvironmentsInteractive() {
   const [activeEnvId, setActiveEnvId] = useState('escuelas');
   const [activeCheckpointIndex, setActiveCheckpointIndex] = useState(0);
-  const [showPopup, setShowPopup] = useState(true);
 
   const selectedEnv = ENVIRONMENTS_DATA.find((e) => e.id === activeEnvId) || ENVIRONMENTS_DATA[0];
   const ActiveIcon = selectedEnv.icon;
@@ -300,12 +311,10 @@ export default function AccessEnvironmentsInteractive() {
   const handleSelectIndustry = (envId) => {
     setActiveEnvId(envId);
     setActiveCheckpointIndex(0);
-    setShowPopup(true);
   };
 
   const handleSelectCheckpoint = (idx) => {
     setActiveCheckpointIndex(idx);
-    setShowPopup(true);
   };
 
   const waMessage = `Hola, quisiera más información sobre "${currentCheckpoint.title}" para ${selectedEnv.title}.`;
@@ -328,7 +337,7 @@ export default function AccessEnvironmentsInteractive() {
       </div>
 
       {/* ════════════════════════════════════════════════════════════════════
-         DESKTOP VIEW: Left Sidebar (320px) + Right Isometric Vector Blueprint Stage
+         DESKTOP VIEW: Sidebar (320px) + Clean Blueprint Stage + Docked HUD Ficha
          ════════════════════════════════════════════════════════════════════ */}
       <div className="env-main-layout hp-desktop-only">
         
@@ -364,10 +373,10 @@ export default function AccessEnvironmentsInteractive() {
           </div>
         </aside>
 
-        {/* RIGHT AREA: ISOMETRIC CYBER VECTOR BLUEPRINT STAGE */}
+        {/* RIGHT AREA: UNIFIED ISOMETRIC VECTOR BLUEPRINT STAGE */}
         <div className="env-blueprint-stage">
           
-          {/* Blueprint Top Bar Header & Checkpoint Pills */}
+          {/* 1. Header Bar */}
           <div className="blueprint-top-bar">
             <div className="blueprint-meta-info">
               <div className="flex items-center gap-2 mb-1">
@@ -383,7 +392,6 @@ export default function AccessEnvironmentsInteractive() {
 
             {/* Checkpoints Selector Tabs */}
             <div className="blueprint-checkpoints-tabs">
-              <span className="tabs-label font-mono">PUNTOS DE CONTROL:</span>
               <div className="tabs-row">
                 {selectedEnv.checkpoints.map((cp, idx) => {
                   const isSelected = activeCheckpointIndex === idx;
@@ -402,20 +410,17 @@ export default function AccessEnvironmentsInteractive() {
             </div>
           </div>
 
-          {/* ISOMETRIC BLUEPRINT CANVAS STAGE */}
+          {/* 2. ISOMETRIC BLUEPRINT CANVAS (Pure Vector Architecture) */}
           <div className="blueprint-canvas-container">
-            {/* Cyber Blueprint Grid Background */}
             <div className="blueprint-grid-overlay" />
 
-            {/* SVG Vector Schematic Scene */}
             <svg 
               className="blueprint-svg-scene" 
-              viewBox="0 0 940 540" 
+              viewBox="0 0 940 480" 
               fill="none" 
               xmlns="http://www.w3.org/2000/svg"
             >
               <defs>
-                {/* Glow Filters */}
                 <filter id="cyanGlow" x="-30%" y="-30%" width="160%" height="160%">
                   <feGaussianBlur stdDeviation="5" result="blur" />
                   <feMerge>
@@ -432,8 +437,8 @@ export default function AccessEnvironmentsInteractive() {
                     <feMergeNode in="SourceGraphic" />
                   </feMerge>
                 </filter>
-                <linearGradient id="floorGrad" x1="0" y1="0" x2="940" y2="540" gradientUnits="userSpaceOnUse">
-                  <stop offset="0%" stopColor="#12d4c9" stopOpacity="0.12" />
+                <linearGradient id="floorGrad" x1="0" y1="0" x2="940" y2="480" gradientUnits="userSpaceOnUse">
+                  <stop offset="0%" stopColor="#12d4c9" stopOpacity="0.14" />
                   <stop offset="100%" stopColor="#38bdf8" stopOpacity="0.04" />
                 </linearGradient>
                 <linearGradient id="wallBackGrad" x1="0" y1="0" x2="0" y2="1">
@@ -442,83 +447,63 @@ export default function AccessEnvironmentsInteractive() {
                 </linearGradient>
               </defs>
 
-              {/* 1. Isometric Room Floor & Grid */}
+              {/* Isometric Room Floor & Grid */}
               <g className="iso-room-floor">
-                {/* Outer Isometric Diamond Floor */}
-                <path d="M470 50 L870 255 L470 460 L70 255 Z" fill="url(#floorGrad)" stroke="#12d4c9" strokeWidth="1.8" strokeOpacity="0.4" />
-                
-                {/* Inner Grid Lines */}
-                <path d="M470 110 L770 260 L470 410 L170 260 Z" stroke="#12d4c9" strokeWidth="1" strokeOpacity="0.2" strokeDasharray="5 5" />
-                <path d="M470 170 L670 265 L470 360 L270 265 Z" stroke="#12d4c9" strokeWidth="1" strokeOpacity="0.15" />
-                
-                {/* Axes */}
-                <line x1="470" y1="50" x2="470" y2="460" stroke="#12d4c9" strokeWidth="1" strokeOpacity="0.18" strokeDasharray="3 3" />
-                <line x1="70" y1="255" x2="870" y2="255" stroke="#12d4c9" strokeWidth="1" strokeOpacity="0.18" strokeDasharray="3 3" />
+                <path d="M470 40 L870 240 L470 440 L70 240 Z" fill="url(#floorGrad)" stroke="#12d4c9" strokeWidth="1.8" strokeOpacity="0.45" />
+                <path d="M470 100 L770 245 L470 390 L170 245 Z" stroke="#12d4c9" strokeWidth="1" strokeOpacity="0.2" strokeDasharray="5 5" />
+                <path d="M470 160 L670 250 L470 340 L270 250 Z" stroke="#12d4c9" strokeWidth="1" strokeOpacity="0.15" />
+                <line x1="470" y1="40" x2="470" y2="440" stroke="#12d4c9" strokeWidth="1" strokeOpacity="0.18" strokeDasharray="3 3" />
+                <line x1="70" y1="240" x2="870" y2="240" stroke="#12d4c9" strokeWidth="1" strokeOpacity="0.18" strokeDasharray="3 3" />
               </g>
 
-              {/* 2. Isometric Architectural Walls */}
+              {/* Isometric Architectural Walls */}
               <g className="iso-room-walls">
-                {/* Back Left Wall */}
-                <path d="M70 255 L470 50 L470 0 L70 205 Z" fill="url(#wallBackGrad)" stroke="#12d4c9" strokeWidth="1.5" strokeOpacity="0.5" />
-                {/* Back Right Wall */}
-                <path d="M470 50 L870 255 L870 205 L470 0 Z" fill="url(#wallBackGrad)" stroke="#12d4c9" strokeWidth="1.5" strokeOpacity="0.5" />
-                {/* Center Column / Vertex Light */}
-                <line x1="470" y1="0" x2="470" y2="50" stroke="#12d4c9" strokeWidth="2.5" strokeOpacity="0.9" filter="url(#cyanGlow)" />
-                <line x1="70" y1="205" x2="70" y2="255" stroke="#12d4c9" strokeWidth="1.5" strokeOpacity="0.5" />
-                <line x1="870" y1="205" x2="870" y2="255" stroke="#12d4c9" strokeWidth="1.5" strokeOpacity="0.5" />
-
-                {/* Architectural Blueprint Zone Guide Marks */}
-                <text x="210" y="90" fill="#38bdf8" opacity="0.5" fontSize="11" fontFamily="monospace" fontWeight="bold">PASILLO DE ACCESO // ENTRADA</text>
-                <text x="560" y="90" fill="#38bdf8" opacity="0.5" fontSize="11" fontFamily="monospace" fontWeight="bold">NÚCLEO DE CONTROL // RECEPCIÓN</text>
+                <path d="M70 240 L470 40 L470 0 L70 200 Z" fill="url(#wallBackGrad)" stroke="#12d4c9" strokeWidth="1.5" strokeOpacity="0.5" />
+                <path d="M470 40 L870 240 L870 200 L470 0 Z" fill="url(#wallBackGrad)" stroke="#12d4c9" strokeWidth="1.5" strokeOpacity="0.5" />
+                <line x1="470" y1="0" x2="470" y2="40" stroke="#12d4c9" strokeWidth="2.5" strokeOpacity="0.9" filter="url(#cyanGlow)" />
+                <line x1="70" y1="200" x2="70" y2="240" stroke="#12d4c9" strokeWidth="1.5" strokeOpacity="0.5" />
+                <line x1="870" y1="200" x2="870" y2="240" stroke="#12d4c9" strokeWidth="1.5" strokeOpacity="0.5" />
+                <text x="210" y="80" fill="#38bdf8" opacity="0.5" fontSize="11" fontFamily="monospace" fontWeight="bold">CORREDOR DE ACCESO // PERÍMETRO</text>
+                <text x="560" y="80" fill="#38bdf8" opacity="0.5" fontSize="11" fontFamily="monospace" fontWeight="bold">NÚCLEO DE CONTROL // RECEPCIÓN</text>
               </g>
 
-              {/* 3. DYNAMIC VECTOR SCHEMATIC BY ACTIVE INDUSTRY */}
+              {/* DYNAMIC VECTOR HARDWARE BY INDUSTRY */}
               
               {/* === ESCUELAS === */}
               {activeEnvId === 'escuelas' && (
                 <g className="iso-env-graphics">
-                  {/* Punto 1: Torniquetes Escolares Triples */}
-                  <g className={`iso-hw-group ${activeCheckpointIndex === 0 ? 'is-active-hw' : ''}`}>
-                    {/* Pedestal 1 */}
-                    <path d="M260 300 L305 278 L315 283 L270 305 Z" fill="#0f172a" stroke="#12d4c9" strokeWidth="1.5" />
-                    <path d="M260 300 L270 305 L270 345 L260 340 Z" fill="#020617" stroke="#12d4c9" strokeWidth="1.5" />
-                    <path d="M270 305 L315 283 L315 323 L270 345 Z" fill="#1e293b" stroke="#12d4c9" strokeWidth="1.5" />
-                    <circle cx="288" cy="295" r="4.5" fill="#12d4c9" filter="url(#cyanGlow)" />
-                    <line x1="288" y1="295" x2="338" y2="318" stroke="#10b981" strokeWidth="3" strokeLinecap="round" filter="url(#cyanGlow)" />
-                    <line x1="288" y1="295" x2="250" y2="280" stroke="#10b981" strokeWidth="2.5" strokeLinecap="round" />
+                  {/* Punto 1: Torniquetes */}
+                  <g className={`iso-hw-group ${activeCheckpointIndex === 0 ? 'is-active-hw' : ''}`} onClick={() => handleSelectCheckpoint(0)} style={{ cursor: 'pointer' }}>
+                    <path d="M260 290 L305 268 L315 273 L270 295 Z" fill="#0f172a" stroke="#12d4c9" strokeWidth="1.5" />
+                    <path d="M260 290 L270 295 L270 335 L260 330 Z" fill="#020617" stroke="#12d4c9" strokeWidth="1.5" />
+                    <path d="M270 295 L315 273 L315 313 L270 335 Z" fill="#1e293b" stroke="#12d4c9" strokeWidth="1.5" />
+                    <circle cx="288" cy="285" r="4.5" fill="#12d4c9" filter="url(#cyanGlow)" />
+                    <line x1="288" y1="285" x2="338" y2="308" stroke="#10b981" strokeWidth="3" strokeLinecap="round" filter="url(#cyanGlow)" />
 
-                    {/* Pedestal 2 */}
-                    <path d="M340 338 L385 316 L395 321 L350 343 Z" fill="#0f172a" stroke="#12d4c9" strokeWidth="1.5" />
-                    <path d="M340 338 L350 343 L350 383 L340 378 Z" fill="#020617" stroke="#12d4c9" strokeWidth="1.5" />
-                    <path d="M350 343 L395 321 L395 361 L350 383 Z" fill="#1e293b" stroke="#12d4c9" strokeWidth="1.5" />
-                    <circle cx="368" cy="333" r="4.5" fill="#12d4c9" filter="url(#cyanGlow)" />
-                    <line x1="368" y1="333" x2="418" y2="356" stroke="#10b981" strokeWidth="3" strokeLinecap="round" filter="url(#cyanGlow)" />
-
-                    {/* Flow arrow on floor */}
-                    <path d="M230 365 L310 325 L335 338" stroke="#10b981" strokeWidth="2.5" strokeDasharray="5 3" />
-                    <text x="220" y="390" fill="#10b981" fontSize="11" fontFamily="monospace" fontWeight="bold">FLUJO ALUMNOS RFID ▶</text>
+                    <path d="M340 328 L385 306 L395 311 L350 333 Z" fill="#0f172a" stroke="#12d4c9" strokeWidth="1.5" />
+                    <path d="M340 328 L350 333 L350 373 L340 368 Z" fill="#020617" stroke="#12d4c9" strokeWidth="1.5" />
+                    <path d="M350 333 L395 311 L395 351 L350 373 Z" fill="#1e293b" stroke="#12d4c9" strokeWidth="1.5" />
+                    <circle cx="368" cy="323" r="4.5" fill="#12d4c9" filter="url(#cyanGlow)" />
+                    <line x1="368" y1="323" x2="418" y2="346" stroke="#10b981" strokeWidth="3" strokeLinecap="round" filter="url(#cyanGlow)" />
+                    <text x="220" y="380" fill="#10b981" fontSize="11" fontFamily="monospace" fontWeight="bold">FLUJO ALUMNOS RFID ▶</text>
                   </g>
 
-                  {/* Punto 2: Módulo Registro Tutores */}
-                  <g className={`iso-hw-group ${activeCheckpointIndex === 1 ? 'is-active-hw' : ''}`}>
-                    {/* Security Desk */}
-                    <path d="M580 215 L650 180 L680 195 L610 230 Z" fill="#0f172a" stroke="#12d4c9" strokeWidth="1.5" />
-                    <path d="M580 215 L610 230 L610 270 L580 255 Z" fill="#020617" stroke="#12d4c9" strokeWidth="1.5" />
-                    <path d="M610 230 L680 195 L680 235 L610 270 Z" fill="#1e293b" stroke="#12d4c9" strokeWidth="1.5" />
-                    {/* Touchscreen on desk */}
-                    <path d="M620 205 L645 192 L645 210 L620 223 Z" fill="#38bdf8" stroke="#ffffff" strokeWidth="1" filter="url(#cyanGlow)" />
-                    <circle cx="655" cy="190" r="3" fill="#12d4c9" />
-                    <text x="590" y="170" fill="#38bdf8" fontSize="11" fontFamily="monospace" fontWeight="bold">MÓDULO TUTORES</text>
+                  {/* Punto 2: Módulo Tutores */}
+                  <g className={`iso-hw-group ${activeCheckpointIndex === 1 ? 'is-active-hw' : ''}`} onClick={() => handleSelectCheckpoint(1)} style={{ cursor: 'pointer' }}>
+                    <path d="M600 205 L670 170 L700 185 L630 220 Z" fill="#0f172a" stroke="#12d4c9" strokeWidth="1.5" />
+                    <path d="M600 205 L630 220 L630 260 L600 245 Z" fill="#020617" stroke="#12d4c9" strokeWidth="1.5" />
+                    <path d="M630 220 L700 185 L700 225 L630 260 Z" fill="#1e293b" stroke="#12d4c9" strokeWidth="1.5" />
+                    <path d="M640 195 L665 182 L665 200 L640 213 Z" fill="#38bdf8" stroke="#ffffff" strokeWidth="1" filter="url(#cyanGlow)" />
+                    <text x="610" y="160" fill="#38bdf8" fontSize="11" fontFamily="monospace" fontWeight="bold">MÓDULO TUTORES</text>
                   </g>
 
-                  {/* Punto 3: Salida Fail-Safe Emergencia */}
-                  <g className={`iso-hw-group ${activeCheckpointIndex === 2 ? 'is-active-hw' : ''}`}>
-                    {/* Door Frame on Back Wall */}
-                    <path d="M470 105 L520 80 L520 160 L470 185 Z" fill="#020617" stroke="#ef4444" strokeWidth="2" strokeDasharray="4 3" />
-                    <path d="M470 105 L510 125 L510 205 L470 185 Z" fill="rgba(239, 68, 68, 0.2)" stroke="#ef4444" strokeWidth="2" filter="url(#intenseGlow)" />
-                    <line x1="475" y1="150" x2="505" y2="165" stroke="#ffffff" strokeWidth="3" />
-                    <rect x="480" y="90" width="30" height="8" fill="#ef4444" filter="url(#cyanGlow)" />
-                    <text x="440" y="65" fill="#ef4444" fontSize="11" fontFamily="monospace" fontWeight="bold">SALIDA FAIL-SAFE ⚡</text>
+                  {/* Punto 3: Salida Emergencia */}
+                  <g className={`iso-hw-group ${activeCheckpointIndex === 2 ? 'is-active-hw' : ''}`} onClick={() => handleSelectCheckpoint(2)} style={{ cursor: 'pointer' }}>
+                    <path d="M470 95 L520 70 L520 150 L470 175 Z" fill="#020617" stroke="#ef4444" strokeWidth="2" strokeDasharray="4 3" />
+                    <path d="M470 95 L510 115 L510 195 L470 175 Z" fill="rgba(239, 68, 68, 0.2)" stroke="#ef4444" strokeWidth="2" filter="url(#intenseGlow)" />
+                    <line x1="475" y1="140" x2="505" y2="155" stroke="#ffffff" strokeWidth="3" />
+                    <rect x="480" y="80" width="30" height="8" fill="#ef4444" filter="url(#cyanGlow)" />
+                    <text x="440" y="55" fill="#ef4444" fontSize="11" fontFamily="monospace" fontWeight="bold">SALIDA FAIL-SAFE ⚡</text>
                   </g>
                 </g>
               )}
@@ -526,38 +511,35 @@ export default function AccessEnvironmentsInteractive() {
               {/* === BANCOS === */}
               {activeEnvId === 'bancos' && (
                 <g className="iso-env-graphics">
-                  {/* Punto 1: Bóveda de Valores */}
-                  <g className={`iso-hw-group ${activeCheckpointIndex === 0 ? 'is-active-hw' : ''}`}>
-                    <path d="M230 130 L320 85 L320 220 L230 265 Z" fill="#0f172a" stroke="#12d4c9" strokeWidth="2" />
-                    {/* Vault Wheel */}
-                    <ellipse cx="275" cy="175" rx="34" ry="48" fill="#020617" stroke="#38bdf8" strokeWidth="2.5" filter="url(#cyanGlow)" />
-                    <ellipse cx="275" cy="175" rx="16" ry="24" fill="rgba(18,212,201,0.25)" stroke="#12d4c9" strokeWidth="1.8" />
-                    <line x1="275" y1="145" x2="275" y2="205" stroke="#12d4c9" strokeWidth="2.5" />
-                    <line x1="250" y1="175" x2="300" y2="175" stroke="#12d4c9" strokeWidth="2.5" />
-                    {/* Biometric Keypad */}
-                    <rect x="315" y="155" width="12" height="22" fill="#12d4c9" filter="url(#cyanGlow)" />
-                    <text x="200" y="65" fill="#38bdf8" fontSize="11" fontFamily="monospace" fontWeight="bold">BÓVEDA DE VALORES [AES-256]</text>
+                  {/* Punto 1: Bóveda */}
+                  <g className={`iso-hw-group ${activeCheckpointIndex === 0 ? 'is-active-hw' : ''}`} onClick={() => handleSelectCheckpoint(0)} style={{ cursor: 'pointer' }}>
+                    <path d="M230 120 L320 75 L320 210 L230 255 Z" fill="#0f172a" stroke="#12d4c9" strokeWidth="2" />
+                    <ellipse cx="275" cy="165" rx="34" ry="48" fill="#020617" stroke="#38bdf8" strokeWidth="2.5" filter="url(#cyanGlow)" />
+                    <ellipse cx="275" cy="165" rx="16" ry="24" fill="rgba(18,212,201,0.25)" stroke="#12d4c9" strokeWidth="1.8" />
+                    <line x1="275" y1="135" x2="275" y2="195" stroke="#12d4c9" strokeWidth="2.5" />
+                    <line x1="250" y1="165" x2="300" y2="165" stroke="#12d4c9" strokeWidth="2.5" />
+                    <rect x="315" y="145" width="12" height="22" fill="#12d4c9" filter="url(#cyanGlow)" />
+                    <text x="200" y="55" fill="#38bdf8" fontSize="11" fontFamily="monospace" fontWeight="bold">BÓVEDA DE VALORES [AES-256]</text>
                   </g>
 
-                  {/* Punto 2: Esclusa de Cajas */}
-                  <g className={`iso-hw-group ${activeCheckpointIndex === 1 ? 'is-active-hw' : ''}`}>
-                    <path d="M510 250 L570 220 L605 238 L545 268 Z" fill="#0f172a" stroke="#10b981" strokeWidth="1.8" />
-                    <path d="M510 250 L545 268 L545 330 L510 310 Z" fill="rgba(16, 185, 129, 0.2)" stroke="#10b981" strokeWidth="1.8" />
-                    <path d="M545 268 L605 238 L605 300 L545 330 Z" fill="rgba(16, 185, 129, 0.3)" stroke="#10b981" strokeWidth="1.8" />
-                    <line x1="558" y1="250" x2="558" y2="310" stroke="#10b981" strokeWidth="2" strokeDasharray="3 3" filter="url(#cyanGlow)" />
-                    <text x="480" y="355" fill="#10b981" fontSize="11" fontFamily="monospace" fontWeight="bold">ESCLUSA UNIPERSONAL CAJAS</text>
+                  {/* Punto 2: Esclusa Cajas */}
+                  <g className={`iso-hw-group ${activeCheckpointIndex === 1 ? 'is-active-hw' : ''}`} onClick={() => handleSelectCheckpoint(1)} style={{ cursor: 'pointer' }}>
+                    <path d="M520 240 L580 210 L615 228 L555 258 Z" fill="#0f172a" stroke="#10b981" strokeWidth="1.8" />
+                    <path d="M520 240 L555 258 L555 320 L520 300 Z" fill="rgba(16, 185, 129, 0.2)" stroke="#10b981" strokeWidth="1.8" />
+                    <path d="M555 258 L615 228 L615 290 L555 320 Z" fill="rgba(16, 185, 129, 0.3)" stroke="#10b981" strokeWidth="1.8" />
+                    <line x1="568" y1="240" x2="568" y2="300" stroke="#10b981" strokeWidth="2" strokeDasharray="3 3" filter="url(#cyanGlow)" />
+                    <text x="490" y="345" fill="#10b981" fontSize="11" fontFamily="monospace" fontWeight="bold">ESCLUSA UNIPERSONAL CAJAS</text>
                   </g>
 
-                  {/* Punto 3: Centro de Monitoreo CCTV */}
-                  <g className={`iso-hw-group ${activeCheckpointIndex === 2 ? 'is-active-hw' : ''}`}>
-                    <path d="M620 115 L670 90 L695 102 L645 127 Z" fill="#0f172a" stroke="#12d4c9" strokeWidth="1.8" />
-                    <path d="M620 115 L645 127 L645 200 L620 188 Z" fill="#020617" stroke="#12d4c9" strokeWidth="1.8" />
-                    <path d="M645 127 L695 102 L695 175 L645 200 Z" fill="#1e293b" stroke="#12d4c9" strokeWidth="1.8" />
-                    <circle cx="655" cy="140" r="2" fill="#10b981" filter="url(#cyanGlow)" />
-                    <circle cx="670" cy="132" r="2" fill="#10b981" filter="url(#cyanGlow)" />
-                    <circle cx="655" cy="155" r="2" fill="#38bdf8" filter="url(#cyanGlow)" />
-                    <circle cx="670" cy="147" r="2" fill="#ef4444" filter="url(#cyanGlow)" />
-                    <text x="590" y="70" fill="#12d4c9" fontSize="11" fontFamily="monospace" fontWeight="bold">MONITOREO CCTV 24/7</text>
+                  {/* Punto 3: CCTV Rack */}
+                  <g className={`iso-hw-group ${activeCheckpointIndex === 2 ? 'is-active-hw' : ''}`} onClick={() => handleSelectCheckpoint(2)} style={{ cursor: 'pointer' }}>
+                    <path d="M630 105 L680 80 L705 92 L655 117 Z" fill="#0f172a" stroke="#12d4c9" strokeWidth="1.8" />
+                    <path d="M630 105 L655 117 L655 190 L630 178 Z" fill="#020617" stroke="#12d4c9" strokeWidth="1.8" />
+                    <path d="M655 117 L705 92 L705 165 L655 190 Z" fill="#1e293b" stroke="#12d4c9" strokeWidth="1.8" />
+                    <circle cx="665" cy="130" r="2" fill="#10b981" filter="url(#cyanGlow)" />
+                    <circle cx="680" cy="122" r="2" fill="#10b981" filter="url(#cyanGlow)" />
+                    <circle cx="665" cy="145" r="2" fill="#38bdf8" filter="url(#cyanGlow)" />
+                    <text x="600" y="60" fill="#12d4c9" fontSize="11" fontFamily="monospace" fontWeight="bold">MONITOREO CCTV 24/7</text>
                   </g>
                 </g>
               )}
@@ -565,37 +547,34 @@ export default function AccessEnvironmentsInteractive() {
               {/* === OFICINAS === */}
               {activeEnvId === 'oficinas' && (
                 <g className="iso-env-graphics">
-                  {/* Punto 1: Speed Gates Ópticos */}
-                  <g className={`iso-hw-group ${activeCheckpointIndex === 0 ? 'is-active-hw' : ''}`}>
-                    <path d="M280 285 L325 263 L335 268 L290 290 Z" fill="#0f172a" stroke="#12d4c9" strokeWidth="1.5" />
-                    <path d="M280 285 L290 290 L290 335 L280 330 Z" fill="#020617" stroke="#12d4c9" strokeWidth="1.5" />
-                    <path d="M290 290 L335 268 L335 313 L290 335 Z" fill="#1e293b" stroke="#12d4c9" strokeWidth="1.5" />
-                    <polygon points="310,275 355,297 355,265 310,243" fill="rgba(18,212,201,0.35)" stroke="#12d4c9" strokeWidth="1.8" filter="url(#cyanGlow)" />
+                  {/* Punto 1: Speed Gates */}
+                  <g className={`iso-hw-group ${activeCheckpointIndex === 0 ? 'is-active-hw' : ''}`} onClick={() => handleSelectCheckpoint(0)} style={{ cursor: 'pointer' }}>
+                    <path d="M280 275 L325 253 L335 258 L290 280 Z" fill="#0f172a" stroke="#12d4c9" strokeWidth="1.5" />
+                    <path d="M280 275 L290 280 L290 325 L280 320 Z" fill="#020617" stroke="#12d4c9" strokeWidth="1.5" />
+                    <path d="M290 280 L335 253 L335 298 L290 325 Z" fill="#1e293b" stroke="#12d4c9" strokeWidth="1.5" />
+                    <polygon points="310,265 355,287 355,255 310,233" fill="rgba(18,212,201,0.35)" stroke="#12d4c9" strokeWidth="1.8" filter="url(#cyanGlow)" />
 
-                    <path d="M360 325 L405 303 L415 308 L370 330 Z" fill="#0f172a" stroke="#12d4c9" strokeWidth="1.5" />
-                    <path d="M360 325 L370 330 L370 375 L360 370 Z" fill="#020617" stroke="#12d4c9" strokeWidth="1.5" />
-                    <path d="M370 330 L415 308 L415 353 L370 375 Z" fill="#1e293b" stroke="#12d4c9" strokeWidth="1.5" />
-                    <polygon points="390,315 435,337 435,305 390,283" fill="rgba(18,212,201,0.35)" stroke="#12d4c9" strokeWidth="1.8" filter="url(#cyanGlow)" />
-
-                    <line x1="310" y1="277" x2="390" y2="317" stroke="#10b981" strokeWidth="2.5" strokeDasharray="4 3" filter="url(#cyanGlow)" />
-                    <text x="250" y="370" fill="#12d4c9" fontSize="11" fontFamily="monospace" fontWeight="bold">PASILLO SPEED GATES ▶</text>
+                    <path d="M360 315 L405 293 L415 298 L370 320 Z" fill="#0f172a" stroke="#12d4c9" strokeWidth="1.5" />
+                    <path d="M360 315 L370 320 L370 365 L360 360 Z" fill="#020617" stroke="#12d4c9" strokeWidth="1.5" />
+                    <path d="M370 320 L415 293 L415 338 L370 365 Z" fill="#1e293b" stroke="#12d4c9" strokeWidth="1.5" />
+                    <polygon points="390,305 435,327 435,295 390,273" fill="rgba(18,212,201,0.35)" stroke="#12d4c9" strokeWidth="1.8" filter="url(#cyanGlow)" />
+                    <text x="250" y="360" fill="#12d4c9" fontSize="11" fontFamily="monospace" fontWeight="bold">PASILLO SPEED GATES ▶</text>
                   </g>
 
-                  {/* Punto 2: Sala de Servidores */}
-                  <g className={`iso-hw-group ${activeCheckpointIndex === 1 ? 'is-active-hw' : ''}`}>
-                    <path d="M230 120 L300 85 L300 195 L230 230 Z" fill="#020617" stroke="#38bdf8" strokeWidth="2" />
-                    <rect x="295" y="135" width="10" height="18" fill="#38bdf8" filter="url(#cyanGlow)" />
-                    <text x="200" y="60" fill="#38bdf8" fontSize="11" fontFamily="monospace" fontWeight="bold">SALA TI // SERVIDORES [FACIAL 3D]</text>
+                  {/* Punto 2: Data Center */}
+                  <g className={`iso-hw-group ${activeCheckpointIndex === 1 ? 'is-active-hw' : ''}`} onClick={() => handleSelectCheckpoint(1)} style={{ cursor: 'pointer' }}>
+                    <path d="M230 110 L300 75 L300 185 L230 220 Z" fill="#020617" stroke="#38bdf8" strokeWidth="2" />
+                    <rect x="295" y="125" width="10" height="18" fill="#38bdf8" filter="url(#cyanGlow)" />
+                    <text x="200" y="50" fill="#38bdf8" fontSize="11" fontFamily="monospace" fontWeight="bold">SALA TI // SERVIDORES [FACIAL 3D]</text>
                   </g>
 
                   {/* Punto 3: Recepción NFC */}
-                  <g className={`iso-hw-group ${activeCheckpointIndex === 2 ? 'is-active-hw' : ''}`}>
-                    <path d="M570 205 L650 165 L680 180 L600 220 Z" fill="#0f172a" stroke="#12d4c9" strokeWidth="1.5" />
-                    <path d="M570 205 L600 220 L600 255 L570 240 Z" fill="#020617" stroke="#12d4c9" strokeWidth="1.5" />
-                    <path d="M600 220 L680 180 L680 215 L600 255 Z" fill="#1e293b" stroke="#12d4c9" strokeWidth="1.5" />
-                    <ellipse cx="630" cy="190" rx="10" ry="5" stroke="#10b981" strokeWidth="1.8" fill="none" filter="url(#cyanGlow)" />
-                    <ellipse cx="630" cy="190" rx="18" ry="9" stroke="#10b981" strokeWidth="1.2" strokeDasharray="3 2" fill="none" />
-                    <text x="580" y="150" fill="#10b981" fontSize="11" fontFamily="monospace" fontWeight="bold">NFC SMARTPHONE DESK</text>
+                  <g className={`iso-hw-group ${activeCheckpointIndex === 2 ? 'is-active-hw' : ''}`} onClick={() => handleSelectCheckpoint(2)} style={{ cursor: 'pointer' }}>
+                    <path d="M580 195 L660 155 L690 170 L610 210 Z" fill="#0f172a" stroke="#12d4c9" strokeWidth="1.5" />
+                    <path d="M580 195 L610 210 L610 245 L580 230 Z" fill="#020617" stroke="#12d4c9" strokeWidth="1.5" />
+                    <path d="M610 210 L690 170 L690 205 L610 245 Z" fill="#1e293b" stroke="#12d4c9" strokeWidth="1.5" />
+                    <ellipse cx="640" cy="180" rx="10" ry="5" stroke="#10b981" strokeWidth="1.8" fill="none" filter="url(#cyanGlow)" />
+                    <text x="590" y="140" fill="#10b981" fontSize="11" fontFamily="monospace" fontWeight="bold">NFC SMARTPHONE DESK</text>
                   </g>
                 </g>
               )}
@@ -604,32 +583,30 @@ export default function AccessEnvironmentsInteractive() {
               {activeEnvId === 'edificios' && (
                 <g className="iso-env-graphics">
                   {/* Punto 1: Kiosco QR */}
-                  <g className={`iso-hw-group ${activeCheckpointIndex === 0 ? 'is-active-hw' : ''}`}>
-                    <path d="M290 265 L325 248 L335 253 L300 270 Z" fill="#0f172a" stroke="#12d4c9" strokeWidth="1.8" />
-                    <path d="M290 265 L300 270 L300 340 L290 335 Z" fill="#020617" stroke="#12d4c9" strokeWidth="1.8" />
-                    <path d="M300 270 L335 253 L335 323 L300 340 Z" fill="#1e293b" stroke="#12d4c9" strokeWidth="1.8" />
-                    <polygon points="302,277 330,263 330,300 302,314" fill="#12d4c9" opacity="0.9" filter="url(#cyanGlow)" />
-                    <text x="250" y="365" fill="#12d4c9" fontSize="11" fontFamily="monospace" fontWeight="bold">KIOSCO VISITANTES QR</text>
+                  <g className={`iso-hw-group ${activeCheckpointIndex === 0 ? 'is-active-hw' : ''}`} onClick={() => handleSelectCheckpoint(0)} style={{ cursor: 'pointer' }}>
+                    <path d="M290 255 L325 238 L335 243 L300 260 Z" fill="#0f172a" stroke="#12d4c9" strokeWidth="1.8" />
+                    <path d="M290 255 L300 260 L300 330 L290 325 Z" fill="#020617" stroke="#12d4c9" strokeWidth="1.8" />
+                    <path d="M300 260 L335 243 L335 313 L300 330 Z" fill="#1e293b" stroke="#12d4c9" strokeWidth="1.8" />
+                    <polygon points="302,267 330,253 330,290 302,304" fill="#12d4c9" opacity="0.9" filter="url(#cyanGlow)" />
+                    <text x="250" y="355" fill="#12d4c9" fontSize="11" fontFamily="monospace" fontWeight="bold">KIOSCO VISITANTES QR</text>
                   </g>
 
-                  {/* Punto 2: Elevador Inteligente */}
-                  <g className={`iso-hw-group ${activeCheckpointIndex === 1 ? 'is-active-hw' : ''}`}>
-                    <path d="M520 135 L590 100 L590 220 L520 255 Z" fill="#0f172a" stroke="#38bdf8" strokeWidth="2" />
-                    <line x1="555" y1="117" x2="555" y2="237" stroke="#38bdf8" strokeWidth="1.8" />
-                    <rect x="535" y="105" width="40" height="10" fill="#020617" stroke="#10b981" strokeWidth="1.2" />
-                    <text x="542" y="113" fill="#10b981" fontSize="8" fontFamily="monospace">PISO 18 ▲</text>
-                    <text x="490" y="75" fill="#38bdf8" fontSize="11" fontFamily="monospace" fontWeight="bold">ELEVADOR // ACCESO POR PISO</text>
+                  {/* Punto 2: Elevador */}
+                  <g className={`iso-hw-group ${activeCheckpointIndex === 1 ? 'is-active-hw' : ''}`} onClick={() => handleSelectCheckpoint(1)} style={{ cursor: 'pointer' }}>
+                    <path d="M530 125 L600 90 L600 210 L530 245 Z" fill="#0f172a" stroke="#38bdf8" strokeWidth="2" />
+                    <line x1="565" y1="107" x2="565" y2="227" stroke="#38bdf8" strokeWidth="1.8" />
+                    <rect x="545" y="95" width="40" height="10" fill="#020617" stroke="#10b981" strokeWidth="1.2" />
+                    <text x="552" y="103" fill="#10b981" fontSize="8" fontFamily="monospace">PISO 18 ▲</text>
+                    <text x="500" y="65" fill="#38bdf8" fontSize="11" fontFamily="monospace" fontWeight="bold">ELEVADOR // ACCESO POR PISO</text>
                   </g>
 
-                  {/* Punto 3: Barrera Vehicular UHF */}
-                  <g className={`iso-hw-group ${activeCheckpointIndex === 2 ? 'is-active-hw' : ''}`}>
-                    <path d="M580 315 L610 300 L620 305 L590 320 Z" fill="#0f172a" stroke="#f59e0b" strokeWidth="1.8" />
-                    <path d="M580 315 L590 320 L590 365 L580 360 Z" fill="#020617" stroke="#f59e0b" strokeWidth="1.8" />
-                    <path d="M590 320 L620 305 L620 350 L590 365 Z" fill="#1e293b" stroke="#f59e0b" strokeWidth="1.8" />
-                    <line x1="590" y1="325" x2="660" y2="290" stroke="#f59e0b" strokeWidth="4.5" strokeDasharray="10 7" filter="url(#cyanGlow)" />
-                    <line x1="565" y1="290" x2="565" y2="250" stroke="#38bdf8" strokeWidth="2.5" />
-                    <polygon points="560,250 570,250 565,240" fill="#38bdf8" filter="url(#cyanGlow)" />
-                    <text x="540" y="385" fill="#f59e0b" fontSize="11" fontFamily="monospace" fontWeight="bold">BARRERA VEHICULAR TAG UHF</text>
+                  {/* Punto 3: Barrera Vehicular */}
+                  <g className={`iso-hw-group ${activeCheckpointIndex === 2 ? 'is-active-hw' : ''}`} onClick={() => handleSelectCheckpoint(2)} style={{ cursor: 'pointer' }}>
+                    <path d="M580 305 L610 290 L620 295 L590 310 Z" fill="#0f172a" stroke="#f59e0b" strokeWidth="1.8" />
+                    <path d="M580 305 L590 310 L590 355 L580 350 Z" fill="#020617" stroke="#f59e0b" strokeWidth="1.8" />
+                    <path d="M590 310 L620 295 L620 340 L590 355 Z" fill="#1e293b" stroke="#f59e0b" strokeWidth="1.8" />
+                    <line x1="590" y1="315" x2="660" y2="280" stroke="#f59e0b" strokeWidth="4.5" strokeDasharray="10 7" filter="url(#cyanGlow)" />
+                    <text x="540" y="375" fill="#f59e0b" fontSize="11" fontFamily="monospace" fontWeight="bold">BARRERA VEHICULAR TAG UHF</text>
                   </g>
                 </g>
               )}
@@ -637,129 +614,150 @@ export default function AccessEnvironmentsInteractive() {
               {/* === GOBIERNO === */}
               {activeEnvId === 'gobierno' && (
                 <g className="iso-env-graphics">
-                  {/* Punto 1: Reconocimiento Facial 3D */}
-                  <g className={`iso-hw-group ${activeCheckpointIndex === 0 ? 'is-active-hw' : ''}`}>
-                    <path d="M270 160 L340 125 L350 130 L280 165 Z" fill="#0f172a" stroke="#10b981" strokeWidth="1.8" />
-                    <path d="M270 160 L280 165 L280 255 L270 250 Z" fill="#020617" stroke="#10b981" strokeWidth="2" />
-                    <path d="M340 125 L350 130 L350 220 L340 215 Z" fill="#020617" stroke="#10b981" strokeWidth="2" />
-                    <polygon points="310,140 260,240 370,190" fill="rgba(16,185,129,0.2)" stroke="#10b981" strokeWidth="1.2" strokeDasharray="4 3" filter="url(#cyanGlow)" />
-                    <text x="240" y="100" fill="#10b981" fontSize="11" fontFamily="monospace" fontWeight="bold">RECONOCIMIENTO FACIAL 3D (3M)</text>
+                  {/* Punto 1: Reconocimiento Facial */}
+                  <g className={`iso-hw-group ${activeCheckpointIndex === 0 ? 'is-active-hw' : ''}`} onClick={() => handleSelectCheckpoint(0)} style={{ cursor: 'pointer' }}>
+                    <path d="M270 150 L340 115 L350 120 L280 155 Z" fill="#0f172a" stroke="#10b981" strokeWidth="1.8" />
+                    <path d="M270 150 L280 155 L280 245 L270 240 Z" fill="#020617" stroke="#10b981" strokeWidth="2" />
+                    <path d="M340 115 L350 120 L350 210 L340 205 Z" fill="#020617" stroke="#10b981" strokeWidth="2" />
+                    <polygon points="310,130 260,230 370,180" fill="rgba(16,185,129,0.2)" stroke="#10b981" strokeWidth="1.2" strokeDasharray="4 3" filter="url(#cyanGlow)" />
+                    <text x="240" y="90" fill="#10b981" fontSize="11" fontFamily="monospace" fontWeight="bold">RECONOCIMIENTO FACIAL 3D (3M)</text>
                   </g>
 
                   {/* Punto 2: Filtro Perimetral */}
-                  <g className={`iso-hw-group ${activeCheckpointIndex === 1 ? 'is-active-hw' : ''}`}>
-                    <path d="M510 275 L560 250 L570 255 L520 280 Z" fill="#0f172a" stroke="#12d4c9" strokeWidth="1.8" />
-                    <path d="M510 275 L520 280 L520 325 L510 320 Z" fill="#020617" stroke="#12d4c9" strokeWidth="1.8" />
-                    <path d="M520 280 L570 255 L570 300 L520 325 Z" fill="#1e293b" stroke="#12d4c9" strokeWidth="1.8" />
-                    <line x1="535" y1="270" x2="585" y2="295" stroke="#12d4c9" strokeWidth="3" />
-                    <text x="480" y="350" fill="#12d4c9" fontSize="11" fontFamily="monospace" fontWeight="bold">FILTRO SEGURIDAD INSTITUCIONAL</text>
+                  <g className={`iso-hw-group ${activeCheckpointIndex === 1 ? 'is-active-hw' : ''}`} onClick={() => handleSelectCheckpoint(1)} style={{ cursor: 'pointer' }}>
+                    <path d="M510 265 L560 240 L570 245 L520 270 Z" fill="#0f172a" stroke="#12d4c9" strokeWidth="1.8" />
+                    <path d="M510 265 L520 270 L520 315 L510 310 Z" fill="#020617" stroke="#12d4c9" strokeWidth="1.8" />
+                    <path d="M520 270 L570 245 L570 290 L520 315 Z" fill="#1e293b" stroke="#12d4c9" strokeWidth="1.8" />
+                    <line x1="535" y1="260" x2="585" y2="285" stroke="#12d4c9" strokeWidth="3" />
+                    <text x="480" y="340" fill="#12d4c9" fontSize="11" fontFamily="monospace" fontWeight="bold">FILTRO SEGURIDAD INSTITUCIONAL</text>
                   </g>
 
                   {/* Punto 3: Archivo Clasificado */}
-                  <g className={`iso-hw-group ${activeCheckpointIndex === 2 ? 'is-active-hw' : ''}`}>
-                    <path d="M530 100 L600 65 L600 170 L530 205 Z" fill="#020617" stroke="#38bdf8" strokeWidth="2" />
-                    <rect x="550" y="75" width="30" height="8" fill="#ef4444" filter="url(#cyanGlow)" />
-                    <circle cx="605" cy="120" r="3.5" fill="#12d4c9" />
-                    <text x="500" y="45" fill="#38bdf8" fontSize="11" fontFamily="monospace" fontWeight="bold">ARCHIVO CLASIFICADO [600 LBS]</text>
+                  <g className={`iso-hw-group ${activeCheckpointIndex === 2 ? 'is-active-hw' : ''}`} onClick={() => handleSelectCheckpoint(2)} style={{ cursor: 'pointer' }}>
+                    <path d="M540 90 L610 55 L610 160 L540 195 Z" fill="#020617" stroke="#38bdf8" strokeWidth="2" />
+                    <rect x="560" y="65" width="30" height="8" fill="#ef4444" filter="url(#cyanGlow)" />
+                    <circle cx="615" cy="110" r="3.5" fill="#12d4c9" />
+                    <text x="510" y="35" fill="#38bdf8" fontSize="11" fontFamily="monospace" fontWeight="bold">ARCHIVO CLASIFICADO [600 LBS]</text>
                   </g>
                 </g>
               )}
 
-              {/* 4. ISOMETRIC CYBER HOTSPOT PINS */}
+              {/* FLOATING CYBER CALLOUT TAGS ANCHORED ON CANVAS */}
               {selectedEnv.checkpoints.map((cp, idx) => {
                 const isSelected = activeCheckpointIndex === idx;
-                const { x, y } = cp.svgCoords;
+                const { x, y } = cp.tagCoords;
+                const targetPoint = cp.svgCoords;
 
                 return (
                   <g 
-                    key={cp.id} 
-                    className={`iso-hotspot-pin-node ${isSelected ? 'is-selected' : ''}`}
+                    key={`tag-${cp.id}`} 
+                    className={`iso-canvas-tag ${isSelected ? 'tag-selected' : ''}`}
                     onClick={() => handleSelectCheckpoint(idx)}
                     style={{ cursor: 'pointer' }}
                   >
-                    {/* Animated Pulsing Rings */}
-                    <circle cx={x} cy={y} r="20" fill="none" stroke="#12d4c9" strokeWidth="1.2" className="pin-svg-wave" />
-                    <circle cx={x} cy={y} r="12" fill="none" stroke="#12d4c9" strokeWidth="1.8" className="pin-svg-ring" />
-                    
-                    {/* Main Core Pin */}
-                    <circle 
-                      cx={x} 
-                      cy={y} 
-                      r="9" 
-                      fill={isSelected ? '#12d4c9' : '#0f172a'} 
-                      stroke={isSelected ? '#ffffff' : '#12d4c9'} 
-                      strokeWidth="2.2" 
-                      filter="url(#cyanGlow)" 
+                    {/* Leader Line from Tag to Equipment */}
+                    <line 
+                      x1={x} 
+                      y1={y + 12} 
+                      x2={targetPoint.x} 
+                      y2={targetPoint.y} 
+                      stroke={isSelected ? '#12d4c9' : '#64748b'} 
+                      strokeWidth={isSelected ? '1.8' : '1'} 
+                      strokeDasharray={isSelected ? 'none' : '3 3'}
+                      strokeOpacity={isSelected ? '0.9' : '0.4'}
                     />
-                    
-                    {/* Number text */}
+
+                    {/* Tag Background Pill */}
+                    <rect 
+                      x={x - 85} 
+                      y={y - 12} 
+                      width="170" 
+                      height="24" 
+                      rx="12" 
+                      fill={isSelected ? '#020617' : '#0f172a'} 
+                      stroke={isSelected ? '#12d4c9' : '#334155'} 
+                      strokeWidth={isSelected ? '1.8' : '1'}
+                      filter={isSelected ? 'url(#cyanGlow)' : 'none'}
+                    />
+
+                    {/* Tag Number Circle */}
+                    <circle 
+                      cx={x - 72} 
+                      cy={y} 
+                      r="7.5" 
+                      fill={isSelected ? '#12d4c9' : '#334155'} 
+                    />
                     <text 
-                      x={x} 
-                      y={y + 4} 
+                      x={x - 72} 
+                      y={y + 3} 
                       fill={isSelected ? '#020617' : '#ffffff'} 
-                      fontSize="10" 
+                      fontSize="9" 
                       fontWeight="bold" 
                       fontFamily="monospace" 
                       textAnchor="middle"
                     >
                       {cp.number}
                     </text>
+
+                    {/* Tag Text */}
+                    <text 
+                      x={x - 58} 
+                      y={y + 3.5} 
+                      fill={isSelected ? '#ffffff' : '#94a3b8'} 
+                      fontSize="9.5" 
+                      fontWeight="bold" 
+                      fontFamily="sans-serif"
+                    >
+                      {cp.tag}
+                    </text>
                   </g>
                 );
               })}
             </svg>
-
-            {/* 5. INTERACTIVE HUD POPUP CARD ("Pop que muestra la información") */}
-            {showPopup && (
-              <div className="blueprint-hud-popup">
-                <button 
-                  className="hud-popup-close-btn" 
-                  onClick={() => setShowPopup(false)}
-                  title="Cerrar ficha"
-                >
-                  <X size={15} />
-                </button>
-
-                <div className="hud-popup-header">
-                  <div className="hud-popup-tag-badge font-mono">
-                    <ShieldCheck size={13} className="inline mr-1 text-accent" />
-                    <span>PUNTO {currentCheckpoint.number}: {currentCheckpoint.tag}</span>
-                  </div>
-                  <h4 className="hud-popup-title">{currentCheckpoint.title}</h4>
-                  <div className="hud-popup-tech font-mono">
-                    <Zap size={13} className="text-accent inline mr-1" />
-                    <span>{currentCheckpoint.tech}</span>
-                  </div>
-                </div>
-
-                <p className="hud-popup-desc">{currentCheckpoint.desc}</p>
-
-                <div className="hud-popup-highlights">
-                  <span className="hud-hl-label font-mono">ESPECIFICACIONES CLAVE:</span>
-                  <div className="hud-hl-list">
-                    {currentCheckpoint.highlights.map((h, i) => (
-                      <div key={i} className="hud-hl-item">
-                        <CheckCircle2 size={13} className="text-accent flex-shrink-0 mr-1.5 inline" />
-                        <span>{h}</span>
-                      </div>
-                    ))}
-                  </div>
-                </div>
-
-                <div className="hud-popup-actions">
-                  <a 
-                    href={waUrl}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="btn btn-primary w-full justify-center text-sm py-2.5"
-                  >
-                    Cotizar este Punto de Control →
-                  </a>
-                </div>
-              </div>
-            )}
-
           </div>
+
+          {/* 3. DOCKED BOTTOM EXECUTIVE HUD FICHA STRIP (Zero Overlap, Premium Architecture) */}
+          <div className="blueprint-docked-hud">
+            <div className="hud-left-details">
+              <div className="flex items-center gap-2 mb-1">
+                <span className="hud-tag-pill font-mono">
+                  <ShieldCheck size={13} className="inline mr-1 text-accent" />
+                  PUNTO {currentCheckpoint.number}: {currentCheckpoint.tag}
+                </span>
+                <span className="hud-tech-text font-mono">
+                  <Zap size={12} className="text-accent inline mr-1" />
+                  {currentCheckpoint.tech}
+                </span>
+              </div>
+              <h4 className="hud-unit-title">{currentCheckpoint.title}</h4>
+              <p className="hud-unit-desc">{currentCheckpoint.desc}</p>
+            </div>
+
+            <div className="hud-center-specs">
+              <span className="specs-label font-mono">ESPECIFICACIONES CLAVE:</span>
+              <div className="specs-pills-list">
+                {currentCheckpoint.highlights.map((h, i) => (
+                  <div key={i} className="spec-pill-item">
+                    <CheckCircle2 size={13} className="text-accent flex-shrink-0 mr-1.5 inline" />
+                    <span>{h}</span>
+                  </div>
+                ))}
+              </div>
+            </div>
+
+            <div className="hud-right-action">
+              <a 
+                href={waUrl}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="btn btn-primary w-full justify-center text-sm py-3"
+              >
+                <MessageSquare size={16} className="mr-1.5 inline" />
+                Cotizar este Punto →
+              </a>
+            </div>
+          </div>
+
         </div>
 
       </div>
