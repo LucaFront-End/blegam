@@ -12,8 +12,7 @@ import {
   ShieldCheck, 
   MapPin, 
   MessageSquare,
-  Activity,
-  ArrowRight
+  Activity
 } from 'lucide-react';
 import './AccessEnvironmentsInteractive.css';
 
@@ -35,9 +34,9 @@ const ENVIRONMENTS_DATA = [
         desc: "Ingreso masivo de miles de alumnos por hora con validación de credencial activa y prevención de sustitución de alumnos.",
         tag: "Ingreso Alumnos",
         svgCoords: { x: 300, y: 310 },
-        tagCoords: { x: 300, y: 260 },
+        tagCoords: { x: 300, y: 255 },
         highlights: [
-          "Validación en < 0.2 seg",
+          "Validación ultrarrápida en < 0.2s",
           "Alerta automática a tutores por App",
           "Mecanismo de uso continuo de alto flujo"
         ]
@@ -50,7 +49,7 @@ const ENVIRONMENTS_DATA = [
         desc: "Validación obligatoria de padres de familia y proveedores con impresión de distintivo temporal con fotografía y QR.",
         tag: "Control de Tutores",
         svgCoords: { x: 640, y: 240 },
-        tagCoords: { x: 640, y: 190 },
+        tagCoords: { x: 640, y: 185 },
         highlights: [
           "Validación de tutor autorizado",
           "Gafete de visita con QR temporal",
@@ -65,7 +64,7 @@ const ENVIRONMENTS_DATA = [
         desc: "Caída inmediata de brazos de torniquetes y apertura de puertas ante señal de alarma sísmica, conato de incendio o corte de luz.",
         tag: "Fail-Safe Evacuación",
         svgCoords: { x: 500, y: 130 },
-        tagCoords: { x: 500, y: 75 },
+        tagCoords: { x: 500, y: 70 },
         highlights: [
           "Desbloqueo instantáneo sin energía",
           "Liberación por contacto de alarma",
@@ -91,7 +90,7 @@ const ENVIRONMENTS_DATA = [
         desc: "Acceso con regla de doble custodia obligatoria, bitácora AES-256 inalterable y protocolo silencioso anti-coacción.",
         tag: "Bóvedas & Custodia",
         svgCoords: { x: 280, y: 180 },
-        tagCoords: { x: 280, y: 120 },
+        tagCoords: { x: 280, y: 115 },
         highlights: [
           "Apertura por doble autorización",
           "Registro forense inalterable",
@@ -106,7 +105,7 @@ const ENVIRONMENTS_DATA = [
         desc: "Validación de identidad de cajeros y supervisores previa a autorizar transacciones o apertura de gavetas de valores.",
         tag: "Zona de Cajas",
         svgCoords: { x: 560, y: 280 },
-        tagCoords: { x: 560, y: 225 },
+        tagCoords: { x: 560, y: 220 },
         highlights: [
           "Sensor óptico anti-huella falsa",
           "Verificación en cada apertura",
@@ -121,7 +120,7 @@ const ENVIRONMENTS_DATA = [
         desc: "Sincronización simultánea de videoclips HD con cada intento de acceso o evento de lectura de credencial.",
         tag: "Auditoría 24/7",
         svgCoords: { x: 650, y: 140 },
-        tagCoords: { x: 650, y: 85 },
+        tagCoords: { x: 650, y: 80 },
         highlights: [
           "Videowall en tiempo real",
           "Alertas por intento fallido",
@@ -147,7 +146,7 @@ const ENVIRONMENTS_DATA = [
         desc: "Desahogo continuo de colaboradores en horas pico previniendo pasos simultáneos sin autorización mediante cortina infrarroja.",
         tag: "Flujo Masivo",
         svgCoords: { x: 330, y: 300 },
-        tagCoords: { x: 330, y: 245 },
+        tagCoords: { x: 330, y: 240 },
         highlights: [
           "Apertura veloz (< 0.3 seg)",
           "16 sensores anti-tailgating",
@@ -162,7 +161,7 @@ const ENVIRONMENTS_DATA = [
         desc: "Restricción exclusiva a personal informático autorizado con monitoreo de tiempo de permanencia y alerta por puerta abierta.",
         tag: "Infraestructura TI",
         svgCoords: { x: 280, y: 160 },
-        tagCoords: { x: 280, y: 105 },
+        tagCoords: { x: 280, y: 100 },
         highlights: [
           "Facial 3D liveness anti-foto",
           "Alerta por puerta abierta >30s",
@@ -177,7 +176,7 @@ const ENVIRONMENTS_DATA = [
         desc: "Asignación instantánea de permisos temporales a empleados y consultores sin necesidad de tarjetas plásticas físicas.",
         tag: "NFC Smartphone",
         svgCoords: { x: 620, y: 230 },
-        tagCoords: { x: 620, y: 175 },
+        tagCoords: { x: 620, y: 170 },
         highlights: [
           "Acceso sin contacto con móvil",
           "Baja de credencial con 1 clic",
@@ -203,7 +202,7 @@ const ENVIRONMENTS_DATA = [
         desc: "Autocomprobación de identidad y registro fotográfico con notificación automática al residente o anfitrión corporativo.",
         tag: "Autogestión QR",
         svgCoords: { x: 310, y: 290 },
-        tagCoords: { x: 310, y: 235 },
+        tagCoords: { x: 310, y: 230 },
         highlights: [
           "Ticket o distintivo con código QR",
           "QR dinámico de un solo uso",
@@ -218,7 +217,7 @@ const ENVIRONMENTS_DATA = [
         desc: "El elevador habilita exclusivamente la botonera del piso asignado a la tarjeta o credencial del usuario.",
         tag: "Pisos Restringidos",
         svgCoords: { x: 560, y: 170 },
-        tagCoords: { x: 560, y: 115 },
+        tagCoords: { x: 560, y: 110 },
         highlights: [
           "Compatible con Otis, Schindler, KONE",
           "Permisos por perfil de residente",
@@ -233,7 +232,7 @@ const ENVIRONMENTS_DATA = [
         desc: "Apertura automatizada de barreras de estacionamiento para vehículos registrados con historial completo de entradas.",
         tag: "Tag Vehicular",
         svgCoords: { x: 600, y: 340 },
-        tagCoords: { x: 600, y: 285 },
+        tagCoords: { x: 600, y: 280 },
         highlights: [
           "Antena UHF alcance 6 a 10m",
           "Apertura en 1.5 segundos",
@@ -259,7 +258,7 @@ const ENVIRONMENTS_DATA = [
         desc: "Verificación de identidad sin detener el paso de funcionarios y directores con alta precisión anti-suplantación.",
         tag: "Reconocimiento Facial",
         svgCoords: { x: 310, y: 190 },
-        tagCoords: { x: 310, y: 135 },
+        tagCoords: { x: 310, y: 130 },
         highlights: [
           "Lectura al caminar a 3m",
           "Sensor liveness infrarrojo 3D",
@@ -274,7 +273,7 @@ const ENVIRONMENTS_DATA = [
         desc: "Punto de control institucional que canaliza el flujo del público general previo a ingresar a áreas gubernamentales.",
         tag: "Filtro Institucional",
         svgCoords: { x: 550, y: 300 },
-        tagCoords: { x: 550, y: 245 },
+        tagCoords: { x: 550, y: 240 },
         highlights: [
           "Acero inoxidable 304 anti-vandalismo",
           "Integración con detector de metales",
@@ -289,7 +288,7 @@ const ENVIRONMENTS_DATA = [
         desc: "Control riguroso de ingreso a repositorios de documentos oficiales con sello de tiempo inalterable.",
         tag: "Archivos Clasificados",
         svgCoords: { x: 570, y: 130 },
-        tagCoords: { x: 570, y: 75 },
+        tagCoords: { x: 570, y: 70 },
         highlights: [
           "Retención magnética 600 lbs",
           "Huella o rostro obligatorio",
@@ -379,10 +378,10 @@ export default function AccessEnvironmentsInteractive() {
           {/* 1. Header Bar */}
           <div className="blueprint-top-bar">
             <div className="blueprint-meta-info">
-              <div className="flex items-center gap-2 mb-1">
-                <span className="badge badge-accent text-xs font-mono">{selectedEnv.badge}</span>
+              <div className="blueprint-meta-header">
+                <span className="blueprint-badge-pill font-mono">{selectedEnv.badge}</span>
                 <span className="blueprint-live-tag font-mono">
-                  <Activity size={12} className="inline mr-1 text-emerald-400" />
+                  <Activity size={13} className="text-emerald-400" />
                   PLANO ISOMÉTRICO ACTIVO
                 </span>
               </div>
@@ -716,16 +715,18 @@ export default function AccessEnvironmentsInteractive() {
             </svg>
           </div>
 
-          {/* 3. DOCKED BOTTOM EXECUTIVE HUD FICHA STRIP (Zero Overlap, Premium Architecture) */}
+          {/* 3. DOCKED BOTTOM EXECUTIVE HUD FICHA STRIP */}
           <div className="blueprint-docked-hud">
+            
+            {/* Left Column: Punto Tag + Unit Title + Tech Spec + Description */}
             <div className="hud-left-details">
-              <div className="flex items-center gap-2 mb-1">
+              <div className="hud-meta-row">
                 <span className="hud-tag-pill font-mono">
-                  <ShieldCheck size={13} className="inline mr-1 text-accent" />
+                  <ShieldCheck size={13} className="inline mr-1" />
                   PUNTO {currentCheckpoint.number}: {currentCheckpoint.tag}
                 </span>
                 <span className="hud-tech-text font-mono">
-                  <Zap size={12} className="text-accent inline mr-1" />
+                  <Zap size={12} className="inline mr-1 text-accent" />
                   {currentCheckpoint.tech}
                 </span>
               </div>
@@ -733,29 +734,32 @@ export default function AccessEnvironmentsInteractive() {
               <p className="hud-unit-desc">{currentCheckpoint.desc}</p>
             </div>
 
+            {/* Middle Column: 3 Key Specifications */}
             <div className="hud-center-specs">
               <span className="specs-label font-mono">ESPECIFICACIONES CLAVE:</span>
               <div className="specs-pills-list">
                 {currentCheckpoint.highlights.map((h, i) => (
                   <div key={i} className="spec-pill-item">
-                    <CheckCircle2 size={13} className="text-accent flex-shrink-0 mr-1.5 inline" />
+                    <CheckCircle2 size={14} className="text-accent flex-shrink-0" />
                     <span>{h}</span>
                   </div>
                 ))}
               </div>
             </div>
 
+            {/* Right Column: CTA Action Button */}
             <div className="hud-right-action">
               <a 
                 href={waUrl}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="btn btn-primary w-full justify-center text-sm py-3"
+                className="hud-cta-btn"
               >
-                <MessageSquare size={16} className="mr-1.5 inline" />
-                Cotizar este Punto →
+                <MessageSquare size={17} className="flex-shrink-0" />
+                <span>Cotizar este Punto →</span>
               </a>
             </div>
+
           </div>
 
         </div>
