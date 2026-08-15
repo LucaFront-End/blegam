@@ -8,12 +8,12 @@
 }
 
 /* ═══════════════════════════════════════════════════
-   DESKTOP VIEW: Left Sticky Sidebar + Right Vector Blueprint Stage
+   DESKTOP VIEW: Left Sticky Sidebar (320px) + Right Vector Blueprint Stage
    ═══════════════════════════════════════════════════ */
 
 .env-main-layout {
   display: grid;
-  grid-template-columns: 290px 1fr;
+  grid-template-columns: 320px 1fr;
   gap: 32px;
   align-items: start;
 }
@@ -25,7 +25,7 @@
   background: var(--bg-card);
   border: 1px solid var(--border-light);
   border-radius: var(--radius-xl);
-  padding: 20px;
+  padding: 22px;
   box-shadow: var(--shadow-card);
   z-index: 20;
 }
@@ -43,14 +43,14 @@
 .env-sidebar-list {
   display: flex;
   flex-direction: column;
-  gap: 10px;
+  gap: 12px;
 }
 
 .env-sidebar-btn {
   display: flex;
   align-items: center;
-  gap: 12px;
-  padding: 14px 16px;
+  gap: 14px;
+  padding: 16px 18px;
   border-radius: var(--radius-lg);
   background: var(--bg-primary);
   border: 1px solid var(--border-light);
@@ -64,18 +64,18 @@
   background: #ffffff;
   border-color: var(--accent-primary);
   transform: translateX(4px);
-  box-shadow: 0 4px 14px rgba(18, 212, 201, 0.12);
+  box-shadow: 0 6px 18px rgba(18, 212, 201, 0.12);
 }
 
 .env-sidebar-btn.active {
   background: #ffffff;
   border-color: var(--accent-primary);
-  box-shadow: 0 6px 20px rgba(18, 212, 201, 0.2);
+  box-shadow: 0 8px 24px rgba(18, 212, 201, 0.2);
 }
 
 .env-btn-icon-box {
-  width: 38px;
-  height: 38px;
+  width: 42px;
+  height: 42px;
   border-radius: var(--radius-md);
   background: var(--bg-card);
   border: 1px solid var(--border-light);
@@ -100,19 +100,19 @@
 }
 
 .env-btn-title {
-  font-size: 0.9rem;
+  font-size: 0.95rem;
   font-weight: 700;
   color: var(--text-primary);
-  white-space: nowrap;
-  overflow: hidden;
-  text-overflow: ellipsis;
+  white-space: normal;
+  line-height: 1.3;
 }
 
 .env-btn-badge {
-  font-size: 0.68rem;
+  font-size: 0.7rem;
   font-family: var(--font-mono);
   color: var(--text-tertiary);
-  margin-top: 2px;
+  margin-top: 3px;
+  line-height: 1.25;
 }
 
 .env-btn-arrow {
@@ -125,7 +125,7 @@
 .env-sidebar-btn.active .env-btn-arrow {
   color: var(--accent-primary);
   opacity: 1;
-  transform: translateX(2px);
+  transform: translateX(3px);
 }
 
 /* ═══════════════════════════════════════════════════
@@ -134,155 +134,131 @@
 
 .env-blueprint-stage {
   background: radial-gradient(circle at 50% 30%, #0b152d 0%, #020617 100%);
-  border: 1px solid rgba(18, 212, 201, 0.25);
+  border: 1px solid rgba(18, 212, 201, 0.3);
   border-radius: var(--radius-xl);
   overflow: hidden;
-  box-shadow: 0 30px 80px -20px rgba(0, 0, 0, 0.8), 0 0 40px rgba(18, 212, 201, 0.08);
+  box-shadow: 0 35px 90px -20px rgba(0, 0, 0, 0.8), 0 0 50px rgba(18, 212, 201, 0.1);
   display: flex;
   flex-direction: column;
 }
 
 /* Stage Header Bar */
 .blueprint-top-bar {
-  padding: 24px 28px;
-  background: rgba(2, 6, 23, 0.7);
+  padding: 26px 30px;
+  background: rgba(2, 6, 23, 0.85);
   border-bottom: 1px solid rgba(255, 255, 255, 0.08);
   display: flex;
-  justify-content: space-between;
-  align-items: center;
-  gap: 20px;
-  backdrop-filter: blur(10px);
+  flex-direction: column;
+  gap: 18px;
+  backdrop-filter: blur(12px);
+}
+
+.blueprint-meta-info {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
 }
 
 .blueprint-live-tag {
-  font-size: 0.68rem;
+  font-size: 0.7rem;
   font-weight: 800;
   color: #38bdf8;
   letter-spacing: 0.5px;
 }
 
 .blueprint-env-title {
-  font-size: 1.45rem;
+  font-size: 1.55rem;
   font-weight: 800;
   color: #ffffff;
-  margin: 0 0 4px 0;
+  margin: 0;
   letter-spacing: -0.3px;
 }
 
 .blueprint-env-desc {
-  font-size: 0.86rem;
+  font-size: 0.9rem;
   color: #94a3b8;
-  margin: 0;
-  line-height: 1.45;
+  margin: 2px 0 0 0;
+  line-height: 1.5;
 }
 
-.blueprint-stat-box {
-  background: rgba(18, 212, 201, 0.08);
-  border: 1px solid rgba(18, 212, 201, 0.3);
-  border-radius: var(--radius-lg);
-  padding: 10px 16px;
-  text-align: right;
-  flex-shrink: 0;
-}
-
-.stat-label {
-  display: block;
-  font-size: 0.62rem;
-  color: #12d4c9;
-  letter-spacing: 0.5px;
-}
-
-.stat-val {
-  display: block;
-  font-size: 0.85rem;
-  font-weight: 700;
-  color: #ffffff;
-  margin-top: 2px;
-}
-
-/* Blueprint Hotspots Quick Selector Bar */
-.blueprint-hotspots-bar {
-  padding: 12px 28px;
-  background: rgba(15, 23, 42, 0.6);
-  border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+/* Checkpoints Selector Tabs */
+.blueprint-checkpoints-tabs {
   display: flex;
-  align-items: center;
-  gap: 16px;
+  flex-direction: column;
+  gap: 8px;
+  padding-top: 12px;
+  border-top: 1px solid rgba(255, 255, 255, 0.06);
 }
 
-.hotspot-bar-label {
+.tabs-label {
   font-size: 0.68rem;
   font-weight: 800;
   color: #64748b;
   letter-spacing: 0.5px;
-  white-space: nowrap;
 }
 
-.hotspot-bar-pills {
-  display: flex;
-  gap: 8px;
-  flex-grow: 1;
+.tabs-row {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 10px;
 }
 
-.blueprint-pill-btn {
-  flex: 1;
+.blueprint-tab-btn {
   display: flex;
   align-items: center;
-  gap: 8px;
-  padding: 8px 12px;
+  gap: 10px;
+  padding: 10px 14px;
   border-radius: var(--radius-md);
-  background: rgba(2, 6, 23, 0.6);
+  background: rgba(15, 23, 42, 0.7);
   border: 1px solid rgba(255, 255, 255, 0.08);
   cursor: pointer;
   transition: all 0.25s ease;
   color: #94a3b8;
-  font-size: 0.78rem;
   text-align: left;
 }
 
-.blueprint-pill-btn:hover {
-  background: rgba(18, 212, 201, 0.1);
+.blueprint-tab-btn:hover {
+  background: rgba(18, 212, 201, 0.12);
   border-color: rgba(18, 212, 201, 0.4);
   color: #ffffff;
 }
 
-.blueprint-pill-btn.active {
-  background: rgba(18, 212, 201, 0.18);
+.blueprint-tab-btn.active {
+  background: rgba(18, 212, 201, 0.2);
   border-color: #12d4c9;
   color: #ffffff;
-  box-shadow: 0 0 16px rgba(18, 212, 201, 0.2);
+  box-shadow: 0 0 16px rgba(18, 212, 201, 0.25);
 }
 
-.pill-circle {
-  width: 20px;
-  height: 20px;
+.tab-num {
+  width: 22px;
+  height: 22px;
   border-radius: 50%;
   background: rgba(255, 255, 255, 0.1);
   display: grid;
   place-items: center;
   font-family: var(--font-mono);
-  font-size: 0.7rem;
+  font-size: 0.72rem;
   font-weight: 800;
   flex-shrink: 0;
 }
 
-.blueprint-pill-btn.active .pill-circle {
+.blueprint-tab-btn.active .tab-num {
   background: #12d4c9;
   color: #020617;
 }
 
-.pill-text {
+.tab-title {
+  font-size: 0.8rem;
   font-weight: 600;
-  white-space: nowrap;
-  overflow: hidden;
-  text-overflow: ellipsis;
+  line-height: 1.25;
 }
 
 /* Blueprint Canvas Container */
 .blueprint-canvas-container {
   position: relative;
   width: 100%;
-  min-height: 500px;
+  min-height: 560px;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -294,8 +270,8 @@
   position: absolute;
   inset: 0;
   background-image: 
-    linear-gradient(rgba(18, 212, 201, 0.06) 1px, transparent 1px),
-    linear-gradient(90deg, rgba(18, 212, 201, 0.06) 1px, transparent 1px);
+    linear-gradient(rgba(18, 212, 201, 0.05) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(18, 212, 201, 0.05) 1px, transparent 1px);
   background-size: 32px 32px;
   pointer-events: none;
 }
@@ -304,18 +280,18 @@
 .blueprint-svg-scene {
   width: 100%;
   height: auto;
-  max-height: 520px;
+  min-height: 540px;
   display: block;
 }
 
-/* Hardware Unit Styling & Hover */
-.iso-hw-unit {
+/* Hardware Unit Styling & Active Glow */
+.iso-hw-group {
   transition: all 0.4s cubic-bezier(0.2, 0.8, 0.2, 1);
   filter: drop-shadow(0 0 4px rgba(18, 212, 201, 0.2));
 }
 
-.iso-hw-unit.highlight-active {
-  filter: drop-shadow(0 0 12px rgba(18, 212, 201, 0.8)) drop-shadow(0 0 24px rgba(56, 189, 248, 0.5));
+.iso-hw-group.is-active-hw {
+  filter: drop-shadow(0 0 14px rgba(18, 212, 201, 0.85)) drop-shadow(0 0 28px rgba(56, 189, 248, 0.6));
 }
 
 /* Hotspot Vector Pin Nodes */
@@ -324,7 +300,7 @@
 }
 
 .iso-hotspot-pin-node:hover {
-  transform: scale(1.15);
+  transform: scale(1.2);
 }
 
 .pin-svg-wave {
@@ -339,41 +315,41 @@
 
 @keyframes pinSvgWavePulse {
   0% {
-    r: 8px;
+    r: 9px;
     opacity: 0.9;
   }
   100% {
-    r: 26px;
+    r: 30px;
     opacity: 0;
   }
 }
 
 @keyframes pinSvgRingPulse {
   0% {
-    r: 8px;
+    r: 9px;
     opacity: 0.9;
   }
   100% {
-    r: 18px;
+    r: 20px;
     opacity: 0;
   }
 }
 
 /* ═══════════════════════════════════════════════════
-   INTERACTIVE HUD POPUP CARD ("POP O ALGO QUE MUESTRE LA INFO")
+   INTERACTIVE HUD POPUP CARD ("Pop que muestra la información")
    ═══════════════════════════════════════════════════ */
 
 .blueprint-hud-popup {
   position: absolute;
   bottom: 24px;
   right: 24px;
-  width: 360px;
-  background: rgba(11, 19, 41, 0.92);
+  width: 380px;
+  background: rgba(10, 20, 42, 0.94);
   border: 1.5px solid #12d4c9;
   border-radius: var(--radius-xl);
-  padding: 22px;
+  padding: 24px;
   backdrop-filter: blur(16px);
-  box-shadow: 0 20px 60px rgba(0, 0, 0, 0.8), 0 0 30px rgba(18, 212, 201, 0.25);
+  box-shadow: 0 25px 70px rgba(0, 0, 0, 0.85), 0 0 35px rgba(18, 212, 201, 0.25);
   z-index: 30;
   animation: hudPopupFadeIn 0.35s cubic-bezier(0.16, 1, 0.3, 1) forwards;
 }
@@ -391,10 +367,10 @@
 
 .hud-popup-close-btn {
   position: absolute;
-  top: 14px;
-  right: 14px;
-  width: 26px;
-  height: 26px;
+  top: 16px;
+  right: 16px;
+  width: 28px;
+  height: 28px;
   border-radius: 50%;
   background: rgba(255, 255, 255, 0.08);
   border: 1px solid rgba(255, 255, 255, 0.15);
@@ -412,12 +388,12 @@
 }
 
 .hud-popup-header {
-  margin-bottom: 12px;
-  padding-right: 24px;
+  margin-bottom: 14px;
+  padding-right: 26px;
 }
 
 .hud-popup-tag-badge {
-  font-size: 0.68rem;
+  font-size: 0.7rem;
   font-weight: 800;
   color: #12d4c9;
   letter-spacing: 0.5px;
@@ -425,7 +401,7 @@
 }
 
 .hud-popup-title {
-  font-size: 1.15rem;
+  font-size: 1.2rem;
   font-weight: 800;
   color: #ffffff;
   line-height: 1.25;
@@ -433,29 +409,29 @@
 }
 
 .hud-popup-tech {
-  font-size: 0.72rem;
+  font-size: 0.75rem;
   color: #38bdf8;
   font-weight: 600;
 }
 
 .hud-popup-desc {
-  font-size: 0.84rem;
+  font-size: 0.86rem;
   color: #cbd5e1;
-  line-height: 1.5;
-  margin: 0 0 14px 0;
+  line-height: 1.55;
+  margin: 0 0 16px 0;
 }
 
 .hud-popup-highlights {
-  background: rgba(2, 6, 23, 0.6);
+  background: rgba(2, 6, 23, 0.65);
   border: 1px solid rgba(255, 255, 255, 0.08);
   border-radius: var(--radius-md);
-  padding: 12px;
-  margin-bottom: 16px;
+  padding: 14px;
+  margin-bottom: 18px;
 }
 
 .hud-hl-label {
   display: block;
-  font-size: 0.62rem;
+  font-size: 0.64rem;
   font-weight: 800;
   color: #64748b;
   letter-spacing: 0.5px;
@@ -465,20 +441,20 @@
 .hud-hl-list {
   display: flex;
   flex-direction: column;
-  gap: 6px;
+  gap: 7px;
 }
 
 .hud-hl-item {
-  font-size: 0.76rem;
+  font-size: 0.78rem;
   color: #f1f5f9;
-  line-height: 1.35;
+  line-height: 1.4;
   display: flex;
   align-items: flex-start;
 }
 
 .hud-popup-actions .btn {
   font-weight: 700;
-  box-shadow: 0 4px 16px rgba(18, 212, 201, 0.3);
+  box-shadow: 0 4px 18px rgba(18, 212, 201, 0.3);
 }
 
 /* ═══════════════════════════════════════════════════
