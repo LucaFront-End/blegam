@@ -1,4 +1,4 @@
-import { useState, useRef } from 'react';
+import { useState } from 'react';
 import { 
   ShieldCheck, 
   GitCommit, 
@@ -20,7 +20,7 @@ const SOLUTIONS_SPEC_DATA = [
     id: "torniquetes",
     title: "Control de Acceso con Torniquetes",
     subtitle: "Administración Física de Alto Tránsito",
-    desc: "Sistemas electromecánicos u ópticos diseñados para encauzar personas una a una, previniendo accesos simultáneos sin autorización.",
+    desc: "Sistemas electromecánicos u ópticos diseñados para encauzar personas una a una, previniendo accesos simultáneos sin autorización mediante barreras físicas de alta cadencia.",
     tag: "Flujo Masivo & Restricción Física",
     icon: ShieldCheck,
     badgeColor: "cyan",
@@ -32,13 +32,17 @@ const SOLUTIONS_SPEC_DATA = [
       durability: "Acero Inoxidable AISI 304 / IP65"
     },
     idealFor: ["Corporativos", "Oficinas", "Gobierno", "Escuelas", "Bancos"],
-    highlights: ["Brazos colapsables de emergencia", "Sensores ópticos anti-tailgating", "Contador de accesos integrado"]
+    highlights: [
+      "Brazos colapsables automáticos ante emergencias",
+      "Sensores ópticos anti-tailgating (anti-cola)",
+      "Contador bidireccional de aforo en tiempo real"
+    ]
   },
   {
     id: "riel",
     title: "Control de Acceso de Riel",
     subtitle: "Canalización Guiada y Control Perimetral",
-    desc: "Soluciones de barrera física de carril continuo para organizar el tránsito en vestíbulos, pasillos y áreas de recepción restringida.",
+    desc: "Soluciones de barrera física de carril continuo para organizar el tránsito en vestíbulos, pasillos y áreas de recepción restringida con diseño arquitectónico estilizado.",
     tag: "Tránsito Guiado & Canalizado",
     icon: GitCommit,
     badgeColor: "purple",
@@ -50,14 +54,18 @@ const SOLUTIONS_SPEC_DATA = [
       durability: "Estructura de Aluminio Anodizado"
     },
     idealFor: ["Edificios", "Corporativos", "Instituciones", "Áreas restringidas"],
-    highlights: ["Direccionamiento de flujo bi-direccional", "Integración con lectoras remotas", "Diseño corporativo estilizado"]
+    highlights: [
+      "Direccionamiento de flujo bi-direccional programable",
+      "Integración nativa con lectoras remotas y tótems",
+      "Diseño corporativo estilizado con perfil ultra-delgado"
+    ]
   },
   {
     id: "tarjeta",
     title: "Control de Acceso con Tarjeta RFID",
     subtitle: "Credencialización Proximidad & Permisos",
-    desc: "Autorización de paso mediante tarjetas inteligentes RFID/MIFARE con asignación de roles por usuario, horarios y áreas autorizadas.",
-    tag: "Credenciales RFID & Proximidad",
+    desc: "Autorización de paso mediante tarjetas inteligentes RFID/MIFARE con asignación de roles por usuario, ventanas de horario y áreas jerarquizadas.",
+    tag: "Credenciales RFID & Smartphone NFC",
     icon: CreditCard,
     badgeColor: "blue",
     image: "/assets/images/control-accesos/office_nfc.png",
@@ -68,13 +76,17 @@ const SOLUTIONS_SPEC_DATA = [
       durability: "Lectores Estancos IP67 Anti-vandalismo"
     },
     idealFor: ["Oficinas", "Edificios", "Escuelas", "Gobierno", "Bancos"],
-    highlights: ["Cifrado de datos AES-256 bits", "Desactivación instantánea por pérdida", "Formatos virtuales para Smartphone NFC"]
+    highlights: [
+      "Cifrado de datos AES-256 bits anti-duplicación",
+      "Desactivación instantánea por extravío desde la consola",
+      "Formatos virtuales compatibles con Apple Wallet y Google Pay"
+    ]
   },
   {
     id: "biometrico",
     title: "Control de Acceso Biométrico y Huella",
     subtitle: "Validación Facial y Dactilar de Alta Identación",
-    desc: "Verificación de identidad única mediante rasgos físicos infalsificables para recintos de máxima seguridad o áreas confidenciales.",
+    desc: "Verificación de identidad única mediante rasgos físicos infalsificables para recintos de máxima seguridad, bóvedas bancarias y centros de cómputo.",
     tag: "Biometría Facial & Dactilar Anti-Clon",
     icon: Fingerprint,
     badgeColor: "emerald",
@@ -86,42 +98,17 @@ const SOLUTIONS_SPEC_DATA = [
       durability: "Sensor Óptico Templado Anti-Rayaduras"
     },
     idealFor: ["Áreas restringidas", "Bancos", "Gobierno", "Corporativos", "Instalaciones críticas"],
-    highlights: ["Detección de vida (Liveness Anti-Foto)", "Reconocimiento sin contacto a distancia", "Doble factor de autenticación (Huella + PIN)"]
+    highlights: [
+      "Detección de vida en tiempo real (Liveness Anti-Foto/Video)",
+      "Reconocimiento sin contacto sobre la marcha a 3 metros",
+      "Doble factor de autenticación (Biometría + PIN criptográfico)"
+    ]
   }
 ];
 
 export default function AccessSolutionsInteractive() {
   const [activeFilter, setActiveFilter] = useState('all');
-  const [hoveredCard, setHoveredCard] = useState(null);
   const [selectedIndustry, setSelectedIndustry] = useState({});
-
-  const cardRefs = useRef({});
-
-  // Mouse move 3D tilt calculation
-  const handleMouseMove = (e, id) => {
-    const card = cardRefs.current[id];
-    if (!card) return;
-
-    const rect = card.getBoundingClientRect();
-    const x = e.clientX - rect.left;
-    const y = e.clientY - rect.top;
-
-    const centerX = rect.width / 2;
-    const centerY = rect.height / 2;
-
-    const rotateX = ((y - centerY) / centerY) * -6; // Tilt deg
-    const rotateY = ((x - centerX) / centerX) * 6;
-
-    card.style.transform = `perspective(1000px) rotateX(${rotateX}deg) rotateY(${rotateY}deg) translateY(-4px)`;
-  };
-
-  const handleMouseLeave = (id) => {
-    const card = cardRefs.current[id];
-    if (card) {
-      card.style.transform = `perspective(1000px) rotateX(0deg) rotateY(0deg) translateY(0px)`;
-    }
-    setHoveredCard(null);
-  };
 
   const filteredSolutions = activeFilter === 'all' 
     ? SOLUTIONS_SPEC_DATA 
@@ -169,128 +156,140 @@ export default function AccessSolutionsInteractive() {
         </div>
       </div>
 
-      {/* Holographic 3D Grid */}
-      <div className="holo-grid-cards">
-        {filteredSolutions.map((sol) => {
+      {/* HORIZONTAL STICKY STACKING CARDS DECK */}
+      <div className="solutions-sticky-stack">
+        {filteredSolutions.map((sol, index) => {
           const IconComponent = sol.icon;
-          const isHovered = hoveredCard === sol.id;
           const activeInd = selectedIndustry[sol.id];
           
           // Generate WhatsApp Direct URL with customized pre-filled message
           const waMessage = `Hola, quisiera más información de "${sol.title}".`;
           const waUrl = `https://api.whatsapp.com/send?phone=525541692770&text=${encodeURIComponent(waMessage)}`;
 
+          // Calculate sticky stacking top offset (each sticks 24px below the previous one)
+          const stickyTopOffset = 85 + (index * 24);
+
           return (
             <div
               key={sol.id}
-              ref={(el) => (cardRefs.current[sol.id] = el)}
-              className={`holo-card card-badge-${sol.badgeColor} ${isHovered ? 'is-hovered' : ''}`}
-              onMouseMove={(e) => handleMouseMove(e, sol.id)}
-              onMouseEnter={() => setHoveredCard(sol.id)}
-              onMouseLeave={() => handleMouseLeave(sol.id)}
+              className={`holo-sticky-card card-badge-${sol.badgeColor}`}
+              style={{
+                top: `${stickyTopOffset}px`,
+                zIndex: index + 1
+              }}
             >
-              {/* Card Photo Banner Header */}
-              <div className="holo-card-image-wrapper">
+              {/* Left Column: Premium Photo Media with Tech Overlays */}
+              <div className="holo-card-media-col">
                 <img src={sol.image} alt={sol.title} className="holo-card-img" />
                 <div className="holo-card-img-overlay" />
-                <span className="holo-tag-badge">{sol.tag}</span>
+                
+                {/* Floating Top Tag */}
+                <div className="holo-media-tag-badge font-mono">
+                  <Sparkles size={13} className="text-accent inline mr-1" />
+                  <span>{sol.tag}</span>
+                </div>
+
+                {/* Bottom Overlay Summary */}
+                <div className="holo-media-bottom-badge">
+                  <div className="flex items-center gap-2">
+                    <span className="media-stat-val font-mono">{sol.specs.speed}</span>
+                    <span className="media-stat-sep">•</span>
+                    <span className="media-stat-lbl">Nivel {sol.specs.securityLevel}</span>
+                  </div>
+                </div>
               </div>
 
-              <div className="holo-card-body">
-                {/* Card Top Title Row */}
-                <div className="holo-card-top">
+              {/* Right Column: Structured Executive Content Area */}
+              <div className="holo-card-content-col">
+                
+                {/* Top Title & Icon Row */}
+                <div className="holo-card-header">
                   <div className="holo-icon-box">
                     <IconComponent size={24} />
                   </div>
                   <div>
                     <h3 className="holo-card-title">{sol.title}</h3>
-                    <span className="holo-card-sub">{sol.subtitle}</span>
+                    <span className="holo-card-subtitle">{sol.subtitle}</span>
                   </div>
                 </div>
 
                 <p className="holo-card-desc">{sol.desc}</p>
 
-                {/* Interactive Specs Dashboard */}
-                <div className="holo-specs-box">
-                  <div className="spec-item">
-                    <div className="spec-item-header">
-                      <Zap size={13} className="text-accent mr-1" />
-                      <span className="spec-lbl">CAPACIDAD / VELOCIDAD</span>
+                {/* 4-Box Technical Specifications Dashboard */}
+                <div className="holo-specs-grid">
+                  <div className="spec-box-item">
+                    <div className="spec-box-header">
+                      <Zap size={13} className="text-accent" />
+                      <span className="spec-box-label font-mono">CAPACIDAD / VELOCIDAD</span>
                     </div>
-                    <span className="spec-val font-mono text-accent">{sol.specs.speed}</span>
+                    <span className="spec-box-val font-mono text-accent">{sol.specs.speed}</span>
                   </div>
 
-                  <div className="spec-item">
-                    <div className="spec-item-header">
-                      <Shield size={13} className="text-accent mr-1" />
-                      <span className="spec-lbl">NIVEL DE SEGURIDAD</span>
+                  <div className="spec-box-item">
+                    <div className="spec-box-header">
+                      <Shield size={13} className="text-accent" />
+                      <span className="spec-box-label font-mono">NIVEL DE SEGURIDAD</span>
                     </div>
-                    <span className="spec-val font-mono text-accent">{sol.specs.securityLevel}</span>
+                    <span className="spec-box-val font-mono text-accent">{sol.specs.securityLevel}</span>
                   </div>
 
-                  <div className="spec-item">
-                    <div className="spec-item-header">
-                      <Activity size={13} className="text-accent mr-1" />
-                      <span className="spec-lbl">MODO DE EMERGENCIA</span>
+                  <div className="spec-box-item">
+                    <div className="spec-box-header">
+                      <Activity size={13} className="text-accent" />
+                      <span className="spec-box-label font-mono">MODO DE EMERGENCIA</span>
                     </div>
-                    <span className="spec-val">{sol.specs.failSafe}</span>
+                    <span className="spec-box-val">{sol.specs.failSafe}</span>
                   </div>
 
-                  <div className="spec-item">
-                    <div className="spec-item-header">
-                      <Cpu size={13} className="text-accent mr-1" />
-                      <span className="spec-lbl">RESISTENCIA & CHASIS</span>
+                  <div className="spec-box-item">
+                    <div className="spec-box-header">
+                      <Cpu size={13} className="text-accent" />
+                      <span className="spec-box-label font-mono">RESISTENCIA & CHASIS</span>
                     </div>
-                    <span className="spec-val">{sol.specs.durability}</span>
+                    <span className="spec-box-val">{sol.specs.durability}</span>
                   </div>
                 </div>
 
-                {/* Key Features List */}
-                <div className="holo-highlights-list">
-                  {sol.highlights.map((h, i) => (
-                    <div key={i} className="holo-hl-point">
-                      <div className="hl-check-pill">
-                        <CheckCircle2 size={13} />
+                {/* Highlights List */}
+                <div className="holo-highlights-section">
+                  <div className="holo-hl-grid">
+                    {sol.highlights.map((h, i) => (
+                      <div key={i} className="holo-hl-item">
+                        <CheckCircle2 size={15} className="text-accent flex-shrink-0" />
+                        <span>{h}</span>
                       </div>
-                      <span>{h}</span>
-                    </div>
-                  ))}
-                </div>
-
-                {/* Interactive Industry Selector */}
-                <div className="holo-industry-selector">
-                  <span className="ind-selector-title">Despliegue Recomendado en:</span>
-                  <div className="ind-chips-row">
-                    {sol.idealFor.map((ind, idx) => (
-                      <button
-                        key={idx}
-                        className={`ind-chip ${activeInd === ind ? 'active' : ''}`}
-                        onClick={() => toggleIndustry(sol.id, ind)}
-                      >
-                        {ind}
-                      </button>
                     ))}
                   </div>
-                  {activeInd && (
-                    <div className="ind-active-preview">
-                      <Zap size={14} className="text-accent mr-1 inline-block" />
-                      <span>Configurado para <strong>{activeInd}</strong> con integración nativa BLEGAM OS.</span>
-                    </div>
-                  )}
                 </div>
 
-                {/* WhatsApp Direct Action Link */}
-                <div className="holo-card-footer">
+                {/* Recommended Deployment & WhatsApp CTA Footer Row */}
+                <div className="holo-card-footer-row">
+                  <div className="holo-industry-box">
+                    <span className="ind-box-label font-mono">Despliegue Recomendado:</span>
+                    <div className="ind-chips-wrap">
+                      {sol.idealFor.map((ind, idx) => (
+                        <button
+                          key={idx}
+                          className={`ind-chip ${activeInd === ind ? 'active' : ''}`}
+                          onClick={() => toggleIndustry(sol.id, ind)}
+                        >
+                          {ind}
+                        </button>
+                      ))}
+                    </div>
+                  </div>
+
                   <a 
                     href={waUrl} 
                     target="_blank" 
                     rel="noopener noreferrer" 
-                    className="holo-btn-action"
+                    className="holo-sticky-cta-btn"
                   >
-                    <MessageSquare size={16} className="mr-1 inline-block text-accent" />
-                    Solicitar Especificación por WhatsApp <ChevronRight size={16} />
+                    <MessageSquare size={16} className="flex-shrink-0" />
+                    <span>Solicitar Especificación por WhatsApp →</span>
                   </a>
                 </div>
+
               </div>
             </div>
           );
