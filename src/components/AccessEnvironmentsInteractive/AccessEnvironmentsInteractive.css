@@ -1,26 +1,27 @@
 /* ═══════════════════════════════════════════════════
-   BLEGAM — Interactive Control Points & Environment Suite
+   BLEGAM — Control de Accesos: Vector Architectural Blueprint Stage
    ═══════════════════════════════════════════════════ */
 
-.env-3photo-wrapper,
 .env-interactive-container {
   width: 100%;
   position: relative;
 }
 
-/* MAIN LAYOUT: Sticky Left Sidebar + Right Stage Area */
+/* ═══════════════════════════════════════════════════
+   DESKTOP VIEW: Left Sticky Sidebar + Right Vector Blueprint Stage
+   ═══════════════════════════════════════════════════ */
+
 .env-main-layout {
   display: grid;
-  grid-template-columns: 310px 1fr;
+  grid-template-columns: 290px 1fr;
   gap: 32px;
   align-items: start;
 }
 
-/* ─── STICKY LEFT SIDEBAR: "entornos" Menu ─── */
+/* STICKY LEFT SIDEBAR ("ENTORNOS DISPONIBLES") */
 .env-sidebar-menu {
   position: sticky;
   top: 90px;
-  align-self: start;
   background: var(--bg-card);
   border: 1px solid var(--border-light);
   border-radius: var(--radius-xl);
@@ -33,10 +34,10 @@
   font-size: 0.72rem;
   font-weight: 800;
   color: var(--text-tertiary);
-  letter-spacing: 0.5px;
+  letter-spacing: 1px;
   margin-bottom: 16px;
-  padding-bottom: 10px;
-  border-bottom: 1px solid var(--border-subtle);
+  padding-bottom: 12px;
+  border-bottom: 1px solid var(--border-light);
 }
 
 .env-sidebar-list {
@@ -50,443 +51,438 @@
   align-items: center;
   gap: 12px;
   padding: 14px 16px;
+  border-radius: var(--radius-lg);
   background: var(--bg-primary);
   border: 1px solid var(--border-light);
-  border-radius: var(--radius-lg);
   cursor: pointer;
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
   text-align: left;
-  transition: all 0.25s ease;
-  position: relative;
-  overflow: hidden;
+  width: 100%;
 }
 
 .env-sidebar-btn:hover {
   background: #ffffff;
   border-color: var(--accent-primary);
   transform: translateX(4px);
+  box-shadow: 0 4px 14px rgba(18, 212, 201, 0.12);
 }
 
 .env-sidebar-btn.active {
   background: #ffffff;
   border-color: var(--accent-primary);
-  box-shadow: var(--shadow-card), 0 0 15px rgba(18, 212, 201, 0.15);
-}
-
-.env-sidebar-btn.active::before {
-  content: '';
-  position: absolute;
-  top: 0;
-  left: 0;
-  width: 4px;
-  height: 100%;
-  background: var(--accent-primary);
+  box-shadow: 0 6px 20px rgba(18, 212, 201, 0.2);
 }
 
 .env-btn-icon-box {
   width: 38px;
   height: 38px;
   border-radius: var(--radius-md);
-  background: var(--accent-glow);
-  border: 1px solid var(--border-accent);
+  background: var(--bg-card);
+  border: 1px solid var(--border-light);
   display: grid;
   place-items: center;
-  color: var(--accent-secondary);
+  color: var(--accent-primary);
   flex-shrink: 0;
+  transition: all 0.3s ease;
 }
 
 .env-sidebar-btn.active .env-btn-icon-box {
   background: var(--accent-primary);
   color: var(--bg-void);
+  border-color: var(--accent-primary);
 }
 
 .env-btn-text {
   display: flex;
   flex-direction: column;
-  gap: 2px;
-  flex: 1;
+  flex-grow: 1;
+  min-width: 0;
 }
 
 .env-btn-title {
-  font-size: 0.92rem;
+  font-size: 0.9rem;
   font-weight: 700;
   color: var(--text-primary);
-  line-height: 1.2;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
 }
 
 .env-btn-badge {
   font-size: 0.68rem;
+  font-family: var(--font-mono);
   color: var(--text-tertiary);
+  margin-top: 2px;
 }
 
 .env-btn-arrow {
   color: var(--text-tertiary);
-  transition: transform 0.25s ease;
-}
-
-.env-sidebar-btn:hover .env-btn-arrow,
-.env-sidebar-btn.active .env-btn-arrow {
-  color: var(--accent-primary);
-  transform: translateX(3px);
-}
-
-/* ─── RIGHT STAGE AREA ─── */
-.env-stage-area {
-  display: flex;
-  flex-direction: column;
-  gap: 24px;
-}
-
-.stage-top-banner {
-  display: flex;
-  align-items: flex-start;
-  gap: 16px;
-  background: var(--bg-card);
-  border: 1px solid var(--border-light);
-  border-radius: var(--radius-xl);
-  padding: 24px;
-  box-shadow: var(--shadow-card);
-}
-
-.banner-icon-bg {
-  width: 48px;
-  height: 48px;
-  border-radius: var(--radius-lg);
-  background: var(--accent-glow);
-  border: 1px solid var(--border-accent);
-  display: grid;
-  place-items: center;
-  color: var(--accent-secondary);
+  opacity: 0.4;
+  transition: all 0.3s ease;
   flex-shrink: 0;
 }
 
-.banner-title {
-  font-size: 1.35rem;
-  font-weight: 800;
-  color: var(--text-primary);
-  line-height: 1.2;
+.env-sidebar-btn.active .env-btn-arrow {
+  color: var(--accent-primary);
+  opacity: 1;
+  transform: translateX(2px);
 }
 
-.banner-desc {
-  font-size: 0.92rem;
-  color: var(--text-secondary);
-  line-height: 1.6;
-  margin-top: 4px;
-}
+/* ═══════════════════════════════════════════════════
+   RIGHT AREA: ISOMETRIC CYBER VECTOR BLUEPRINT STAGE
+   ═══════════════════════════════════════════════════ */
 
-/* Hotspot Nav Bar */
-.hotspots-nav-bar {
-  background: var(--bg-card);
-  border: 1px solid var(--border-light);
-  border-radius: var(--radius-lg);
-  padding: 16px 20px;
+.env-blueprint-stage {
+  background: radial-gradient(circle at 50% 30%, #0b152d 0%, #020617 100%);
+  border: 1px solid rgba(18, 212, 201, 0.25);
+  border-radius: var(--radius-xl);
+  overflow: hidden;
+  box-shadow: 0 30px 80px -20px rgba(0, 0, 0, 0.8), 0 0 40px rgba(18, 212, 201, 0.08);
   display: flex;
   flex-direction: column;
-  gap: 10px;
 }
 
-.hotspot-bar-title {
-  font-size: 0.7rem;
+/* Stage Header Bar */
+.blueprint-top-bar {
+  padding: 24px 28px;
+  background: rgba(2, 6, 23, 0.7);
+  border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 20px;
+  backdrop-filter: blur(10px);
+}
+
+.blueprint-live-tag {
+  font-size: 0.68rem;
   font-weight: 800;
-  color: var(--text-tertiary);
+  color: #38bdf8;
   letter-spacing: 0.5px;
 }
 
-.hotspot-pills {
-  display: grid;
-  grid-template-columns: repeat(3, 1fr);
-  gap: 12px;
-}
-
-.hotspot-pill-btn {
-  display: flex;
-  align-items: center;
-  gap: 10px;
-  padding: 10px 14px;
-  background: var(--bg-primary);
-  border: 1px solid var(--border-light);
-  border-radius: var(--radius-md);
-  cursor: pointer;
-  text-align: left;
-  transition: all 0.25s ease;
-}
-
-.hotspot-pill-btn:hover {
-  background: #ffffff;
-  border-color: var(--accent-primary);
-}
-
-.hotspot-pill-btn.active {
-  background: #ffffff;
-  border-color: var(--accent-primary);
-  box-shadow: 0 0 15px rgba(18, 212, 201, 0.2);
-}
-
-.pill-num {
-  width: 24px;
-  height: 24px;
-  border-radius: 50%;
-  background: var(--accent-glow);
-  border: 1px solid var(--border-accent);
-  color: var(--accent-secondary);
-  font-family: var(--font-mono);
-  font-size: 0.78rem;
+.blueprint-env-title {
+  font-size: 1.45rem;
   font-weight: 800;
-  display: grid;
-  place-items: center;
+  color: #ffffff;
+  margin: 0 0 4px 0;
+  letter-spacing: -0.3px;
+}
+
+.blueprint-env-desc {
+  font-size: 0.86rem;
+  color: #94a3b8;
+  margin: 0;
+  line-height: 1.45;
+}
+
+.blueprint-stat-box {
+  background: rgba(18, 212, 201, 0.08);
+  border: 1px solid rgba(18, 212, 201, 0.3);
+  border-radius: var(--radius-lg);
+  padding: 10px 16px;
+  text-align: right;
   flex-shrink: 0;
 }
 
-.hotspot-pill-btn.active .pill-num {
-  background: var(--accent-primary);
-  color: var(--bg-void);
+.stat-label {
+  display: block;
+  font-size: 0.62rem;
+  color: #12d4c9;
+  letter-spacing: 0.5px;
 }
 
-.pill-title {
+.stat-val {
+  display: block;
   font-size: 0.85rem;
   font-weight: 700;
-  color: var(--text-primary);
-  line-height: 1.2;
+  color: #ffffff;
+  margin-top: 2px;
 }
 
-/* ARCHITECTURAL INTERACTIVE GRID */
-.env-architectural-grid {
-  display: grid;
-  grid-template-columns: 1.15fr 0.85fr;
-  gap: 24px;
-  align-items: stretch;
+/* Blueprint Hotspots Quick Selector Bar */
+.blueprint-hotspots-bar {
+  padding: 12px 28px;
+  background: rgba(15, 23, 42, 0.6);
+  border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+  display: flex;
+  align-items: center;
+  gap: 16px;
 }
 
-/* Hotspot Visual Container */
-.arch-visual-container {
-  position: relative;
-  border-radius: var(--radius-xl);
-  border: 1px solid var(--border-accent);
-  overflow: hidden;
-  box-shadow: var(--shadow-card);
-  background: #020617;
+.hotspot-bar-label {
+  font-size: 0.68rem;
+  font-weight: 800;
+  color: #64748b;
+  letter-spacing: 0.5px;
+  white-space: nowrap;
 }
 
-.arch-image-wrapper {
-  position: relative;
-  width: 100%;
-  height: 100%;
-  min-height: 440px;
-  overflow: hidden;
+.hotspot-bar-pills {
+  display: flex;
+  gap: 8px;
+  flex-grow: 1;
 }
 
-.arch-bg-image {
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
-  transition: transform 0.6s ease, opacity 0.4s ease;
-}
-
-.fade-in-img {
-  animation: fadeInImg 0.4s ease forwards;
-}
-
-@keyframes fadeInImg {
-  from { opacity: 0.4; transform: scale(1.02); }
-  to { opacity: 1; transform: scale(1); }
-}
-
-.arch-visual-container:hover .arch-bg-image {
-  transform: scale(1.03);
-}
-
-.arch-image-overlay {
-  position: absolute;
-  inset: 0;
-  background: linear-gradient(180deg, rgba(2, 6, 23, 0.2) 0%, rgba(2, 6, 23, 0.7) 100%);
-  pointer-events: none;
-}
-
-.arch-badge-tag {
-  position: absolute;
-  bottom: 16px;
-  left: 16px;
-  background: rgba(15, 23, 42, 0.85);
-  backdrop-filter: blur(8px);
-  border: 1px solid var(--border-accent);
+.blueprint-pill-btn {
+  flex: 1;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 8px 12px;
   border-radius: var(--radius-md);
-  padding: 8px 14px;
-  color: var(--text-primary);
+  background: rgba(2, 6, 23, 0.6);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  cursor: pointer;
+  transition: all 0.25s ease;
+  color: #94a3b8;
   font-size: 0.78rem;
-  font-weight: 700;
-  z-index: 5;
+  text-align: left;
 }
 
-/* HOTSPOT PINS WITH PULSING WAVES ("parpadea ondas") */
-.hotspot-pin-btn {
-  position: absolute;
-  width: 40px;
-  height: 40px;
+.blueprint-pill-btn:hover {
+  background: rgba(18, 212, 201, 0.1);
+  border-color: rgba(18, 212, 201, 0.4);
+  color: #ffffff;
+}
+
+.blueprint-pill-btn.active {
+  background: rgba(18, 212, 201, 0.18);
+  border-color: #12d4c9;
+  color: #ffffff;
+  box-shadow: 0 0 16px rgba(18, 212, 201, 0.2);
+}
+
+.pill-circle {
+  width: 20px;
+  height: 20px;
   border-radius: 50%;
-  background: var(--accent-primary);
-  border: 2px solid #ffffff;
-  color: var(--bg-void);
-  font-family: var(--font-mono);
-  font-size: 1rem;
-  font-weight: 900;
+  background: rgba(255, 255, 255, 0.1);
   display: grid;
   place-items: center;
-  cursor: pointer;
-  transform: translate(-50%, -50%);
-  transition: all 0.3s ease;
-  z-index: 10;
-  box-shadow: 0 0 30px #12d4c9;
+  font-family: var(--font-mono);
+  font-size: 0.7rem;
+  font-weight: 800;
+  flex-shrink: 0;
 }
 
-.hotspot-pin-btn.active {
-  transform: translate(-50%, -50%) scale(1.25);
-  box-shadow: 0 0 40px #12d4c9;
+.blueprint-pill-btn.active .pill-circle {
+  background: #12d4c9;
+  color: #020617;
 }
 
-/* Pulsing Wave Ring Animation */
-.pin-pulse-wave {
+.pill-text {
+  font-weight: 600;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+/* Blueprint Canvas Container */
+.blueprint-canvas-container {
+  position: relative;
+  width: 100%;
+  min-height: 500px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: #020617;
+  overflow: hidden;
+}
+
+.blueprint-grid-overlay {
   position: absolute;
-  inset: -8px;
-  border-radius: 50%;
-  border: 2px solid var(--accent-primary);
-  animation: pinPulseWave 2s infinite ease-out;
+  inset: 0;
+  background-image: 
+    linear-gradient(rgba(18, 212, 201, 0.06) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(18, 212, 201, 0.06) 1px, transparent 1px);
+  background-size: 32px 32px;
   pointer-events: none;
 }
 
-.pin-pulse-ring {
-  position: absolute;
-  inset: -14px;
-  border-radius: 50%;
-  border: 1.5px solid rgba(18, 212, 201, 0.6);
-  animation: pinPulseWave 2s infinite ease-out 0.6s;
-  pointer-events: none;
+/* SVG Scene */
+.blueprint-svg-scene {
+  width: 100%;
+  height: auto;
+  max-height: 520px;
+  display: block;
 }
 
-@keyframes pinPulseWave {
+/* Hardware Unit Styling & Hover */
+.iso-hw-unit {
+  transition: all 0.4s cubic-bezier(0.2, 0.8, 0.2, 1);
+  filter: drop-shadow(0 0 4px rgba(18, 212, 201, 0.2));
+}
+
+.iso-hw-unit.highlight-active {
+  filter: drop-shadow(0 0 12px rgba(18, 212, 201, 0.8)) drop-shadow(0 0 24px rgba(56, 189, 248, 0.5));
+}
+
+/* Hotspot Vector Pin Nodes */
+.iso-hotspot-pin-node {
+  transition: transform 0.3s ease;
+}
+
+.iso-hotspot-pin-node:hover {
+  transform: scale(1.15);
+}
+
+.pin-svg-wave {
+  animation: pinSvgWavePulse 2.4s cubic-bezier(0.2, 0.8, 0.2, 1) infinite;
+  transform-origin: center;
+}
+
+.pin-svg-ring {
+  animation: pinSvgRingPulse 2.4s cubic-bezier(0.2, 0.8, 0.2, 1) infinite 0.6s;
+  transform-origin: center;
+}
+
+@keyframes pinSvgWavePulse {
   0% {
-    transform: scale(0.8);
+    r: 8px;
     opacity: 0.9;
   }
   100% {
-    transform: scale(2.2);
+    r: 26px;
     opacity: 0;
   }
 }
 
-.pin-number {
-  position: relative;
-  z-index: 2;
-}
-
-/* Pin Tooltip */
-.pin-tooltip {
-  position: absolute;
-  bottom: 125%;
-  left: 50%;
-  transform: translateX(-50%) translateY(0);
-  white-space: nowrap;
-  background: #020617;
-  border: 1.5px solid #12d4c9;
-  padding: 8px 16px;
-  border-radius: 20px;
-  font-family: var(--font-mono);
-  font-size: 0.78rem;
-  font-weight: 800;
-  color: #ffffff !important;
-  opacity: 1;
-  pointer-events: none;
-  box-shadow: 0 8px 25px rgba(0, 0, 0, 0.7), 0 0 15px rgba(18, 212, 201, 0.4);
-  letter-spacing: 0.02em;
-}
-
-/* DYNAMIC FICHA CARD */
-.ficha-spec-card {
-  background: var(--bg-card);
-  border: 1px solid var(--border-light);
-  border-radius: var(--radius-xl);
-  overflow: hidden;
-  box-shadow: var(--shadow-card);
-  display: flex;
-  flex-direction: column;
-  transition: all 0.3s ease;
-}
-
-.ficha-spec-card:hover {
-  border-color: var(--border-accent);
-  box-shadow: var(--shadow-elevated);
-}
-
-.ficha-body {
-  padding: 28px;
-  display: flex;
-  flex-direction: column;
-  height: 100%;
-}
-
-.ficha-header {
-  margin-bottom: 12px;
-}
-
-.ficha-title {
-  font-size: 1.25rem;
-  font-weight: 800;
-  color: var(--text-primary);
-  line-height: 1.25;
-  margin-top: 4px;
-}
-
-.ficha-tech {
-  display: inline-flex;
-  align-items: center;
-  font-size: 0.75rem;
-  font-weight: 700;
-  color: var(--accent-primary);
-  background: var(--accent-glow);
-  border: 1px solid var(--border-accent);
-  padding: 4px 10px;
-  border-radius: 6px;
-  margin-top: 8px;
-}
-
-.ficha-desc {
-  font-size: 0.92rem;
-  color: var(--text-secondary);
-  line-height: 1.6;
-  margin-bottom: 20px;
-}
-
-.ficha-highlights {
-  background: var(--bg-primary);
-  border: 1px solid var(--border-light);
-  border-radius: var(--radius-lg);
-  padding: 18px;
-  margin-bottom: 20px;
-}
-
-.highlights-label {
-  display: block;
-  font-size: 0.68rem;
-  font-weight: 800;
-  color: var(--text-tertiary);
-  letter-spacing: 0.5px;
-  margin-bottom: 12px;
-}
-
-.highlights-list {
-  display: flex;
-  flex-direction: column;
-  gap: 10px;
-}
-
-.hl-row {
-  display: flex;
-  align-items: center;
-  font-size: 0.85rem;
-  font-weight: 600;
-  color: var(--text-primary);
+@keyframes pinSvgRingPulse {
+  0% {
+    r: 8px;
+    opacity: 0.9;
+  }
+  100% {
+    r: 18px;
+    opacity: 0;
+  }
 }
 
 /* ═══════════════════════════════════════════════════
-   SLEEK EXECUTIVE MOBILE HARDWARE STREAM (< 769px)
+   INTERACTIVE HUD POPUP CARD ("POP O ALGO QUE MUESTRE LA INFO")
+   ═══════════════════════════════════════════════════ */
+
+.blueprint-hud-popup {
+  position: absolute;
+  bottom: 24px;
+  right: 24px;
+  width: 360px;
+  background: rgba(11, 19, 41, 0.92);
+  border: 1.5px solid #12d4c9;
+  border-radius: var(--radius-xl);
+  padding: 22px;
+  backdrop-filter: blur(16px);
+  box-shadow: 0 20px 60px rgba(0, 0, 0, 0.8), 0 0 30px rgba(18, 212, 201, 0.25);
+  z-index: 30;
+  animation: hudPopupFadeIn 0.35s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+}
+
+@keyframes hudPopupFadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(16px) scale(0.96);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+  }
+}
+
+.hud-popup-close-btn {
+  position: absolute;
+  top: 14px;
+  right: 14px;
+  width: 26px;
+  height: 26px;
+  border-radius: 50%;
+  background: rgba(255, 255, 255, 0.08);
+  border: 1px solid rgba(255, 255, 255, 0.15);
+  color: #ffffff;
+  display: grid;
+  place-items: center;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.hud-popup-close-btn:hover {
+  background: #ef4444;
+  border-color: #ef4444;
+  color: #ffffff;
+}
+
+.hud-popup-header {
+  margin-bottom: 12px;
+  padding-right: 24px;
+}
+
+.hud-popup-tag-badge {
+  font-size: 0.68rem;
+  font-weight: 800;
+  color: #12d4c9;
+  letter-spacing: 0.5px;
+  margin-bottom: 6px;
+}
+
+.hud-popup-title {
+  font-size: 1.15rem;
+  font-weight: 800;
+  color: #ffffff;
+  line-height: 1.25;
+  margin: 0 0 6px 0;
+}
+
+.hud-popup-tech {
+  font-size: 0.72rem;
+  color: #38bdf8;
+  font-weight: 600;
+}
+
+.hud-popup-desc {
+  font-size: 0.84rem;
+  color: #cbd5e1;
+  line-height: 1.5;
+  margin: 0 0 14px 0;
+}
+
+.hud-popup-highlights {
+  background: rgba(2, 6, 23, 0.6);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  border-radius: var(--radius-md);
+  padding: 12px;
+  margin-bottom: 16px;
+}
+
+.hud-hl-label {
+  display: block;
+  font-size: 0.62rem;
+  font-weight: 800;
+  color: #64748b;
+  letter-spacing: 0.5px;
+  margin-bottom: 8px;
+}
+
+.hud-hl-list {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.hud-hl-item {
+  font-size: 0.76rem;
+  color: #f1f5f9;
+  line-height: 1.35;
+  display: flex;
+  align-items: flex-start;
+}
+
+.hud-popup-actions .btn {
+  font-weight: 700;
+  box-shadow: 0 4px 16px rgba(18, 212, 201, 0.3);
+}
+
+/* ═══════════════════════════════════════════════════
+   SLEEK EXECUTIVE MOBILE HARDWARE STREAM (< 769px) (PRESERVED)
    ═══════════════════════════════════════════════════ */
 
 .env-mobile-stream {
@@ -600,35 +596,14 @@
   box-shadow: var(--shadow-card);
 }
 
-.env-mobile-card-img-wrap {
-  position: relative;
-  width: 100%;
-  height: 180px;
-  overflow: hidden;
-}
-
-.env-mobile-card-img {
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
-}
-
 .env-mobile-tag-badge {
-  position: absolute;
-  bottom: 12px;
-  left: 12px;
-  background: rgba(15, 23, 42, 0.88);
-  backdrop-filter: blur(6px);
-  border: 1px solid var(--border-accent);
   color: var(--accent-primary);
   font-size: 0.72rem;
   font-weight: 800;
-  padding: 4px 10px;
-  border-radius: 6px;
 }
 
 .env-mobile-card-body {
-  padding: 18px;
+  padding: 20px;
   display: flex;
   flex-direction: column;
 }
