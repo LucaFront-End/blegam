@@ -2,6 +2,7 @@ import { useState } from 'react';
 import { useLocation } from 'react-router-dom';
 import { brand } from '../../data/content';
 import { useLanding } from '../../context/LandingContext';
+import { submitLeadToWix } from '../../lib/leadService';
 import './FloatingActions.css';
 
 export default function FloatingActions() {
@@ -33,24 +34,39 @@ export default function FloatingActions() {
     e.preventDefault();
     setSending(true);
 
+    const tipoText = typeLabels[form.type] || form.type;
+
+    // 1. Send data to Wix CMS Collection (Cotizacionformulario)
+    const wixPromise = submitLeadToWix({
+      name: form.name,
+      email: form.email,
+      service: `Buzón: ${tipoText}`,
+      empresa: form.project || 'No especificado',
+      message: form.message,
+      origin: `Buzón Flotante [${location.pathname}]`
+    });
+
+    // 2. Send email notification via FormSubmit
     const body = new FormData();
     body.append('Nombre', form.name);
     body.append('Correo', form.email);
-    body.append('Tipo', typeLabels[form.type] || form.type);
+    body.append('Tipo', tipoText);
     body.append('Proyecto', form.project || 'No especificado');
     body.append('Mensaje', form.message);
     // FormSubmit config - Clean White Template & Spanish Language
-    body.append('_subject', `Buzón de comentarios: ${typeLabels[form.type] || form.type}`);
+    body.append('_subject', `Buzón de comentarios: ${tipoText}`);
     body.append('_captcha', 'false');
     body.append('_template', 'box');
     body.append('_language', 'es');
     body.append('_autoresponse', 'Gracias por tu comentario. En Blegam Corp valoramos tu opinión y nos pondremos en contacto contigo si es necesario.');
 
+    const formSubmitPromise = fetch('https://formsubmit.co/ajax/info@blegam.com.mx', {
+      method: 'POST',
+      body,
+    });
+
     try {
-      await fetch('https://formsubmit.co/ajax/info@blegam.com.mx', {
-        method: 'POST',
-        body,
-      });
+      await Promise.allSettled([wixPromise, formSubmitPromise]);
       setSubmitted(true);
       setTimeout(() => {
         setSubmitted(false);

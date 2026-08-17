@@ -1,6 +1,7 @@
 import { useState } from 'react';
 import { Link } from 'react-router-dom';
 import { brand, nav } from '../../data/content';
+import { submitLeadToWix } from '../../lib/leadService';
 import './Footer.css';
 
 export default function Footer() {
@@ -13,6 +14,14 @@ export default function Footer() {
     if (!email) return;
     setSending(true);
 
+    // 1. Send data to Wix CMS Collection (Cotizacionformulario)
+    const wixPromise = submitLeadToWix({
+      email,
+      service: 'Suscripción Newsletter',
+      origin: 'Footer Newsletter'
+    });
+
+    // 2. Send email notification via FormSubmit
     const body = new FormData();
     body.append('Email de suscripción', email);
     body.append('_subject', 'Nueva suscripción a Newsletter de Blegam Corp');
@@ -20,11 +29,13 @@ export default function Footer() {
     body.append('_template', 'box');
     body.append('_language', 'es');
 
+    const formSubmitPromise = fetch('https://formsubmit.co/ajax/info@blegam.com.mx', {
+      method: 'POST',
+      body,
+    });
+
     try {
-      await fetch('https://formsubmit.co/ajax/info@blegam.com.mx', {
-        method: 'POST',
-        body,
-      });
+      await Promise.allSettled([wixPromise, formSubmitPromise]);
       setSubmitted(true);
       setEmail('');
       setTimeout(() => setSubmitted(false), 4000);

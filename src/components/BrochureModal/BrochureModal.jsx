@@ -1,5 +1,6 @@
 import { useState, useEffect } from 'react';
 import { X, FileText, Download, CheckCircle2, Sparkles, ShieldCheck } from 'lucide-react';
+import { submitLeadToWix } from '../../lib/leadService';
 import './BrochureModal.css';
 
 const ESTADOS_MEXICO = [
@@ -67,25 +68,40 @@ export default function BrochureModal() {
     e.preventDefault();
     setSending(true);
 
+    // 1. Send data to Wix CMS Collection (Cotizacionformulario)
+    const wixPromise = submitLeadToWix({
+      name: form.name,
+      phone: form.phone,
+      email: form.email,
+      estado: form.estado,
+      service: 'Brochure Salas de Juicios Orales',
+      documento: 'Brochure Salas de Juicios Orales',
+      origin: 'Popup Salas de Oralidad (Brochure)'
+    });
+
+    // 2. Send email notification via FormSubmit
     const body = new FormData();
     body.append('Nombre', form.name);
     body.append('Teléfono', form.phone);
     body.append('Email', form.email);
     body.append('Estado', form.estado);
     body.append('Documento', 'Brochure Salas de Juicios Orales');
+    body.append('Origen', 'Popup Salas de Oralidad');
     body.append('_subject', `[Descarga Brochure - Salas de Oralidad] Lead de ${form.name} (${form.estado})`);
     body.append('_captcha', 'false');
     body.append('_template', 'box');
     body.append('_language', 'es');
     body.append('_autoresponse', 'Gracias por solicitar el Brochure de Salas de Oralidad de Blegam Corp.');
 
+    const formSubmitPromise = fetch('https://formsubmit.co/ajax/info@blegam.com.mx', {
+      method: 'POST',
+      body,
+    }).catch(() => null);
+
     try {
-      await fetch('https://formsubmit.co/ajax/info@blegam.com.mx', {
-        method: 'POST',
-        body,
-      });
+      await Promise.allSettled([wixPromise, formSubmitPromise]);
     } catch {
-      // Proceed even if formsubmit fails
+      // Proceed even if any service fails
     } finally {
       setSending(false);
       setDownloaded(true);
@@ -100,10 +116,10 @@ export default function BrochureModal() {
       link.click();
       document.body.removeChild(link);
 
-      // Auto close after 3 seconds
+      // Auto close after 3.5 seconds
       setTimeout(() => {
         setIsOpen(false);
-      }, 3000);
+      }, 3500);
     }
   };
 
@@ -111,24 +127,24 @@ export default function BrochureModal() {
 
   return (
     <div className="brochure-modal-overlay">
-      <div className="brochure-modal-box glass-card">
-        {/* Close Button X (Tache) */}
+      <div className="brochure-modal-box">
+        {/* Close Button X */}
         <button 
           className="brochure-close-btn" 
           onClick={handleClose} 
           title="Cerrar ventana"
           aria-label="Cerrar"
         >
-          <X size={20} />
+          <X size={18} />
         </button>
 
         {/* Modal Header */}
         <div className="brochure-modal-header">
           <div className="modal-icon-badge">
-            <FileText size={28} />
+            <FileText size={22} />
           </div>
-          <span className="badge badge-accent mb-1">
-            <Sparkles size={12} className="mr-1 inline-block" />
+          <span className="badge badge-accent mb-1 text-xs">
+            <Sparkles size={11} className="mr-1 inline-block" />
             Documentación Técnica Ejecutiva
           </span>
           <h2 className="modal-title">
@@ -143,11 +159,11 @@ export default function BrochureModal() {
         {downloaded ? (
           <div className="modal-success-box">
             <div className="success-check-circle">
-              <CheckCircle2 size={36} />
+              <CheckCircle2 size={32} />
             </div>
             <h3>¡Descarga Iniciada!</h3>
             <p>El archivo PDF del Brochure de Salas de Oralidad se ha descargado a tu dispositivo.</p>
-            <span className="text-sm text-accent font-mono">Un ejecutivo de BLEGAM te contactará para apoyarte con tu proyecto.</span>
+            <span className="text-xs text-accent font-mono">Un ejecutivo de BLEGAM te contactará para apoyarte con tu proyecto.</span>
           </div>
         ) : (
           <form onSubmit={handleSubmit} className="brochure-form">
@@ -211,15 +227,15 @@ export default function BrochureModal() {
             {/* Action Submit Button */}
             <button 
               type="submit" 
-              className="btn btn-primary w-full justify-center text-base py-3 mt-4 brochure-submit-btn"
+              className="btn btn-primary w-full justify-center text-sm py-2.5 mt-3 brochure-submit-btn"
               disabled={sending}
             >
-              <Download size={18} className="mr-2" />
+              <Download size={16} className="mr-1.5" />
               {sending ? 'Iniciando Descarga...' : 'Descargar Brochure PDF Gratis →'}
             </button>
 
             <div className="modal-privacy-note font-mono">
-              <ShieldCheck size={13} className="text-accent mr-1 inline-block" />
+              <ShieldCheck size={12} className="text-accent mr-1 inline-block" />
               <span>Tus datos están protegidos bajo aviso de privacidad corporativo.</span>
             </div>
           </form>

@@ -14,6 +14,7 @@ import {
 } from 'lucide-react';
 import { brand } from '../data/content';
 import { fetchAllLandings } from '../lib/landingService';
+import { submitLeadToWix } from '../lib/leadService';
 import './Contact.css';
 
 export default function Contact() {
@@ -73,6 +74,18 @@ export default function Contact() {
 
     const origenRef = queryOrigen || queryType || 'Directo';
 
+    // 1. Send data to Wix CMS Collection (Cotizacionformulario)
+    const wixPromise = submitLeadToWix({
+      name: form.name,
+      email: form.email,
+      phone: form.phone,
+      company: form.company,
+      service: form.service,
+      message: form.message,
+      origin: `Página Contacto [${origenRef}]`
+    });
+
+    // 2. Send email notification via FormSubmit
     const body = new FormData();
     body.append('Nombre', form.name);
     body.append('Email', form.email);
@@ -89,11 +102,13 @@ export default function Contact() {
     body.append('_language', 'es');
     body.append('_autoresponse', 'Gracias por contactar a Blegam Corp. Hemos recibido tu solicitud y un ejecutivo especializado te contactará a la brevedad.');
 
+    const formSubmitPromise = fetch('https://formsubmit.co/ajax/info@blegam.com.mx', {
+      method: 'POST',
+      body,
+    });
+
     try {
-      await fetch('https://formsubmit.co/ajax/info@blegam.com.mx', {
-        method: 'POST',
-        body,
-      });
+      await Promise.allSettled([wixPromise, formSubmitPromise]);
       setSubmitted(true);
     } catch {
       alert('Hubo un error al enviar. Por favor intenta de nuevo.');
