@@ -7,7 +7,6 @@ import {
   Mail, 
   MapPin, 
   ShieldCheck, 
-  Clock, 
   Sparkles, 
   Send,
   CheckCircle2
@@ -172,10 +171,13 @@ export default function Contact() {
       <section className="contact-content">
         <div className="container">
           <div className="contact-grid">
+            
             {/* Left Column: Form Card */}
             <div className="contact-form-wrap contact-card-box">
               <div className="card-box-header">
-                <Send size={20} className="text-accent mr-2" />
+                <div className="card-header-icon-box">
+                  <Send size={18} />
+                </div>
                 <h3 className="card-box-title">Formulario de Cotización Directa</h3>
               </div>
 
@@ -236,13 +238,15 @@ export default function Contact() {
             <div className="contact-info contact-card-box info-panel-side">
               <div>
                 <div className="card-box-header">
-                  <Phone size={20} className="text-accent mr-2" />
+                  <div className="card-header-icon-box">
+                    <Phone size={18} />
+                  </div>
                   <h3 className="card-box-title">Información Directa & Atención</h3>
                 </div>
 
-                <div className="live-status-pill mb-4 font-mono">
-                  <span className="pulse-dot mr-2" />
-                  EN LÍNEA — RESPUESTA EN &lt; 15 MINUTOS
+                <div className="live-status-pill font-mono">
+                  <span className="pulse-dot" />
+                  <span>EN LÍNEA — RESPUESTA EN &lt; 15 MINUTOS</span>
                 </div>
 
                 <div className="info-items">
@@ -250,7 +254,7 @@ export default function Contact() {
                     <div className="info-icon-box">
                       <Phone size={20} />
                     </div>
-                    <div>
+                    <div className="info-text-col">
                       <span className="info-label font-mono">TELÉFONO CORPORATIVO</span>
                       <span className="info-value font-mono">{brand.contact.phone}</span>
                     </div>
@@ -260,9 +264,9 @@ export default function Contact() {
                     <div className="info-icon-box wa-icon-bg">
                       <MessageSquare size={20} />
                     </div>
-                    <div>
+                    <div className="info-text-col">
                       <span className="info-label font-mono">WHATSAPP DIRECTO</span>
-                      <span className="info-value font-mono text-emerald-400 font-bold">{brand.contact.whatsapp}</span>
+                      <span className="info-value font-mono text-emerald-500 font-bold">{brand.contact.whatsapp}</span>
                     </div>
                   </a>
 
@@ -270,7 +274,7 @@ export default function Contact() {
                     <div className="info-icon-box">
                       <Mail size={20} />
                     </div>
-                    <div>
+                    <div className="info-text-col">
                       <span className="info-label font-mono">EMAIL CORPORATIVO</span>
                       <span className="info-value font-mono">{brand.contact.email}</span>
                     </div>
@@ -280,7 +284,7 @@ export default function Contact() {
                     <div className="info-icon-box">
                       <MapPin size={20} />
                     </div>
-                    <div>
+                    <div className="info-text-col">
                       <span className="info-label font-mono">OFICINAS CENTRALES</span>
                       <span className="info-value">{brand.contact.address}</span>
                     </div>
@@ -293,20 +297,21 @@ export default function Contact() {
                 <span className="sla-box-title font-mono">COMPROMISOS BLEGAM:</span>
                 <div className="sla-items-list">
                   <div className="sla-item">
-                    <CheckCircle2 size={15} className="text-accent mr-2 flex-shrink-0" />
+                    <CheckCircle2 size={16} className="sla-check-icon" />
                     <span>Cotizaciones ejecutivas en Pesos Mexicanos (MXN).</span>
                   </div>
                   <div className="sla-item">
-                    <CheckCircle2 size={15} className="text-accent mr-2 flex-shrink-0" />
+                    <CheckCircle2 size={16} className="sla-check-icon" />
                     <span>Levantamiento técnico sin costo en todo México.</span>
                   </div>
                   <div className="sla-item">
-                    <CheckCircle2 size={15} className="text-accent mr-2 flex-shrink-0" />
+                    <CheckCircle2 size={16} className="sla-check-icon" />
                     <span>Pólizas de soporte y mantenimiento SLA 24/7.</span>
                   </div>
                 </div>
               </div>
             </div>
+
           </div>
         </div>
       </section>

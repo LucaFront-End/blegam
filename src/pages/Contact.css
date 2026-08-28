@@ -62,32 +62,47 @@
   box-shadow: var(--shadow-elevated);
 }
 
+/* Card Header with Icon Box */
 .card-box-header {
   display: flex;
   align-items: center;
-  margin-bottom: 20px;
-  padding-bottom: 12px;
+  gap: 14px;
+  margin-bottom: 22px;
+  padding-bottom: 14px;
   border-bottom: 1px solid var(--border-subtle);
 }
 
+.card-header-icon-box {
+  width: 36px;
+  height: 36px;
+  border-radius: var(--radius-md);
+  background: var(--accent-glow);
+  border: 1px solid var(--border-accent);
+  color: var(--accent-secondary);
+  display: grid;
+  place-items: center;
+  flex-shrink: 0;
+}
+
 .card-box-title {
-  font-size: 1.15rem;
+  font-size: 1.18rem;
   font-weight: 800;
   color: var(--text-primary);
-  line-height: 1.2;
+  line-height: 1.25;
+  margin: 0;
 }
 
 /* Left Form Wrap */
 .contact-form { 
   display: flex; 
   flex-direction: column; 
-  gap: 20px; 
+  gap: 18px; 
 }
 
 .form-row { 
   display: grid; 
   grid-template-columns: 1fr 1fr; 
-  gap: 20px; 
+  gap: 16px; 
 }
 
 .form-group { 
@@ -98,17 +113,18 @@
 
 .form-group label {
   font-family: var(--font-mono);
-  font-size: 0.72rem;
+  font-size: 0.7rem;
   font-weight: 800;
   letter-spacing: 0.08em;
   text-transform: uppercase;
   color: var(--text-tertiary);
+  margin-bottom: 2px;
 }
 
 .form-group input,
 .form-group select,
 .form-group textarea {
-  padding: 14px 16px;
+  padding: 13px 16px;
   background: var(--bg-primary);
   border: 1px solid var(--border-light);
   border-radius: var(--radius-md);
@@ -143,6 +159,8 @@
 
 .form-submit-btn {
   margin-top: 8px;
+  font-weight: 800;
+  box-shadow: 0 4px 18px rgba(18, 212, 201, 0.35);
 }
 
 /* Success Screen */
@@ -175,7 +193,7 @@
   color: var(--text-secondary); 
 }
 
-/* Right Info Panel Side */
+/* ─── Right Info Panel Side ─── */
 .info-panel-side {
   display: flex;
   flex-direction: column;
@@ -185,14 +203,17 @@
 .live-status-pill {
   display: inline-flex;
   align-items: center;
+  gap: 10px;
   font-size: 0.72rem;
   font-weight: 800;
   color: #10b981;
   background: rgba(16, 185, 129, 0.08);
   border: 1px solid rgba(16, 185, 129, 0.3);
-  padding: 6px 14px;
-  border-radius: 16px;
-  letter-spacing: 0.5px;
+  padding: 7px 16px;
+  border-radius: 20px;
+  letter-spacing: 0.6px;
+  margin-bottom: 20px;
+  align-self: flex-start;
 }
 
 .pulse-dot {
@@ -202,6 +223,7 @@
   background: #10b981;
   box-shadow: 0 0 10px #10b981;
   animation: pulseGreen 2s infinite ease-in-out;
+  flex-shrink: 0;
 }
 
 @keyframes pulseGreen {
@@ -213,7 +235,7 @@
 .info-items { 
   display: flex; 
   flex-direction: column; 
-  gap: 16px; 
+  gap: 14px; 
 }
 
 .info-item {
@@ -233,12 +255,12 @@
   border-color: var(--accent-primary);
   background: #ffffff;
   transform: translateX(4px);
-  box-shadow: var(--shadow-card);
+  box-shadow: 0 6px 20px rgba(0, 0, 0, 0.04);
 }
 
 .info-icon-box { 
-  width: 42px;
-  height: 42px;
+  width: 44px;
+  height: 44px;
   border-radius: var(--radius-md);
   background: var(--accent-glow);
   color: var(--accent-secondary);
@@ -254,10 +276,11 @@
   border-color: rgba(16, 185, 129, 0.3);
 }
 
-.info-item div { 
+.info-text-col { 
   display: flex; 
   flex-direction: column; 
-  gap: 2px; 
+  gap: 2px;
+  min-width: 0;
 }
 
 .info-label {
@@ -271,15 +294,17 @@
 .info-value { 
   font-size: 0.95rem; 
   font-weight: 700;
-  color: var(--text-primary); 
+  color: var(--text-primary);
+  line-height: 1.35;
+  word-break: break-word;
 }
 
-/* SLA Guarantees Box */
+/* ─── SLA Guarantees Box ─── */
 .contact-sla-guarantees {
   background: var(--bg-primary);
   border: 1px solid var(--border-light);
   border-radius: var(--radius-lg);
-  padding: 20px;
+  padding: 20px 22px;
   margin-top: 24px;
 }
 
@@ -288,22 +313,29 @@
   font-size: 0.68rem;
   font-weight: 800;
   color: var(--text-tertiary);
-  letter-spacing: 0.5px;
+  letter-spacing: 0.6px;
   margin-bottom: 12px;
 }
 
 .sla-items-list {
   display: flex;
   flex-direction: column;
-  gap: 8px;
+  gap: 10px;
 }
 
 .sla-item {
   display: flex;
   align-items: center;
-  font-size: 0.82rem;
+  gap: 10px;
+  font-size: 0.84rem;
   font-weight: 600;
   color: var(--text-primary);
+  line-height: 1.35;
+}
+
+.sla-check-icon {
+  color: var(--accent-secondary);
+  flex-shrink: 0;
 }
 
 /* Responsive Breakpoints */
