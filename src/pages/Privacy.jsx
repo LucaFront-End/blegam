@@ -326,7 +326,7 @@ export default function Privacy() {
                 Si tiene cualquier duda, comentario o inquietud respecto a los términos de este Aviso de Privacidad Integral o al tratamiento que damos a sus datos personales, por favor póngase en contacto con nosotros:
               </p>
               
-              <div className="contact-grid">
+              <div className="privacy-contact-list">
                 <div className="contact-info-card">
                   <Mail className="contact-icon" size={20} />
                   <div>

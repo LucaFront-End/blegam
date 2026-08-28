@@ -6,11 +6,12 @@
   padding-top: var(--nav-height); 
   min-height: 100vh;
   background: var(--bg-primary);
+  width: 100%;
 }
 
 .contact-hero {
   position: relative;
-  padding: 40px 0 24px;
+  padding: 48px 0 28px;
   overflow: hidden;
 }
 
@@ -30,14 +31,18 @@
 
 .contact-content { 
   padding: 10px 0 80px; 
+  position: relative;
+  z-index: 1;
 }
 
-/* SIDE-BY-SIDE MAIN GRID */
+/* ─── BULLETPROOF SIDE-BY-SIDE MAIN GRID ─── */
+.page-contact .contact-grid,
 .contact-grid {
-  display: grid;
-  grid-template-columns: 1.15fr 0.85fr;
-  gap: 32px;
-  align-items: stretch;
+  display: grid !important;
+  grid-template-columns: 1.15fr 0.85fr !important;
+  gap: 32px !important;
+  align-items: stretch !important;
+  width: 100% !important;
 }
 
 /* Executive Card Box */
@@ -48,6 +53,8 @@
   padding: 36px;
   box-shadow: var(--shadow-card);
   transition: all 0.3s ease;
+  width: 100%;
+  box-sizing: border-box;
 }
 
 .contact-card-box:hover {
@@ -110,6 +117,7 @@
   outline: none;
   transition: all 0.2s ease;
   resize: vertical;
+  font-family: inherit;
 }
 
 .form-group input:focus,
@@ -299,9 +307,10 @@
 }
 
 /* Responsive Breakpoints */
-@media (max-width: 768px) {
+@media (max-width: 900px) {
+  .page-contact .contact-grid,
   .contact-grid { 
-    grid-template-columns: 1fr; 
+    grid-template-columns: 1fr !important; 
   }
   
   .form-row { 
