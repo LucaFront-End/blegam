@@ -46,43 +46,72 @@ export default function SalasOralidad({ landing: propLanding }) {
   }
   
   const blueprintNodes = [
-    { id: 'video', label: 'Video PTZ', desc: 'Cámaras 4K con seguimiento en techo y esquinas.' },
-    { id: 'audio', label: 'Audio DSP', desc: 'Micrófonos de alta fidelidad en los estrados.' },
-    { id: 'redes', label: 'Redes Seguras', desc: 'Cableado estructurado bajo el piso falso.' },
-    { id: 'storage', label: 'Storage NAS', desc: 'Grabación y respaldo en el rack de comunicaciones.' },
-    { id: 'software', label: 'MASOD®', desc: 'Pantallas interactivas en el estrado del juez.' },
+    { 
+      id: 'video', 
+      label: 'Video PTZ',
+      fullTitle: 'Video PTZ Robótico 4K',
+      icon: '📹',
+      badge: '4K Ultra HD · 30x Zoom',
+      desc: 'Cámaras robóticas de alta resolución con seguimiento inteligente del orador activo.',
+      highlights: [
+        'Cobertura 360° sin puntos ciegos en estrado y sala',
+        'Auto-enfoque dinámico a juez, defensa y fiscalía',
+        'Integración nativa con grabación multicámara'
+      ]
+    },
+    { 
+      id: 'audio', 
+      label: 'Audio DSP',
+      fullTitle: 'Audio DSP & Microfonía Judicial',
+      icon: '🎙️',
+      badge: 'Dante Audio · Cancelación AEC',
+      desc: 'Micrófonos de alta fidelidad con aislamiento vocal y supresión acústica total de ruido.',
+      highlights: [
+        'Microfonía de cuello de ganso en cada estrado',
+        'Cancelación avanzada de eco y ruidos ambientales',
+        'Canales de audio independientes por participante'
+      ]
+    },
+    { 
+      id: 'redes', 
+      label: 'Redes Seguras',
+      fullTitle: 'Redes Seguras & Piso Técnico',
+      icon: '⚡',
+      badge: 'Cat6A Blindado · VLAN 10Gbps',
+      desc: 'Cableado estructurado bajo piso modular con segmentación de tráfico judicial.',
+      highlights: [
+        'Piso técnico registrable para mantenimiento invisible',
+        'Segmentación VLAN exclusiva de alta seguridad',
+        'Latencia ultra baja en streaming interno (< 2ms)'
+      ]
+    },
+    { 
+      id: 'storage', 
+      label: 'Storage NAS',
+      fullTitle: 'Almacenamiento NAS Inmutable',
+      icon: '💾',
+      badge: 'RAID 6 · Cifrado AES-256',
+      desc: 'Servidores dedicados en rack con duplicación automática y cadena de custodia probatoria.',
+      highlights: [
+        'Resguardo redundante en caliente 24TB+',
+        'Cifrado inmutable que previene cualquier manipulación',
+        'Exportación rápida a medios certificados'
+      ]
+    },
+    { 
+      id: 'software', 
+      label: 'MASOD®',
+      fullTitle: 'Software Judicial MASOD® Core',
+      icon: '🧠',
+      badge: 'Core Propio Blegam',
+      desc: 'Panel táctil unificado en el estrado del juez para control de juicio e indexación en tiempo real.',
+      highlights: [
+        'Indexación vocal por marcas de tiempo en vivo',
+        'Firma electrónica y certificación criptográfica',
+        'Control multicámara y reproducción de evidencia al instante'
+      ]
+    },
   ];
-
-  const blueprintItemsRef = useRef([]);
-
-  // Auto-activate 3D layer when cards scroll past on mobile
-  useEffect(() => {
-    const handleMobileScroll = () => {
-      if (window.innerWidth > 900) return;
-      const centerY = window.innerHeight * 0.6;
-      
-      let closestId = null;
-      let minDistance = Infinity;
-
-      blueprintItemsRef.current.forEach((el, idx) => {
-        if (!el) return;
-        const rect = el.getBoundingClientRect();
-        const elCenter = rect.top + rect.height / 2;
-        const distance = Math.abs(elCenter - centerY);
-        if (distance < minDistance && rect.top < window.innerHeight && rect.bottom > 120) {
-          minDistance = distance;
-          closestId = blueprintNodes[idx]?.id;
-        }
-      });
-
-      if (closestId && closestId !== activeBlueprint) {
-        setActiveBlueprint(closestId);
-      }
-    };
-
-    window.addEventListener('scroll', handleMobileScroll, { passive: true });
-    return () => window.removeEventListener('scroll', handleMobileScroll);
-  }, [activeBlueprint]);
 
   const heroRef = useScrollReveal();
   const whatRef = useScrollReveal();
@@ -238,41 +267,27 @@ export default function SalasOralidad({ landing: propLanding }) {
         </div>
       </section>
 
-      {/* ─── 2. ¿Qué es? (Holograma Arquitectónico) ─── */}
+      {/* ─── 2. ¿Qué es? (Holograma Arquitectónico / Capas de Ingeniería) ─── */}
       <section className="salas-what grid-bg" ref={whatRef}>
         <div className="container">
           
-          {/* Mobile Header (Shows above sticky stage on mobile) */}
-          <div className="salas-what-header-mobile">
-            <span className="section-label">Ingeniería de Espacios</span>
-            <h2 className="section-title">Integración <span className="accent">Invisible</span></h2>
-            <p className="section-description">
-              Una sala oral moderna requiere la máxima precisión tecnológica sin invadir la solemnidad del espacio. Integramos todos los ecosistemas arquitectónicamente.
-            </p>
-          </div>
-
-          <div className="salas-split reveal">
-            
+          {/* Desktop Split View (> 900px) */}
+          <div className="salas-split bp-desktop-split reveal">
             <div className="split-text blueprint-text-panel">
-              <div className="bp-desktop-header-block">
-                <span className="section-label">Ingeniería de Espacios</span>
-                <h2 className="section-title">Integración <span className="accent">Invisible</span></h2>
-                <p className="section-description" style={{ marginBottom: '32px' }}>
-                  Una sala oral moderna requiere la máxima precisión tecnológica sin invadir la solemnidad del espacio. Integramos todos los ecosistemas arquitectónicamente.
-                </p>
-              </div>
+              <span className="section-label">Ingeniería de Espacios</span>
+              <h2 className="section-title">Integración <span className="accent">Invisible</span></h2>
+              <p className="section-description" style={{ marginBottom: '32px' }}>
+                Una sala oral moderna requiere la máxima precisión tecnológica sin invadir la solemnidad del espacio. Integramos todos los ecosistemas arquitectónicamente.
+              </p>
               
               <div className="blueprint-list">
-                {blueprintNodes.map((node, i) => (
+                {blueprintNodes.map(node => (
                   <div 
                     key={node.id}
-                    ref={el => blueprintItemsRef.current[i] = el}
                     className={`blueprint-list-item ${activeBlueprint === node.id ? 'active' : ''}`}
-                    onClick={() => setActiveBlueprint(node.id)}
+                    onClick={() => setActiveBlueprint(prev => prev === node.id ? null : node.id)}
                     onMouseEnter={() => setActiveBlueprint(node.id)}
-                    onMouseLeave={() => {
-                      if (window.innerWidth > 900) setActiveBlueprint(null);
-                    }}
+                    onMouseLeave={() => setActiveBlueprint(null)}
                   >
                     <div className="bp-item-header">
                       <div className="bp-item-indicator" />
@@ -284,7 +299,7 @@ export default function SalasOralidad({ landing: propLanding }) {
               </div>
             </div>
 
-            <div className="split-visual blueprint-sticky-stage">
+            <div className="split-visual">
               <div className={`blueprint-3d-container ${activeBlueprint ? 'has-active' : ''}`}>
                 {/* HUD Header Strip */}
                 <div className="bp-hud-header">
@@ -292,7 +307,7 @@ export default function SalasOralidad({ landing: propLanding }) {
                   <span className="bp-hud-title font-mono">
                     {activeBlueprint 
                       ? `CAPA: ${blueprintNodes.find(n => n.id === activeBlueprint)?.label.toUpperCase()}` 
-                      : 'EXPLORADOR 3D · DESPLÁZATE O TOCA UNA CAPA'}
+                      : 'EXPLORADOR 3D · SELECCIONA UN COMPONENTE'}
                   </span>
                 </div>
 
@@ -304,12 +319,10 @@ export default function SalasOralidad({ landing: propLanding }) {
                        <span className="bp-layer-label">CAPA FÍSICA & REDES</span>
                        <div className="bp-grid-pattern"></div>
                        <svg className="bp-realistic-svg" viewBox="0 0 280 280">
-                         {/* Server to floor nodes cables */}
                          <path d="M 140,140 C 140,200 40,200 40,240" stroke="rgba(18,212,201,0.4)" strokeWidth="2" fill="none" />
                          <path d="M 140,140 C 140,200 240,200 240,240" stroke="rgba(18,212,201,0.6)" strokeWidth="3" fill="none" strokeDasharray="5,5" className="bp-anim-dash" />
                          <path d="M 140,140 C 140,80 80,80 80,40" stroke="rgba(18,212,201,0.3)" strokeWidth="2" fill="none" />
                          <path d="M 140,140 C 140,80 200,80 200,40" stroke="var(--accent-primary)" strokeWidth="2" fill="none" className="bp-anim-dash-fast" />
-                         {/* Central Switch Hub */}
                          <rect x="120" y="130" width="40" height="20" rx="4" fill="#0f172a" stroke="var(--accent-primary)" strokeWidth="2" />
                          <circle cx="128" cy="140" r="2" fill="#12d4c9" className="bp-blink" />
                          <circle cx="136" cy="140" r="2" fill="#12d4c9" className="bp-blink-fast" />
@@ -324,10 +337,8 @@ export default function SalasOralidad({ landing: propLanding }) {
                     <div className="bp-layer-surface">
                        <span className="bp-layer-label">ALMACENAMIENTO (NAS)</span>
                        <svg className="bp-realistic-svg" viewBox="0 0 280 280">
-                         {/* Floor footprints */}
                          <rect x="120" y="120" width="40" height="40" fill="rgba(18,212,201,0.1)" />
                        </svg>
-                       {/* 3D Server Racks built with CSS */}
                        <div className="bp-hardware-box server-rack main-rack">
                           <div className="rack-unit"></div>
                           <div className="rack-unit"></div>
@@ -343,12 +354,10 @@ export default function SalasOralidad({ landing: propLanding }) {
                     <div className="bp-layer-surface">
                        <span className="bp-layer-label">AUDIO & VIDEO DSP</span>
                        <svg className="bp-realistic-svg" viewBox="0 0 280 280">
-                         {/* Desks Outlines */}
-                         <rect x="100" y="60" width="80" height="20" rx="2" fill="rgba(255,255,255,0.05)" stroke="rgba(255,255,255,0.3)" strokeWidth="1" /> {/* Juez */}
-                         <rect x="40" y="160" width="60" height="20" rx="2" fill="rgba(255,255,255,0.05)" stroke="rgba(255,255,255,0.3)" strokeWidth="1" /> {/* Defensa */}
-                         <rect x="180" y="160" width="60" height="20" rx="2" fill="rgba(255,255,255,0.05)" stroke="rgba(255,255,255,0.3)" strokeWidth="1" /> {/* Fiscalia */}
+                         <rect x="100" y="60" width="80" height="20" rx="2" fill="rgba(255,255,255,0.05)" stroke="rgba(255,255,255,0.3)" strokeWidth="1" />
+                         <rect x="40" y="160" width="60" height="20" rx="2" fill="rgba(255,255,255,0.05)" stroke="rgba(255,255,255,0.3)" strokeWidth="1" />
+                         <rect x="180" y="160" width="60" height="20" rx="2" fill="rgba(255,255,255,0.05)" stroke="rgba(255,255,255,0.3)" strokeWidth="1" />
                          
-                         {/* Microphones */}
                          <g className="bp-mic-group">
                            <line x1="140" y1="70" x2="140" y2="60" stroke="#fff" strokeWidth="2" />
                            <circle cx="140" cy="58" r="3" fill="var(--accent-primary)" />
@@ -362,7 +371,6 @@ export default function SalasOralidad({ landing: propLanding }) {
                            <circle cx="210" cy="158" r="3" fill="var(--accent-primary)" />
                          </g>
 
-                         {/* Cameras */}
                          <g className="bp-camera-group" transform="translate(230, 10)">
                            <path d="M 15,25 L 25,25 L 30,15 L 10,15 Z" fill="rgba(255,255,255,0.8)" />
                            <circle cx="20" cy="20" r="4" fill="#000" />
@@ -403,8 +411,94 @@ export default function SalasOralidad({ landing: propLanding }) {
                 </div>
               </div>
             </div>
-            
           </div>
+
+          {/* Mobile Interactive Layer Showcase View (<= 900px) */}
+          <div className="bp-mobile-showcase-view">
+            <div className="bp-m-header-block">
+              <span className="section-label">Ingeniería de Espacios</span>
+              <h2 className="section-title">Integración <span className="accent">Invisible</span></h2>
+              <p className="section-description">
+                5 capas tecnológicas integradas arquitectónicamente sin alterar la solemnidad de la sala.
+              </p>
+            </div>
+
+            {/* Horizontal Pill Selector Bar */}
+            <div className="bp-m-pill-bar">
+              {blueprintNodes.map(node => {
+                const isCurrent = (activeBlueprint || 'video') === node.id;
+                return (
+                  <button
+                    key={node.id}
+                    type="button"
+                    className={`bp-m-pill ${isCurrent ? 'active' : ''}`}
+                    onClick={() => setActiveBlueprint(node.id)}
+                  >
+                    <span className="bp-pill-ico">{node.icon}</span>
+                    <span className="bp-pill-txt">{node.label}</span>
+                  </button>
+                );
+              })}
+            </div>
+
+            {/* Featured Active Layer Showcase Card */}
+            {(() => {
+              const current = blueprintNodes.find(n => n.id === (activeBlueprint || 'video')) || blueprintNodes[0];
+              return (
+                <div className="bp-m-showcase-card">
+                  <div className="bp-sc-top-bar">
+                    <span className="bp-sc-live-status font-mono">
+                      <span className="bp-sc-dot" />
+                      CAPA ACTIVA
+                    </span>
+                    <span className="bp-sc-spec-badge font-mono">{current.badge}</span>
+                  </div>
+
+                  <div className="bp-sc-title-row">
+                    <div className="bp-sc-icon-box">
+                      <span>{current.icon}</span>
+                    </div>
+                    <div className="bp-sc-title-info">
+                      <h3 className="bp-sc-title">{current.fullTitle || current.label}</h3>
+                      <p className="bp-sc-desc">{current.desc}</p>
+                    </div>
+                  </div>
+
+                  <div className="bp-sc-highlights-box">
+                    {current.highlights.map((item, idx) => (
+                      <div key={idx} className="bp-sc-highlight-item">
+                        <span className="bp-sc-check">✓</span>
+                        <span>{item}</span>
+                      </div>
+                    ))}
+                  </div>
+                </div>
+              );
+            })()}
+
+            {/* Quick List Deck */}
+            <div className="bp-m-cards-deck">
+              {blueprintNodes.map(node => {
+                const isCurrent = (activeBlueprint || 'video') === node.id;
+                return (
+                  <div
+                    key={node.id}
+                    className={`bp-m-deck-card ${isCurrent ? 'active' : ''}`}
+                    onClick={() => setActiveBlueprint(node.id)}
+                  >
+                    <div className="bp-m-deck-indicator" />
+                    <span className="bp-m-deck-icon">{node.icon}</span>
+                    <div className="bp-m-deck-info">
+                      <h4>{node.label}</h4>
+                      <p>{node.desc}</p>
+                    </div>
+                    <span className="bp-m-deck-arrow">{isCurrent ? '●' : '›'}</span>
+                  </div>
+                );
+              })}
+            </div>
+          </div>
+
         </div>
       </section>
 
