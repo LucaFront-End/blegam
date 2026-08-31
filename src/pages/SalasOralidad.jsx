@@ -254,7 +254,7 @@ export default function SalasOralidad({ landing: propLanding }) {
             </p>
           </div>
 
-          <div className="salas-split reveal">
+          <div className="salas-split">
             
             <div className="split-text blueprint-text-panel">
               <div className="bp-desktop-header-block">

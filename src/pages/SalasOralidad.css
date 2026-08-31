@@ -46,7 +46,7 @@
 .split-text { position: relative; z-index: 1; }
 
 /* ─── What Section (Blueprint) ─── */
-.salas-what { padding: var(--section-padding); overflow: hidden; }
+.salas-what { padding: var(--section-padding); overflow: visible; }
 
 .blueprint-list {
   display: flex;
