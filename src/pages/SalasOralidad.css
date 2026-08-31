@@ -1111,7 +1111,7 @@
    ═══════════════════════════════════════════════════ */
 
 .page-salas {
-  overflow-x: hidden;
+  overflow-x: clip;
 }
 
 .masod-split-visual {
