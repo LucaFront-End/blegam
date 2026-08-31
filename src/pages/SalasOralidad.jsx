@@ -46,11 +46,41 @@ export default function SalasOralidad({ landing: propLanding }) {
   }
   
   const blueprintNodes = [
-    { id: 'video', label: 'Video PTZ', desc: 'Cámaras 4K con seguimiento en techo y esquinas.' },
-    { id: 'audio', label: 'Audio DSP', desc: 'Micrófonos de alta fidelidad en los estrados.' },
-    { id: 'redes', label: 'Redes Seguras', desc: 'Cableado estructurado bajo el piso falso.' },
-    { id: 'storage', label: 'Storage NAS', desc: 'Grabación y respaldo en el rack de comunicaciones.' },
-    { id: 'software', label: 'MASOD®', desc: 'Pantallas interactivas en el estrado del juez.' },
+    { 
+      id: 'video', 
+      step: '01',
+      tag: 'CÁMARAS & VISIÓN',
+      label: 'Video PTZ', 
+      desc: 'Cámaras 4K con seguimiento activo automático de oradores en techo y esquinas.' 
+    },
+    { 
+      id: 'audio', 
+      step: '02',
+      tag: 'PROCESAMIENTO DSP',
+      label: 'Audio DSP', 
+      desc: 'Microfonía de alta fidelidad en estrados con cancelación de eco acústico en tiempo real.' 
+    },
+    { 
+      id: 'redes', 
+      step: '03',
+      tag: 'INFRAESTRUCTURA',
+      label: 'Redes Seguras', 
+      desc: 'Cableado estructurado Cat6A blindado bajo piso técnico para cero interferencias.' 
+    },
+    { 
+      id: 'storage', 
+      step: '04',
+      tag: 'RESGUARDO LOCAL',
+      label: 'Storage NAS', 
+      desc: 'Grabación y respaldo automatizado en servidor NAS redundante con cifrado AES-256.' 
+    },
+    { 
+      id: 'software', 
+      step: '05',
+      tag: 'NÚCLEO DIGITAL',
+      label: 'MASOD® Core', 
+      desc: 'Software de gestión y pantallas interactivas táctiles en el estrado del juez.' 
+    },
   ];
 
   const blueprintItemsRef = useRef([]);
@@ -61,18 +91,18 @@ export default function SalasOralidad({ landing: propLanding }) {
       if (window.innerWidth > 900) return;
       
       const navHeight = 64;
-      const stageHeight = 270;
-      const baseStickyTop = navHeight + 8 + stageHeight + 8; // ~350px
+      const stageHeight = 315;
+      const baseStickyTop = navHeight + 8 + stageHeight + 10; // ~397px
       
       let currentActiveId = blueprintNodes[0].id;
 
       blueprintItemsRef.current.forEach((el, idx) => {
         if (!el) return;
         const rect = el.getBoundingClientRect();
-        const itemStickyTop = baseStickyTop + (idx * 16);
+        const itemStickyTop = baseStickyTop + (idx * 14);
         
         // If this card has scrolled up to or past its sticky threshold:
-        if (rect.top <= itemStickyTop + 24) {
+        if (rect.top <= itemStickyTop + 32) {
           currentActiveId = blueprintNodes[idx]?.id;
         }
       });
@@ -279,8 +309,12 @@ export default function SalasOralidad({ landing: propLanding }) {
                     }}
                   >
                     <div className="bp-item-header">
+                      <span className="bp-item-step font-mono">{node.step}</span>
+                      <div className="bp-item-title-group">
+                        <span className="bp-item-tag font-mono">{node.tag}</span>
+                        <h4>{node.label}</h4>
+                      </div>
                       <div className="bp-item-indicator" />
-                      <h4>{node.label}</h4>
                     </div>
                     <p className="bp-item-desc">{node.desc}</p>
                   </div>
