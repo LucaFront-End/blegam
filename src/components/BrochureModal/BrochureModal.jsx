@@ -227,11 +227,11 @@ export default function BrochureModal() {
             {/* Action Submit Button */}
             <button 
               type="submit" 
-              className="btn btn-primary w-full justify-center text-sm py-2.5 mt-3 brochure-submit-btn"
+              className="brochure-submit-btn"
               disabled={sending}
             >
-              <Download size={16} className="mr-1.5" />
-              {sending ? 'Iniciando Descarga...' : 'Descargar Brochure PDF Gratis →'}
+              <Download size={18} className="brochure-btn-icon" />
+              <span>{sending ? 'Iniciando Descarga...' : 'Descargar Brochure PDF Gratis →'}</span>
             </button>
 
             <div className="modal-privacy-note font-mono">
