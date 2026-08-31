@@ -53,6 +53,37 @@ export default function SalasOralidad({ landing: propLanding }) {
     { id: 'software', label: 'MASOD®', desc: 'Pantallas interactivas en el estrado del juez.' },
   ];
 
+  const blueprintItemsRef = useRef([]);
+
+  // Auto-activate 3D layer when cards scroll past on mobile
+  useEffect(() => {
+    const handleMobileScroll = () => {
+      if (window.innerWidth > 900) return;
+      const centerY = window.innerHeight * 0.6;
+      
+      let closestId = null;
+      let minDistance = Infinity;
+
+      blueprintItemsRef.current.forEach((el, idx) => {
+        if (!el) return;
+        const rect = el.getBoundingClientRect();
+        const elCenter = rect.top + rect.height / 2;
+        const distance = Math.abs(elCenter - centerY);
+        if (distance < minDistance && rect.top < window.innerHeight && rect.bottom > 120) {
+          minDistance = distance;
+          closestId = blueprintNodes[idx]?.id;
+        }
+      });
+
+      if (closestId && closestId !== activeBlueprint) {
+        setActiveBlueprint(closestId);
+      }
+    };
+
+    window.addEventListener('scroll', handleMobileScroll, { passive: true });
+    return () => window.removeEventListener('scroll', handleMobileScroll);
+  }, [activeBlueprint]);
+
   const heroRef = useScrollReveal();
   const whatRef = useScrollReveal();
   const probRef = useScrollReveal();
@@ -210,22 +241,38 @@ export default function SalasOralidad({ landing: propLanding }) {
       {/* ─── 2. ¿Qué es? (Holograma Arquitectónico) ─── */}
       <section className="salas-what grid-bg" ref={whatRef}>
         <div className="container">
+          
+          {/* Mobile Header (Shows above sticky stage on mobile) */}
+          <div className="salas-what-header-mobile">
+            <span className="section-label">Ingeniería de Espacios</span>
+            <h2 className="section-title">Integración <span className="accent">Invisible</span></h2>
+            <p className="section-description">
+              Una sala oral moderna requiere la máxima precisión tecnológica sin invadir la solemnidad del espacio. Integramos todos los ecosistemas arquitectónicamente.
+            </p>
+          </div>
+
           <div className="salas-split reveal">
             
             <div className="split-text blueprint-text-panel">
-              <span className="section-label">Ingeniería de Espacios</span>
-              <h2 className="section-title">Integración <span className="accent">Invisible</span></h2>
-              <p className="section-description" style={{ marginBottom: '32px' }}>
-                Una sala oral moderna requiere la máxima precisión tecnológica sin invadir la solemnidad del espacio. Integramos todos los ecosistemas arquitectónicamente.
-              </p>
+              <div className="bp-desktop-header-block">
+                <span className="section-label">Ingeniería de Espacios</span>
+                <h2 className="section-title">Integración <span className="accent">Invisible</span></h2>
+                <p className="section-description" style={{ marginBottom: '32px' }}>
+                  Una sala oral moderna requiere la máxima precisión tecnológica sin invadir la solemnidad del espacio. Integramos todos los ecosistemas arquitectónicamente.
+                </p>
+              </div>
               
               <div className="blueprint-list">
-                {blueprintNodes.map(node => (
+                {blueprintNodes.map((node, i) => (
                   <div 
                     key={node.id}
+                    ref={el => blueprintItemsRef.current[i] = el}
                     className={`blueprint-list-item ${activeBlueprint === node.id ? 'active' : ''}`}
+                    onClick={() => setActiveBlueprint(node.id)}
                     onMouseEnter={() => setActiveBlueprint(node.id)}
-                    onMouseLeave={() => setActiveBlueprint(null)}
+                    onMouseLeave={() => {
+                      if (window.innerWidth > 900) setActiveBlueprint(null);
+                    }}
                   >
                     <div className="bp-item-header">
                       <div className="bp-item-indicator" />
@@ -237,8 +284,18 @@ export default function SalasOralidad({ landing: propLanding }) {
               </div>
             </div>
 
-            <div className="split-visual">
+            <div className="split-visual blueprint-sticky-stage">
               <div className={`blueprint-3d-container ${activeBlueprint ? 'has-active' : ''}`}>
+                {/* HUD Header Strip */}
+                <div className="bp-hud-header">
+                  <div className={`bp-hud-dot ${activeBlueprint ? 'active' : ''}`} />
+                  <span className="bp-hud-title font-mono">
+                    {activeBlueprint 
+                      ? `CAPA: ${blueprintNodes.find(n => n.id === activeBlueprint)?.label.toUpperCase()}` 
+                      : 'EXPLORADOR 3D · DESPLÁZATE O TOCA UNA CAPA'}
+                  </span>
+                </div>
+
                 <div className="bp-exploded-wrapper">
                   
                   {/* Layer 1: Redes (Cables & Switches) */}

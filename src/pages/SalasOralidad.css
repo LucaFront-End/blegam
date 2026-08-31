@@ -157,11 +157,62 @@
   overflow: hidden;
 }
 
-/* Layer Base Translations (Stacking them up further apart for top-down view) */
+/* Layer Base Translations (Balanced heights for desktop) */
 .bp-layer-redes { transform: translateZ(0px); }
-.bp-layer-storage { transform: translateZ(100px); }
-.bp-layer-av { transform: translateZ(200px); }
-.bp-layer-software { transform: translateZ(300px); }
+.bp-layer-storage { transform: translateZ(55px); }
+.bp-layer-av { transform: translateZ(110px); }
+.bp-layer-software { transform: translateZ(165px); }
+
+/* HUD Header Strip on 3D Stage */
+.bp-hud-header {
+  position: absolute;
+  top: 14px;
+  left: 16px;
+  right: 16px;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  background: rgba(15, 23, 42, 0.88);
+  border: 1px solid rgba(18, 212, 201, 0.3);
+  backdrop-filter: blur(8px);
+  padding: 8px 14px;
+  border-radius: 20px;
+  z-index: 10;
+  pointer-events: none;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
+}
+
+.bp-hud-dot {
+  width: 7px;
+  height: 7px;
+  border-radius: 50%;
+  background: #64748b;
+  flex-shrink: 0;
+  transition: all 0.3s ease;
+}
+
+.bp-hud-dot.active {
+  background: #12d4c9;
+  box-shadow: 0 0 10px #12d4c9;
+}
+
+.bp-hud-title {
+  font-size: 0.72rem;
+  font-weight: 800;
+  color: #f1f5f9;
+  letter-spacing: 0.6px;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.salas-what-header-mobile {
+  display: none;
+}
+
+.bp-desktop-header-block {
+  display: block;
+}
 
 /* Layer Labels */
 .bp-layer-label {
@@ -1143,39 +1194,91 @@
     margin-bottom: 28px;
   }
 
+  .salas-what-header-mobile {
+    display: block !important;
+    margin-bottom: 18px;
+    text-align: left;
+  }
+
+  .bp-desktop-header-block {
+    display: none !important;
+  }
+
   .salas-split {
-    grid-template-columns: 1fr;
-    gap: 28px;
+    display: flex !important;
+    flex-direction: column !important;
+    gap: 16px !important;
+    position: relative !important;
   }
 
-  .split-text {
-    padding-right: 0 !important;
+  /* 3D Holographic Blueprint Visual on Mobile (Sticky at top of section) */
+  .split-visual.blueprint-sticky-stage {
+    order: 1 !important;
+    position: sticky !important;
+    top: calc(var(--nav-height) + 8px) !important;
+    z-index: 20 !important;
+    width: 100% !important;
   }
 
-  /* 3D Holographic Blueprint Visual on Mobile */
   .blueprint-3d-container {
-    height: 320px !important;
-    perspective: 1000px;
-    border-radius: var(--radius-lg);
+    height: 230px !important;
+    perspective: 800px !important;
+    border-radius: var(--radius-xl) !important;
+    background: radial-gradient(circle at center, #1e293b 0%, #070d18 100%) !important;
+    border: 1px solid rgba(18, 212, 201, 0.35) !important;
+    box-shadow: 0 12px 30px rgba(0, 0, 0, 0.5), 0 0 20px rgba(18, 212, 201, 0.12) !important;
+    margin: 0 !important;
   }
 
   .bp-exploded-wrapper {
-    width: 220px;
-    height: 220px;
-    transform: rotateX(45deg) rotateZ(-30deg) scale(0.72) translateZ(-40deg) !important;
+    width: 175px !important;
+    height: 175px !important;
+    transform: rotateX(46deg) rotateZ(-32deg) scale(0.64) translateZ(-25px) translateY(8px) !important;
+  }
+
+  .bp-layer-redes { transform: translateZ(0px) !important; }
+  .bp-layer-storage { transform: translateZ(26px) !important; }
+  .bp-layer-av { transform: translateZ(52px) !important; }
+  .bp-layer-software { transform: translateZ(78px) !important; }
+
+  /* Scrollable Cards below on Mobile */
+  .split-text.blueprint-text-panel {
+    order: 2 !important;
+    width: 100% !important;
+    padding-right: 0 !important;
+  }
+
+  .blueprint-list {
+    display: flex !important;
+    flex-direction: column !important;
+    gap: 14px !important;
+    padding-top: 8px !important;
+    padding-bottom: 50px !important;
   }
 
   .blueprint-list-item {
-    padding: 12px 14px;
+    padding: 16px 18px !important;
+    border-radius: var(--radius-lg) !important;
+    background: var(--bg-card) !important;
+    border: 1px solid var(--border-light) !important;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.03) !important;
+    transition: all 0.25s cubic-bezier(0.4, 0, 0.2, 1) !important;
+  }
+
+  .blueprint-list-item.active {
+    border-color: var(--accent-primary) !important;
+    background: var(--bg-elevated) !important;
+    box-shadow: 0 8px 24px rgba(18, 212, 201, 0.16) !important;
+    transform: scale(1.02) !important;
   }
 
   .bp-item-header h4 {
-    font-size: 0.98rem;
+    font-size: 1rem !important;
   }
 
   .bp-item-desc {
-    font-size: 0.85rem;
-    padding-left: 0;
+    font-size: 0.86rem !important;
+    padding-left: 20px !important;
   }
 
   /* Problems Section */
