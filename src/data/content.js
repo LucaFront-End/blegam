@@ -333,7 +333,7 @@ export const timeline = [
   { year: 2016, title: 'Expansión Nacional', description: 'Presencia en 4 estados con más de 50 salas implementadas para el Poder Judicial.' },
   { year: 2018, title: 'División Broadcast', description: 'Integración de soluciones audiovisuales para televisoras y eventos de gran escala.' },
   { year: 2020, title: 'Transformación Digital', description: 'Implementación de videoconferencia judicial y audiencias remotas durante la pandemia.' },
-  { year: 2022, title: '150+ Salas', description: 'Hito de 150 salas implementadas. Certificación ISO 9001 y alianzas con fabricantes globales.' },
+  { year: 2022, title: '150+ Salas', description: 'Hito de 150 salas implementadas y alianzas estratégicas con fabricantes globales.' },
   { year: 2024, title: '200+ Salas', description: 'Más de 200 salas activas en 6 estados. Expansión a ciberseguridad y Smart Cities.' },
 ];
 
@@ -355,7 +355,6 @@ export const teamCapabilities = [
 ];
 
 export const certifications = [
-  { name: 'ISO 9001:2015', type: 'Calidad' },
   { name: 'Empresa 100% Mexicana', type: 'Origen' },
   { name: 'Padrón de Proveedores Confiables', type: 'Gobierno' },
   { name: 'Certificación Bosch', type: 'Partner' },

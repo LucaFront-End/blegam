@@ -56,7 +56,6 @@ export default function Footer() {
             <img src={brand.logo} alt={brand.fullName} className="footer-logo" />
             <p className="footer-desc">{brand.description}</p>
             <div className="footer-social">
-              <span className="footer-badge">ISO 9001</span>
               <span className="footer-badge">Empresa 100% Mexicana</span>
             </div>
           </div>
